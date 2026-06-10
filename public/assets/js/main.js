@@ -1,0 +1,1 @@
+const menuBtn=document.querySelector('#menuBtn');const mobileMenu=document.querySelector('#mobileMenu');if(menuBtn){menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'))}document.querySelectorAll('[data-year]').forEach(e=>e.textContent=new Date().getFullYear());

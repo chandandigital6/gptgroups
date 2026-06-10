@@ -1,13 +1,32 @@
 <?php
+
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
-Route::view('/', 'welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+
+Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/about', [FrontController::class, 'about'])->name('about');
+Route::get('/brands', [FrontController::class, 'brands'])->name('brands');
+Route::get('/carriers', [FrontController::class, 'carriers'])->name('carriers');
+Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+Route::get('/groups_company', [FrontController::class, 'groups_company'])->name('groups_company');
+Route::get('/network', [FrontController::class, 'network'])->name('network');
+Route::get('/news', [FrontController::class, 'news'])->name('news');
+Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
+Route::get('/products', [FrontController::class, 'products'])->name('products');
+
+
+
+
+
+
+// Route::view('/', 'welcome', [
+//     'canRegister' => Features::enabled(Features::registration()),
+// ])->name('home');
 
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
