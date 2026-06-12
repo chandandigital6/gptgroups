@@ -958,7 +958,7 @@
     <section class="section">
         <div class="containerx grid lg:grid-cols-2 gap-12 items-center">
             <img class="rounded-[44px] h-[520px] w-full object-cover shadow-2xl"
-                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80" />
+                src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" />
             <div>
                 <p class="text-blue-700 font-black uppercase tracking-[.25em]">
                     Founder & CEO
