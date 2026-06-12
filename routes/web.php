@@ -18,6 +18,7 @@ Route::get('/network', [FrontController::class, 'network'])->name('network');
 Route::get('/news', [FrontController::class, 'news'])->name('news');
 Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
 Route::get('/products', [FrontController::class, 'products'])->name('products');
+Route::get('/services', [FrontController::class, 'services'])->name('services');
 
 
 

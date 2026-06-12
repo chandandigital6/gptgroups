@@ -51,6 +51,8 @@ class FrontController extends Controller
     }
 
 
+
+
     public function products()
     {
         return view('front.products');
@@ -66,5 +68,9 @@ class FrontController extends Controller
         return view('front.contact');
     }
 
+    public function services()
+    {
+        return view('front.services');
+    }
 
 }
