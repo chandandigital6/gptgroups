@@ -1575,52 +1575,99 @@
         </div>
     </section>
 
-    <section class="section bg-white">
-        <div class="containerx grid lg:grid-cols-2 gap-10 items-stretch">
-            <div class="rounded-[44px] bg-gradient-to-br from-blue-700 to-cyan-500 text-white p-10 md:p-14">
-                <p class="font-black uppercase tracking-[.25em] text-blue-100">
-                    Call To Action
-                </p>
-                <h2 class="mt-4 text-4xl md:text-6xl font-black">
-                    Ready to build your distribution advantage?
-                </h2>
-                <p class="mt-5 text-blue-50 text-lg leading-8">
-                    Connect with GPT Group for brand partnership, product distribution,
-                    retail outlet support, B2B enquiries and market expansion.
-                </p>
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a class="btn-light" href="pages/contact.html">Partner Enquiry</a><a class="btn-primary bg-slate-950"
-                        href="pages/brands.html">Explore Products</a>
-                </div>
-            </div>
-            <div class="rounded-[44px] bg-slate-950 text-white p-10 md:p-14">
-                <p class="text-cyan-300 font-black uppercase tracking-[.25em]">
-                    Enquiry
-                </p>
-                <h3 class="mt-4 text-3xl font-black">Quick Contact Form</h3>
-                <form class="mt-7 grid gap-4">
-                    <input
-                        class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-white placeholder:text-slate-400"
-                        placeholder="Full Name" />
-                    <input
-                        class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-white placeholder:text-slate-400"
-                        placeholder="Company / Brand Name" />
-                    <input
-                        class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-white placeholder:text-slate-400"
-                        placeholder="Phone / Email" />
-                    <select class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-slate-300">
-                        <option>Distribution Partnership</option>
-                        <option>Retail Outlet</option>
-                        <option>B2B Supply</option>
-                        <option>Career</option>
-                    </select>
-                    <textarea class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 h-28 text-white placeholder:text-slate-400"
-                        placeholder="Message"></textarea>
-                    <button type="button" class="btn-light justify-center">
-                        Submit Enquiry
-                    </button>
-                </form>
+    {{-- CTA + ENQUIRY SECTION --}}
+<section class="bg-white py-12 sm:py-16 lg:py-24 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
+
+        {{-- CTA CARD --}}
+        <div class="rounded-[2rem] sm:rounded-[2.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 text-white p-6 sm:p-8 md:p-10 lg:p-14 shadow-xl">
+            <p class="font-black uppercase tracking-[.20em] sm:tracking-[.25em] text-blue-100 text-xs sm:text-sm">
+                Call To Action
+            </p>
+
+            <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+                Ready to build your distribution advantage?
+            </h2>
+
+            <p class="mt-4 sm:mt-5 text-blue-50 text-base sm:text-lg leading-7 sm:leading-8">
+                Connect with GPT Group for brand partnership, product distribution, retail outlet support, B2B enquiries and market expansion.
+            </p>
+
+            <div class="mt-7 sm:mt-8 grid sm:flex gap-3 sm:gap-4">
+                <a
+                    class="inline-flex justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg"
+                    href="{{ url('/contact-us') }}"
+                >
+                    Partner Enquiry
+                </a>
+
+                <a
+                    class="inline-flex justify-center rounded-full bg-slate-950 px-6 py-3.5 text-sm font-black text-white shadow-lg"
+                    href="{{ url('/brands') }}"
+                >
+                    Explore Products
+                </a>
             </div>
         </div>
-    </section>
+
+        {{-- FORM CARD --}}
+        <div class="rounded-[2rem] sm:rounded-[2.75rem] bg-slate-950 text-white p-6 sm:p-8 md:p-10 lg:p-14 shadow-xl min-w-0">
+            <p class="text-cyan-300 font-black uppercase tracking-[.20em] sm:tracking-[.25em] text-xs sm:text-sm">
+                Enquiry
+            </p>
+
+            <h3 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+                Quick Contact Form
+            </h3>
+
+            <form action="#" method="POST" class="mt-6 sm:mt-7 grid gap-3 sm:gap-4">
+                @csrf
+
+                <input
+                    type="text"
+                    name="name"
+                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
+                    placeholder="Full Name"
+                />
+
+                <input
+                    type="text"
+                    name="company"
+                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
+                    placeholder="Company / Brand Name"
+                />
+
+                <input
+                    type="text"
+                    name="contact"
+                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
+                    placeholder="Phone / Email"
+                />
+
+                <select
+                    name="enquiry_type"
+                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-slate-300 outline-none focus:border-cyan-300"
+                >
+                    <option class="text-slate-950">Distribution Partnership</option>
+                    <option class="text-slate-950">Retail Outlet</option>
+                    <option class="text-slate-950">B2B Supply</option>
+                    <option class="text-slate-950">Career</option>
+                </select>
+
+                <textarea
+                    name="message"
+                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 h-28 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 resize-none"
+                    placeholder="Message"
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="mt-1 inline-flex w-full justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5"
+                >
+                    Submit Enquiry
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
 @endsection
