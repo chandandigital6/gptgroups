@@ -11,22 +11,23 @@
     ];
 @endphp
 
-<header class="sticky top-0 z-50 border-b border-white/20 bg-white/80 backdrop-blur-xl shadow-sm">
+<header class="sticky top-0 z-50 border-b border-white/20 bg-white/85 backdrop-blur-xl shadow-sm">
     <div class="containerx h-20 flex items-center justify-between">
+
+        {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-700 to-cyan-400 grid place-items-center text-white font-black text-xl shadow-lg shadow-blue-500/20">
-                GPT
-            </div>
-            <div>
-                <p class="font-black tracking-tight text-xl text-slate-950">GPT Group</p>
-                <p class="text-xs text-slate-500 -mt-1">Global Phone Technology</p>
-            </div>
+            <img
+                src="{{ asset('assets/logo/GPT-Group-Logo.webp') }}"
+                alt="GPT Group Logo"
+                class="h-14 w-auto max-w-[170px] object-contain"
+            >
         </a>
 
+        {{-- Desktop Menu --}}
         <nav class="hidden lg:flex items-center gap-2 font-semibold text-sm">
             @foreach ($navItems as $item)
                 @php
-                    $isActive = request()->routeIs($item['active']);
+                    $isActive = request()->routeIs(...$item['active']);
                 @endphp
 
                 <a
@@ -42,6 +43,7 @@
             @endforeach
         </nav>
 
+        {{-- CTA --}}
         <a
             href="{{ route('contact') }}"
             class="hidden md:inline-flex rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-0.5"
@@ -49,6 +51,7 @@
             Partner Enquiry
         </a>
 
+        {{-- Mobile Button --}}
         <button
             id="menuBtn"
             type="button"
@@ -58,11 +61,12 @@
         </button>
     </div>
 
-    <div id="mobileMenu" class="mobile-menu lg:hidden border-t border-slate-100 bg-white">
+    {{-- Mobile Menu --}}
+    <div id="mobileMenu" class="mobile-menu hidden lg:hidden border-t border-slate-100 bg-white">
         <div class="containerx py-5 grid gap-2 font-semibold">
             @foreach ($navItems as $item)
                 @php
-                    $isActive = request()->routeIs($item['active']);
+                    $isActive = request()->routeIs(...$item['active']);
                 @endphp
 
                 <a
@@ -86,3 +90,16 @@
         </div>
     </div>
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    });
+</script>

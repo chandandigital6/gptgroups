@@ -55,35 +55,6 @@
     {{-- Main CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-    {{-- Structured Data / Schema --}}
-    
-    {{-- <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "GPT Group",
-        "alternateName": "Global Phone Technologies",
-        "url": "{{ url('/') }}",
-        "logo": "{{ asset('assets/images/logo.png') }}",
-        "description": "GPT Group is a telecom distribution and diversified business group in Oman, supporting mobile devices, smartphones, tablets, accessories, B2B supply, retail outlets and partner programs.",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Muscat",
-            "addressCountry": "OM"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+96824501533",
-            "contactType": "customer service",
-            "email": "info@gptgroups.com",
-            "areaServed": ["OM", "AE", "KW"],
-            "availableLanguage": ["English", "Hindi", "Arabic"]
-        },
-        "sameAs": [
-            "{{ url('/') }}"
-        ]
-    }
-    </script> --}}
 
     @stack('styles')
 </head>
