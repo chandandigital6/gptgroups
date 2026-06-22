@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\FounderSection;
 use App\Models\TeamMemberGpt;
 use Illuminate\Http\Request;
+use App\Models\WhatWeDoSection;
 
 class FrontController extends Controller
 {
@@ -21,8 +22,11 @@ class FrontController extends Controller
         ->orderBy('sort_order', 'asc')
         ->latest()
         ->first();
-
-        return view('front.index', compact('banners','founderSection'));
+  $whatWeDoSection = WhatWeDoSection::where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->first();
+        return view('front.index', compact('banners','founderSection','whatWeDoSection'));
     }
 
 
@@ -37,7 +41,12 @@ class FrontController extends Controller
         ->orderBy('sort_order', 'asc')
         ->latest()
         ->get();
-        return view('front.about',compact('founderSection','teamMembers'));
+
+         $whatWeDoSection = WhatWeDoSection::where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->first();
+        return view('front.about',compact('founderSection','teamMembers','whatWeDoSection'));
     }
 
 

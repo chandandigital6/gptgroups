@@ -38,8 +38,13 @@
                     {{ __('Team Members') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.*')"
-                    wire:navigate>
+                <flux:sidebar.item icon="briefcase" :href="route('what-we-do-sections.index')"
+                    :current="request()->routeIs('what-we-do-sections.*')" wire:navigate>
+                    {{ __('What We Do') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="users" :href="route('users.index')"
+                    :current="request()->routeIs('users.*')" wire:navigate>
                     {{ __('Users') }}
                 </flux:sidebar.item>
 

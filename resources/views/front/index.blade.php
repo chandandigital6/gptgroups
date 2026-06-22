@@ -910,64 +910,139 @@
     </section>
 
     <!-- Expanded Business Sections -->
-    <section class="section bg-white">
-        <div class="containerx">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-blue-700 font-black uppercase tracking-[.25em]">
-                        What We Do
-                    </p>
-                    <h2 class="mt-4 text-4xl md:text-6xl font-black leading-tight">
-                        Complete market execution for telecom and lifestyle brands.
-                    </h2>
-                    <p class="mt-6 text-slate-600 text-lg leading-8">
-                        GPT Group supports global brands with distribution, retail
-                        expansion, product launches, stock planning, partner onboarding,
-                        sales training, after-sales coordination and market intelligence
-                        across Oman and GCC.
-                    </p>
-                    <div class="mt-8 grid sm:grid-cols-2 gap-5">
-                        <div class="rounded-3xl bg-slate-50 p-6">
-                            <h3 class="font-black text-xl">Brand Distribution</h3>
-                            <p class="mt-2 text-slate-600">
-                                Channel-wise sales, stock flow and reseller support.
-                            </p>
+    {{-- WHAT WE DO --}}
+@if($whatWeDoSection)
+    <section class="bg-slate-50 py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="grid items-center gap-12 lg:grid-cols-2">
+
+                {{-- Mobile Top / Desktop Right Image --}}
+                <div class="relative order-1 lg:order-2">
+                    @if($whatWeDoSection->image)
+                        <img
+                            class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
+                            src="{{ asset('storage/' . $whatWeDoSection->image) }}"
+                            alt="{{ $whatWeDoSection->title }}"
+                        >
+                    @else
+                        <img
+                            class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
+                            src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
+                            alt="{{ $whatWeDoSection->title }}"
+                        >
+                    @endif
+
+                    @if($whatWeDoSection->overlay_title || $whatWeDoSection->overlay_text)
+                        <div class="absolute -bottom-8 left-6 right-6 rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl">
+                            @if($whatWeDoSection->overlay_title)
+                                <p class="text-3xl font-black">
+                                    {{ $whatWeDoSection->overlay_title }}
+                                </p>
+                            @endif
+
+                            @if($whatWeDoSection->overlay_text)
+                                <p class="mt-2 text-slate-300">
+                                    {{ $whatWeDoSection->overlay_text }}
+                                </p>
+                            @endif
                         </div>
-                        <div class="rounded-3xl bg-slate-50 p-6">
-                            <h3 class="font-black text-xl">Retail Visibility</h3>
-                            <p class="mt-2 text-slate-600">
-                                In-store display, offer banners and launch activation.
-                            </p>
-                        </div>
-                        <div class="rounded-3xl bg-slate-50 p-6">
-                            <h3 class="font-black text-xl">B2B Supply</h3>
-                            <p class="mt-2 text-slate-600">
-                                Corporate, dealer, wholesale and KDR-focused fulfilment.
-                            </p>
-                        </div>
-                        <div class="rounded-3xl bg-slate-50 p-6">
-                            <h3 class="font-black text-xl">Digital Growth</h3>
-                            <p class="mt-2 text-slate-600">
-                                E-commerce, IT solutions and customer communication.
-                            </p>
-                        </div>
-                    </div>
+                    @endif
                 </div>
-                <div class="relative">
-                    <img class="rounded-[44px] h-[560px] w-full object-cover shadow-2xl"
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80"
-                        alt="GPT Group team strategy" />
-                    <div
-                        class="absolute -bottom-8 -right-4 bg-slate-950 text-white rounded-[32px] p-7 shadow-2xl max-w-sm">
-                        <p class="text-3xl font-black">End-to-end business support</p>
-                        <p class="mt-2 text-slate-300">
-                            From product arrival to retail sell-through.
+
+                {{-- Mobile Bottom / Desktop Left Content --}}
+                <div class="order-2 lg:order-1">
+
+                    @if($whatWeDoSection->label)
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $whatWeDoSection->label }}
                         </p>
+                    @endif
+
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                        {{ $whatWeDoSection->title }}
+                    </h2>
+
+                    @if($whatWeDoSection->description)
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $whatWeDoSection->description }}
+                        </p>
+                    @endif
+
+                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+
+                        @if($whatWeDoSection->card_1_title || $whatWeDoSection->card_1_description)
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                @if($whatWeDoSection->card_1_title)
+                                    <h3 class="text-xl font-black">
+                                        {{ $whatWeDoSection->card_1_title }}
+                                    </h3>
+                                @endif
+
+                                @if($whatWeDoSection->card_1_description)
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $whatWeDoSection->card_1_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if($whatWeDoSection->card_2_title || $whatWeDoSection->card_2_description)
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                @if($whatWeDoSection->card_2_title)
+                                    <h3 class="text-xl font-black">
+                                        {{ $whatWeDoSection->card_2_title }}
+                                    </h3>
+                                @endif
+
+                                @if($whatWeDoSection->card_2_description)
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $whatWeDoSection->card_2_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if($whatWeDoSection->card_3_title || $whatWeDoSection->card_3_description)
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                @if($whatWeDoSection->card_3_title)
+                                    <h3 class="text-xl font-black">
+                                        {{ $whatWeDoSection->card_3_title }}
+                                    </h3>
+                                @endif
+
+                                @if($whatWeDoSection->card_3_description)
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $whatWeDoSection->card_3_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if($whatWeDoSection->card_4_title || $whatWeDoSection->card_4_description)
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                @if($whatWeDoSection->card_4_title)
+                                    <h3 class="text-xl font-black">
+                                        {{ $whatWeDoSection->card_4_title }}
+                                    </h3>
+                                @endif
+
+                                @if($whatWeDoSection->card_4_description)
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $whatWeDoSection->card_4_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
                     </div>
                 </div>
+
             </div>
+
         </div>
     </section>
+@endif
 
 
     <section class="section">

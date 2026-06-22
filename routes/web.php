@@ -9,6 +9,7 @@ use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FounderSectionController;
 use App\Http\Controllers\TeamMemberController;
+use App\Http\Controllers\WhatWeDoSectionController;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -80,6 +81,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/team-members/{teamMember}/edit', [TeamMemberController::class, 'edit'])->name('team-members.edit');
     Route::put('/team-members/{teamMember}', [TeamMemberController::class, 'update'])->name('team-members.update');
     Route::delete('/team-members/{teamMember}', [TeamMemberController::class, 'destroy'])->name('team-members.destroy');
+
+
+    Route::get('/what-we-do-sections', [WhatWeDoSectionController::class, 'index'])->name('what-we-do-sections.index');
+    Route::get('/what-we-do-sections/create', [WhatWeDoSectionController::class, 'create'])->name('what-we-do-sections.create');
+    Route::post('/what-we-do-sections', [WhatWeDoSectionController::class, 'store'])->name('what-we-do-sections.store');
+    Route::get('/what-we-do-sections/{whatWeDoSection}', [WhatWeDoSectionController::class, 'show'])->name('what-we-do-sections.show');
+    Route::get('/what-we-do-sections/{whatWeDoSection}/edit', [WhatWeDoSectionController::class, 'edit'])->name('what-we-do-sections.edit');
+    Route::put('/what-we-do-sections/{whatWeDoSection}', [WhatWeDoSectionController::class, 'update'])->name('what-we-do-sections.update');
+    Route::delete('/what-we-do-sections/{whatWeDoSection}', [WhatWeDoSectionController::class, 'destroy'])->name('what-we-do-sections.destroy');
 });
 
 
