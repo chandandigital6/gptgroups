@@ -888,27 +888,7 @@
         </div>
     </section> --}}
 
-    <section class="section">
-        <div class="containerx grid lg:grid-cols-2 gap-12 items-center">
-            <img class="rounded-[44px] h-[520px] w-full object-cover shadow-2xl"
-                src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" />
-            <div>
-                <p class="text-blue-700 font-black uppercase tracking-[.25em]">
-                    Founder & CEO
-                </p>
-                <h2 class="mt-4 text-5xl font-black">
-                    Visionary telecom distribution leader.
-                </h2>
-                <p class="mt-6 text-slate-600 leading-8 text-lg">
-                    Mr. Tripathi brings 20+ years of Middle East telecom experience and
-                    has helped build distribution ecosystems for global brands including
-                    Samsung, Apple, Nokia and Vivo across Oman, UAE and Kuwait.
-                </p>
-                <a class="btn-primary mt-8" href="pages/about.html">Read Journey</a>
-            </div>
-        </div>
-    </section>
-
+  
     <section class="section bg-white">
         <div class="containerx">
             <div
@@ -1099,43 +1079,103 @@
         </div>
     </section>
 
+
+    {{-- founder section --}}
+
+   @if($founderSection)
     <section class="section bg-white">
         <div class="containerx">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <img class="rounded-[44px] h-[560px] w-full object-cover shadow-2xl"
-                    src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" alt="Founder leadership" />
-                <div>
-                    <p class="text-blue-700 font-black uppercase tracking-[.25em]">
-                        Founder Section
-                    </p>
-                    <h2 class="mt-4 text-4xl md:text-6xl font-black">
-                        Mr. Tripathi — Founder & CEO, GPT Group.
-                    </h2>
-                    <p class="mt-6 text-slate-600 text-lg leading-8">
-                        With over two decades of experience in the Middle East telecom
-                        industry, Mr. Tripathi has built scalable distribution and retail
-                        ecosystems for global technology brands. His leadership combines
-                        market insight, hands-on execution and long-term partner
-                        commitment.
-                    </p>
-                    <div class="mt-8 grid sm:grid-cols-3 gap-4">
-                        <div class="rounded-3xl bg-slate-50 p-5">
-                            <p class="text-3xl font-black text-gradient">20+</p>
-                            <p class="text-slate-600 font-semibold">Years</p>
-                        </div>
-                        <div class="rounded-3xl bg-slate-50 p-5">
-                            <p class="text-3xl font-black text-gradient">2016</p>
-                            <p class="text-slate-600 font-semibold">GPT Founded</p>
-                        </div>
-                        <div class="rounded-3xl bg-slate-50 p-5">
-                            <p class="text-3xl font-black text-gradient">GCC</p>
-                            <p class="text-slate-600 font-semibold">Market Vision</p>
-                        </div>
-                    </div>
+
+            <div class="grid items-center gap-12 lg:grid-cols-2">
+
+                {{-- Mobile Top / Desktop Right Image --}}
+                <div class="order-1 lg:order-2">
+                    @if($founderSection->image)
+                        <img
+                            class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
+                            src="{{ asset('storage/' . $founderSection->image) }}"
+                            alt="{{ $founderSection->title }}"
+                        >
+                    @else
+                        <img
+                            class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
+                            src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
+                            alt="{{ $founderSection->title }}"
+                        >
+                    @endif
                 </div>
+
+                {{-- Mobile Bottom / Desktop Left Content --}}
+                <div class="order-2 lg:order-1">
+                    @if($founderSection->label)
+                        <p class="font-black uppercase tracking-[.25em] text-blue-700">
+                            {{ $founderSection->label }}
+                        </p>
+                    @endif
+
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+                        {{ $founderSection->title }}
+                    </h2>
+
+                    @if($founderSection->description)
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $founderSection->description }}
+                        </p>
+                    @endif
+
+                    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+
+                        @if($founderSection->stat_1_value || $founderSection->stat_1_label)
+                            <div class="rounded-3xl bg-slate-50 p-5">
+                                <p class="text-gradient text-3xl font-black">
+                                    {{ $founderSection->stat_1_value }}
+                                </p>
+                                <p class="font-semibold text-slate-600">
+                                    {{ $founderSection->stat_1_label }}
+                                </p>
+                            </div>
+                        @endif
+
+                        @if($founderSection->stat_2_value || $founderSection->stat_2_label)
+                            <div class="rounded-3xl bg-slate-50 p-5">
+                                <p class="text-gradient text-3xl font-black">
+                                    {{ $founderSection->stat_2_value }}
+                                </p>
+                                <p class="font-semibold text-slate-600">
+                                    {{ $founderSection->stat_2_label }}
+                                </p>
+                            </div>
+                        @endif
+
+                        @if($founderSection->stat_3_value || $founderSection->stat_3_label)
+                            <div class="rounded-3xl bg-slate-50 p-5">
+                                <p class="text-gradient text-3xl font-black">
+                                    {{ $founderSection->stat_3_value }}
+                                </p>
+                                <p class="font-semibold text-slate-600">
+                                    {{ $founderSection->stat_3_label }}
+                                </p>
+                            </div>
+                        @endif
+
+                    </div>
+
+                    @if($founderSection->button_text)
+                        <a
+                            href="{{ $founderSection->button_link ?: '#' }}"
+                            class="mt-8 inline-flex rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-7 py-4 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-1"
+                        >
+                            {{ $founderSection->button_text }}
+                        </a>
+                    @endif
+                </div>
+
             </div>
+
         </div>
     </section>
+@endif
+
 
     <section class="section">
         <div class="containerx">

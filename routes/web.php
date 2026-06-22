@@ -7,6 +7,8 @@ use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\FounderSectionController;
+use App\Http\Controllers\TeamMemberController;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -35,7 +37,7 @@ Route::prefix('{current_team}')
 
 
 
-    Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/banners', [BannerController::class, 'index'])
         ->name('banners.index');
@@ -57,7 +59,30 @@ Route::prefix('{current_team}')
 
     Route::delete('/banners/{banner}', [BannerController::class, 'destroy'])
         ->name('banners.destroy');
+
+
+
+    Route::get('/founder-sections', [FounderSectionController::class, 'index'])->name('founder-sections.index');
+    Route::get('/founder-sections/create', [FounderSectionController::class, 'create'])->name('founder-sections.create');
+    Route::post('/founder-sections', [FounderSectionController::class, 'store'])->name('founder-sections.store');
+    Route::get('/founder-sections/{founderSection}', [FounderSectionController::class, 'show'])->name('founder-sections.show');
+    Route::get('/founder-sections/{founderSection}/edit', [FounderSectionController::class, 'edit'])->name('founder-sections.edit');
+    Route::put('/founder-sections/{founderSection}', [FounderSectionController::class, 'update'])->name('founder-sections.update');
+    Route::delete('/founder-sections/{founderSection}', [FounderSectionController::class, 'destroy'])->name('founder-sections.destroy');
+
+
+
+
+    Route::get('/team-members', [TeamMemberController::class, 'index'])->name('team-members.index');
+    Route::get('/team-members/create', [TeamMemberController::class, 'create'])->name('team-members.create');
+    Route::post('/team-members', [TeamMemberController::class, 'store'])->name('team-members.store');
+    Route::get('/team-members/{teamMember}', [TeamMemberController::class, 'show'])->name('team-members.show');
+    Route::get('/team-members/{teamMember}/edit', [TeamMemberController::class, 'edit'])->name('team-members.edit');
+    Route::put('/team-members/{teamMember}', [TeamMemberController::class, 'update'])->name('team-members.update');
+    Route::delete('/team-members/{teamMember}', [TeamMemberController::class, 'destroy'])->name('team-members.destroy');
 });
+
+
 
 
 

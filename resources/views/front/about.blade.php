@@ -217,62 +217,109 @@
 
 
     {{-- FOUNDER SECTION --}}
+   {{-- FOUNDER SECTION --}}
+@if($founderSection)
     <section class="bg-slate-950 py-16 lg:py-24 text-white overflow-hidden">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="relative">
+
+                {{-- Mobile Top / Desktop Left Image --}}
+                <div class="relative order-1 lg:order-1">
                     <div class="absolute -inset-6 rounded-full bg-blue-500/20 blur-3xl"></div>
 
-                    <div
-                        class="relative overflow-hidden rounded-[2.5rem] bg-white/10 p-5 backdrop-blur border border-white/10">
-                        <img class="h-[520px] w-full rounded-[2rem] object-cover"
-                            src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" alt="Founder GPT Group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-white/10 p-5 backdrop-blur border border-white/10">
+
+                        @if($founderSection->image)
+                            <img
+                                class="h-[360px] sm:h-[460px] lg:h-[520px] w-full rounded-[2rem] object-cover"
+                                src="{{ asset('storage/' . $founderSection->image) }}"
+                                alt="{{ $founderSection->title }}"
+                            >
+                        @else
+                            <img
+                                class="h-[360px] sm:h-[460px] lg:h-[520px] w-full rounded-[2rem] object-cover"
+                                src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
+                                alt="{{ $founderSection->title }}"
+                            >
+                        @endif
+
                         <div class="absolute bottom-8 left-8 right-8 rounded-[2rem] bg-slate-950/90 p-6 backdrop-blur">
-                            <p class="text-2xl font-black">Mr. Pradeep Tripathi</p>
-                            <p class="mt-1 text-cyan-300 font-bold">Founder | Chairman</p>
+                            <p class="text-2xl font-black">
+                                {{ $founderSection->title }}
+                            </p>
+
+                            @if($founderSection->label)
+                                <p class="mt-1 text-cyan-300 font-bold">
+                                    {{ $founderSection->label }}
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <p class="font-black uppercase tracking-[.3em] text-cyan-300">Founder & Leadership</p>
+                {{-- Mobile Bottom / Desktop Right Content --}}
+                <div class="order-2 lg:order-2">
+
+                    @if($founderSection->label)
+                        <p class="font-black uppercase tracking-[.3em] text-cyan-300">
+                            {{ $founderSection->label }}
+                        </p>
+                    @endif
 
                     <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
-                        Visionary telecom distribution leader.
+                        {{ $founderSection->title }}
                     </h2>
 
-                    <p class="mt-6 text-lg leading-8 text-slate-300">
-                        Mr. Pradeep Tripathi is a young, dynamic and enterprising technocrat entrepreneur with 20+ years of
-                        telecom experience in the Middle East. His journey started with HCL India in 2000, followed by Dubai
-                        in 2002 and Oman in 2003.
-                    </p>
-
-                    <p class="mt-5 text-lg leading-8 text-slate-300">
-                        He has been instrumental in setting up distribution and retail for major brands including Samsung,
-                        Apple, Nokia, Vivo, Xiaomi, Huawei, BlackBerry, Sony and Micromax across Oman, UAE and Kuwait.
-                    </p>
+                    @if($founderSection->description)
+                        <p class="mt-6 text-lg leading-8 text-slate-300">
+                            {{ $founderSection->description }}
+                        </p>
+                    @endif
 
                     <div class="mt-8 grid sm:grid-cols-3 gap-4">
-                        <div class="rounded-[1.75rem] bg-white/10 p-5">
-                            <p class="text-3xl font-black text-cyan-300">20+</p>
-                            <p class="mt-1 text-sm text-slate-300">Years Experience</p>
-                        </div>
 
-                        <div class="rounded-[1.75rem] bg-white/10 p-5">
-                            <p class="text-3xl font-black text-cyan-300">2016</p>
-                            <p class="mt-1 text-sm text-slate-300">GPT Founded</p>
-                        </div>
+                        @if($founderSection->stat_1_value || $founderSection->stat_1_label)
+                            <div class="rounded-[1.75rem] bg-white/10 p-5">
+                                <p class="text-3xl font-black text-cyan-300">
+                                    {{ $founderSection->stat_1_value }}
+                                </p>
+                                <p class="mt-1 text-sm text-slate-300">
+                                    {{ $founderSection->stat_1_label }}
+                                </p>
+                            </div>
+                        @endif
 
-                        <div class="rounded-[1.75rem] bg-white/10 p-5">
-                            <p class="text-3xl font-black text-cyan-300">GCC</p>
-                            <p class="mt-1 text-sm text-slate-300">Market Reach</p>
-                        </div>
+                        @if($founderSection->stat_2_value || $founderSection->stat_2_label)
+                            <div class="rounded-[1.75rem] bg-white/10 p-5">
+                                <p class="text-3xl font-black text-cyan-300">
+                                    {{ $founderSection->stat_2_value }}
+                                </p>
+                                <p class="mt-1 text-sm text-slate-300">
+                                    {{ $founderSection->stat_2_label }}
+                                </p>
+                            </div>
+                        @endif
+
+                        @if($founderSection->stat_3_value || $founderSection->stat_3_label)
+                            <div class="rounded-[1.75rem] bg-white/10 p-5">
+                                <p class="text-3xl font-black text-cyan-300">
+                                    {{ $founderSection->stat_3_value }}
+                                </p>
+                                <p class="mt-1 text-sm text-slate-300">
+                                    {{ $founderSection->stat_3_label }}
+                                </p>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
+
             </div>
+
         </div>
     </section>
-
+@endif
 
     {{-- VISION MISSION VALUES --}}
     <section class="bg-white py-16 lg:py-24">
@@ -383,114 +430,86 @@
 
 
     {{-- TEAM SECTION --}}
+  {{-- TEAM SECTION --}}
+@if($teamMembers->count() > 0)
     <section class="bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">Leadership Team</p>
-                    <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950">
+                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        Leadership Team
+                    </p>
+
+                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
                         GPT Group Team
                     </h2>
+
                     <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                        The Group’s leadership and operational teams bring integrity, resilience, creativity and commitment
-                        to excellence.
+                        The Group’s leadership and operational teams bring integrity, resilience, creativity and commitment to excellence.
                     </p>
                 </div>
 
                 <a href="{{ route('contact') }}"
-                    class="inline-flex w-fit rounded-full bg-slate-950 px-7 py-4 text-sm font-black text-white shadow-xl hover:-translate-y-1 transition">
+                    class="inline-flex w-fit rounded-full bg-slate-950 px-7 py-4 text-sm font-black text-white shadow-xl transition hover:-translate-y-1">
                     Contact Team
                 </a>
             </div>
 
-            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div
-                    class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <div class="h-72 bg-gradient-to-br from-blue-100 to-cyan-100 p-6">
-                        <img class="h-full w-full rounded-[1.5rem] object-cover"
-                            src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
-                            alt="Pradeep Tripathi">
-                    </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Pradeep Tripathi</h3>
-                        <p class="mt-1 font-bold text-blue-700">Founder | Chairman</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-500">20+ years telecom experience in the Middle East.
-                        </p>
-                    </div>
-                </div>
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-                <div
-                    class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <div class="h-72 bg-gradient-to-br from-slate-100 to-blue-100 p-6">
-                        <img class="h-full w-full rounded-[1.5rem] object-cover"
-                            src="{{ asset('assets/img/Mr-Adam.jpeg') }}"
-                            alt="Adam Al Balshi">
-                    </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Adam Al Balshi</h3>
-                        <p class="mt-1 font-bold text-blue-700">General Group Manager</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-500">Leadership and group operations support.</p>
-                    </div>
-                </div>
+                @foreach($teamMembers as $member)
+                    <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
 
-                <div
-                    class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <div class="h-72 bg-gradient-to-br from-cyan-100 to-slate-100 p-6">
-                                        <img class="h-full w-full rounded-[1.5rem] object-cover"
-                                            src="{{ asset('assets/img/Mr-Omkumar.jpeg') }}"
-                            alt="OmKumar Tolani">
-                    </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">OmKumar Tolani</h3>
-                        <p class="mt-1 font-bold text-blue-700">General Manager</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-500">Business and operational management.</p>
-                    </div>
-                </div>
+                        <div class="h-72 bg-gradient-to-br from-blue-100 to-cyan-100 p-6">
+                            @if($member->image)
+                                <img
+                                    class="h-full w-full rounded-[1.5rem] object-cover"
+                                    src="{{ asset('storage/' . $member->image) }}"
+                                    alt="{{ $member->name }}"
+                                >
+                            @else
+                                <div class="flex h-full w-full items-center justify-center rounded-[1.5rem] bg-white text-slate-400">
+                                    No Image
+                                </div>
+                            @endif
+                        </div>
 
-                <div
-                    class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <div class="h-72 bg-gradient-to-br from-blue-100 to-slate-100 p-6">
-                        <img class="h-full w-full rounded-[1.5rem] object-cover"
-                            src="{{ asset('assets/img/Mr-Faizan.jpeg') }}"
-                            alt="Syed Irfan">
-                    </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Syed Irfan</h3>
-                        <p class="mt-1 font-bold text-blue-700">General Manager</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-500">Retail, sales and market execution support.</p>
-                    </div>
-                </div>
+                        <div class="p-7">
+                            <h3 class="text-2xl font-black text-slate-950">
+                                {{ $member->name }}
+                            </h3>
 
-                <div
-                    class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <div class="h-72 bg-gradient-to-br from-slate-100 to-cyan-100 p-6">
-                        <img class="h-full w-full rounded-[1.5rem] object-cover"
-                            src="{{ asset('assets/img/Mr-George.jpeg') }}"
-                            alt="George">
-                    </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">George</h3>
-                        <p class="mt-1 font-bold text-blue-700">General Manager</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-500">Team coordination and business operations.</p>
-                    </div>
-                </div>
+                            @if($member->designation)
+                                <p class="mt-1 font-bold text-blue-700">
+                                    {{ $member->designation }}
+                                </p>
+                            @endif
 
-                <div
-                    class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <div class="h-72 bg-gradient-to-br from-cyan-100 to-blue-100 p-6">
-                        <img class="h-full w-full rounded-[1.5rem] object-cover"
-                            src="{{ asset('assets/img/WhatsApp-Image-2026-05-25-at-2.18.09-PM-1-e1779701452750.jpeg') }}"
-                            alt="Devesh">
+                            @if($member->description)
+                                <p class="mt-3 text-sm leading-6 text-slate-500">
+                                    {{ $member->description }}
+                                </p>
+                            @endif
+
+                            @if($member->profile_link)
+                                <a
+                                    href="{{ $member->profile_link }}"
+                                    target="_blank"
+                                    class="mt-5 inline-flex rounded-full bg-slate-950 px-5 py-3 text-xs font-black text-white transition hover:bg-blue-700"
+                                >
+                                    View Profile →
+                                </a>
+                            @endif
+                        </div>
+
                     </div>
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Devesh</h3>
-                        <p class="mt-1 font-bold text-blue-700">General Manager</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-500">Operational excellence and business support.</p>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </section>
+@endif
 
 
     {{-- OPERATIONAL EXCELLENCE --}}

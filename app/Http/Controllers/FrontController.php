@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\FounderSection;
+use App\Models\TeamMemberGpt;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -15,13 +17,27 @@ class FrontController extends Controller
             ->latest()
             ->get();
 
-        return view('front.index', compact('banners'));
+                $founderSection = FounderSection::where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->first();
+
+        return view('front.index', compact('banners','founderSection'));
     }
 
 
     public function about()
     {
-        return view('front.about');
+            $founderSection = FounderSection::where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->first();
+
+         $teamMembers = TeamMemberGpt::where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->get();
+        return view('front.about',compact('founderSection','teamMembers'));
     }
 
 

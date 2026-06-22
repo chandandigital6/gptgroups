@@ -28,6 +28,16 @@
                     {{ __('Banners') }}
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="user-circle" :href="route('founder-sections.index')"
+                    :current="request()->routeIs('founder-sections.*')" wire:navigate>
+                    {{ __('Founder Section') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="user-group" :href="route('team-members.index')"
+                    :current="request()->routeIs('team-members.*')" wire:navigate>
+                    {{ __('Team Members') }}
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.*')"
                     wire:navigate>
                     {{ __('Users') }}
@@ -49,7 +59,7 @@
 
         <flux:spacer />
 
-     
+
 
         <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
     </flux:sidebar>
