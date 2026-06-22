@@ -1,128 +1,263 @@
 @extends('front_pages.front_components.main')
+
 @section('content')
-  
+    <style>
+        .bannerSwiper .swiper-pagination-bullet,
+        .productSwiper .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, .75);
+            opacity: 1;
+        }
 
-   <style>
-    .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-        background: rgba(255, 255, 255, .75);
-        opacity: 1;
-    }
+        .bannerSwiper .swiper-pagination-bullet-active,
+        .productSwiper .swiper-pagination-bullet-active {
+            width: 34px;
+            border-radius: 999px;
+            background: #22d3ee;
+        }
 
-    .swiper-pagination-bullet-active {
-        width: 34px;
-        border-radius: 999px;
-        background: #22d3ee;
-    }
+        .productSwiper .swiper-pagination-bullet {
+            background: #cbd5e1;
+        }
 
-    .mobile-hero-pagination .swiper-pagination-bullet {
-        background: rgba(255, 255, 255, .65);
-    }
+        .productSwiper .swiper-pagination-bullet-active {
+            background: #2563eb;
+        }
 
-    .mobile-hero-pagination .swiper-pagination-bullet-active {
-        background: #22d3ee;
-    }
-</style>
+        .banner-bg {
+            transition: transform 7s ease;
+        }
 
-{{-- HERO SLIDER --}}
-<section class="relative overflow-hidden bg-slate-950">
-    <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(14,165,233,.30),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(37,99,235,.30),transparent_35%),linear-gradient(135deg,#071226,#020617)]">
-    </div>
+        .bannerSwiper .swiper-slide-active .banner-bg {
+            transform: scale(1.08);
+        }
 
-    {{-- DESKTOP HERO --}}
-    <div class="relative hidden lg:block">
-        <div class="swiper heroOfferSwiper">
+        .banner-product-img {
+            transition: transform .8s ease;
+        }
+
+        .banner-product-card:hover .banner-product-img {
+            transform: scale(1.08);
+        }
+
+        .banner-prev,
+        .banner-next,
+        .product-prev,
+        .product-next {
+            transition: all .3s ease;
+        }
+
+        .banner-prev:hover,
+        .banner-next:hover {
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .product-prev:hover,
+        .product-next:hover {
+            transform: scale(1.08);
+        }
+
+        @media (max-width: 767px) {
+            .banner-prev,
+            .banner-next {
+                display: none !important;
+            }
+        }
+    </style>
+
+    @php
+    
+
+        $products = [
+            [
+                'tag' => '5G',
+                'name' => 'Premium Smartphones',
+                'desc' => 'Latest 4G and 5G mobile range for retail and B2B supply.',
+                'img' => 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=900&q=85',
+                'labels' => ['5G', 'Retail', 'B2B'],
+                'color' => 'bg-blue-600',
+            ],
+            [
+                'tag' => 'Tablet',
+                'name' => 'Business Tablets',
+                'desc' => 'Tablets for education, office, business and entertainment use.',
+                'img' => 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85',
+                'labels' => ['Business', 'Education'],
+                'color' => 'bg-cyan-500',
+            ],
+            [
+                'tag' => 'Watch',
+                'name' => 'Smart Watches',
+                'desc' => 'Modern wearable products for lifestyle and daily usage.',
+                'img' => 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85',
+                'labels' => ['Wearable', 'Bluetooth'],
+                'color' => 'bg-emerald-500',
+            ],
+            [
+                'tag' => 'Audio',
+                'name' => 'Earphones & Headphones',
+                'desc' => 'Fast moving audio accessories for every mobile store.',
+                'img' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=85',
+                'labels' => ['Audio', 'Accessories'],
+                'color' => 'bg-slate-950',
+            ],
+            [
+                'tag' => 'Power',
+                'name' => 'Chargers & Cables',
+                'desc' => 'Essential mobile accessories with high retail demand.',
+                'img' => 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=900&q=85',
+                'labels' => ['Charger', 'Cable'],
+                'color' => 'bg-orange-500',
+            ],
+        ];
+
+       
+    @endphp
+
+@php
+    $bannerThemeClasses = function ($theme) {
+        return match ($theme) {
+            'yellow' => [
+                'badge' => 'bg-yellow-300 text-slate-950',
+                'highlight' => 'text-yellow-300',
+                'button' => 'bg-yellow-300 text-slate-950',
+                'dot' => 'bg-yellow-300',
+                'ring' => 'ring-yellow-300/30',
+            ],
+            'emerald' => [
+                'badge' => 'bg-emerald-300 text-slate-950',
+                'highlight' => 'text-emerald-300',
+                'button' => 'bg-emerald-300 text-slate-950',
+                'dot' => 'bg-emerald-300',
+                'ring' => 'ring-emerald-300/30',
+            ],
+            default => [
+                'badge' => 'bg-cyan-300 text-slate-950',
+                'highlight' => 'text-cyan-300',
+                'button' => 'bg-cyan-300 text-slate-950',
+                'dot' => 'bg-cyan-300',
+                'ring' => 'ring-cyan-300/30',
+            ],
+        };
+    };
+@endphp
+
+@if($banners->count() > 0)
+    {{-- PREMIUM BANNER SLIDER --}}
+    <section class="relative overflow-hidden bg-slate-950">
+        <div class="swiper bannerSwiper">
             <div class="swiper-wrapper">
 
-                {{-- SLIDE 1 --}}
-                <div class="swiper-slide">
-                    <div class="mx-auto max-w-7xl px-8 min-h-[760px] grid grid-cols-2 gap-12 items-center py-16">
-                        <div class="text-white">
-                            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-black backdrop-blur">
-                                <span class="h-2.5 w-2.5 rounded-full bg-cyan-300"></span>
-                                Authorized Telecom Distribution
-                            </div>
+                @foreach ($banners as $banner)
+                    @php
+                        $theme = $bannerThemeClasses($banner->theme ?? 'cyan');
 
-                            <h1 class="mt-7 text-7xl font-black leading-[.95] tracking-tight">
-                                Tech Distributor
-                                <span class="block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-                                    For Modern GCC
-                                </span>
-                            </h1>
+                        $desktopImage = $banner->desktop_image
+                            ? asset('storage/' . $banner->desktop_image)
+                            : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=85';
 
-                            <p class="mt-6 max-w-xl text-xl leading-8 text-slate-300">
-                                GPT Group supports brands with telecom distribution, retail partner growth, product launches, B2B supply and market execution across Oman and GCC.
-                            </p>
+                        $mobileImage = $banner->mobile_image
+                            ? asset('storage/' . $banner->mobile_image)
+                            : $desktopImage;
 
-                            <div class="mt-8 flex flex-wrap gap-4">
-                                <a href="{{ url('/brands') }}"
-                                    class="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-xl hover:-translate-y-1 transition">
-                                    Explore Brands
-                                </a>
+                        $productImage = $banner->product_image
+                            ? asset('storage/' . $banner->product_image)
+                            : $desktopImage;
 
-                                <a href="{{ url('/contact-us') }}"
-                                    class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-7 py-4 text-sm font-black text-white shadow-xl hover:-translate-y-1 transition">
-                                    Partner Enquiry
-                                </a>
-                            </div>
+                        $buttonLink = $banner->button_link ?: '#';
+                        $secondButtonLink = $banner->second_button_link ?: '#';
+                    @endphp
 
-                            <div class="mt-10 grid grid-cols-3 max-w-xl gap-4">
-                                <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
-                                    <p class="text-3xl font-black">2016</p>
-                                    <p class="mt-1 text-sm text-slate-300">Founded</p>
-                                </div>
-                                <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
-                                    <p class="text-3xl font-black">GCC</p>
-                                    <p class="mt-1 text-sm text-slate-300">Market</p>
-                                </div>
-                                <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
-                                    <p class="text-3xl font-black">B2B</p>
-                                    <p class="mt-1 text-sm text-slate-300">Supply</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="swiper-slide">
+                        <div class="relative min-h-[760px] overflow-hidden sm:min-h-[820px] lg:min-h-[640px] xl:min-h-[680px]">
 
-                        <div class="relative">
-                            <div class="absolute -inset-6 rounded-full bg-cyan-400/20 blur-3xl"></div>
+                            {{-- Background Image --}}
+                            <picture>
+                                <source media="(max-width: 767px)" srcset="{{ $mobileImage }}">
+                                <img
+                                    src="{{ $desktopImage }}"
+                                    alt="{{ $banner->title }}"
+                                    class="banner-bg absolute inset-0 h-full w-full object-cover"
+                                >
+                            </picture>
 
-                            <div class="relative rounded-[2.5rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur">
-                                <div class="overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-900 to-slate-800 p-10">
-                                    <div class="flex flex-wrap items-center justify-between gap-4">
-                                        <div>
-                                            <p class="text-xs font-black uppercase tracking-[.35em] text-cyan-300">
-                                                New Launch
+                            {{-- Overlay --}}
+                            <div class="absolute inset-0 bg-slate-950/70"></div>
+                            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/35"></div>
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_34%),radial-gradient(circle_at_82%_38%,rgba(59,130,246,.14),transparent_35%)]"></div>
+
+                            <div class="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-4 py-10 sm:min-h-[820px] sm:px-6 lg:min-h-[640px] lg:px-8 xl:min-h-[680px]">
+                                <div class="grid w-full gap-7 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+
+                                    {{-- Mobile Top / Desktop Right Product Image --}}
+                                    <a href="{{ $buttonLink }}"
+                                        class="banner-product-card order-1 group relative mx-auto w-full max-w-[640px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-xl ring-1 {{ $theme['ring'] }} transition hover:-translate-y-2 lg:order-2 lg:max-w-none">
+
+                                        <div class="relative h-[260px] overflow-hidden rounded-[1.6rem] bg-white sm:h-[380px] lg:h-[450px] xl:h-[500px]">
+                                            <img
+                                                src="{{ $productImage }}"
+                                                alt="{{ $banner->highlight ?: $banner->title }}"
+                                                class="banner-product-img h-full w-full object-cover object-center"
+                                            >
+                                        </div>
+                                    </a>
+
+                                    {{-- Mobile Bottom / Desktop Left Content --}}
+                                    <div class="order-2 max-w-xl text-white lg:order-1">
+                                        @if($banner->badge)
+                                            <div class="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black backdrop-blur sm:text-sm">
+                                                <span class="h-2.5 w-2.5 rounded-full {{ $theme['dot'] }}"></span>
+                                                {{ $banner->badge }}
+                                            </div>
+                                        @endif
+
+                                        <h1 class="mt-5 text-3xl font-black leading-[1.08] tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
+                                            {{ $banner->title }}
+
+                                            @if($banner->highlight)
+                                                <span class="mt-2 block {{ $theme['highlight'] }}">
+                                                    {{ $banner->highlight }}
+                                                </span>
+                                            @endif
+                                        </h1>
+
+                                        @if($banner->description)
+                                            <p class="mt-5 max-w-lg text-sm leading-7 text-slate-200 sm:text-base lg:text-lg">
+                                                {{ $banner->description }}
                                             </p>
-                                            <h2 class="mt-3 text-6xl font-black text-white">
-                                                Smartphones
-                                            </h2>
-                                            <p class="mt-3 text-slate-300">Premium performance. Retail ready.</p>
+                                        @endif
+
+                                        <div class="mt-7 flex flex-wrap gap-4">
+                                            @if($banner->button_text)
+                                                <a href="{{ $buttonLink }}"
+                                                    class="inline-flex items-center justify-center rounded-full {{ $theme['button'] }} px-6 py-3.5 text-sm font-black shadow-xl transition hover:-translate-y-1">
+                                                    {{ $banner->button_text }}
+                                                </a>
+                                            @endif
+
+                                            @if($banner->second_button_text)
+                                                <a href="{{ $secondButtonLink }}"
+                                                    class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-black text-white shadow-xl backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
+                                                    {{ $banner->second_button_text }}
+                                                </a>
+                                            @endif
                                         </div>
 
-                                        <span class="rounded-full bg-yellow-300 px-5 py-3 text-sm font-black text-slate-950">
-                                            Offer Soon
-                                        </span>
-                                    </div>
-
-                                    <div class="mt-10 grid grid-cols-2 gap-6 items-end">
-                                        <div class="rounded-[2rem] bg-white p-6 shadow-2xl">
-                                            <img class="h-[320px] w-full object-contain"
-                                                src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=900&q=80"
-                                                alt="Smartphone">
-                                        </div>
-
-                                        <div class="space-y-5">
-                                            <div class="rounded-[2rem] bg-white p-6">
-                                                <p class="text-sm text-slate-500">Starting From</p>
-                                                <p class="mt-1 text-4xl font-black text-slate-950">OMR 49*</p>
+                                        <div class="mt-8 grid max-w-lg grid-cols-3 gap-3">
+                                            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                                                <p class="text-xl font-black sm:text-2xl">2016</p>
+                                                <p class="mt-1 text-xs text-slate-300">Founded</p>
                                             </div>
 
-                                            <div class="rounded-[2rem] border border-white/10 bg-white/10 p-6 text-white">
-                                                <p class="text-xl font-black">Launch Campaign</p>
-                                                <p class="mt-2 text-sm leading-6 text-slate-300">
-                                                    Offer image, discount, launch date aur product highlight yaha add kar sakte ho.
-                                                </p>
+                                            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                                                <p class="text-xl font-black sm:text-2xl">GCC</p>
+                                                <p class="mt-1 text-xs text-slate-300">Market</p>
+                                            </div>
+
+                                            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                                                <p class="text-xl font-black sm:text-2xl">B2B</p>
+                                                <p class="mt-1 text-xs text-slate-300">Supply</p>
                                             </div>
                                         </div>
                                     </div>
@@ -131,465 +266,96 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- SLIDE 2 --}}
-                <div class="swiper-slide">
-                    <div class="mx-auto max-w-7xl px-8 min-h-[760px] grid grid-cols-2 gap-12 items-center py-16">
-                        <div class="text-white">
-                            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-black backdrop-blur">
-                                <span class="h-2.5 w-2.5 rounded-full bg-yellow-300"></span>
-                                Dealer Special Offer
-                            </div>
-
-                            <h1 class="mt-7 text-7xl font-black leading-[.95] tracking-tight">
-                                Premium Deals
-                                <span class="block bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
-                                    For Partners
-                                </span>
-                            </h1>
-
-                            <p class="mt-6 max-w-xl text-xl leading-8 text-slate-300">
-                                Retailers aur dealers ke liye mobile launch offers, bundle schemes, stock availability aur B2B distribution support.
-                            </p>
-
-                            <div class="mt-8 flex flex-wrap gap-4">
-                                <a href="{{ url('/contact-us') }}"
-                                    class="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-xl hover:-translate-y-1 transition">
-                                    Become Partner
-                                </a>
-
-                                <a href="{{ url('/network') }}"
-                                    class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-orange-500 to-yellow-400 px-7 py-4 text-sm font-black text-slate-950 shadow-xl hover:-translate-y-1 transition">
-                                    View Network
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute -inset-6 rounded-full bg-yellow-400/20 blur-3xl"></div>
-
-                            <div class="relative rounded-[2.5rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur">
-                                <div class="rounded-[2rem] bg-gradient-to-br from-yellow-300 to-orange-500 p-10">
-                                    <p class="text-sm font-black uppercase tracking-[.35em] text-slate-950">
-                                        Limited Period
-                                    </p>
-                                    <h2 class="mt-4 text-6xl font-black text-slate-950">Mega Offer</h2>
-                                    <p class="mt-4 text-xl font-bold text-slate-800">
-                                        Smartphones • Tablets • Accessories
-                                    </p>
-
-                                    <div class="mt-10 rounded-[2rem] bg-white/80 p-6 backdrop-blur">
-                                        <img class="h-[350px] w-full object-contain"
-                                            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
-                                            alt="Offer Phone">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- SLIDE 3 --}}
-                <div class="swiper-slide">
-                    <div class="mx-auto max-w-7xl px-8 min-h-[760px] grid grid-cols-2 gap-12 items-center py-16">
-                        <div class="text-white">
-                            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-black backdrop-blur">
-                                <span class="h-2.5 w-2.5 rounded-full bg-emerald-300"></span>
-                                New Product Arrival
-                            </div>
-
-                            <h1 class="mt-7 text-7xl font-black leading-[.95] tracking-tight">
-                                Accessories
-                                <span class="block bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent">
-                                    Now Available
-                                </span>
-                            </h1>
-
-                            <p class="mt-6 max-w-xl text-xl leading-8 text-slate-300">
-                                Chargers, earphones, smart watches aur mobile accessories ko premium product showcase me display karo.
-                            </p>
-
-                            <div class="mt-8 flex flex-wrap gap-4">
-                                <a href="{{ url('/brands') }}"
-                                    class="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-xl hover:-translate-y-1 transition">
-                                    Explore Accessories
-                                </a>
-
-                                <a href="{{ url('/services') }}"
-                                    class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-400 px-7 py-4 text-sm font-black text-slate-950 shadow-xl hover:-translate-y-1 transition">
-                                    GPT Services
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute -inset-6 rounded-full bg-emerald-400/20 blur-3xl"></div>
-
-                            <div class="relative rounded-[2.5rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur">
-                                <div class="rounded-[2rem] bg-gradient-to-br from-emerald-500 to-cyan-500 p-10">
-                                    <h2 class="text-6xl font-black text-white">Smart Add-ons</h2>
-                                    <p class="mt-4 text-lg font-semibold text-emerald-50">
-                                        High demand accessories for every store.
-                                    </p>
-
-                                    <div class="mt-10 grid grid-cols-2 gap-5">
-                                        <div class="rounded-[2rem] bg-white p-5">
-                                            <img class="h-52 w-full object-contain"
-                                                src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80"
-                                                alt="Headphone">
-                                        </div>
-
-                                        <div class="rounded-[2rem] bg-white p-5">
-                                            <img class="h-52 w-full object-contain"
-                                                src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=80"
-                                                alt="Watch">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                @endforeach
 
             </div>
 
-            <div class="hero-prev absolute left-8 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl cursor-pointer">
+            {{-- Arrows --}}
+            <div class="banner-prev absolute left-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/90 text-2xl text-slate-950 shadow-xl md:left-6 md:h-12 md:w-12">
                 ‹
             </div>
-            <div class="hero-next absolute right-8 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl cursor-pointer">
+
+            <div class="banner-next absolute right-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/90 text-2xl text-slate-950 shadow-xl md:right-6 md:h-12 md:w-12">
                 ›
             </div>
 
-            <div class="hero-pagination absolute z-20 !bottom-6"></div>
+            <div class="banner-pagination absolute z-20 !bottom-6"></div>
         </div>
-    </div>
-
-
-    {{-- MOBILE HERO --}}
-    <div class="relative block lg:hidden">
-        <div class="swiper mobileHeroSwiper">
-            <div class="swiper-wrapper">
-
-                {{-- MOBILE SLIDE 1 --}}
-                <div class="swiper-slide">
-                    <div class="px-4 pt-10 pb-16 min-h-[680px] flex items-center">
-                        <div class="w-full rounded-[2rem] border border-white/10 bg-white/10 p-4 text-white shadow-2xl backdrop-blur">
-                            <div class="overflow-hidden rounded-[1.7rem] bg-gradient-to-br from-slate-900 to-slate-800">
-                                <div class="relative h-72 bg-white/5 p-6">
-                                    <div class="absolute left-4 top-4 z-10 rounded-full bg-cyan-300 px-4 py-2 text-xs font-black text-slate-950">
-                                        New Launch
-                                    </div>
-
-                                    <img
-                                        class="h-full w-full object-contain"
-                                        src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=900&q=80"
-                                        alt="Smartphone"
-                                    >
-                                </div>
-
-                                <div class="p-6">
-                                    <p class="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-black text-cyan-300">
-                                        Authorized Telecom Distribution
-                                    </p>
-
-                                    <h1 class="mt-5 text-4xl font-black leading-[1.02] tracking-tight">
-                                        Tech Distributor
-                                        <span class="block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-                                            For Modern GCC
-                                        </span>
-                                    </h1>
-
-                                    <p class="mt-4 text-sm leading-6 text-slate-300">
-                                        GPT Group supports telecom distribution, retail partner growth, product launches, B2B supply and market execution.
-                                    </p>
-
-                                    <div class="mt-5 grid grid-cols-3 gap-3">
-                                        <div class="rounded-2xl bg-white/10 p-3 text-center">
-                                            <p class="text-xl font-black">2016</p>
-                                            <p class="mt-1 text-[11px] text-slate-300">Founded</p>
-                                        </div>
-                                        <div class="rounded-2xl bg-white/10 p-3 text-center">
-                                            <p class="text-xl font-black">GCC</p>
-                                            <p class="mt-1 text-[11px] text-slate-300">Market</p>
-                                        </div>
-                                        <div class="rounded-2xl bg-white/10 p-3 text-center">
-                                            <p class="text-xl font-black">B2B</p>
-                                            <p class="mt-1 text-[11px] text-slate-300">Supply</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-6 grid grid-cols-2 gap-3">
-                                        <a href="{{ url('/brands') }}"
-                                            class="rounded-full bg-white px-4 py-3 text-center text-xs font-black text-slate-950 shadow-lg">
-                                            Explore
-                                        </a>
-                                        <a href="{{ url('/contact-us') }}"
-                                            class="rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 text-center text-xs font-black text-white shadow-lg">
-                                            Enquiry
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- MOBILE SLIDE 2 --}}
-                <div class="swiper-slide">
-                    <div class="px-4 pt-10 pb-16 min-h-[680px] flex items-center">
-                        <div class="w-full rounded-[2rem] border border-white/10 bg-white/10 p-4 text-white shadow-2xl backdrop-blur">
-                            <div class="overflow-hidden rounded-[1.7rem] bg-gradient-to-br from-yellow-300 to-orange-500">
-                                <div class="relative h-72 p-6">
-                                    <div class="absolute left-4 top-4 z-10 rounded-full bg-slate-950 px-4 py-2 text-xs font-black text-white">
-                                        Dealer Offer
-                                    </div>
-
-                                    <img
-                                        class="h-full w-full object-contain"
-                                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
-                                        alt="Offer Phone"
-                                    >
-                                </div>
-
-                                <div class="p-6 text-slate-950">
-                                    <p class="inline-flex rounded-full bg-white/60 px-4 py-2 text-xs font-black">
-                                        Limited Period
-                                    </p>
-
-                                    <h1 class="mt-5 text-4xl font-black leading-[1.02] tracking-tight">
-                                        Premium Deals
-                                        <span class="block">
-                                            For Partners
-                                        </span>
-                                    </h1>
-
-                                    <p class="mt-4 text-sm leading-6 text-slate-800">
-                                        Retailers aur dealers ke liye launch offers, bundle schemes aur B2B distribution support.
-                                    </p>
-
-                                    <div class="mt-5 grid grid-cols-3 gap-3">
-                                        <div class="rounded-2xl bg-white/60 p-3 text-center">
-                                            <p class="text-xl font-black">Offer</p>
-                                            <p class="mt-1 text-[11px]">Soon</p>
-                                        </div>
-                                        <div class="rounded-2xl bg-white/60 p-3 text-center">
-                                            <p class="text-xl font-black">B2B</p>
-                                            <p class="mt-1 text-[11px]">Supply</p>
-                                        </div>
-                                        <div class="rounded-2xl bg-white/60 p-3 text-center">
-                                            <p class="text-xl font-black">GCC</p>
-                                            <p class="mt-1 text-[11px]">Market</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-6 grid grid-cols-2 gap-3">
-                                        <a href="{{ url('/contact-us') }}"
-                                            class="rounded-full bg-slate-950 px-4 py-3 text-center text-xs font-black text-white shadow-lg">
-                                            Partner
-                                        </a>
-                                        <a href="{{ url('/network') }}"
-                                            class="rounded-full bg-white px-4 py-3 text-center text-xs font-black text-slate-950 shadow-lg">
-                                            Network
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- MOBILE SLIDE 3 --}}
-                <div class="swiper-slide">
-                    <div class="px-4 pt-10 pb-16 min-h-[680px] flex items-center">
-                        <div class="w-full rounded-[2rem] border border-white/10 bg-white/10 p-4 text-white shadow-2xl backdrop-blur">
-                            <div class="overflow-hidden rounded-[1.7rem] bg-gradient-to-br from-emerald-500 to-cyan-500">
-                                <div class="relative h-72 p-6">
-                                    <div class="absolute left-4 top-4 z-10 rounded-full bg-white px-4 py-2 text-xs font-black text-slate-950">
-                                        Accessories
-                                    </div>
-
-                                    <div class="grid h-full grid-cols-2 gap-4">
-                                        <div class="rounded-[1.5rem] bg-white p-4">
-                                            <img
-                                                class="h-full w-full object-contain"
-                                                src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80"
-                                                alt="Headphone"
-                                            >
-                                        </div>
-
-                                        <div class="rounded-[1.5rem] bg-white p-4">
-                                            <img
-                                                class="h-full w-full object-contain"
-                                                src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=80"
-                                                alt="Watch"
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="p-6">
-                                    <p class="inline-flex rounded-full bg-white/20 px-4 py-2 text-xs font-black text-white">
-                                        New Product Arrival
-                                    </p>
-
-                                    <h1 class="mt-5 text-4xl font-black leading-[1.02] tracking-tight text-white">
-                                        Accessories
-                                        <span class="block">
-                                            Now Available
-                                        </span>
-                                    </h1>
-
-                                    <p class="mt-4 text-sm leading-6 text-emerald-50">
-                                        Chargers, earphones, smart watches aur accessories ko premium mobile showcase me display karo.
-                                    </p>
-
-                                    <div class="mt-6 grid grid-cols-2 gap-3">
-                                        <a href="{{ url('/brands') }}"
-                                            class="rounded-full bg-white px-4 py-3 text-center text-xs font-black text-slate-950 shadow-lg">
-                                            Explore
-                                        </a>
-                                        <a href="{{ url('/services') }}"
-                                            class="rounded-full bg-slate-950 px-4 py-3 text-center text-xs font-black text-white shadow-lg">
-                                            Services
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="mobile-hero-pagination absolute z-20 !bottom-6"></div>
-        </div>
-    </div>
-</section>
-
+    </section>
+@endif
 
     {{-- QUICK FEATURES --}}
     <section class="bg-white">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="rounded-3xl bg-slate-50 p-5 flex items-center gap-4 border border-slate-100">
-                    <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-white font-black">01</div>
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid gap-4 md:grid-cols-3">
+                <div class="flex items-center gap-4 rounded-3xl border border-slate-100 bg-slate-50 p-5">
+                    <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 font-black text-white">01</div>
                     <div>
-                        <p class="font-black">Offer Banners</p>
-                        <p class="text-sm text-slate-500">Upcoming schemes aur dealer campaigns.</p>
+                        <p class="font-black text-slate-950">Offer Banners</p>
+                        <p class="text-sm text-slate-500">Upcoming schemes and dealer campaigns.</p>
                     </div>
                 </div>
 
-                <div class="rounded-3xl bg-slate-50 p-5 flex items-center gap-4 border border-slate-100">
-                    <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 text-white font-black">02</div>
+                <div class="flex items-center gap-4 rounded-3xl border border-slate-100 bg-slate-50 p-5">
+                    <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 font-black text-white">02</div>
                     <div>
-                        <p class="font-black">New Launches</p>
-                        <p class="text-sm text-slate-500">Latest mobiles aur accessories.</p>
+                        <p class="font-black text-slate-950">New Launches</p>
+                        <p class="text-sm text-slate-500">Latest mobiles, tablets and accessories.</p>
                     </div>
                 </div>
 
-                <div class="rounded-3xl bg-slate-50 p-5 flex items-center gap-4 border border-slate-100">
-                    <div class="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white font-black">03</div>
+                <div class="flex items-center gap-4 rounded-3xl border border-slate-100 bg-slate-50 p-5">
+                    <div class="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 font-black text-white">03</div>
                     <div>
-                        <p class="font-black">Partner Support</p>
-                        <p class="text-sm text-slate-500">Retail, wholesale aur B2B supply.</p>
+                        <p class="font-black text-slate-950">Partner Support</p>
+                        <p class="text-sm text-slate-500">Retail, wholesale and B2B supply.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
     {{-- LATEST PRODUCTS --}}
     <section class="bg-slate-100 py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                     <p class="font-black uppercase tracking-[.3em] text-blue-700">New Launches</p>
-                    <h2 class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950">
+                    <h2 class="mt-3 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
                         Latest Products
                     </h2>
                     <p class="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-                        Upcoming mobiles, tablets, watches aur accessories ko premium product cards me showcase karein.
+                        Smartphones, tablets, watches and accessories ko premium product cards me showcase karein.
                     </p>
                 </div>
 
                 <div class="flex gap-3">
-                    <div
-                        class="product-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
-                        ‹</div>
-                    <div
-                        class="product-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
-                        ›</div>
+                    <div class="product-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
+                        ‹
+                    </div>
+                    <div class="product-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
+                        ›
+                    </div>
                 </div>
             </div>
 
             <div class="swiper productSwiper mt-12">
                 <div class="swiper-wrapper pb-14">
-
-                    @php
-                        $products = [
-                            [
-                                'tag' => 'New',
-                                'name' => 'AGNI 4',
-                                'desc' => 'Premium flagship design with powerful performance.',
-                                'img' =>
-                                    'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80',
-                                'labels' => ['5G', '128GB', 'AMOLED'],
-                                'color' => 'bg-red-500',
-                            ],
-                            [
-                                'tag' => '5G',
-                                'name' => 'Play Max',
-                                'desc' => 'Fast processor, premium display and long battery.',
-                                'img' =>
-                                    'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=700&q=80',
-                                'labels' => ['Gaming', '8GB RAM'],
-                                'color' => 'bg-blue-600',
-                            ],
-                            [
-                                'tag' => 'Duo',
-                                'name' => 'Blaze Duo 3',
-                                'desc' => 'Stylish dual screen design with AMOLED display.',
-                                'img' =>
-                                    'https://images.unsplash.com/photo-1605236453806-6ff36851218e?auto=format&fit=crop&w=700&q=80',
-                                'labels' => ['AMOLED', 'Dual Display'],
-                                'color' => 'bg-cyan-500',
-                            ],
-                            [
-                                'tag' => 'Budget',
-                                'name' => 'Star 3',
-                                'desc' => 'Smooth daily performance with clean design.',
-                                'img' =>
-                                    'https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&w=700&q=80',
-                                'labels' => ['4GB RAM', '64GB'],
-                                'color' => 'bg-slate-950',
-                            ],
-                            [
-                                'tag' => 'Watch',
-                                'name' => 'Smart Watch',
-                                'desc' => 'Premium wearable for daily lifestyle use.',
-                                'img' =>
-                                    'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=700&q=80',
-                                'labels' => ['Wearable', 'Bluetooth'],
-                                'color' => 'bg-emerald-500',
-                            ],
-                        ];
-                    @endphp
-
                     @foreach ($products as $product)
                         <div class="swiper-slide">
                             <a href="{{ url('/brands') }}"
                                 class="group block overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
+
                                 <div class="relative h-80 bg-gradient-to-br from-white to-slate-100 p-7">
-                                    <span
-                                        class="absolute left-5 top-5 rounded-full {{ $product['color'] }} px-4 py-2 text-xs font-black text-white">
+                                    <span class="absolute left-5 top-5 rounded-full {{ $product['color'] }} px-4 py-2 text-xs font-black text-white">
                                         {{ $product['tag'] }}
                                     </span>
 
-                                    <img class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
-                                        src="{{ $product['img'] }}" alt="{{ $product['name'] }}">
+                                    <img
+                                        class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+                                        src="{{ $product['img'] }}"
+                                        alt="{{ $product['name'] }}"
+                                    >
                                 </div>
 
                                 <div class="p-6">
@@ -599,23 +365,22 @@
                                             <p class="mt-2 text-sm leading-6 text-slate-500">{{ $product['desc'] }}</p>
                                         </div>
 
-                                        <span
-                                            class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 group-hover:bg-blue-600 group-hover:text-white transition">
+                                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
                                             →
                                         </span>
                                     </div>
 
                                     <div class="mt-5 flex flex-wrap gap-2">
                                         @foreach ($product['labels'] as $label)
-                                            <span
-                                                class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">{{ $label }}</span>
+                                            <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                                                {{ $label }}
+                                            </span>
                                         @endforeach
                                     </div>
                                 </div>
                             </a>
                         </div>
                     @endforeach
-
                 </div>
 
                 <div class="product-pagination"></div>
@@ -623,128 +388,179 @@
         </div>
     </section>
 
-
     {{-- OFFER + CAMPAIGN --}}
     <section class="bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-8 items-stretch">
-                <div
-                    class="overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 sm:p-10 text-white shadow-2xl">
-                    <p class="font-black uppercase tracking-[.3em] text-blue-100">Special Offer</p>
 
-                    <h2 class="mt-4 text-4xl sm:text-5xl font-black leading-tight">
-                        Add Any Upcoming Offer Here
-                    </h2>
+            <div class="mb-10 text-center">
+                <p class="font-black uppercase tracking-[.3em] text-blue-700">Campaigns & Offers</p>
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    Dealer Offers & Brand Launch Support
+                </h2>
+                <p class="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+                    GPT Group partners ke liye premium product campaigns, dealer schemes, retail visibility aur B2B supply support.
+                </p>
+            </div>
 
-                    <p class="mt-5 text-lg leading-8 text-blue-50">
-                        Monthly offer, dealer scheme, festival offer ya new launch campaign banner yaha add kar sakte hain.
-                    </p>
+            <div class="grid items-stretch gap-8 lg:grid-cols-2">
 
-                    <div class="mt-8 rounded-[2rem] bg-white/15 p-6 backdrop-blur">
-                        <div class="grid sm:grid-cols-3 gap-4">
-                            <div>
-                                <p class="text-3xl font-black">30%</p>
-                                <p class="text-sm text-blue-50">Offer Tag</p>
+                <div class="group relative min-h-[520px] overflow-hidden rounded-[2.5rem] shadow-2xl">
+                    <img
+                        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=85"
+                        alt="Dealer Schemes"
+                        class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    >
+
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-950/90 via-blue-800/75 to-cyan-500/60"></div>
+
+                    <div class="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7 text-white sm:p-10">
+                        <div>
+                            <div class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-black backdrop-blur">
+                                <span class="h-2.5 w-2.5 rounded-full bg-cyan-300"></span>
+                                Special Dealer Offer
                             </div>
 
-                            <div>
-                                <p class="text-3xl font-black">5G</p>
-                                <p class="text-sm text-blue-50">Devices</p>
+                            <h2 class="mt-7 text-4xl font-black leading-tight sm:text-5xl">
+                                Dealer Schemes &
+                                <span class="block text-cyan-300">Product Campaigns</span>
+                            </h2>
+
+                            <p class="mt-5 max-w-xl text-lg leading-8 text-blue-50">
+                                Monthly dealer scheme, festival campaign, new launch promotion aur bulk order support ko yaha highlight kar sakte hain.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/15 p-5 backdrop-blur">
+                                    <p class="text-3xl font-black">GCC</p>
+                                    <p class="mt-1 text-sm text-blue-50">Market Reach</p>
+                                </div>
+
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/15 p-5 backdrop-blur">
+                                    <p class="text-3xl font-black">5G</p>
+                                    <p class="mt-1 text-sm text-blue-50">Devices</p>
+                                </div>
+
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/15 p-5 backdrop-blur">
+                                    <p class="text-3xl font-black">B2B</p>
+                                    <p class="mt-1 text-sm text-blue-50">Supply</p>
+                                </div>
                             </div>
 
-                            <div>
-                                <p class="text-3xl font-black">B2B</p>
-                                <p class="text-sm text-blue-50">Supply</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="{{ url('/contact-us') }}"
-                        class="mt-8 inline-flex rounded-full bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-xl">
-                        Enquire Now
-                    </a>
-                </div>
-
-                <div class="overflow-hidden rounded-[2.5rem] bg-slate-950 p-8 sm:p-10 text-white shadow-2xl">
-                    <p class="font-black uppercase tracking-[.3em] text-cyan-300">Brand Campaign</p>
-
-                    <h2 class="mt-4 text-4xl sm:text-5xl font-black leading-tight">
-                        Launch Your Product With GPT Group
-                    </h2>
-
-                    <p class="mt-5 text-lg leading-8 text-slate-300">
-                        Product launch, channel distribution, retail visibility aur partner support ke liye premium
-                        placement.
-                    </p>
-
-                    <div class="mt-8 grid grid-cols-2 gap-5">
-                        <div class="rounded-[2rem] bg-white/10 p-5">
-                            <p class="text-2xl font-black">Retail</p>
-                            <p class="mt-2 text-sm text-slate-300">Store visibility</p>
-                        </div>
-
-                        <div class="rounded-[2rem] bg-white/10 p-5">
-                            <p class="text-2xl font-black">Dealer</p>
-                            <p class="mt-2 text-sm text-slate-300">Channel support</p>
-                        </div>
-
-                        <div class="rounded-[2rem] bg-white/10 p-5">
-                            <p class="text-2xl font-black">B2B</p>
-                            <p class="mt-2 text-sm text-slate-300">Bulk supply</p>
-                        </div>
-
-                        <div class="rounded-[2rem] bg-white/10 p-5">
-                            <p class="text-2xl font-black">GCC</p>
-                            <p class="mt-2 text-sm text-slate-300">Market reach</p>
+                            <a href="{{ url('/contact-us') }}"
+                                class="mt-8 inline-flex rounded-full bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1">
+                                Enquire Now →
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <div class="group relative min-h-[520px] overflow-hidden rounded-[2.5rem] shadow-2xl">
+                    <img
+                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=85"
+                        alt="Brand Campaign"
+                        class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    >
+
+                    <div class="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/85 to-slate-950/55"></div>
+
+                    <div class="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7 text-white sm:p-10">
+                        <div>
+                            <div class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-black backdrop-blur">
+                                <span class="h-2.5 w-2.5 rounded-full bg-yellow-300"></span>
+                                Brand Campaign
+                            </div>
+
+                            <h2 class="mt-7 text-4xl font-black leading-tight sm:text-5xl">
+                                Launch Your Product
+                                <span class="block text-yellow-300">With GPT Group</span>
+                            </h2>
+
+                            <p class="mt-5 max-w-xl text-lg leading-8 text-slate-200">
+                                Product launch, channel distribution, retail visibility, dealer activation aur partner support ke liye premium placement.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="mt-8 grid grid-cols-2 gap-4">
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                    <p class="text-2xl font-black">Retail</p>
+                                    <p class="mt-2 text-sm text-slate-300">Store visibility</p>
+                                </div>
+
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                    <p class="text-2xl font-black">Dealer</p>
+                                    <p class="mt-2 text-sm text-slate-300">Channel support</p>
+                                </div>
+
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                    <p class="text-2xl font-black">B2B</p>
+                                    <p class="mt-2 text-sm text-slate-300">Bulk supply</p>
+                                </div>
+
+                                <div class="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
+                                    <p class="text-2xl font-black">GCC</p>
+                                    <p class="mt-2 text-sm text-slate-300">Market reach</p>
+                                </div>
+                            </div>
+
+                            <a href="{{ url('/contact-us') }}"
+                                class="mt-8 inline-flex rounded-full bg-yellow-300 px-7 py-4 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1">
+                                Start Campaign →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-
     {{-- SERVICES --}}
     <section class="bg-slate-100 py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto">
+            <div class="mx-auto max-w-3xl text-center">
                 <p class="font-black uppercase tracking-[.3em] text-blue-700">Services</p>
-                <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950">
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
                     Customer & Business Support
                 </h2>
                 <p class="mt-5 text-lg leading-8 text-slate-600">
-                    GPT Group customers aur partners ke liye repair, B2B supply, retail support aur distribution solutions.
+                    GPT Group customers and partners ke liye repair, B2B supply, retail support and distribution solutions.
                 </p>
             </div>
 
-            <div class="mt-12 grid md:grid-cols-2 gap-6">
+            <div class="mt-12 grid gap-6 md:grid-cols-2">
                 <a href="{{ url('/services#gpt-care') }}"
-                    class="group overflow-hidden rounded-[2.5rem] bg-white shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                    <img class="h-72 w-full object-cover"
-                        src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=1200&q=80"
-                        alt="GPT Care">
+                    class="group overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
+                    <img
+                        class="h-72 w-full object-cover"
+                        src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=1200&q=85"
+                        alt="GPT Care"
+                    >
 
                     <div class="p-8">
                         <p class="font-black uppercase tracking-[.25em] text-blue-700">GPT Care</p>
                         <h3 class="mt-4 text-3xl font-black text-slate-950">Mobile Repair & Service</h3>
                         <p class="mt-3 leading-7 text-slate-600">
-                            Screen, battery, software, water damage aur mobile service enquiries ke liye professional
-                            support.
+                            Screen, battery, software, water damage and mobile service enquiries ke liye professional support.
                         </p>
                     </div>
                 </a>
 
                 <a href="{{ url('/services#b2b-program') }}"
                     class="group overflow-hidden rounded-[2.5rem] bg-slate-950 text-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <img class="h-72 w-full object-cover opacity-85"
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
-                        alt="B2B Program">
+                    <img
+                        class="h-72 w-full object-cover opacity-85"
+                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=85"
+                        alt="B2B Program"
+                    >
 
                     <div class="p-8">
                         <p class="font-black uppercase tracking-[.25em] text-cyan-300">B2B Program</p>
                         <h3 class="mt-4 text-3xl font-black">Business Distribution Support</h3>
                         <p class="mt-3 leading-7 text-slate-300">
-                            Corporate supply, wholesale, dealer network aur operational efficiency ke liye B2B support.
+                            Corporate supply, wholesale, dealer network and operational efficiency ke liye B2B support.
                         </p>
                     </div>
                 </a>
@@ -752,44 +568,43 @@
         </div>
     </section>
 
-
     {{-- PRODUCT CATEGORIES --}}
-    <section class="bg-slate-950 py-16 lg:py-24 text-white">
+    <section class="bg-slate-950 py-16 text-white lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto">
+            <div class="mx-auto max-w-3xl text-center">
                 <p class="font-black uppercase tracking-[.3em] text-cyan-300">Categories</p>
-                <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black">
+                <h2 class="mt-4 text-4xl font-black sm:text-5xl lg:text-6xl">
                     Product Ecosystem
                 </h2>
                 <p class="mt-5 text-lg leading-8 text-slate-300">
-                    GPT Group ke product categories ko clean aur premium way me show karein.
+                    GPT Group ke product categories ko clean and premium way me show karein.
                 </p>
             </div>
 
-            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 <a href="{{ url('/brands') }}"
                     class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
                     <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80"
-                        alt="Mobiles">
+                        src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=85"
+                        alt="Smartphones">
                     <h3 class="mt-6 text-2xl font-black">Smartphones</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Latest 4G, 5G aur premium mobile range.</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-300">Latest 4G, 5G and premium mobile range.</p>
                 </a>
 
                 <a href="{{ url('/brands') }}"
                     class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
                     <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=80"
+                        src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85"
                         alt="Tablets">
                     <h3 class="mt-6 text-2xl font-black">Tablets</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Business, education aur entertainment tablets.</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-300">Business, education and entertainment tablets.</p>
                 </a>
 
                 <a href="{{ url('/brands') }}"
                     class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
                     <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=80"
-                        alt="Watches">
+                        src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85"
+                        alt="Smart Watches">
                     <h3 class="mt-6 text-2xl font-black">Smart Watches</h3>
                     <p class="mt-2 text-sm leading-6 text-slate-300">Modern wearable and lifestyle products.</p>
                 </a>
@@ -797,33 +612,31 @@
                 <a href="{{ url('/brands') }}"
                     class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
                     <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80"
+                        src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=85"
                         alt="Accessories">
                     <h3 class="mt-6 text-2xl font-black">Accessories</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Chargers, earphones aur mobile add-ons.</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-300">Chargers, earphones and mobile add-ons.</p>
                 </a>
             </div>
         </div>
     </section>
 
-
     {{-- NETWORK SECTION --}}
     <section class="bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="grid items-center gap-12 lg:grid-cols-2">
                 <div>
                     <p class="font-black uppercase tracking-[.3em] text-blue-700">Network</p>
 
-                    <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-slate-950">
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
                         Oman market coverage with retail and warehouse support.
                     </h2>
 
                     <p class="mt-6 text-lg leading-8 text-slate-600">
-                        GPT Group network retail IRs, wholesale, KDR aur B2B channels ko supply-chain execution ke saath
-                        support karta hai.
+                        GPT Group network retail, wholesale and B2B channels ko supply-chain execution ke saath support karta hai.
                     </p>
 
-                    <div class="mt-8 grid sm:grid-cols-2 gap-5">
+                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
                         <div class="rounded-[1.75rem] bg-slate-50 p-6">
                             <h3 class="text-xl font-black">Sur & Salalah</h3>
                             <p class="mt-2 text-sm leading-6 text-slate-500">Regional market coverage.</p>
@@ -836,14 +649,14 @@
                     </div>
 
                     <a href="{{ url('/network') }}"
-                        class="mt-8 inline-flex rounded-full bg-slate-950 px-7 py-4 text-sm font-black text-white shadow-xl hover:-translate-y-1 transition">
+                        class="mt-8 inline-flex rounded-full bg-slate-950 px-7 py-4 text-sm font-black text-white shadow-xl transition hover:-translate-y-1">
                         View Network
                     </a>
                 </div>
 
                 <div class="relative">
                     <img class="h-[560px] w-full rounded-[2.5rem] object-cover shadow-2xl"
-                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"
+                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85"
                         alt="GPT Network">
 
                     <div class="absolute -bottom-8 left-6 right-6 rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl">
@@ -855,57 +668,29 @@
         </div>
     </section>
 
-
-    {{-- CTA --}}
-
-    {{-- <section class="bg-slate-100 py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="rounded-[2.5rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 sm:p-12 lg:p-16 text-white shadow-2xl">
-            <div class="grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-100">Partner With GPT Group</p>
-                    <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
-                        Get the competitive advantage with GPT Group.
-                    </h2>
-                    <p class="mt-5 text-lg leading-8 text-blue-50">
-                        Product distribution, retail visibility, B2B supply, launch support aur market expansion ke liye GPT Group se connect karein.
-                    </p>
-                </div>
-
-                <div class="lg:text-right">
-                    <a href="{{ url('/contact-us') }}" class="inline-flex rounded-full bg-white px-8 py-4 text-sm font-black text-slate-950 shadow-xl hover:-translate-y-1 transition">
-                        Start Partnership
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
-
-
-  
-
+    {{-- ONLY ONE SCRIPT BLOCK --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             if (typeof Swiper !== 'undefined') {
-                new Swiper('.heroOfferSwiper', {
+                new Swiper('.bannerSwiper', {
                     loop: true,
-                    speed: 900,
+                    speed: 950,
                     effect: 'fade',
                     fadeEffect: {
                         crossFade: true,
                     },
                     autoplay: {
-                        delay: 3500,
+                        delay: 4200,
                         disableOnInteraction: false,
-                    },
-                    navigation: {
-                        nextEl: '.hero-next',
-                        prevEl: '.hero-prev',
+                        pauseOnMouseEnter: true,
                     },
                     pagination: {
-                        el: '.hero-pagination',
+                        el: '.banner-pagination',
                         clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.banner-next',
+                        prevEl: '.banner-prev',
                     },
                 });
 
@@ -916,6 +701,7 @@
                     autoplay: {
                         delay: 2800,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
                     },
                     navigation: {
                         nextEl: '.product-next',
@@ -943,88 +729,6 @@
             }
         });
     </script>
-
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        if (typeof Swiper !== 'undefined') {
-            new Swiper('.heroOfferSwiper', {
-                loop: true,
-                speed: 900,
-                effect: 'fade',
-                fadeEffect: {
-                    crossFade: true,
-                },
-                autoplay: {
-                    delay: 3500,
-                    disableOnInteraction: false,
-                },
-                navigation: {
-                    nextEl: '.hero-next',
-                    prevEl: '.hero-prev',
-                },
-                pagination: {
-                    el: '.hero-pagination',
-                    clickable: true,
-                },
-            });
-
-            new Swiper('.mobileHeroSwiper', {
-                loop: true,
-                speed: 650,
-                spaceBetween: 16,
-                autoplay: {
-                    delay: 3500,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.mobile-hero-pagination',
-                    clickable: true,
-                },
-            });
-        }
-    });
-</script>
-
-
-
-
-    {{-- <section class="relative overflow-hidden hero-grid">
-        <div class="absolute -top-24 -right-20 w-96 h-96 bg-cyan-300 rounded-full blob"></div>
-        <div class="absolute top-40 -left-28 w-96 h-96 bg-blue-300 rounded-full blob"></div>
-        <div class="containerx grid lg:grid-cols-2 gap-14 items-center min-h-[720px] py-16">
-            <div>
-                <p class="inline-flex rounded-full bg-blue-50 text-blue-700 font-black px-5 py-2">
-                    Authorized Telecom Distribution • Oman & GCC
-                </p>
-                <h1 class="mt-8 text-5xl md:text-7xl font-black leading-[.95]">
-                    Tech Distributor For The
-                    <span class="text-gradient">Modern Age</span>
-                </h1>
-                <p class="mt-7 text-xl text-slate-600 leading-8">
-                    GPT Group is a dynamic business house focused on telecom
-                    distribution, retail partner growth, supply-chain execution, brand
-                    programs, e-commerce, beauty, fashion retail and IT solutions.
-                </p>
-                <div class="mt-9 flex flex-wrap gap-4">
-                    <a class="btn-primary" href="pages/brands.html">Explore Brands</a><a class="btn-light"
-                        href="pages/network.html">View Network</a>
-                </div>
-            </div>
-            <div class="relative">
-                <img class="rounded-[44px] shadow-2xl w-full h-[560px] object-cover"
-                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" />
-                <div class="absolute -bottom-8 -left-8 bg-white rounded-[32px] p-6 shadow-xl max-w-xs">
-                    <p class="font-black text-2xl">Global Brands. Local Execution.</p>
-                    <p class="text-slate-500 mt-2">
-                        Distribution, servicing, marketing and reseller support.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section> --}}
 
 
 
@@ -1576,98 +1280,82 @@
     </section>
 
     {{-- CTA + ENQUIRY SECTION --}}
-<section class="bg-white py-12 sm:py-16 lg:py-24 overflow-hidden">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
+    <section class="bg-white py-12 sm:py-16 lg:py-24 overflow-hidden">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
 
-        {{-- CTA CARD --}}
-        <div class="rounded-[2rem] sm:rounded-[2.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 text-white p-6 sm:p-8 md:p-10 lg:p-14 shadow-xl">
-            <p class="font-black uppercase tracking-[.20em] sm:tracking-[.25em] text-blue-100 text-xs sm:text-sm">
-                Call To Action
-            </p>
+            {{-- CTA CARD --}}
+            <div
+                class="rounded-[2rem] sm:rounded-[2.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 text-white p-6 sm:p-8 md:p-10 lg:p-14 shadow-xl">
+                <p class="font-black uppercase tracking-[.20em] sm:tracking-[.25em] text-blue-100 text-xs sm:text-sm">
+                    Call To Action
+                </p>
 
-            <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
-                Ready to build your distribution advantage?
-            </h2>
+                <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+                    Ready to build your distribution advantage?
+                </h2>
 
-            <p class="mt-4 sm:mt-5 text-blue-50 text-base sm:text-lg leading-7 sm:leading-8">
-                Connect with GPT Group for brand partnership, product distribution, retail outlet support, B2B enquiries and market expansion.
-            </p>
+                <p class="mt-4 sm:mt-5 text-blue-50 text-base sm:text-lg leading-7 sm:leading-8">
+                    Connect with GPT Group for brand partnership, product distribution, retail outlet support, B2B enquiries
+                    and market expansion.
+                </p>
 
-            <div class="mt-7 sm:mt-8 grid sm:flex gap-3 sm:gap-4">
-                <a
-                    class="inline-flex justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg"
-                    href="{{ url('/contact-us') }}"
-                >
-                    Partner Enquiry
-                </a>
+                <div class="mt-7 sm:mt-8 grid sm:flex gap-3 sm:gap-4">
+                    <a class="inline-flex justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg"
+                        href="{{ url('/contact-us') }}">
+                        Partner Enquiry
+                    </a>
 
-                <a
-                    class="inline-flex justify-center rounded-full bg-slate-950 px-6 py-3.5 text-sm font-black text-white shadow-lg"
-                    href="{{ url('/brands') }}"
-                >
-                    Explore Products
-                </a>
+                    <a class="inline-flex justify-center rounded-full bg-slate-950 px-6 py-3.5 text-sm font-black text-white shadow-lg"
+                        href="{{ url('/brands') }}">
+                        Explore Products
+                    </a>
+                </div>
+            </div>
+
+            {{-- FORM CARD --}}
+            <div
+                class="rounded-[2rem] sm:rounded-[2.75rem] bg-slate-950 text-white p-6 sm:p-8 md:p-10 lg:p-14 shadow-xl min-w-0">
+                <p class="text-cyan-300 font-black uppercase tracking-[.20em] sm:tracking-[.25em] text-xs sm:text-sm">
+                    Enquiry
+                </p>
+
+                <h3 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+                    Quick Contact Form
+                </h3>
+
+                <form action="#" method="POST" class="mt-6 sm:mt-7 grid gap-3 sm:gap-4">
+                    @csrf
+
+                    <input type="text" name="name"
+                        class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
+                        placeholder="Full Name" />
+
+                    <input type="text" name="company"
+                        class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
+                        placeholder="Company / Brand Name" />
+
+                    <input type="text" name="contact"
+                        class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
+                        placeholder="Phone / Email" />
+
+                    <select name="enquiry_type"
+                        class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-slate-300 outline-none focus:border-cyan-300">
+                        <option class="text-slate-950">Distribution Partnership</option>
+                        <option class="text-slate-950">Retail Outlet</option>
+                        <option class="text-slate-950">B2B Supply</option>
+                        <option class="text-slate-950">Career</option>
+                    </select>
+
+                    <textarea name="message"
+                        class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 h-28 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 resize-none"
+                        placeholder="Message"></textarea>
+
+                    <button type="submit"
+                        class="mt-1 inline-flex w-full justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5">
+                        Submit Enquiry
+                    </button>
+                </form>
             </div>
         </div>
-
-        {{-- FORM CARD --}}
-        <div class="rounded-[2rem] sm:rounded-[2.75rem] bg-slate-950 text-white p-6 sm:p-8 md:p-10 lg:p-14 shadow-xl min-w-0">
-            <p class="text-cyan-300 font-black uppercase tracking-[.20em] sm:tracking-[.25em] text-xs sm:text-sm">
-                Enquiry
-            </p>
-
-            <h3 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
-                Quick Contact Form
-            </h3>
-
-            <form action="#" method="POST" class="mt-6 sm:mt-7 grid gap-3 sm:gap-4">
-                @csrf
-
-                <input
-                    type="text"
-                    name="name"
-                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
-                    placeholder="Full Name"
-                />
-
-                <input
-                    type="text"
-                    name="company"
-                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
-                    placeholder="Company / Brand Name"
-                />
-
-                <input
-                    type="text"
-                    name="contact"
-                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300"
-                    placeholder="Phone / Email"
-                />
-
-                <select
-                    name="enquiry_type"
-                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-slate-300 outline-none focus:border-cyan-300"
-                >
-                    <option class="text-slate-950">Distribution Partnership</option>
-                    <option class="text-slate-950">Retail Outlet</option>
-                    <option class="text-slate-950">B2B Supply</option>
-                    <option class="text-slate-950">Career</option>
-                </select>
-
-                <textarea
-                    name="message"
-                    class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 sm:px-5 py-3.5 sm:py-4 h-28 text-sm sm:text-base text-white placeholder:text-slate-400 outline-none focus:border-cyan-300 resize-none"
-                    placeholder="Message"
-                ></textarea>
-
-                <button
-                    type="submit"
-                    class="mt-1 inline-flex w-full justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5"
-                >
-                    Submit Enquiry
-                </button>
-            </form>
-        </div>
-    </div>
-</section>
+    </section>
 @endsection

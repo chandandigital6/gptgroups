@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+
     public function index()
     {
-        return view('front.index');
+        $banners = Banner::where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->get();
+
+        return view('front.index', compact('banners'));
     }
 
 
@@ -18,7 +25,7 @@ class FrontController extends Controller
     }
 
 
-      public function brands()
+    public function brands()
     {
         return view('front.brands');
     }
@@ -72,5 +79,4 @@ class FrontController extends Controller
     {
         return view('front.services');
     }
-
 }

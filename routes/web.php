@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\BannerController;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -25,15 +26,43 @@ Route::get('/services', [FrontController::class, 'services'])->name('services');
 
 
 
-// Route::view('/', 'welcome', [
-//     'canRegister' => Features::enabled(Features::registration()),
-// ])->name('home');
 
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
     ->group(function () {
         Route::view('dashboard', 'dashboard')->name('dashboard');
     });
+
+
+
+    Route::middleware(['auth'])->prefix('admin')->group(function () {
+
+    Route::get('/banners', [BannerController::class, 'index'])
+        ->name('banners.index');
+
+    Route::get('/banners/create', [BannerController::class, 'create'])
+        ->name('banners.create');
+
+    Route::post('/banners', [BannerController::class, 'store'])
+        ->name('banners.store');
+
+    Route::get('/banners/{banner}', [BannerController::class, 'show'])
+        ->name('banners.show');
+
+    Route::get('/banners/{banner}/edit', [BannerController::class, 'edit'])
+        ->name('banners.edit');
+
+    Route::put('/banners/{banner}', [BannerController::class, 'update'])
+        ->name('banners.update');
+
+    Route::delete('/banners/{banner}', [BannerController::class, 'destroy'])
+        ->name('banners.destroy');
+});
+
+
+
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('roles', RoleController::class);
@@ -45,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('permissions/assign', [PermissionController::class, 'assign'])->name('permissions.assign');
     Route::post('permissions/store', [PermissionController::class, 'store'])->name('permissions.store');
     Route::delete('permissions/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
- Route::get('/users', function () {
+    Route::get('/users', function () {
         return view('users.index');
     })->name('users.index');
 });
@@ -55,4 +84,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('invitations.accept');
 });
 
-require __DIR__.'/settings.php';
+
+
+
+
+
+
+
+require __DIR__ . '/settings.php';
