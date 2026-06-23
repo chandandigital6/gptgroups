@@ -59,6 +59,7 @@
         }
 
         @media (max-width: 767px) {
+
             .banner-prev,
             .banner-next {
                 display: none !important;
@@ -66,223 +67,186 @@
         }
     </style>
 
+   
+
     @php
-    
-
-        $products = [
-            [
-                'tag' => '5G',
-                'name' => 'Premium Smartphones',
-                'desc' => 'Latest 4G and 5G mobile range for retail and B2B supply.',
-                'img' => 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=900&q=85',
-                'labels' => ['5G', 'Retail', 'B2B'],
-                'color' => 'bg-blue-600',
-            ],
-            [
-                'tag' => 'Tablet',
-                'name' => 'Business Tablets',
-                'desc' => 'Tablets for education, office, business and entertainment use.',
-                'img' => 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85',
-                'labels' => ['Business', 'Education'],
-                'color' => 'bg-cyan-500',
-            ],
-            [
-                'tag' => 'Watch',
-                'name' => 'Smart Watches',
-                'desc' => 'Modern wearable products for lifestyle and daily usage.',
-                'img' => 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85',
-                'labels' => ['Wearable', 'Bluetooth'],
-                'color' => 'bg-emerald-500',
-            ],
-            [
-                'tag' => 'Audio',
-                'name' => 'Earphones & Headphones',
-                'desc' => 'Fast moving audio accessories for every mobile store.',
-                'img' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=85',
-                'labels' => ['Audio', 'Accessories'],
-                'color' => 'bg-slate-950',
-            ],
-            [
-                'tag' => 'Power',
-                'name' => 'Chargers & Cables',
-                'desc' => 'Essential mobile accessories with high retail demand.',
-                'img' => 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=900&q=85',
-                'labels' => ['Charger', 'Cable'],
-                'color' => 'bg-orange-500',
-            ],
-        ];
-
-       
+        $bannerThemeClasses = function ($theme) {
+            return match ($theme) {
+                'yellow' => [
+                    'badge' => 'bg-yellow-300 text-slate-950',
+                    'highlight' => 'text-yellow-300',
+                    'button' => 'bg-yellow-300 text-slate-950',
+                    'dot' => 'bg-yellow-300',
+                    'ring' => 'ring-yellow-300/30',
+                ],
+                'emerald' => [
+                    'badge' => 'bg-emerald-300 text-slate-950',
+                    'highlight' => 'text-emerald-300',
+                    'button' => 'bg-emerald-300 text-slate-950',
+                    'dot' => 'bg-emerald-300',
+                    'ring' => 'ring-emerald-300/30',
+                ],
+                default => [
+                    'badge' => 'bg-cyan-300 text-slate-950',
+                    'highlight' => 'text-cyan-300',
+                    'button' => 'bg-cyan-300 text-slate-950',
+                    'dot' => 'bg-cyan-300',
+                    'ring' => 'ring-cyan-300/30',
+                ],
+            };
+        };
     @endphp
 
-@php
-    $bannerThemeClasses = function ($theme) {
-        return match ($theme) {
-            'yellow' => [
-                'badge' => 'bg-yellow-300 text-slate-950',
-                'highlight' => 'text-yellow-300',
-                'button' => 'bg-yellow-300 text-slate-950',
-                'dot' => 'bg-yellow-300',
-                'ring' => 'ring-yellow-300/30',
-            ],
-            'emerald' => [
-                'badge' => 'bg-emerald-300 text-slate-950',
-                'highlight' => 'text-emerald-300',
-                'button' => 'bg-emerald-300 text-slate-950',
-                'dot' => 'bg-emerald-300',
-                'ring' => 'ring-emerald-300/30',
-            ],
-            default => [
-                'badge' => 'bg-cyan-300 text-slate-950',
-                'highlight' => 'text-cyan-300',
-                'button' => 'bg-cyan-300 text-slate-950',
-                'dot' => 'bg-cyan-300',
-                'ring' => 'ring-cyan-300/30',
-            ],
-        };
-    };
-@endphp
+    @if ($banners->count() > 0)
+        {{-- PREMIUM BANNER SLIDER --}}
+        <section class="relative overflow-hidden bg-slate-950">
+            <div class="swiper bannerSwiper">
+                <div class="swiper-wrapper">
 
-@if($banners->count() > 0)
-    {{-- PREMIUM BANNER SLIDER --}}
-    <section class="relative overflow-hidden bg-slate-950">
-        <div class="swiper bannerSwiper">
-            <div class="swiper-wrapper">
+                    @foreach ($banners as $banner)
+                        @php
+                            $theme = $bannerThemeClasses($banner->theme ?? 'cyan');
 
-                @foreach ($banners as $banner)
-                    @php
-                        $theme = $bannerThemeClasses($banner->theme ?? 'cyan');
+                            $desktopImage = $banner->desktop_image
+                                ? asset('storage/' . $banner->desktop_image)
+                                : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=85';
 
-                        $desktopImage = $banner->desktop_image
-                            ? asset('storage/' . $banner->desktop_image)
-                            : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=85';
+                            $mobileImage = $banner->mobile_image
+                                ? asset('storage/' . $banner->mobile_image)
+                                : $desktopImage;
 
-                        $mobileImage = $banner->mobile_image
-                            ? asset('storage/' . $banner->mobile_image)
-                            : $desktopImage;
+                            $productImage = $banner->product_image
+                                ? asset('storage/' . $banner->product_image)
+                                : $desktopImage;
 
-                        $productImage = $banner->product_image
-                            ? asset('storage/' . $banner->product_image)
-                            : $desktopImage;
+                            $buttonLink = $banner->button_link ?: '#';
+                            $secondButtonLink = $banner->second_button_link ?: '#';
+                        @endphp
 
-                        $buttonLink = $banner->button_link ?: '#';
-                        $secondButtonLink = $banner->second_button_link ?: '#';
-                    @endphp
+                        <div class="swiper-slide">
+                            <div
+                                class="relative min-h-[760px] overflow-hidden sm:min-h-[820px] lg:min-h-[640px] xl:min-h-[680px]">
 
-                    <div class="swiper-slide">
-                        <div class="relative min-h-[760px] overflow-hidden sm:min-h-[820px] lg:min-h-[640px] xl:min-h-[680px]">
+                                {{-- Background Image --}}
+                                <picture>
+                                    <source media="(max-width: 767px)" srcset="{{ $mobileImage }}">
+                                    <img src="{{ $desktopImage }}" alt="{{ $banner->title }}"
+                                        class="banner-bg absolute inset-0 h-full w-full object-cover">
+                                </picture>
 
-                            {{-- Background Image --}}
-                            <picture>
-                                <source media="(max-width: 767px)" srcset="{{ $mobileImage }}">
-                                <img
-                                    src="{{ $desktopImage }}"
-                                    alt="{{ $banner->title }}"
-                                    class="banner-bg absolute inset-0 h-full w-full object-cover"
-                                >
-                            </picture>
+                                {{-- Overlay --}}
+                                <div class="absolute inset-0 bg-slate-950/70"></div>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/35">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_34%),radial-gradient(circle_at_82%_38%,rgba(59,130,246,.14),transparent_35%)]">
+                                </div>
 
-                            {{-- Overlay --}}
-                            <div class="absolute inset-0 bg-slate-950/70"></div>
-                            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/35"></div>
-                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_34%),radial-gradient(circle_at_82%_38%,rgba(59,130,246,.14),transparent_35%)]"></div>
+                                <div
+                                    class="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-4 py-10 sm:min-h-[820px] sm:px-6 lg:min-h-[640px] lg:px-8 xl:min-h-[680px]">
+                                    <div class="grid w-full gap-7 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
 
-                            <div class="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-4 py-10 sm:min-h-[820px] sm:px-6 lg:min-h-[640px] lg:px-8 xl:min-h-[680px]">
-                                <div class="grid w-full gap-7 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+                                        {{-- Mobile Top / Desktop Right Product Image --}}
+                                        <a href="{{ $buttonLink }}"
+                                            class="banner-product-card order-1 group relative mx-auto w-full max-w-[640px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-xl ring-1 {{ $theme['ring'] }} transition hover:-translate-y-2 lg:order-2 lg:max-w-none">
 
-                                    {{-- Mobile Top / Desktop Right Product Image --}}
-                                    <a href="{{ $buttonLink }}"
-                                        class="banner-product-card order-1 group relative mx-auto w-full max-w-[640px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl backdrop-blur-xl ring-1 {{ $theme['ring'] }} transition hover:-translate-y-2 lg:order-2 lg:max-w-none">
-
-                                        <div class="relative h-[260px] overflow-hidden rounded-[1.6rem] bg-white sm:h-[380px] lg:h-[450px] xl:h-[500px]">
-                                            <img
-                                                src="{{ $productImage }}"
-                                                alt="{{ $banner->highlight ?: $banner->title }}"
-                                                class="banner-product-img h-full w-full object-cover object-center"
-                                            >
-                                        </div>
-                                    </a>
-
-                                    {{-- Mobile Bottom / Desktop Left Content --}}
-                                    <div class="order-2 max-w-xl text-white lg:order-1">
-                                        @if($banner->badge)
-                                            <div class="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black backdrop-blur sm:text-sm">
-                                                <span class="h-2.5 w-2.5 rounded-full {{ $theme['dot'] }}"></span>
-                                                {{ $banner->badge }}
+                                            <div
+                                                class="relative h-[260px] overflow-hidden rounded-[1.6rem] bg-white sm:h-[380px] lg:h-[450px] xl:h-[500px]">
+                                                <img src="{{ $productImage }}"
+                                                    alt="{{ $banner->highlight ?: $banner->title }}"
+                                                    class="banner-product-img h-full w-full object-cover object-center">
                                             </div>
-                                        @endif
+                                        </a>
 
-                                        <h1 class="mt-5 text-3xl font-black leading-[1.08] tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
-                                            {{ $banner->title }}
-
-                                            @if($banner->highlight)
-                                                <span class="mt-2 block {{ $theme['highlight'] }}">
-                                                    {{ $banner->highlight }}
-                                                </span>
-                                            @endif
-                                        </h1>
-
-                                        @if($banner->description)
-                                            <p class="mt-5 max-w-lg text-sm leading-7 text-slate-200 sm:text-base lg:text-lg">
-                                                {{ $banner->description }}
-                                            </p>
-                                        @endif
-
-                                        <div class="mt-7 flex flex-wrap gap-4">
-                                            @if($banner->button_text)
-                                                <a href="{{ $buttonLink }}"
-                                                    class="inline-flex items-center justify-center rounded-full {{ $theme['button'] }} px-6 py-3.5 text-sm font-black shadow-xl transition hover:-translate-y-1">
-                                                    {{ $banner->button_text }}
-                                                </a>
+                                        {{-- Mobile Bottom / Desktop Left Content --}}
+                                        <div class="order-2 max-w-xl text-white lg:order-1">
+                                            @if ($banner->badge)
+                                                <div
+                                                    class="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black backdrop-blur sm:text-sm">
+                                                    <span class="h-2.5 w-2.5 rounded-full {{ $theme['dot'] }}"></span>
+                                                    {{ $banner->badge }}
+                                                </div>
                                             @endif
 
-                                            @if($banner->second_button_text)
-                                                <a href="{{ $secondButtonLink }}"
-                                                    class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-black text-white shadow-xl backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
-                                                    {{ $banner->second_button_text }}
-                                                </a>
+                                            <h1
+                                                class="mt-5 text-3xl font-black leading-[1.08] tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
+                                                {{ $banner->title }}
+
+                                                @if ($banner->highlight)
+                                                    <span class="mt-2 block {{ $theme['highlight'] }}">
+                                                        {{ $banner->highlight }}
+                                                    </span>
+                                                @endif
+                                            </h1>
+
+                                            @if ($banner->description)
+                                                <p
+                                                    class="mt-5 max-w-lg text-sm leading-7 text-slate-200 sm:text-base lg:text-lg">
+                                                    {{ $banner->description }}
+                                                </p>
                                             @endif
+
+                                            <div class="mt-7 flex flex-wrap gap-4">
+                                                @if ($banner->button_text)
+                                                    <a href="{{ $buttonLink }}"
+                                                        class="inline-flex items-center justify-center rounded-full {{ $theme['button'] }} px-6 py-3.5 text-sm font-black shadow-xl transition hover:-translate-y-1">
+                                                        {{ $banner->button_text }}
+                                                    </a>
+                                                @endif
+
+                                                @if ($banner->second_button_text)
+                                                    <a href="{{ $secondButtonLink }}"
+                                                        class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-black text-white shadow-xl backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
+                                                        {{ $banner->second_button_text }}
+                                                    </a>
+                                                @endif
+                                            </div>
+
+                                            <div class="mt-8 grid max-w-lg grid-cols-3 gap-3">
+                                                <div
+                                                    class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                                                    <p class="text-xl font-black sm:text-2xl">2016</p>
+                                                    <p class="mt-1 text-xs text-slate-300">Founded</p>
+                                                </div>
+
+                                                <div
+                                                    class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                                                    <p class="text-xl font-black sm:text-2xl">GCC</p>
+                                                    <p class="mt-1 text-xs text-slate-300">Market</p>
+                                                </div>
+
+                                                <div
+                                                    class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                                                    <p class="text-xl font-black sm:text-2xl">B2B</p>
+                                                    <p class="mt-1 text-xs text-slate-300">Supply</p>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div class="mt-8 grid max-w-lg grid-cols-3 gap-3">
-                                            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
-                                                <p class="text-xl font-black sm:text-2xl">2016</p>
-                                                <p class="mt-1 text-xs text-slate-300">Founded</p>
-                                            </div>
-
-                                            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
-                                                <p class="text-xl font-black sm:text-2xl">GCC</p>
-                                                <p class="mt-1 text-xs text-slate-300">Market</p>
-                                            </div>
-
-                                            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
-                                                <p class="text-xl font-black sm:text-2xl">B2B</p>
-                                                <p class="mt-1 text-xs text-slate-300">Supply</p>
-                                            </div>
-                                        </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
+                </div>
+
+                {{-- Arrows --}}
+                <div
+                    class="banner-prev absolute left-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/90 text-2xl text-slate-950 shadow-xl md:left-6 md:h-12 md:w-12">
+                    ‹
+                </div>
+
+                <div
+                    class="banner-next absolute right-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/90 text-2xl text-slate-950 shadow-xl md:right-6 md:h-12 md:w-12">
+                    ›
+                </div>
+
+                <div class="banner-pagination absolute z-20 !bottom-6"></div>
             </div>
-
-            {{-- Arrows --}}
-            <div class="banner-prev absolute left-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/90 text-2xl text-slate-950 shadow-xl md:left-6 md:h-12 md:w-12">
-                ‹
-            </div>
-
-            <div class="banner-next absolute right-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/90 text-2xl text-slate-950 shadow-xl md:right-6 md:h-12 md:w-12">
-                ›
-            </div>
-
-            <div class="banner-pagination absolute z-20 !bottom-6"></div>
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
 
     {{-- QUICK FEATURES --}}
     <section class="bg-white">
@@ -315,15 +279,176 @@
         </div>
     </section>
 
-    {{-- LATEST PRODUCTS --}}
+
+  
+
+{{-- PRODUCT BRANDS --}}
+@if(isset($productBrands) && $productBrands->count() > 0)
+    <section class="section">
+        <div class="containerx">
+            <div class="text-center max-w-3xl mx-auto">
+                <p class="text-blue-700 font-black uppercase tracking-[.25em]">
+                    Key Brands
+                </p>
+
+                <h2 class="mt-4 text-4xl md:text-6xl font-black">
+                    Product Brand Ecosystem
+                </h2>
+
+                <p class="mt-5 text-slate-600 text-lg">
+                    Explore brand-wise products, categories and latest launches.
+                </p>
+            </div>
+
+            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach($productBrands as $brand)
+                    <div class="premium-card group bg-white rounded-[34px] overflow-hidden transition hover:-translate-y-2 hover:shadow-2xl">
+
+                        <div class="h-56 bg-slate-50 p-6">
+                            @if($brand->logo)
+                                <img
+                                    class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
+                                    src="{{ asset('storage/' . $brand->logo) }}"
+                                    alt="{{ $brand->name }}"
+                                >
+                            @elseif($brand->banner_image)
+                                <img
+                                    class="h-full w-full rounded-[24px] object-cover transition duration-500 group-hover:scale-110"
+                                    src="{{ asset('storage/' . $brand->banner_image) }}"
+                                    alt="{{ $brand->name }}"
+                                >
+                            @else
+                                <div class="grid h-full w-full place-items-center rounded-[24px] bg-blue-50">
+                                    <span class="text-5xl font-black text-blue-700">
+                                        {{ strtoupper(substr($brand->name, 0, 1)) }}
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="p-7">
+                            <div class="flex items-center justify-between gap-4">
+                                <h3 class="text-2xl font-black text-slate-950">
+                                    {{ $brand->name }}
+                                </h3>
+
+                                <span class="grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
+                                    →
+                                </span>
+                            </div>
+
+                            @if($brand->description)
+                                <p class="text-slate-600 mt-2 line-clamp-2">
+                                    {{ $brand->description }}
+                                </p>
+                            @endif
+
+                            <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-blue-700">
+                                {{ $brand->products_count }} Products
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
+
+
+
+
+
+    {{-- PRODUCT CATEGORIES --}}
+    {{-- PRODUCT CATEGORIES --}}
+
+@if(isset($productCategories) && $productCategories->count() > 0)
+    <section class="bg-slate-950 py-16 text-white lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                <p class="font-black uppercase tracking-[.3em] text-cyan-300">
+                    Categories
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black sm:text-5xl lg:text-6xl">
+                    Product Ecosystem
+                </h2>
+
+                <p class="mt-5 text-lg leading-8 text-slate-300">
+                    GPT Group ke product categories ko clean and premium way me show karein.
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($productCategories as $category)
+                    <div class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
+
+                        @if($category->image)
+                            <img
+                                class="h-52 w-full rounded-[1.5rem] object-cover transition duration-500 group-hover:scale-105"
+                                src="{{ asset('storage/' . $category->image) }}"
+                                alt="{{ $category->name }}"
+                            >
+                        @else
+                            <div class="grid h-52 w-full place-items-center rounded-[1.5rem] bg-white/10 text-slate-400">
+                                No Image
+                            </div>
+                        @endif
+
+                        <div class="mt-6 flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="text-2xl font-black">
+                                    {{ $category->name }}
+                                </h3>
+
+                                @if($category->brand)
+                                    <p class="mt-1 text-xs font-black uppercase tracking-[.2em] text-cyan-300">
+                                        {{ $category->brand->name }}
+                                    </p>
+                                @endif
+                            </div>
+
+                            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-cyan-300 text-xl text-slate-950 transition group-hover:bg-white">
+                                →
+                            </span>
+                        </div>
+
+                        @if($category->description)
+                            <p class="mt-2 text-sm leading-6 text-slate-300 line-clamp-2">
+                                {{ $category->description }}
+                            </p>
+                        @endif
+
+                        <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-cyan-300">
+                            {{ $category->products_count }} Products
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
+
+
+
+  
+  
+   {{-- LATEST PRODUCTS --}}
+
+@if(isset($latestProducts) && $latestProducts->count() > 0)
     <section class="bg-slate-100 py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
             <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">New Launches</p>
+                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        New Launches
+                    </p>
+
                     <h2 class="mt-3 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
                         Latest Products
                     </h2>
+
                     <p class="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
                         Smartphones, tablets, watches and accessories ko premium product cards me showcase karein.
                     </p>
@@ -333,6 +458,7 @@
                     <div class="product-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
                         ‹
                     </div>
+
                     <div class="product-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
                         ›
                     </div>
@@ -341,28 +467,51 @@
 
             <div class="swiper productSwiper mt-12">
                 <div class="swiper-wrapper pb-14">
-                    @foreach ($products as $product)
+
+                    @foreach($latestProducts as $product)
                         <div class="swiper-slide">
-                            <a href="{{ url('/brands') }}"
-                                class="group block overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
+                            <a href="{{ route('product.detail', $product->slug) }}"
+                               class="group block overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
 
                                 <div class="relative h-80 bg-gradient-to-br from-white to-slate-100 p-7">
-                                    <span class="absolute left-5 top-5 rounded-full {{ $product['color'] }} px-4 py-2 text-xs font-black text-white">
-                                        {{ $product['tag'] }}
-                                    </span>
 
-                                    <img
-                                        class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
-                                        src="{{ $product['img'] }}"
-                                        alt="{{ $product['name'] }}"
-                                    >
+                                    @if($product->badge)
+                                        <span class="absolute left-5 top-5 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">
+                                            {{ $product->badge }}
+                                        </span>
+                                    @endif
+
+                                    @if($product->brand)
+                                        <span class="absolute right-5 top-5 rounded-full bg-white px-4 py-2 text-xs font-black text-blue-700 shadow">
+                                            {{ $product->brand->name }}
+                                        </span>
+                                    @endif
+
+                                    @if($product->image)
+                                        <img
+                                            class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+                                            src="{{ asset('storage/' . $product->image) }}"
+                                            alt="{{ $product->name }}"
+                                        >
+                                    @else
+                                        <div class="grid h-full w-full place-items-center rounded-[1.5rem] bg-slate-50 text-slate-400">
+                                            No Image
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="p-6">
                                     <div class="flex items-start justify-between gap-4">
                                         <div>
-                                            <h3 class="text-2xl font-black text-slate-950">{{ $product['name'] }}</h3>
-                                            <p class="mt-2 text-sm leading-6 text-slate-500">{{ $product['desc'] }}</p>
+                                            <h3 class="text-2xl font-black text-slate-950">
+                                                {{ $product->name }}
+                                            </h3>
+
+                                            @if($product->short_description)
+                                                <p class="mt-2 text-sm leading-6 text-slate-500 line-clamp-2">
+                                                    {{ $product->short_description }}
+                                                </p>
+                                            @endif
                                         </div>
 
                                         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
@@ -370,23 +519,99 @@
                                         </span>
                                     </div>
 
-                                    <div class="mt-5 flex flex-wrap gap-2">
-                                        @foreach ($product['labels'] as $label)
-                                            <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
-                                                {{ $label }}
-                                            </span>
-                                        @endforeach
-                                    </div>
+                                    @if(is_array($product->tags) && count($product->tags))
+                                        <div class="mt-5 flex flex-wrap gap-2">
+                                            @foreach($product->tags as $tag)
+                                                <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                                                    {{ $tag }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </a>
                         </div>
                     @endforeach
+
                 </div>
 
                 <div class="product-pagination"></div>
             </div>
         </div>
     </section>
+@endif
+
+
+
+{{-- UPCOMING PRODUCTS --}}
+
+@if(isset($upcomingProducts) && $upcomingProducts->count() > 0)
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mb-12">
+                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                    Coming Soon
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    Upcoming Products
+                </h2>
+
+                <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                    New product launches and upcoming devices for dealers and partners.
+                </p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($upcomingProducts as $product)
+                    <a href="{{ route('product.detail', $product->slug) }}"
+                       class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
+
+                        <div class="relative h-72 bg-gradient-to-br from-slate-50 to-cyan-50 p-6">
+                            <span class="absolute left-5 top-5 rounded-full bg-cyan-500 px-4 py-2 text-xs font-black text-white">
+                                Upcoming
+                            </span>
+
+                            @if($product->image)
+                                <img
+                                    src="{{ asset('storage/' . $product->image) }}"
+                                    alt="{{ $product->name }}"
+                                    class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
+                                >
+                            @else
+                                <div class="grid h-full w-full place-items-center rounded-2xl bg-white text-slate-400">
+                                    No Image
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-2xl font-black text-slate-950">
+                                {{ $product->name }}
+                            </h3>
+
+                            @if($product->launch_date)
+                                <p class="mt-2 text-sm font-bold text-blue-700">
+                                    Launch: {{ $product->launch_date->format('d M Y') }}
+                                </p>
+                            @endif
+
+                            @if($product->short_description)
+                                <p class="mt-3 text-sm leading-6 text-slate-500 line-clamp-2">
+                                    {{ $product->short_description }}
+                                </p>
+                            @endif
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+@endif
+
+
 
     {{-- OFFER + CAMPAIGN --}}
     <section class="bg-white py-16 lg:py-24">
@@ -398,24 +623,24 @@
                     Dealer Offers & Brand Launch Support
                 </h2>
                 <p class="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                    GPT Group partners ke liye premium product campaigns, dealer schemes, retail visibility aur B2B supply support.
+                    GPT Group partners ke liye premium product campaigns, dealer schemes, retail visibility aur B2B supply
+                    support.
                 </p>
             </div>
 
             <div class="grid items-stretch gap-8 lg:grid-cols-2">
 
                 <div class="group relative min-h-[520px] overflow-hidden rounded-[2.5rem] shadow-2xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=85"
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=85"
                         alt="Dealer Schemes"
-                        class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                    >
+                        class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110">
 
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-950/90 via-blue-800/75 to-cyan-500/60"></div>
 
                     <div class="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7 text-white sm:p-10">
                         <div>
-                            <div class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-black backdrop-blur">
+                            <div
+                                class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-black backdrop-blur">
                                 <span class="h-2.5 w-2.5 rounded-full bg-cyan-300"></span>
                                 Special Dealer Offer
                             </div>
@@ -426,7 +651,8 @@
                             </h2>
 
                             <p class="mt-5 max-w-xl text-lg leading-8 text-blue-50">
-                                Monthly dealer scheme, festival campaign, new launch promotion aur bulk order support ko yaha highlight kar sakte hain.
+                                Monthly dealer scheme, festival campaign, new launch promotion aur bulk order support ko
+                                yaha highlight kar sakte hain.
                             </p>
                         </div>
 
@@ -457,17 +683,17 @@
                 </div>
 
                 <div class="group relative min-h-[520px] overflow-hidden rounded-[2.5rem] shadow-2xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=85"
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=85"
                         alt="Brand Campaign"
-                        class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                    >
+                        class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110">
 
-                    <div class="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/85 to-slate-950/55"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/85 to-slate-950/55">
+                    </div>
 
                     <div class="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7 text-white sm:p-10">
                         <div>
-                            <div class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-black backdrop-blur">
+                            <div
+                                class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/15 px-5 py-2 text-sm font-black backdrop-blur">
                                 <span class="h-2.5 w-2.5 rounded-full bg-yellow-300"></span>
                                 Brand Campaign
                             </div>
@@ -478,7 +704,8 @@
                             </h2>
 
                             <p class="mt-5 max-w-xl text-lg leading-8 text-slate-200">
-                                Product launch, channel distribution, retail visibility, dealer activation aur partner support ke liye premium placement.
+                                Product launch, channel distribution, retail visibility, dealer activation aur partner
+                                support ke liye premium placement.
                             </p>
                         </div>
 
@@ -533,28 +760,25 @@
             <div class="mt-12 grid gap-6 md:grid-cols-2">
                 <a href="{{ url('/services#gpt-care') }}"
                     class="group overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <img
-                        class="h-72 w-full object-cover"
+                    <img class="h-72 w-full object-cover"
                         src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=1200&q=85"
-                        alt="GPT Care"
-                    >
+                        alt="GPT Care">
 
                     <div class="p-8">
                         <p class="font-black uppercase tracking-[.25em] text-blue-700">GPT Care</p>
                         <h3 class="mt-4 text-3xl font-black text-slate-950">Mobile Repair & Service</h3>
                         <p class="mt-3 leading-7 text-slate-600">
-                            Screen, battery, software, water damage and mobile service enquiries ke liye professional support.
+                            Screen, battery, software, water damage and mobile service enquiries ke liye professional
+                            support.
                         </p>
                     </div>
                 </a>
 
                 <a href="{{ url('/services#b2b-program') }}"
                     class="group overflow-hidden rounded-[2.5rem] bg-slate-950 text-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                    <img
-                        class="h-72 w-full object-cover opacity-85"
+                    <img class="h-72 w-full object-cover opacity-85"
                         src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=85"
-                        alt="B2B Program"
-                    >
+                        alt="B2B Program">
 
                     <div class="p-8">
                         <p class="font-black uppercase tracking-[.25em] text-cyan-300">B2B Program</p>
@@ -568,60 +792,11 @@
         </div>
     </section>
 
-    {{-- PRODUCT CATEGORIES --}}
-    <section class="bg-slate-950 py-16 text-white lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="font-black uppercase tracking-[.3em] text-cyan-300">Categories</p>
-                <h2 class="mt-4 text-4xl font-black sm:text-5xl lg:text-6xl">
-                    Product Ecosystem
-                </h2>
-                <p class="mt-5 text-lg leading-8 text-slate-300">
-                    GPT Group ke product categories ko clean and premium way me show karein.
-                </p>
-            </div>
-
-            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <a href="{{ url('/brands') }}"
-                    class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
-                    <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=85"
-                        alt="Smartphones">
-                    <h3 class="mt-6 text-2xl font-black">Smartphones</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Latest 4G, 5G and premium mobile range.</p>
-                </a>
-
-                <a href="{{ url('/brands') }}"
-                    class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
-                    <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85"
-                        alt="Tablets">
-                    <h3 class="mt-6 text-2xl font-black">Tablets</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Business, education and entertainment tablets.</p>
-                </a>
-
-                <a href="{{ url('/brands') }}"
-                    class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
-                    <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85"
-                        alt="Smart Watches">
-                    <h3 class="mt-6 text-2xl font-black">Smart Watches</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Modern wearable and lifestyle products.</p>
-                </a>
-
-                <a href="{{ url('/brands') }}"
-                    class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
-                    <img class="h-52 w-full rounded-[1.5rem] object-cover"
-                        src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=85"
-                        alt="Accessories">
-                    <h3 class="mt-6 text-2xl font-black">Accessories</h3>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Chargers, earphones and mobile add-ons.</p>
-                </a>
-            </div>
-        </div>
-    </section>
+    
 
     {{-- NETWORK SECTION --}}
+
+
     <section class="bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid items-center gap-12 lg:grid-cols-2">
@@ -633,7 +808,8 @@
                     </h2>
 
                     <p class="mt-6 text-lg leading-8 text-slate-600">
-                        GPT Group network retail, wholesale and B2B channels ko supply-chain execution ke saath support karta hai.
+                        GPT Group network retail, wholesale and B2B channels ko supply-chain execution ke saath support
+                        karta hai.
                     </p>
 
                     <div class="mt-8 grid gap-5 sm:grid-cols-2">
@@ -670,7 +846,7 @@
 
     {{-- ONLY ONE SCRIPT BLOCK --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             if (typeof Swiper !== 'undefined') {
                 new Swiper('.bannerSwiper', {
                     loop: true,
@@ -797,98 +973,10 @@
         </div>
     </section>
 
-    <section class="section">
-        <div class="containerx">
-            <div class="text-center max-w-3xl mx-auto">
-                <p class="text-blue-700 font-black uppercase tracking-[.25em]">
-                    Key Brands
-                </p>
-                <h2 class="mt-4 text-5xl font-black">
-                    Samsung & LAVA Product Ecosystem
-                </h2>
-            </div>
-            <div class="mt-12 grid md:grid-cols-4 gap-6">
-                <a class="premium-card bg-white rounded-[34px] overflow-hidden" href="{{ route('products') }}"><img
-                        class="h-56 w-full object-cover"
-                        src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80" />
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Samsung Mobiles</h3>
-                        <p class="text-slate-600 mt-2">
-                            Dedicated product category page with premium display sections.
-                        </p>
-                    </div>
-                </a><a class="premium-card bg-white rounded-[34px] overflow-hidden" href="{{ route('products') }}"><img
-                        class="h-56 w-full object-cover"
-                        src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=1200&q=80" />
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Samsung Tablets</h3>
-                        <p class="text-slate-600 mt-2">
-                            Dedicated product category page with premium display sections.
-                        </p>
-                    </div>
-                </a><a class="premium-card bg-white rounded-[34px] overflow-hidden" href="{{ route('products') }}"><img
-                        class="h-56 w-full object-cover"
-                        src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80" />
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">LAVA Mobiles</h3>
-                        <p class="text-slate-600 mt-2">
-                            Dedicated product category page with premium display sections.
-                        </p>
-                    </div>
-                </a><a class="premium-card bg-white rounded-[34px] overflow-hidden" href="{{ route('products') }}"><img
-                        class="h-56 w-full object-cover"
-                        src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1200&q=80" />
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black">Accessories</h3>
-                        <p class="text-slate-600 mt-2">
-                            Dedicated product category page with premium display sections.
-                        </p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
 
-    {{-- <section class="section bg-slate-950 text-white">
-        <div class="containerx grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1">
-                <p class="text-cyan-300 font-black uppercase tracking-[.25em]">
-                    Network
-                </p>
-                <h2 class="mt-4 text-5xl font-black">Oman market coverage.</h2>
-                <p class="mt-5 text-slate-300">
-                    Retail, wholesale, KDR and B2B support from warehouses and partner
-                    channels.
-                </p>
-            </div>
-            <div class="rounded-[34px] bg-white/10 p-8">
-                <h3 class="text-2xl font-black">Sur & Salalah</h3>
-                <p class="mt-3 text-slate-300">
-                    City-wise distribution coverage for regional market growth.
-                </p>
-            </div>
-            <div class="rounded-[34px] bg-white/10 p-8">
-                <h3 class="text-2xl font-black">MCT-Ghala & Sohar</h3>
-                <p class="mt-3 text-slate-300">
-                    Warehouse support for faster dispatch and stock movement.
-                </p>
-            </div>
-            <div class="rounded-[34px] bg-white/10 p-8">
-                <h3 class="text-2xl font-black">Retail Partners</h3>
-                <p class="mt-3 text-slate-300">
-                    IRs, wholesale, KDR and corporate B2B network.
-                </p>
-            </div>
-            <div class="rounded-[34px] bg-white/10 p-8">
-                <h3 class="text-2xl font-black">Partner Assist</h3>
-                <p class="mt-3 text-slate-300">
-                    Store setup guidance, inventory planning and brand training.
-                </p>
-            </div>
-        </div>
-    </section> --}}
 
-  
+
+
     <section class="section bg-white">
         <div class="containerx">
             <div
@@ -911,138 +999,135 @@
 
     <!-- Expanded Business Sections -->
     {{-- WHAT WE DO --}}
-@if($whatWeDoSection)
-    <section class="bg-slate-50 py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    @if ($whatWeDoSection)
+        <section class="bg-slate-50 py-16 lg:py-24">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            <div class="grid items-center gap-12 lg:grid-cols-2">
+                <div class="grid items-center gap-12 lg:grid-cols-2">
 
-                {{-- Mobile Top / Desktop Right Image --}}
-                <div class="relative order-1 lg:order-2">
-                    @if($whatWeDoSection->image)
-                        <img
-                            class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
-                            src="{{ asset('storage/' . $whatWeDoSection->image) }}"
-                            alt="{{ $whatWeDoSection->title }}"
-                        >
-                    @else
-                        <img
-                            class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
-                            src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
-                            alt="{{ $whatWeDoSection->title }}"
-                        >
-                    @endif
+                    {{-- Mobile Top / Desktop Right Image --}}
+                    <div class="relative order-1 lg:order-2">
+                        @if ($whatWeDoSection->image)
+                            <img class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
+                                src="{{ asset('storage/' . $whatWeDoSection->image) }}"
+                                alt="{{ $whatWeDoSection->title }}">
+                        @else
+                            <img class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
+                                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
+                                alt="{{ $whatWeDoSection->title }}">
+                        @endif
 
-                    @if($whatWeDoSection->overlay_title || $whatWeDoSection->overlay_text)
-                        <div class="absolute -bottom-8 left-6 right-6 rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl">
-                            @if($whatWeDoSection->overlay_title)
-                                <p class="text-3xl font-black">
-                                    {{ $whatWeDoSection->overlay_title }}
-                                </p>
-                            @endif
-
-                            @if($whatWeDoSection->overlay_text)
-                                <p class="mt-2 text-slate-300">
-                                    {{ $whatWeDoSection->overlay_text }}
-                                </p>
-                            @endif
-                        </div>
-                    @endif
-                </div>
-
-                {{-- Mobile Bottom / Desktop Left Content --}}
-                <div class="order-2 lg:order-1">
-
-                    @if($whatWeDoSection->label)
-                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                            {{ $whatWeDoSection->label }}
-                        </p>
-                    @endif
-
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                        {{ $whatWeDoSection->title }}
-                    </h2>
-
-                    @if($whatWeDoSection->description)
-                        <p class="mt-6 text-lg leading-8 text-slate-600">
-                            {{ $whatWeDoSection->description }}
-                        </p>
-                    @endif
-
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
-
-                        @if($whatWeDoSection->card_1_title || $whatWeDoSection->card_1_description)
-                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
-                                @if($whatWeDoSection->card_1_title)
-                                    <h3 class="text-xl font-black">
-                                        {{ $whatWeDoSection->card_1_title }}
-                                    </h3>
+                        @if ($whatWeDoSection->overlay_title || $whatWeDoSection->overlay_text)
+                            <div
+                                class="absolute -bottom-8 left-6 right-6 rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl">
+                                @if ($whatWeDoSection->overlay_title)
+                                    <p class="text-3xl font-black">
+                                        {{ $whatWeDoSection->overlay_title }}
+                                    </p>
                                 @endif
 
-                                @if($whatWeDoSection->card_1_description)
-                                    <p class="mt-2 text-sm leading-6 text-slate-500">
-                                        {{ $whatWeDoSection->card_1_description }}
+                                @if ($whatWeDoSection->overlay_text)
+                                    <p class="mt-2 text-slate-300">
+                                        {{ $whatWeDoSection->overlay_text }}
                                     </p>
                                 @endif
                             </div>
                         @endif
-
-                        @if($whatWeDoSection->card_2_title || $whatWeDoSection->card_2_description)
-                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
-                                @if($whatWeDoSection->card_2_title)
-                                    <h3 class="text-xl font-black">
-                                        {{ $whatWeDoSection->card_2_title }}
-                                    </h3>
-                                @endif
-
-                                @if($whatWeDoSection->card_2_description)
-                                    <p class="mt-2 text-sm leading-6 text-slate-500">
-                                        {{ $whatWeDoSection->card_2_description }}
-                                    </p>
-                                @endif
-                            </div>
-                        @endif
-
-                        @if($whatWeDoSection->card_3_title || $whatWeDoSection->card_3_description)
-                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
-                                @if($whatWeDoSection->card_3_title)
-                                    <h3 class="text-xl font-black">
-                                        {{ $whatWeDoSection->card_3_title }}
-                                    </h3>
-                                @endif
-
-                                @if($whatWeDoSection->card_3_description)
-                                    <p class="mt-2 text-sm leading-6 text-slate-500">
-                                        {{ $whatWeDoSection->card_3_description }}
-                                    </p>
-                                @endif
-                            </div>
-                        @endif
-
-                        @if($whatWeDoSection->card_4_title || $whatWeDoSection->card_4_description)
-                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
-                                @if($whatWeDoSection->card_4_title)
-                                    <h3 class="text-xl font-black">
-                                        {{ $whatWeDoSection->card_4_title }}
-                                    </h3>
-                                @endif
-
-                                @if($whatWeDoSection->card_4_description)
-                                    <p class="mt-2 text-sm leading-6 text-slate-500">
-                                        {{ $whatWeDoSection->card_4_description }}
-                                    </p>
-                                @endif
-                            </div>
-                        @endif
-
                     </div>
+
+                    {{-- Mobile Bottom / Desktop Left Content --}}
+                    <div class="order-2 lg:order-1">
+
+                        @if ($whatWeDoSection->label)
+                            <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                                {{ $whatWeDoSection->label }}
+                            </p>
+                        @endif
+
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                            {{ $whatWeDoSection->title }}
+                        </h2>
+
+                        @if ($whatWeDoSection->description)
+                            <p class="mt-6 text-lg leading-8 text-slate-600">
+                                {{ $whatWeDoSection->description }}
+                            </p>
+                        @endif
+
+                        <div class="mt-8 grid gap-5 sm:grid-cols-2">
+
+                            @if ($whatWeDoSection->card_1_title || $whatWeDoSection->card_1_description)
+                                <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                    @if ($whatWeDoSection->card_1_title)
+                                        <h3 class="text-xl font-black">
+                                            {{ $whatWeDoSection->card_1_title }}
+                                        </h3>
+                                    @endif
+
+                                    @if ($whatWeDoSection->card_1_description)
+                                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                                            {{ $whatWeDoSection->card_1_description }}
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
+
+                            @if ($whatWeDoSection->card_2_title || $whatWeDoSection->card_2_description)
+                                <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                    @if ($whatWeDoSection->card_2_title)
+                                        <h3 class="text-xl font-black">
+                                            {{ $whatWeDoSection->card_2_title }}
+                                        </h3>
+                                    @endif
+
+                                    @if ($whatWeDoSection->card_2_description)
+                                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                                            {{ $whatWeDoSection->card_2_description }}
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
+
+                            @if ($whatWeDoSection->card_3_title || $whatWeDoSection->card_3_description)
+                                <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                    @if ($whatWeDoSection->card_3_title)
+                                        <h3 class="text-xl font-black">
+                                            {{ $whatWeDoSection->card_3_title }}
+                                        </h3>
+                                    @endif
+
+                                    @if ($whatWeDoSection->card_3_description)
+                                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                                            {{ $whatWeDoSection->card_3_description }}
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
+
+                            @if ($whatWeDoSection->card_4_title || $whatWeDoSection->card_4_description)
+                                <div class="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                                    @if ($whatWeDoSection->card_4_title)
+                                        <h3 class="text-xl font-black">
+                                            {{ $whatWeDoSection->card_4_title }}
+                                        </h3>
+                                    @endif
+
+                                    @if ($whatWeDoSection->card_4_description)
+                                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                                            {{ $whatWeDoSection->card_4_description }}
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
 
 
     <section class="section">
@@ -1157,99 +1242,92 @@
 
     {{-- founder section --}}
 
-   @if($founderSection)
-    <section class="section bg-white">
-        <div class="containerx">
+    @if ($founderSection)
+        <section class="section bg-white">
+            <div class="containerx">
 
-            <div class="grid items-center gap-12 lg:grid-cols-2">
+                <div class="grid items-center gap-12 lg:grid-cols-2">
 
-                {{-- Mobile Top / Desktop Right Image --}}
-                <div class="order-1 lg:order-2">
-                    @if($founderSection->image)
-                        <img
-                            class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
-                            src="{{ asset('storage/' . $founderSection->image) }}"
-                            alt="{{ $founderSection->title }}"
-                        >
-                    @else
-                        <img
-                            class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
-                            src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
-                            alt="{{ $founderSection->title }}"
-                        >
-                    @endif
-                </div>
-
-                {{-- Mobile Bottom / Desktop Left Content --}}
-                <div class="order-2 lg:order-1">
-                    @if($founderSection->label)
-                        <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                            {{ $founderSection->label }}
-                        </p>
-                    @endif
-
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
-                        {{ $founderSection->title }}
-                    </h2>
-
-                    @if($founderSection->description)
-                        <p class="mt-6 text-lg leading-8 text-slate-600">
-                            {{ $founderSection->description }}
-                        </p>
-                    @endif
-
-                    <div class="mt-8 grid gap-4 sm:grid-cols-3">
-
-                        @if($founderSection->stat_1_value || $founderSection->stat_1_label)
-                            <div class="rounded-3xl bg-slate-50 p-5">
-                                <p class="text-gradient text-3xl font-black">
-                                    {{ $founderSection->stat_1_value }}
-                                </p>
-                                <p class="font-semibold text-slate-600">
-                                    {{ $founderSection->stat_1_label }}
-                                </p>
-                            </div>
+                    {{-- Mobile Top / Desktop Right Image --}}
+                    <div class="order-1 lg:order-2">
+                        @if ($founderSection->image)
+                            <img class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
+                                src="{{ asset('storage/' . $founderSection->image) }}"
+                                alt="{{ $founderSection->title }}">
+                        @else
+                            <img class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
+                                src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" alt="{{ $founderSection->title }}">
                         @endif
-
-                        @if($founderSection->stat_2_value || $founderSection->stat_2_label)
-                            <div class="rounded-3xl bg-slate-50 p-5">
-                                <p class="text-gradient text-3xl font-black">
-                                    {{ $founderSection->stat_2_value }}
-                                </p>
-                                <p class="font-semibold text-slate-600">
-                                    {{ $founderSection->stat_2_label }}
-                                </p>
-                            </div>
-                        @endif
-
-                        @if($founderSection->stat_3_value || $founderSection->stat_3_label)
-                            <div class="rounded-3xl bg-slate-50 p-5">
-                                <p class="text-gradient text-3xl font-black">
-                                    {{ $founderSection->stat_3_value }}
-                                </p>
-                                <p class="font-semibold text-slate-600">
-                                    {{ $founderSection->stat_3_label }}
-                                </p>
-                            </div>
-                        @endif
-
                     </div>
 
-                    @if($founderSection->button_text)
-                        <a
-                            href="{{ $founderSection->button_link ?: '#' }}"
-                            class="mt-8 inline-flex rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-7 py-4 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-1"
-                        >
-                            {{ $founderSection->button_text }}
-                        </a>
-                    @endif
+                    {{-- Mobile Bottom / Desktop Left Content --}}
+                    <div class="order-2 lg:order-1">
+                        @if ($founderSection->label)
+                            <p class="font-black uppercase tracking-[.25em] text-blue-700">
+                                {{ $founderSection->label }}
+                            </p>
+                        @endif
+
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
+                            {{ $founderSection->title }}
+                        </h2>
+
+                        @if ($founderSection->description)
+                            <p class="mt-6 text-lg leading-8 text-slate-600">
+                                {{ $founderSection->description }}
+                            </p>
+                        @endif
+
+                        <div class="mt-8 grid gap-4 sm:grid-cols-3">
+
+                            @if ($founderSection->stat_1_value || $founderSection->stat_1_label)
+                                <div class="rounded-3xl bg-slate-50 p-5">
+                                    <p class="text-gradient text-3xl font-black">
+                                        {{ $founderSection->stat_1_value }}
+                                    </p>
+                                    <p class="font-semibold text-slate-600">
+                                        {{ $founderSection->stat_1_label }}
+                                    </p>
+                                </div>
+                            @endif
+
+                            @if ($founderSection->stat_2_value || $founderSection->stat_2_label)
+                                <div class="rounded-3xl bg-slate-50 p-5">
+                                    <p class="text-gradient text-3xl font-black">
+                                        {{ $founderSection->stat_2_value }}
+                                    </p>
+                                    <p class="font-semibold text-slate-600">
+                                        {{ $founderSection->stat_2_label }}
+                                    </p>
+                                </div>
+                            @endif
+
+                            @if ($founderSection->stat_3_value || $founderSection->stat_3_label)
+                                <div class="rounded-3xl bg-slate-50 p-5">
+                                    <p class="text-gradient text-3xl font-black">
+                                        {{ $founderSection->stat_3_value }}
+                                    </p>
+                                    <p class="font-semibold text-slate-600">
+                                        {{ $founderSection->stat_3_label }}
+                                    </p>
+                                </div>
+                            @endif
+
+                        </div>
+
+                        @if ($founderSection->button_text)
+                            <a href="{{ $founderSection->button_link ?: '#' }}"
+                                class="mt-8 inline-flex rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-7 py-4 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-1">
+                                {{ $founderSection->button_text }}
+                            </a>
+                        @endif
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
 
 
     <section class="section">

@@ -43,6 +43,21 @@
                     {{ __('What We Do') }}
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="building-storefront" :href="route('product-brands.index')"
+                    :current="request()->routeIs('product-brands.*')" wire:navigate>
+                    {{ __('Product Brands') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="squares-2x2" :href="route('product-categories.index')"
+                    :current="request()->routeIs('product-categories.*')" wire:navigate>
+                    {{ __('Product Categories') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="cube" :href="route('products.index')"
+                    :current="request()->routeIs('products.*')" wire:navigate>
+                    {{ __('Products') }}
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="users" :href="route('users.index')"
                     :current="request()->routeIs('users.*')" wire:navigate>
                     {{ __('Users') }}

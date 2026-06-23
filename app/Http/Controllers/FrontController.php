@@ -7,6 +7,9 @@ use App\Models\FounderSection;
 use App\Models\TeamMemberGpt;
 use Illuminate\Http\Request;
 use App\Models\WhatWeDoSection;
+use App\Models\ProductBrand;
+use App\Models\ProductCategory;
+use App\Models\Product;
 
 class FrontController extends Controller
 {
@@ -18,36 +21,78 @@ class FrontController extends Controller
             ->latest()
             ->get();
 
-                $founderSection = FounderSection::where('status', 1)
+        $founderSection = FounderSection::where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->first();
+        $whatWeDoSection = WhatWeDoSection::where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->first();
+
+
+              $productBrands = ProductBrand::where('status', 1)
+        ->withCount(['products' => function ($query) {
+            $query->where('status', 1);
+        }])
         ->orderBy('sort_order', 'asc')
         ->latest()
-        ->first();
-  $whatWeDoSection = WhatWeDoSection::where('status', 1)
+        ->limit(8)
+        ->get();
+
+    $productCategories = ProductCategory::with('brand')
+        ->where('status', 1)
+        ->withCount(['products' => function ($query) {
+            $query->where('status', 1);
+        }])
         ->orderBy('sort_order', 'asc')
         ->latest()
-        ->first();
-        return view('front.index', compact('banners','founderSection','whatWeDoSection'));
+        ->limit(8)
+        ->get();
+
+    $latestProducts = Product::with(['brand', 'category'])
+        ->where('status', 1)
+        ->where('product_type', 'latest')
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->limit(12)
+        ->get();
+
+    $upcomingProducts = Product::with(['brand', 'category'])
+        ->where('status', 1)
+        ->where('product_type', 'upcoming')
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->limit(8)
+        ->get();
+
+        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection','productBrands','productCategories','upcomingProducts','latestProducts'));
     }
 
 
     public function about()
     {
-            $founderSection = FounderSection::where('status', 1)
-        ->orderBy('sort_order', 'asc')
-        ->latest()
-        ->first();
+        $founderSection = FounderSection::where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->first();
 
-         $teamMembers = TeamMemberGpt::where('status', 1)
-        ->orderBy('sort_order', 'asc')
-        ->latest()
-        ->get();
+        $teamMembers = TeamMemberGpt::where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->get();
 
-         $whatWeDoSection = WhatWeDoSection::where('status', 1)
-        ->orderBy('sort_order', 'asc')
-        ->latest()
-        ->first();
-        return view('front.about',compact('founderSection','teamMembers','whatWeDoSection'));
+        $whatWeDoSection = WhatWeDoSection::where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->first();
+        return view('front.about', compact('founderSection', 'teamMembers', 'whatWeDoSection'));
     }
+
+
+
+
+
 
 
     public function brands()
@@ -89,6 +134,29 @@ class FrontController extends Controller
     {
         return view('front.products');
     }
+
+
+    public function productDetail($slug)
+{
+    $product = Product::with(['brand', 'category'])
+        ->where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    $relatedProducts = Product::with(['brand', 'category'])
+        ->where('status', 1)
+        ->where('id', '!=', $product->id)
+        ->where(function ($query) use ($product) {
+            $query->where('product_brand_id', $product->product_brand_id)
+                ->orWhere('product_category_id', $product->product_category_id);
+        })
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->limit(4)
+        ->get();
+
+    return view('front.product_detail', compact('product', 'relatedProducts'));
+}
 
     public function carriers()
     {

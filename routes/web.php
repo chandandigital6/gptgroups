@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FounderSectionController;
+use App\Http\Controllers\ProductBrandController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\WhatWeDoSectionController;
 
@@ -23,6 +26,7 @@ Route::get('/news', [FrontController::class, 'news'])->name('news');
 Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
 Route::get('/products', [FrontController::class, 'products'])->name('products');
 Route::get('/services', [FrontController::class, 'services'])->name('services');
+Route::get('/product/{slug}', [FrontController::class, 'productDetail'])->name('product.detail');
 
 
 
@@ -90,6 +94,37 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/what-we-do-sections/{whatWeDoSection}/edit', [WhatWeDoSectionController::class, 'edit'])->name('what-we-do-sections.edit');
     Route::put('/what-we-do-sections/{whatWeDoSection}', [WhatWeDoSectionController::class, 'update'])->name('what-we-do-sections.update');
     Route::delete('/what-we-do-sections/{whatWeDoSection}', [WhatWeDoSectionController::class, 'destroy'])->name('what-we-do-sections.destroy');
+
+
+
+
+    Route::get('/product-brands', [ProductBrandController::class, 'index'])->name('product-brands.index');
+    Route::get('/product-brands/create', [ProductBrandController::class, 'create'])->name('product-brands.create');
+    Route::post('/product-brands', [ProductBrandController::class, 'store'])->name('product-brands.store');
+    Route::get('/product-brands/{productBrand}/edit', [ProductBrandController::class, 'edit'])->name('product-brands.edit');
+    Route::put('/product-brands/{productBrand}', [ProductBrandController::class, 'update'])->name('product-brands.update');
+    Route::delete('/product-brands/{productBrand}', [ProductBrandController::class, 'destroy'])->name('product-brands.destroy');
+
+
+
+    Route::get('/product-categories', [ProductCategoryController::class, 'index'])->name('product-categories.index');
+    Route::get('/product-categories/create', [ProductCategoryController::class, 'create'])->name('product-categories.create');
+    Route::post('/product-categories', [ProductCategoryController::class, 'store'])->name('product-categories.store');
+    Route::get('/product-categories/{productCategory}/edit', [ProductCategoryController::class, 'edit'])->name('product-categories.edit');
+    Route::put('/product-categories/{productCategory}', [ProductCategoryController::class, 'update'])->name('product-categories.update');
+    Route::delete('/product-categories/{productCategory}', [ProductCategoryController::class, 'destroy'])->name('product-categories.destroy');
+
+
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
 
