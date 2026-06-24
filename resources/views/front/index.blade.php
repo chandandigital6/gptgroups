@@ -67,7 +67,7 @@
         }
     </style>
 
-   
+
 
     @php
         $bannerThemeClasses = function ($theme) {
@@ -280,88 +280,88 @@
     </section>
 
 
-  
 
-{{-- PRODUCT BRANDS --}}
-@if(isset($productBrands) && $productBrands->count() > 0)
-    <section class="section">
-        <div class="containerx">
-            <div class="text-center max-w-3xl mx-auto">
-                <p class="text-blue-700 font-black uppercase tracking-[.25em]">
-                    Key Brands
-                </p>
 
-                <h2 class="mt-4 text-4xl md:text-6xl font-black">
-                    Product Brand Ecosystem
-                </h2>
+    {{-- PRODUCT BRANDS --}}
+    @if (isset($productBrands) && $productBrands->count() > 0)
+        <section class="section">
+            <div class="containerx">
+                <div class="text-center max-w-3xl mx-auto">
+                    <p class="text-blue-700 font-black uppercase tracking-[.25em]">
+                        Key Brands
+                    </p>
 
-                <p class="mt-5 text-slate-600 text-lg">
-                    Explore brand-wise products, categories and latest launches.
-                </p>
-            </div>
+                    <h2 class="mt-4 text-4xl md:text-6xl font-black">
+                        Product Brand Ecosystem
+                    </h2>
 
-            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                @foreach($productBrands as $brand)
-                    <div class="premium-card group bg-white rounded-[34px] overflow-hidden transition hover:-translate-y-2 hover:shadow-2xl">
+                    <p class="mt-5 text-slate-600 text-lg">
+                        Explore brand-wise products, categories and latest launches.
+                    </p>
+                </div>
 
-                        <div class="h-56 bg-slate-50 p-6">
-                            @if($brand->logo)
-                                <img
-                                    class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
-                                    src="{{ asset('storage/' . $brand->logo) }}"
-                                    alt="{{ $brand->name }}"
-                                >
-                            @elseif($brand->banner_image)
-                                <img
-                                    class="h-full w-full rounded-[24px] object-cover transition duration-500 group-hover:scale-110"
-                                    src="{{ asset('storage/' . $brand->banner_image) }}"
-                                    alt="{{ $brand->name }}"
-                                >
-                            @else
-                                <div class="grid h-full w-full place-items-center rounded-[24px] bg-blue-50">
-                                    <span class="text-5xl font-black text-blue-700">
-                                        {{ strtoupper(substr($brand->name, 0, 1)) }}
-                                    </span>
+                <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach ($productBrands as $brand)
+                        {{-- <div
+                            class="premium-card group bg-white rounded-[34px] overflow-hidden transition hover:-translate-y-2 hover:shadow-2xl"> --}}
+                            <a href="{{ route('brands.show', $brand->slug) }}"
+                                class="premium-card group block bg-white rounded-[34px] overflow-hidden transition hover:-translate-y-2 hover:shadow-2xl">
+                                <div class="h-56 bg-slate-50 p-6">
+                                    @if ($brand->logo)
+                                        <img class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
+                                            src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }}">
+                                    @elseif($brand->banner_image)
+                                        <img class="h-full w-full rounded-[24px] object-cover transition duration-500 group-hover:scale-110"
+                                            src="{{ asset('storage/' . $brand->banner_image) }}"
+                                            alt="{{ $brand->name }}">
+                                    @else
+                                        <div class="grid h-full w-full place-items-center rounded-[24px] bg-blue-50">
+                                            <span class="text-5xl font-black text-blue-700">
+                                                {{ strtoupper(substr($brand->name, 0, 1)) }}
+                                            </span>
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
-                        </div>
 
-                        <div class="p-7">
-                            <div class="flex items-center justify-between gap-4">
-                                <h3 class="text-2xl font-black text-slate-950">
-                                    {{ $brand->name }}
-                                </h3>
+                                <div class="p-7">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <h3 class="text-2xl font-black text-slate-950">
+                                            {{ $brand->name }}
+                                        </h3>
 
-                                <span class="grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
-                                    →
-                                </span>
-                            </div>
+                                        <span
+                                            class="grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
+                                            →
+                                        </span>
+                                    </div>
 
-                            @if($brand->description)
-                                <p class="text-slate-600 mt-2 line-clamp-2">
-                                    {{ $brand->description }}
-                                </p>
-                            @endif
+                                    @if ($brand->description)
+                                        <p class="text-slate-600 mt-2 line-clamp-2">
+                                            {{ $brand->description }}
+                                        </p>
+                                    @endif
 
-                            <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-blue-700">
-                                {{ $brand->products_count }} Products
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
+                                    <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-blue-700">
+                                        {{ $brand->products_count }} Products
+                                    </p>
+                                </div>
+                       </a>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
+
 
 
 
 
 
     {{-- PRODUCT CATEGORIES --}}
-    {{-- PRODUCT CATEGORIES --}}
 
-@if(isset($productCategories) && $productCategories->count() > 0)
+ {{-- PRODUCT CATEGORIES --}}
+
+@if (isset($productCategories) && $productCategories->count() > 0)
     <section class="bg-slate-950 py-16 text-white lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -380,15 +380,19 @@
             </div>
 
             <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach($productCategories as $category)
-                    <div class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
+                @foreach ($productCategories as $category)
 
-                        @if($category->image)
-                            <img
-                                class="h-52 w-full rounded-[1.5rem] object-cover transition duration-500 group-hover:scale-105"
-                                src="{{ asset('storage/' . $category->image) }}"
-                                alt="{{ $category->name }}"
-                            >
+                    @if ($category->brand)
+                        <a href="{{ route('brands.categories.show', [$category->brand->slug, $category->slug]) }}"
+                           class="group block rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
+                    @else
+                        <div class="group rounded-[2rem] bg-white/10 p-5 backdrop-blur transition hover:-translate-y-2 hover:bg-white/15">
+                    @endif
+
+                        @if ($category->image)
+                            <img class="h-52 w-full rounded-[1.5rem] object-cover transition duration-500 group-hover:scale-105"
+                                 src="{{ asset('storage/' . $category->image) }}"
+                                 alt="{{ $category->name }}">
                         @else
                             <div class="grid h-52 w-full place-items-center rounded-[1.5rem] bg-white/10 text-slate-400">
                                 No Image
@@ -401,7 +405,7 @@
                                     {{ $category->name }}
                                 </h3>
 
-                                @if($category->brand)
+                                @if ($category->brand)
                                     <p class="mt-1 text-xs font-black uppercase tracking-[.2em] text-cyan-300">
                                         {{ $category->brand->name }}
                                     </p>
@@ -413,7 +417,7 @@
                             </span>
                         </div>
 
-                        @if($category->description)
+                        @if ($category->description)
                             <p class="mt-2 text-sm leading-6 text-slate-300 line-clamp-2">
                                 {{ $category->description }}
                             </p>
@@ -422,194 +426,202 @@
                         <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-cyan-300">
                             {{ $category->products_count }} Products
                         </p>
-                    </div>
+
+                    @if ($category->brand)
+                        </a>
+                    @else
+                        </div>
+                    @endif
+
                 @endforeach
             </div>
         </div>
     </section>
-@endif
+@endif 
 
 
 
-  
-  
-   {{-- LATEST PRODUCTS --}}
 
-@if(isset($latestProducts) && $latestProducts->count() > 0)
-    <section class="bg-slate-100 py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {{-- LATEST PRODUCTS --}}
 
-            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                        New Launches
-                    </p>
+    @if (isset($latestProducts) && $latestProducts->count() > 0)
+        <section class="bg-slate-100 py-16 lg:py-24">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                    <h2 class="mt-3 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                        Latest Products
-                    </h2>
+                <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                    <div>
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            New Launches
+                        </p>
 
-                    <p class="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-                        Smartphones, tablets, watches and accessories ko premium product cards me showcase karein.
-                    </p>
-                </div>
+                        <h2 class="mt-3 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                            Latest Products
+                        </h2>
 
-                <div class="flex gap-3">
-                    <div class="product-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
-                        ‹
+                        <p class="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
+                            Smartphones, tablets, watches and accessories ko premium product cards me showcase karein.
+                        </p>
                     </div>
 
-                    <div class="product-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
-                        ›
+                    <div class="flex gap-3">
+                        <div
+                            class="product-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
+                            ‹
+                        </div>
+
+                        <div
+                            class="product-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg">
+                            ›
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="swiper productSwiper mt-12">
-                <div class="swiper-wrapper pb-14">
+                <div class="swiper productSwiper mt-12">
+                    <div class="swiper-wrapper pb-14">
 
-                    @foreach($latestProducts as $product)
-                        <div class="swiper-slide">
-                            <a href="{{ route('product.detail', $product->slug) }}"
-                               class="group block overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
+                        @foreach ($latestProducts as $product)
+                            <div class="swiper-slide">
+                                <a href="{{ route('product.detail', $product->slug) }}"
+                                    class="group block overflow-hidden rounded-[2rem] bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
 
-                                <div class="relative h-80 bg-gradient-to-br from-white to-slate-100 p-7">
+                                    <div class="relative h-80 bg-gradient-to-br from-white to-slate-100 p-7">
 
-                                    @if($product->badge)
-                                        <span class="absolute left-5 top-5 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">
-                                            {{ $product->badge }}
-                                        </span>
-                                    @endif
+                                        @if ($product->badge)
+                                            <span
+                                                class="absolute left-5 top-5 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">
+                                                {{ $product->badge }}
+                                            </span>
+                                        @endif
 
-                                    @if($product->brand)
-                                        <span class="absolute right-5 top-5 rounded-full bg-white px-4 py-2 text-xs font-black text-blue-700 shadow">
-                                            {{ $product->brand->name }}
-                                        </span>
-                                    @endif
+                                        @if ($product->brand)
+                                            <span
+                                                class="absolute right-5 top-5 rounded-full bg-white px-4 py-2 text-xs font-black text-blue-700 shadow">
+                                                {{ $product->brand->name }}
+                                            </span>
+                                        @endif
 
-                                    @if($product->image)
-                                        <img
-                                            class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
-                                            src="{{ asset('storage/' . $product->image) }}"
-                                            alt="{{ $product->name }}"
-                                        >
-                                    @else
-                                        <div class="grid h-full w-full place-items-center rounded-[1.5rem] bg-slate-50 text-slate-400">
-                                            No Image
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <div class="p-6">
-                                    <div class="flex items-start justify-between gap-4">
-                                        <div>
-                                            <h3 class="text-2xl font-black text-slate-950">
-                                                {{ $product->name }}
-                                            </h3>
-
-                                            @if($product->short_description)
-                                                <p class="mt-2 text-sm leading-6 text-slate-500 line-clamp-2">
-                                                    {{ $product->short_description }}
-                                                </p>
-                                            @endif
-                                        </div>
-
-                                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
-                                            →
-                                        </span>
+                                        @if ($product->image)
+                                            <img class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+                                                src="{{ asset('storage/' . $product->image) }}"
+                                                alt="{{ $product->name }}">
+                                        @else
+                                            <div
+                                                class="grid h-full w-full place-items-center rounded-[1.5rem] bg-slate-50 text-slate-400">
+                                                No Image
+                                            </div>
+                                        @endif
                                     </div>
 
-                                    @if(is_array($product->tags) && count($product->tags))
-                                        <div class="mt-5 flex flex-wrap gap-2">
-                                            @foreach($product->tags as $tag)
-                                                <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
-                                                    {{ $tag }}
-                                                </span>
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
+                                    <div class="p-6">
+                                        <div class="flex items-start justify-between gap-4">
+                                            <div>
+                                                <h3 class="text-2xl font-black text-slate-950">
+                                                    {{ $product->name }}
+                                                </h3>
 
+                                                @if ($product->short_description)
+                                                    <p class="mt-2 text-sm leading-6 text-slate-500 line-clamp-2">
+                                                        {{ $product->short_description }}
+                                                    </p>
+                                                @endif
+                                            </div>
+
+                                            <span
+                                                class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
+                                                →
+                                            </span>
+                                        </div>
+
+                                        @if (is_array($product->tags) && count($product->tags))
+                                            <div class="mt-5 flex flex-wrap gap-2">
+                                                @foreach ($product->tags as $tag)
+                                                    <span
+                                                        class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                                                        {{ $tag }}
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    <div class="product-pagination"></div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+
+    {{-- UPCOMING PRODUCTS --}}
+
+    @if (isset($upcomingProducts) && $upcomingProducts->count() > 0)
+        <section class="bg-white py-16 lg:py-24">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-12">
+                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        Coming Soon
+                    </p>
+
+                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                        Upcoming Products
+                    </h2>
+
+                    <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                        New product launches and upcoming devices for dealers and partners.
+                    </p>
                 </div>
 
-                <div class="product-pagination"></div>
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    @foreach ($upcomingProducts as $product)
+                        <a href="{{ route('product.detail', $product->slug) }}"
+                            class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
+
+                            <div class="relative h-72 bg-gradient-to-br from-slate-50 to-cyan-50 p-6">
+                                <span
+                                    class="absolute left-5 top-5 rounded-full bg-cyan-500 px-4 py-2 text-xs font-black text-white">
+                                    Upcoming
+                                </span>
+
+                                @if ($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                        class="h-full w-full object-contain transition duration-500 group-hover:scale-110">
+                                @else
+                                    <div class="grid h-full w-full place-items-center rounded-2xl bg-white text-slate-400">
+                                        No Image
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="p-6">
+                                <h3 class="text-2xl font-black text-slate-950">
+                                    {{ $product->name }}
+                                </h3>
+
+                                @if ($product->launch_date)
+                                    <p class="mt-2 text-sm font-bold text-blue-700">
+                                        Launch: {{ $product->launch_date->format('d M Y') }}
+                                    </p>
+                                @endif
+
+                                @if ($product->short_description)
+                                    <p class="mt-3 text-sm leading-6 text-slate-500 line-clamp-2">
+                                        {{ $product->short_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+
             </div>
-        </div>
-    </section>
-@endif
-
-
-
-{{-- UPCOMING PRODUCTS --}}
-
-@if(isset($upcomingProducts) && $upcomingProducts->count() > 0)
-    <section class="bg-white py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-            <div class="mb-12">
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Coming Soon
-                </p>
-
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                    Upcoming Products
-                </h2>
-
-                <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                    New product launches and upcoming devices for dealers and partners.
-                </p>
-            </div>
-
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach($upcomingProducts as $product)
-                    <a href="{{ route('product.detail', $product->slug) }}"
-                       class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-
-                        <div class="relative h-72 bg-gradient-to-br from-slate-50 to-cyan-50 p-6">
-                            <span class="absolute left-5 top-5 rounded-full bg-cyan-500 px-4 py-2 text-xs font-black text-white">
-                                Upcoming
-                            </span>
-
-                            @if($product->image)
-                                <img
-                                    src="{{ asset('storage/' . $product->image) }}"
-                                    alt="{{ $product->name }}"
-                                    class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
-                                >
-                            @else
-                                <div class="grid h-full w-full place-items-center rounded-2xl bg-white text-slate-400">
-                                    No Image
-                                </div>
-                            @endif
-                        </div>
-
-                        <div class="p-6">
-                            <h3 class="text-2xl font-black text-slate-950">
-                                {{ $product->name }}
-                            </h3>
-
-                            @if($product->launch_date)
-                                <p class="mt-2 text-sm font-bold text-blue-700">
-                                    Launch: {{ $product->launch_date->format('d M Y') }}
-                                </p>
-                            @endif
-
-                            @if($product->short_description)
-                                <p class="mt-3 text-sm leading-6 text-slate-500 line-clamp-2">
-                                    {{ $product->short_description }}
-                                </p>
-                            @endif
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
 
 
 
@@ -792,7 +804,7 @@
         </div>
     </section>
 
-    
+
 
     {{-- NETWORK SECTION --}}
 

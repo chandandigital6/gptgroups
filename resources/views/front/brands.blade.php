@@ -77,6 +77,81 @@
 </section>
 
 
+
+<section class="bg-white py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        @if($brands->count())
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($brands as $brand)
+                    <a href="{{ route('brands.show', $brand->slug) }}"
+                       class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
+
+                        <div class="h-56 bg-white p-6">
+                            @if($brand->logo)
+                                <img src="{{ asset('storage/' . $brand->logo) }}"
+                                     alt="{{ $brand->name }}"
+                                     class="h-full w-full object-contain transition group-hover:scale-110">
+                            @elseif($brand->banner_image)
+                                <img src="{{ asset('storage/' . $brand->banner_image) }}"
+                                     alt="{{ $brand->name }}"
+                                     class="h-full w-full rounded-[1.5rem] object-cover transition group-hover:scale-110">
+                            @else
+                                <div class="grid h-full w-full place-items-center rounded-[1.5rem] bg-blue-50">
+                                    <span class="text-6xl font-black text-blue-700">
+                                        {{ strtoupper(substr($brand->name, 0, 1)) }}
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="p-7">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-950">
+                                        {{ $brand->name }}
+                                    </h3>
+
+                                    @if($brand->description)
+                                        <p class="mt-2 text-sm leading-6 text-slate-600 line-clamp-2">
+                                            {{ $brand->description }}
+                                        </p>
+                                    @endif
+                                </div>
+
+                                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
+                                    →
+                                </span>
+                            </div>
+
+                            <div class="mt-5 flex flex-wrap gap-2">
+                                <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700">
+                                    {{ $brand->categories_count ?? 0 }} Categories
+                                </span>
+
+                                <span class="rounded-full bg-cyan-50 px-3 py-1 text-xs font-black text-cyan-700">
+                                    {{ $brand->products_count ?? 0 }} Products
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+            <div class="mt-10">
+                {{ $brands->links() }}
+            </div>
+        @else
+            <div class="rounded-[2rem] bg-slate-50 p-10 text-center">
+                <h2 class="text-2xl font-black text-slate-950">No brands found.</h2>
+            </div>
+        @endif
+
+    </div>
+</section>
+
+
+
 {{-- BRAND INTRO --}}
 <section class="bg-slate-50 py-16 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -143,13 +218,20 @@
 
 
 {{-- BRAND PORTFOLIO --}}
+{{-- BRAND PORTFOLIO --}}
+@if(isset($brands) && $brands->count() > 0)
 <section id="brand-portfolio" class="bg-white py-16 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
         <div class="text-center max-w-3xl mx-auto">
-            <p class="font-black uppercase tracking-[.3em] text-blue-700">Our Brands</p>
+            <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                Our Brands
+            </p>
+
             <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950">
                 Leading smartphone brands & providers.
             </h2>
+
             <p class="mt-5 text-lg leading-8 text-slate-600">
                 GPT Group supports a diverse brand ecosystem for retail, B2B, dealer and customer channels.
             </p>
@@ -157,121 +239,97 @@
 
         <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-slate-950 to-blue-700 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-cyan-300">Android Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">Samsung</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-200">Mobiles, tablets, watches and accessories.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Premium smartphones, Galaxy tablets, wearable products and mobile accessories for retail and business customers.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+            @foreach($brands as $brand)
+                <a href="{{ route('brands.show', $brand->slug) }}"
+                   class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-red-600 to-orange-500 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-red-100">Mobile Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">LAVA</h3>
-                    <p class="mt-3 text-sm leading-6 text-red-50">Affordable smartphones and mobile products.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Value-focused mobile devices for daily use, retail counters and emerging customer segments.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                    {{-- Brand Top Area --}}
+                    <div class="h-56 bg-gradient-to-br from-slate-950 to-blue-700 p-7 text-white relative overflow-hidden">
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-slate-900 to-slate-600 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-slate-300">Apple Ecosystem</p>
-                    <h3 class="mt-5 text-4xl font-black">Apple</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-200">iPhone, iPad and MacBook categories.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Premium Apple ecosystem products for customers, professionals and business requirements.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                        @if($brand->banner_image)
+                            <img src="{{ asset('storage/' . $brand->banner_image) }}"
+                                 alt="{{ $brand->name }}"
+                                 class="absolute inset-0 h-full w-full object-cover opacity-35 transition duration-500 group-hover:scale-110">
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-cyan-600 to-blue-600 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-cyan-100">Smart Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">Honor</h3>
-                    <p class="mt-3 text-sm leading-6 text-cyan-50">Smartphones and retail outlet products.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Smart mobile product range available through selected retail and partner outlets.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-slate-950/90 to-blue-700/75"></div>
+                        @endif
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-blue-700 to-indigo-700 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-blue-100">Android Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">Nokia</h3>
-                    <p class="mt-3 text-sm leading-6 text-blue-50">Reliable mobile devices.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Trusted mobile products for customers looking for reliable daily-use technology.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                        <div class="relative z-10">
+                            <p class="text-sm font-black uppercase tracking-[.25em] text-cyan-300">
+                                {{ $brand->brand_type ?? 'Product Brand' }}
+                            </p>
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-violet-700 to-fuchsia-600 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-violet-100">Android Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">Vivo</h3>
-                    <p class="mt-3 text-sm leading-6 text-violet-50">Smartphones for modern users.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Smartphone range with focus on design, camera experience and performance.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                            <h3 class="mt-5 text-4xl font-black">
+                                {{ $brand->name }}
+                            </h3>
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-orange-500 to-yellow-400 p-7 text-slate-950">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-orange-900">Android Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">Xiaomi</h3>
-                    <p class="mt-3 text-sm leading-6 text-orange-950">Smart devices and gadgets.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Smart products, mobile devices and gadget ecosystem for retail and B2B supply.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                            @if($brand->short_description)
+                                <p class="mt-3 text-sm leading-6 text-slate-200 line-clamp-2">
+                                    {{ $brand->short_description }}
+                                </p>
+                            @elseif($brand->description)
+                                <p class="mt-3 text-sm leading-6 text-slate-200 line-clamp-2">
+                                    {{ $brand->description }}
+                                </p>
+                            @else
+                                <p class="mt-3 text-sm leading-6 text-slate-200">
+                                    Explore categories and products.
+                                </p>
+                            @endif
+                        </div>
 
-            <div class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
-                <div class="h-56 bg-gradient-to-br from-red-700 to-slate-900 p-7 text-white">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-red-100">Android Brand</p>
-                    <h3 class="mt-5 text-4xl font-black">Huawei</h3>
-                    <p class="mt-3 text-sm leading-6 text-red-50">Mobile and smart technology products.</p>
-                </div>
-                <div class="p-7">
-                    <p class="text-sm leading-7 text-slate-600">
-                        Technology products and smart devices for customer and business segments.
-                    </p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white">Enquire</a>
-                </div>
-            </div>
+                        @if($brand->logo)
+                            <div class="absolute bottom-5 right-5 z-10 grid h-16 w-16 place-items-center rounded-2xl bg-white p-2 shadow-xl">
+                                <img src="{{ asset('storage/' . $brand->logo) }}"
+                                     alt="{{ $brand->name }}"
+                                     class="h-full w-full object-contain">
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- Brand Content --}}
+                    <div class="p-7">
+                        @if($brand->description)
+                            <p class="text-sm leading-7 text-slate-600 line-clamp-3">
+                                {{ $brand->description }}
+                            </p>
+                        @else
+                            <p class="text-sm leading-7 text-slate-600">
+                                View all categories and products available under {{ $brand->name }}.
+                            </p>
+                        @endif
+
+                        <div class="mt-5 flex flex-wrap gap-2">
+                            <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700">
+                                {{ $brand->categories_count ?? 0 }} Categories
+                            </span>
+
+                            <span class="rounded-full bg-cyan-50 px-3 py-1 text-xs font-black text-cyan-700">
+                                {{ $brand->products_count ?? 0 }} Products
+                            </span>
+                        </div>
+
+                        <div class="mt-6 inline-flex rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white transition group-hover:bg-blue-700">
+                            View Categories
+                        </div>
+                    </div>
+                </a>
+            @endforeach
 
         </div>
     </div>
 </section>
+@else
+<section id="brand-portfolio" class="bg-white py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="rounded-[2rem] bg-slate-50 p-10 text-center">
+            <h2 class="text-2xl font-black text-slate-950">
+                No brands found.
+            </h2>
+        </div>
+    </div>
+</section>
+@endif
 
 
 {{-- PRODUCT CATEGORIES --}}

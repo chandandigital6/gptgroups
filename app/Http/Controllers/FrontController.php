@@ -92,13 +92,142 @@ class FrontController extends Controller
 
 
 
-
-
-
-    public function brands()
+   public function brands()
     {
-        return view('front.brands');
+        $brands = ProductBrand::where('status', 1)
+            ->withCount([
+                'products' => function ($query) {
+                    $query->where('status', 1);
+                },
+                'categories' => function ($query) {
+                    $query->where('status', 1);
+                },
+            ])
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->paginate(12);
+
+        return view('front.brands', compact('brands'));
     }
+
+    public function brandCategories(ProductBrand $brand)
+    {
+        abort_if($brand->status != 1, 404);
+
+        $categories = ProductCategory::with('brand')
+            ->where('status', 1)
+            ->where('product_brand_id', $brand->id)
+            ->withCount(['products' => function ($query) {
+                $query->where('status', 1);
+            }])
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->paginate(12);
+
+        $latestProducts = Product::with(['brand', 'category'])
+            ->where('status', 1)
+            ->where('product_brand_id', $brand->id)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->limit(8)
+            ->get();
+
+        return view('front.brand_categories', compact(
+            'brand',
+            'categories',
+            'latestProducts'
+        ));
+    }
+
+    public function categoryProducts(ProductBrand $brand, ProductCategory $category)
+    {
+        abort_if($brand->status != 1, 404);
+        abort_if($category->status != 1, 404);
+        abort_if($category->product_brand_id != $brand->id, 404);
+
+        $products = Product::with(['brand', 'category'])
+            ->where('status', 1)
+            ->where('product_brand_id', $brand->id)
+            ->where('product_category_id', $category->id)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->paginate(12);
+
+        $otherCategories = ProductCategory::where('status', 1)
+            ->where('product_brand_id', $brand->id)
+            ->where('id', '!=', $category->id)
+            ->withCount(['products' => function ($query) {
+                $query->where('status', 1);
+            }])
+            ->orderBy('sort_order', 'asc')
+            ->limit(6)
+            ->get();
+
+        return view('front.category_products', compact(
+            'brand',
+            'category',
+            'products',
+            'otherCategories'
+        ));
+    }
+
+    public function products()
+    {
+        $products = Product::with(['brand', 'category'])
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->paginate(12);
+
+        return view('front.products', compact('products'));
+    }
+
+    public function productDetail($slug)
+    {
+        $product = Product::with(['brand', 'category'])
+            ->where('slug', $slug)
+            ->where('status', 1)
+            ->firstOrFail();
+
+        $relatedProducts = Product::with(['brand', 'category'])
+            ->where('status', 1)
+            ->where('id', '!=', $product->id)
+            ->where(function ($query) use ($product) {
+                $query->where('product_brand_id', $product->product_brand_id)
+                    ->orWhere('product_category_id', $product->product_category_id);
+            })
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->limit(4)
+            ->get();
+
+        return view('front.product_detail', compact('product', 'relatedProducts'));
+    }
+
+
+    
+
+    public function productDetailold($slug)
+{
+    $product = Product::with(['brand', 'category'])
+        ->where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    $relatedProducts = Product::with(['brand', 'category'])
+        ->where('status', 1)
+        ->where('id', '!=', $product->id)
+        ->where(function ($query) use ($product) {
+            $query->where('product_brand_id', $product->product_brand_id)
+                ->orWhere('product_category_id', $product->product_category_id);
+        })
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->limit(4)
+        ->get();
+
+    return view('front.product_detail', compact('product', 'relatedProducts'));
+}
 
 
 
@@ -128,35 +257,6 @@ class FrontController extends Controller
     }
 
 
-
-
-    public function products()
-    {
-        return view('front.products');
-    }
-
-
-    public function productDetail($slug)
-{
-    $product = Product::with(['brand', 'category'])
-        ->where('slug', $slug)
-        ->where('status', 1)
-        ->firstOrFail();
-
-    $relatedProducts = Product::with(['brand', 'category'])
-        ->where('status', 1)
-        ->where('id', '!=', $product->id)
-        ->where(function ($query) use ($product) {
-            $query->where('product_brand_id', $product->product_brand_id)
-                ->orWhere('product_category_id', $product->product_category_id);
-        })
-        ->orderBy('sort_order', 'asc')
-        ->latest()
-        ->limit(4)
-        ->get();
-
-    return view('front.product_detail', compact('product', 'relatedProducts'));
-}
 
     public function carriers()
     {

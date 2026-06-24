@@ -84,6 +84,92 @@
 </section>
 
 
+
+
+
+
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,.22),transparent_35%),radial-gradient(circle_at_80%_25%,rgba(37,99,235,.22),transparent_35%)]"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <p class="font-black uppercase tracking-[.3em] text-cyan-300">Products</p>
+
+        <h1 class="mt-5 text-5xl sm:text-6xl lg:text-7xl font-black leading-tight">
+            All Products
+        </h1>
+
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            Explore latest, upcoming and normal product range.
+        </p>
+    </div>
+</section>
+
+<section class="bg-white py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        @if($products->count())
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($products as $product)
+                    <a href="{{ route('product.detail', $product->slug) }}"
+                       class="group overflow-hidden rounded-[2rem] bg-slate-50 shadow-sm border border-slate-100 transition hover:-translate-y-2 hover:shadow-2xl">
+
+                        <div class="relative h-72 bg-gradient-to-br from-white to-blue-50 p-6">
+                            @if($product->badge)
+                                <span class="absolute left-5 top-5 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">
+                                    {{ $product->badge }}
+                                </span>
+                            @endif
+
+                            @if($product->image)
+                                <img src="{{ asset('storage/' . $product->image) }}"
+                                     alt="{{ $product->name }}"
+                                     class="h-full w-full object-contain transition group-hover:scale-110">
+                            @else
+                                <div class="grid h-full w-full place-items-center text-slate-400">
+                                    No Image
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-xl font-black text-slate-950">
+                                {{ $product->name }}
+                            </h3>
+
+                            @if($product->brand)
+                                <p class="mt-2 text-xs font-black uppercase tracking-[.2em] text-blue-700">
+                                    {{ $product->brand->name }}
+                                </p>
+                            @endif
+
+                            @if($product->short_description)
+                                <p class="mt-2 text-sm leading-6 text-slate-600 line-clamp-2">
+                                    {{ $product->short_description }}
+                                </p>
+                            @endif
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+            <div class="mt-10">
+                {{ $products->links() }}
+            </div>
+        @else
+            <div class="rounded-[2rem] bg-slate-50 p-10 text-center">
+                <h2 class="text-2xl font-black text-slate-950">No products found.</h2>
+            </div>
+        @endif
+
+    </div>
+</section>
+
+
+
+
+
+
+
 {{-- QUICK HIGHLIGHTS --}}
 <section class="relative z-10 -mt-10 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

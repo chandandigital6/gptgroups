@@ -18,6 +18,9 @@ use App\Http\Controllers\WhatWeDoSectionController;
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/about', [FrontController::class, 'about'])->name('about');
 Route::get('/brands', [FrontController::class, 'brands'])->name('brands');
+Route::get('/brands/{brand:slug}', [FrontController::class, 'brandCategories'])->name('brands.show');
+Route::get('/brands/{brand:slug}/categories/{category:slug}', [FrontController::class, 'categoryProducts'])
+    ->name('brands.categories.show');
 Route::get('/carriers', [FrontController::class, 'carriers'])->name('carriers');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
 Route::get('/groups_company', [FrontController::class, 'groups_company'])->name('groups_company');
