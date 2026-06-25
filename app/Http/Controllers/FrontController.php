@@ -92,25 +92,59 @@ class FrontController extends Controller
 
 
 
-   public function brands()
-    {
-        $brands = ProductBrand::where('status', 1)
-            ->withCount([
-                'products' => function ($query) {
-                    $query->where('status', 1);
-                },
-                'categories' => function ($query) {
-                    $query->where('status', 1);
-                },
-            ])
-            ->orderBy('sort_order', 'asc')
-            ->latest()
-            ->paginate(12);
+//    public function brands()
+//     {
+//         $brands = ProductBrand::where('status', 1)
+//             ->withCount([
+//                 'products' => function ($query) {
+//                     $query->where('status', 1);
+//                 },
+//                 'categories' => function ($query) {
+//                     $query->where('status', 1);
+//                 },
+//             ])
+//             ->orderBy('sort_order', 'asc')
+//             ->latest()
+//             ->paginate(12);
 
-        return view('front.brands', compact('brands'));
-    }
+//         return view('front.brands', compact('brands'));
+//     }
 
-    public function brandCategories(ProductBrand $brand)
+  
+
+
+public function brands()
+{
+    $brands = ProductBrand::where('status', 1)
+        ->withCount([
+            'products' => function ($query) {
+                $query->where('status', 1);
+            },
+            'categories' => function ($query) {
+                $query->where('status', 1);
+            },
+        ])
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->paginate(12);
+
+    $productCategories = ProductCategory::with('brand')
+        ->where('status', 1)
+        ->withCount([
+            'products' => function ($query) {
+                $query->where('status', 1);
+            },
+        ])
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->limit(6)
+        ->get();
+
+    return view('front.brands', compact('brands', 'productCategories'));
+}
+
+
+public function brandCategories(ProductBrand $brand)
     {
         abort_if($brand->status != 1, 404);
 
