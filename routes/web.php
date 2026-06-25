@@ -8,9 +8,13 @@ use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CompanyOverviewController;
 use App\Http\Controllers\FounderSectionController;
+use App\Http\Controllers\NetworkSectionController;
 use App\Http\Controllers\ProductBrandController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\RetailOutletSectionController;
+use App\Http\Controllers\StrategySectionController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\WhatWeDoSectionController;
 
@@ -128,7 +132,103 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+
+     Route::get('/company-overviews', [CompanyOverviewController::class, 'index'])
+        ->name('company-overviews.index');
+
+    Route::get('/company-overviews/create', [CompanyOverviewController::class, 'create'])
+        ->name('company-overviews.create');
+
+    Route::post('/company-overviews', [CompanyOverviewController::class, 'store'])
+        ->name('company-overviews.store');
+
+    Route::get('/company-overviews/{companyOverview}', [CompanyOverviewController::class, 'show'])
+        ->name('company-overviews.show');
+
+    Route::get('/company-overviews/{companyOverview}/edit', [CompanyOverviewController::class, 'edit'])
+        ->name('company-overviews.edit');
+
+    Route::put('/company-overviews/{companyOverview}', [CompanyOverviewController::class, 'update'])
+        ->name('company-overviews.update');
+
+    Route::delete('/company-overviews/{companyOverview}', [CompanyOverviewController::class, 'destroy'])
+        ->name('company-overviews.destroy');
+
+
+
+
+Route::get('/network-sections', [NetworkSectionController::class, 'index'])
+        ->name('network-sections.index');
+
+    Route::get('/network-sections/create', [NetworkSectionController::class, 'create'])
+        ->name('network-sections.create');
+
+    Route::post('/network-sections', [NetworkSectionController::class, 'store'])
+        ->name('network-sections.store');
+
+    Route::get('/network-sections/{networkSection}', [NetworkSectionController::class, 'show'])
+        ->name('network-sections.show');
+
+    Route::get('/network-sections/{networkSection}/edit', [NetworkSectionController::class, 'edit'])
+        ->name('network-sections.edit');
+
+    Route::put('/network-sections/{networkSection}', [NetworkSectionController::class, 'update'])
+        ->name('network-sections.update');
+
+    Route::delete('/network-sections/{networkSection}', [NetworkSectionController::class, 'destroy'])
+        ->name('network-sections.destroy');
+
+
+
+         Route::get('/retail-outlet-sections', [RetailOutletSectionController::class, 'index'])
+        ->name('retail-outlet-sections.index');
+
+    Route::get('/retail-outlet-sections/create', [RetailOutletSectionController::class, 'create'])
+        ->name('retail-outlet-sections.create');
+
+    Route::post('/retail-outlet-sections', [RetailOutletSectionController::class, 'store'])
+        ->name('retail-outlet-sections.store');
+
+    Route::get('/retail-outlet-sections/{retailOutletSection}', [RetailOutletSectionController::class, 'show'])
+        ->name('retail-outlet-sections.show');
+
+    Route::get('/retail-outlet-sections/{retailOutletSection}/edit', [RetailOutletSectionController::class, 'edit'])
+        ->name('retail-outlet-sections.edit');
+
+    Route::put('/retail-outlet-sections/{retailOutletSection}', [RetailOutletSectionController::class, 'update'])
+        ->name('retail-outlet-sections.update');
+
+    Route::delete('/retail-outlet-sections/{retailOutletSection}', [RetailOutletSectionController::class, 'destroy'])
+        ->name('retail-outlet-sections.destroy');
+
+
+
+
+          Route::get('/strategy-sections', [StrategySectionController::class, 'index'])
+        ->name('strategy-sections.index');
+
+    Route::get('/strategy-sections/create', [StrategySectionController::class, 'create'])
+        ->name('strategy-sections.create');
+
+    Route::post('/strategy-sections', [StrategySectionController::class, 'store'])
+        ->name('strategy-sections.store');
+
+    Route::get('/strategy-sections/{strategySection}', [StrategySectionController::class, 'show'])
+        ->name('strategy-sections.show');
+
+    Route::get('/strategy-sections/{strategySection}/edit', [StrategySectionController::class, 'edit'])
+        ->name('strategy-sections.edit');
+
+    Route::put('/strategy-sections/{strategySection}', [StrategySectionController::class, 'update'])
+        ->name('strategy-sections.update');
+
+    Route::delete('/strategy-sections/{strategySection}', [StrategySectionController::class, 'destroy'])
+        ->name('strategy-sections.destroy');
+
+
 });
+
 
 
 

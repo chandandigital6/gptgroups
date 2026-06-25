@@ -28,6 +28,27 @@
                     {{ __('Banners') }}
                 </flux:sidebar.item>
 
+
+                <flux:sidebar.item icon="building-office-2" :href="route('company-overviews.index')"
+                    :current="request()->routeIs('company-overviews.*')" wire:navigate>
+                    {{ __('Company Overview') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="globe-alt" :href="route('network-sections.index')"
+                    :current="request()->routeIs('network-sections.*')" wire:navigate>
+                    {{ __('Network Section') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="building-storefront" :href="route('retail-outlet-sections.index')"
+                    :current="request()->routeIs('retail-outlet-sections.*')" wire:navigate>
+                    {{ __('Retail Outlets') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="chart-bar-square" :href="route('strategy-sections.index')"
+                    :current="request()->routeIs('strategy-sections.*')" wire:navigate>
+                    {{ __('Strategies') }}
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="user-circle" :href="route('founder-sections.index')"
                     :current="request()->routeIs('founder-sections.*')" wire:navigate>
                     {{ __('Founder Section') }}
@@ -57,6 +78,8 @@
                     :current="request()->routeIs('products.*')" wire:navigate>
                     {{ __('Products') }}
                 </flux:sidebar.item>
+
+
 
                 <flux:sidebar.item icon="users" :href="route('users.index')"
                     :current="request()->routeIs('users.*')" wire:navigate>

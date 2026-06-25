@@ -66,7 +66,29 @@ class FrontController extends Controller
         ->limit(8)
         ->get();
 
-        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection','productBrands','productCategories','upcomingProducts','latestProducts'));
+          $companyOverview = \App\Models\CompanyOverview::active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+
+         $networkSection = \App\Models\NetworkSection::active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+         $retailOutletSection = \App\Models\RetailOutletSection::active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+
+           $strategySection = \App\Models\StrategySection::active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection','productBrands','productCategories','upcomingProducts','latestProducts','companyOverview','networkSection','retailOutletSection','strategySection'));
     }
 
 
