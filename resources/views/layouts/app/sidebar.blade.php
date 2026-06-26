@@ -49,6 +49,38 @@
                     {{ __('Strategies') }}
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="question-mark-circle" :href="route('faq-sections.index')"
+                    :current="request()->routeIs('faq-sections.*')" wire:navigate>
+                    {{ __('FAQs') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="photo" :href="route('partner-logo-sections.index')"
+                    :current="request()->routeIs('partner-logo-sections.*')" wire:navigate>
+                    {{ __('Partner Logos') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="chat-bubble-left-right" :href="route('testimonial-sections.index')"
+                    :current="request()->routeIs('testimonial-sections.*')" wire:navigate>
+                    {{ __('Testimonials') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="rectangle-stack" :href="route('page-heroes.index')"
+                    :current="request()->routeIs('page-heroes.*')" wire:navigate>
+                    {{ __('Page Heroes') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="wrench-screwdriver" :href="route('repair-service-sections.index')"
+                    :current="request()->routeIs('repair-service-sections.*')" wire:navigate>
+                    {{ __('Repair Services') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="wrench-screwdriver" :href="route('service-sections.index')"
+                    :current="request()->routeIs('service-sections.*')" wire:navigate>
+                    {{ __('Services') }}
+                </flux:sidebar.item>
+
+
+
                 <flux:sidebar.item icon="user-circle" :href="route('founder-sections.index')"
                     :current="request()->routeIs('founder-sections.*')" wire:navigate>
                     {{ __('Founder Section') }}

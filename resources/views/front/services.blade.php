@@ -2,157 +2,10 @@
 
 @section('content')
 
-<style>
-    .service-soft-bg {
-        background:
-            radial-gradient(circle at 88% 10%, rgba(103, 232, 249, .35), transparent 28%),
-            radial-gradient(circle at 8% 45%, rgba(147, 197, 253, .35), transparent 28%),
-            linear-gradient(135deg, #ffffff 0%, #f8fafc 42%, #eff6ff 100%);
-    }
-
-    .service-gradient-text {
-        background: linear-gradient(90deg, #2563eb, #06b6d4);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    .service-blob {
-        filter: blur(10px);
-        opacity: .45;
-        animation: serviceBlob 7s ease-in-out infinite alternate;
-    }
-
-    @keyframes serviceBlob {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(18px) scale(1.06); }
-    }
-
-    .service-card-hover {
-        transition: all .35s ease;
-    }
-
-    .service-card-hover:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 28px 70px rgba(15, 23, 42, .14);
-    }
-
-    .service-section-light {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    }
-
-    .service-section-soft {
-        background:
-            radial-gradient(circle at 85% 15%, rgba(34, 211, 238, .16), transparent 30%),
-            linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%);
-    }
-
-    .service-input {
-        width: 100%;
-        border-radius: 1rem;
-        border: 1px solid #e2e8f0;
-        background: #ffffff;
-        padding: 1rem 1.25rem;
-        color: #0f172a;
-        outline: none;
-        transition: all .25s ease;
-    }
-
-    .service-input::placeholder {
-        color: #94a3b8;
-    }
-
-    .service-input:focus {
-        border-color: #38bdf8;
-        box-shadow: 0 0 0 4px rgba(56, 189, 248, .16);
-    }
-</style>
 
 
 {{-- SERVICES HERO --}}
-<section class="relative overflow-hidden service-soft-bg">
-    <div class="absolute -top-24 -right-20 h-96 w-96 rounded-full bg-cyan-300 service-blob"></div>
-    <div class="absolute top-44 -left-28 h-96 w-96 rounded-full bg-blue-300 service-blob"></div>
-
-    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-
-            <div>
-                <div class="inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-black text-blue-700 shadow-sm">
-                    <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
-                    GPT Group Services
-                </div>
-
-                <h1 class="mt-7 text-5xl font-black leading-[.95] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-                    Smart Services For
-                    <span class="mt-2 block service-gradient-text">
-                        Customers & Businesses
-                    </span>
-                </h1>
-
-                <p class="mt-7 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
-                    GPT Group provides reliable mobile repair support through GPT Care and business-focused distribution solutions through GPT B2B Programs.
-                </p>
-
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#gpt-care"
-                        class="inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                        GPT Care
-                    </a>
-
-                    <a href="#b2b-program"
-                        class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50">
-                        B2B Programs
-                    </a>
-                </div>
-
-                <div class="mt-9 grid max-w-xl grid-cols-2 gap-4 sm:grid-cols-4">
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black service-gradient-text">Care</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Repair</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black service-gradient-text">B2B</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Program</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black service-gradient-text">Oman</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Support</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black service-gradient-text">Fast</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Service</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -inset-6 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative overflow-hidden rounded-[2.75rem] border border-white bg-white/85 p-4 shadow-2xl ring-1 ring-cyan-100 backdrop-blur-xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85"
-                        alt="GPT Group Services"
-                        class="h-[330px] w-full rounded-[2.2rem] object-cover sm:h-[430px] lg:h-[500px]"
-                    >
-
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black leading-tight text-slate-950">
-                            Repair + Business Support
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            GPT Care for customers and GPT B2B Programs for business partners.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+@include('front.sections.page_hero', ['pageSlug' => 'services'])
 
 
 {{-- SERVICE QUICK CARDS --}}
@@ -305,73 +158,58 @@
 
 
 {{-- REPAIR SERVICES --}}
-<section class="service-section-soft py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Mobile Repair Services
-                </p>
+@if($repairServiceSection && $repairServiceSection->activeItems->count())
+   
+    <section class="service-section-soft py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                    Common repair solutions.
-                </h2>
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        {{ $repairServiceSection->label }}
+                    </p>
 
-                <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                    GPT Care handles day-to-day smartphone issues with professional diagnostics and repair support.
-                </p>
-            </div>
+                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                        {{ $repairServiceSection->title }}
+                    </h2>
 
-            <a href="#service-form"
-                class="inline-flex w-fit rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                Book Repair
-            </a>
-        </div>
-
-        @php
-            $repairServices = [
-                [
-                    'title' => 'Screen Replacement',
-                    'image' => 'https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&w=900&q=80',
-                    'desc' => 'Cracked or shattered screen replacement with standard warranty.',
-                ],
-                [
-                    'title' => 'Battery Issues',
-                    'image' => 'https://images.unsplash.com/photo-1603539444875-76e7684265f6?auto=format&fit=crop&w=900&q=80',
-                    'desc' => 'Battery health diagnosis and replacement for fast draining devices.',
-                ],
-                [
-                    'title' => 'Software & Performance',
-                    'image' => 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80',
-                    'desc' => 'Slow performance, startup issues, freezing and OS support.',
-                ],
-                [
-                    'title' => 'Water Damage',
-                    'image' => 'https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=900&q=80',
-                    'desc' => 'Moisture damage cleaning, testing and component-level diagnostics.',
-                ],
-            ];
-        @endphp
-
-        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            @foreach ($repairServices as $service)
-                <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-sm">
-                    <img
-                        class="h-44 w-full rounded-[1.5rem] object-cover"
-                        src="{{ $service['image'] }}"
-                        alt="{{ $service['title'] }}"
-                    >
-                    <h3 class="mt-6 text-2xl font-black text-slate-950">{{ $service['title'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">
-                        {{ $service['desc'] }}
+                    <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                        {{ $repairServiceSection->description }}
                     </p>
                 </div>
-            @endforeach
-        </div>
 
-    </div>
-</section>
+                @if($repairServiceSection->button_text)
+                    <a href="{{ $repairServiceSection->button_link ?: '#' }}"
+                       class="inline-flex w-fit rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                        {{ $repairServiceSection->button_text }}
+                    </a>
+                @endif
+            </div>
+
+            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                @foreach($repairServiceSection->activeItems as $service)
+                    <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-sm">
+                        @if($service->image)
+                            <img class="h-44 w-full rounded-[1.5rem] object-cover"
+                                 src="{{ asset('storage/' . $service->image) }}"
+                                 alt="{{ $service->image_alt ?: $service->title }}">
+                        @endif
+
+                        <h3 class="mt-6 text-2xl font-black text-slate-950">
+                            {{ $service->title }}
+                        </h3>
+
+                        <p class="mt-3 text-sm leading-7 text-slate-600">
+                            {{ $service->description }}
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+@endif
 
 
 {{-- B2B PROGRAM --}}
@@ -495,6 +333,61 @@
 </section>
 
 
+{{-- FAQ --}}
+<section class="bg-white py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="grid gap-12 lg:grid-cols-2">
+            <div>
+                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                    FAQs
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                    Service questions.
+                </h2>
+
+                <p class="mt-5 text-lg leading-8 text-slate-600">
+                    Quick answers for mobile repair customers and B2B partners.
+                </p>
+            </div>
+
+            <div class="grid gap-4">
+                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm" open>
+                    <summary class="cursor-pointer text-lg font-black text-slate-950">What does GPT Care repair?</summary>
+                    <p class="mt-3 leading-7 text-slate-600">
+                        GPT Care handles cracked screens, battery drain issues, software/startup problems, slow performance, water damage and other mobile issues.
+                    </p>
+                </details>
+
+                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
+                    <summary class="cursor-pointer text-lg font-black text-slate-950">Does GPT Care use genuine parts?</summary>
+                    <p class="mt-3 leading-7 text-slate-600">
+                        Yes. GPT Care mentions use of genuine / brand-approved components to maintain device performance and durability.
+                    </p>
+                </details>
+
+                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
+                    <summary class="cursor-pointer text-lg font-black text-slate-950">What is GPT B2B Program?</summary>
+                    <p class="mt-3 leading-7 text-slate-600">
+                        GPT B2B Program supports organizations with distribution of mobile devices, smartphones, tablets and accessories, plus operational efficiency support.
+                    </p>
+                </details>
+
+                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
+                    <summary class="cursor-pointer text-lg font-black text-slate-950">How can I contact GPT Group?</summary>
+                    <p class="mt-3 leading-7 text-slate-600">
+                        You can contact GPT Group at +968 2450-1533 or info@gptgroups.com.
+                    </p>
+                </details>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
 {{-- SERVICE FORM --}}
 <section id="service-form" class="service-section-soft py-16 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -580,58 +473,6 @@
 </section>
 
 
-{{-- FAQ --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        <div class="grid gap-12 lg:grid-cols-2">
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    FAQs
-                </p>
-
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-                    Service questions.
-                </h2>
-
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    Quick answers for mobile repair customers and B2B partners.
-                </p>
-            </div>
-
-            <div class="grid gap-4">
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm" open>
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">What does GPT Care repair?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        GPT Care handles cracked screens, battery drain issues, software/startup problems, slow performance, water damage and other mobile issues.
-                    </p>
-                </details>
-
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">Does GPT Care use genuine parts?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        Yes. GPT Care mentions use of genuine / brand-approved components to maintain device performance and durability.
-                    </p>
-                </details>
-
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">What is GPT B2B Program?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        GPT B2B Program supports organizations with distribution of mobile devices, smartphones, tablets and accessories, plus operational efficiency support.
-                    </p>
-                </details>
-
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">How can I contact GPT Group?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        You can contact GPT Group at +968 2450-1533 or info@gptgroups.com.
-                    </p>
-                </details>
-            </div>
-        </div>
-
-    </div>
-</section>
 
 
 {{-- CTA --}}

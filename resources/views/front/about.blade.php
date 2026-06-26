@@ -91,7 +91,10 @@
     </style>
 
     {{-- ABOUT HERO --}}
-    <section class="relative overflow-hidden about-soft-bg">
+
+    @include('front.sections.page_hero', ['pageSlug' => 'about'])
+
+    {{-- <section class="relative overflow-hidden about-soft-bg">
         <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-cyan-300 floating-blob"></div>
         <div class="absolute top-48 -left-28 h-96 w-96 rounded-full bg-blue-300 floating-blob"></div>
 
@@ -144,7 +147,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- QUICK FACTS --}}
     <section class="relative z-10 -mt-8 bg-transparent">

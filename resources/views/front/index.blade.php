@@ -781,45 +781,54 @@
     @endif
 
     {{-- 10. SERVICES --}}
+    
+    @if($serviceSection && $serviceSection->activeItems->count())
+
     <section class="section-muted py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">Services</p>
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">Customer & Business Support
+                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                    {{ $serviceSection->label }}
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    {{ $serviceSection->title }}
                 </h2>
-                <p class="mt-5 text-lg leading-8 text-slate-600">GPT Group customers and partners ke liye repair, B2B
-                    supply, retail support and distribution solutions.</p>
+
+                <p class="mt-5 text-lg leading-8 text-slate-600">
+                    {{ $serviceSection->description }}
+                </p>
             </div>
 
             <div class="mt-12 grid gap-6 md:grid-cols-2">
-                <a href="{{ url('/services#gpt-care') }}"
-                    class="soft-card soft-card-hover group overflow-hidden rounded-[2.5rem]">
-                    <img class="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
-                        src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=1200&q=85"
-                        alt="GPT Care">
-                    <div class="p-8">
-                        <p class="font-black uppercase tracking-[.25em] text-blue-700">GPT Care</p>
-                        <h3 class="mt-4 text-3xl font-black text-slate-950">Mobile Repair & Service</h3>
-                        <p class="mt-3 leading-7 text-slate-600">Screen, battery, software, water damage and mobile service
-                            enquiries ke liye professional support.</p>
-                    </div>
-                </a>
+                @foreach($serviceSection->activeItems as $item)
+                    <a href="{{ $item->button_link ?: '#' }}"
+                       class="soft-card soft-card-hover group overflow-hidden rounded-[2.5rem]">
+                        @if($item->image)
+                            <img class="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+                                 src="{{ asset('storage/' . $item->image) }}"
+                                 alt="{{ $item->image_alt ?: $item->title }}">
+                        @endif
 
-                <a href="{{ url('/services#b2b-program') }}"
-                    class="soft-card soft-card-hover group overflow-hidden rounded-[2.5rem]">
-                    <img class="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=85"
-                        alt="B2B Program">
-                    <div class="p-8">
-                        <p class="font-black uppercase tracking-[.25em] text-cyan-600">B2B Program</p>
-                        <h3 class="mt-4 text-3xl font-black text-slate-950">Business Distribution Support</h3>
-                        <p class="mt-3 leading-7 text-slate-600">Corporate supply, wholesale, dealer network and
-                            operational efficiency ke liye B2B support.</p>
-                    </div>
-                </a>
+                        <div class="p-8">
+                            <p class="font-black uppercase tracking-[.25em] {{ $item->accent_color === 'cyan' ? 'text-cyan-600' : 'text-blue-700' }}">
+                                {{ $item->label }}
+                            </p>
+
+                            <h3 class="mt-4 text-3xl font-black text-slate-950">
+                                {{ $item->title }}
+                            </h3>
+
+                            <p class="mt-3 leading-7 text-slate-600">
+                                {{ $item->description }}
+                            </p>
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
+@endif
 
     {{-- 11. NETWORK --}}
 
@@ -1148,85 +1157,149 @@
     @endif
 
     {{-- 16. PARTNER LOGOS --}}
-    <section class="section-muted py-16 lg:py-24">
+
+   @if($partnerLogoSection && $partnerLogoSection->activeLogos->count())
+    <section class="section-muted py-16 lg:py-24 overflow-hidden">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">Partner Logos</p>
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">Trusted brand ecosystem.</h2>
+                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
+                        {{ $partnerLogoSection->label }}
+                    </p>
+
+                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
+                        {{ $partnerLogoSection->title }}
+                    </h2>
                 </div>
-                <p class="max-w-xl text-lg text-slate-600">Use this section for final authorised partner logos. Current
-                    cards are editable placeholders.</p>
+
+                @if($partnerLogoSection->description)
+                    <p class="max-w-xl text-lg text-slate-600">
+                        {{ $partnerLogoSection->description }}
+                    </p>
+                @endif
             </div>
 
-            <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-8">
-                @foreach (['Samsung', 'LAVA', 'Apple', 'Nokia', 'Vivo', 'Xiaomi', 'Huawei', 'Sony'] as $logo)
-                    <div class="soft-card soft-card-hover rounded-3xl p-6 text-center font-black text-slate-700">
-                        {{ $logo }}</div>
-                @endforeach
+            <div class="logo-marquee mt-10">
+                <div class="logo-marquee-track">
+                    @foreach($partnerLogoSection->activeLogos->concat($partnerLogoSection->activeLogos) as $logo)
+                        <div class="logo-marquee-item soft-card soft-card-hover rounded-3xl p-6 text-center font-black text-slate-700">
+                            @if($logo->logo)
+                                <img src="{{ asset('storage/' . $logo->logo) }}"
+                                     class="mx-auto h-14 w-full object-contain"
+                                     alt="{{ $logo->name }}">
+                            @else
+                                {{ $logo->name }}
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
+@endif
 
     {{-- 17. TESTIMONIALS --}}
-    <section class="bg-white py-16 lg:py-24">
+   
+    @if($testimonialSection && $testimonialSection->activeTestimonials->count())
+  
+    <section class="bg-white py-16 lg:py-24 overflow-hidden">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <p class="font-black uppercase tracking-[.25em] text-blue-700">Testimonials</p>
-                <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">What partners say about GPT Group.</h2>
+                <p class="font-black uppercase tracking-[.25em] text-blue-700">
+                    {{ $testimonialSection->label }}
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
+                    {{ $testimonialSection->title }}
+                </h2>
+
+                @if($testimonialSection->description)
+                    <p class="mt-4 text-lg text-slate-600">
+                        {{ $testimonialSection->description }}
+                    </p>
+                @endif
             </div>
 
-            <div class="mt-12 grid gap-6 md:grid-cols-3">
-                @foreach ([['“GPT Group brings speed, clarity and discipline to retail distribution. Their team understands market requirements.”', 'Retail Partner', 'Muscat'], ['“Strong warehouse support and reliable communication make them a dependable partner for product movement.”', 'Wholesale Partner', 'Oman'], ['“Their leadership team is proactive in launch planning, partner training and customer support.”', 'Brand Associate', 'GCC']] as $testimonial)
-                    <div class="soft-card soft-card-hover rounded-[34px] p-8">
-                        <p class="text-xl leading-8 text-slate-700">{{ $testimonial[0] }}</p>
-                        <p class="mt-6 font-black text-slate-950">{{ $testimonial[1] }}</p>
-                        <p class="text-slate-500">{{ $testimonial[2] }}</p>
-                    </div>
-                @endforeach
+            <div class="testimonial-marquee mt-12">
+                <div class="testimonial-marquee-track">
+                    @foreach($testimonialSection->activeTestimonials->concat($testimonialSection->activeTestimonials) as $testimonial)
+                        <div class="testimonial-marquee-item soft-card soft-card-hover rounded-[34px] p-8">
+                            <p class="text-xl leading-8 text-slate-700">
+                                “{{ $testimonial->message }}”
+                            </p>
+
+                            <div class="mt-6 flex items-center gap-3">
+                                @if($testimonial->image)
+                                    <img src="{{ asset('storage/' . $testimonial->image) }}"
+                                         class="h-12 w-12 rounded-full object-cover"
+                                         alt="{{ $testimonial->name }}">
+                                @else
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-black text-blue-700">
+                                        {{ strtoupper(substr($testimonial->name ?? 'P', 0, 1)) }}
+                                    </div>
+                                @endif
+
+                                <div>
+                                    <p class="font-black text-slate-950">
+                                        {{ $testimonial->name }}
+                                    </p>
+
+                                    <p class="text-slate-500">
+                                        {{ $testimonial->location }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
+@endif
 
     {{-- 18. FAQ --}}
+
+   @if($faqSection)
     <section class="section-muted py-16 lg:py-24">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div>
-                <p class="font-black uppercase tracking-[.25em] text-blue-700">FAQs</p>
-                <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">Frequently asked questions.</h2>
-                <p class="mt-5 text-lg text-slate-600">Useful for brands, dealers, retailers and B2B buyers exploring
-                    partnership with GPT Group.</p>
-                <a class="btn-blue mt-8" href="{{ url('/contact-us') }}">Ask More Questions</a>
+                <p class="font-black uppercase tracking-[.25em] text-blue-700">
+                    {{ $faqSection->label }}
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
+                    {{ $faqSection->title }}
+                </h2>
+
+                <p class="mt-5 text-lg text-slate-600">
+                    {{ $faqSection->description }}
+                </p>
+
+                @if($faqSection->button_text)
+                    <a class="btn-blue mt-8" href="{{ $faqSection->button_link ?: '#' }}">
+                        {{ $faqSection->button_text }}
+                    </a>
+                @endif
             </div>
 
             <div class="grid gap-4">
-                <details class="soft-card rounded-3xl p-6" open>
-                    <summary class="cursor-pointer font-black text-slate-950">Which product categories does GPT Group
-                        handle?</summary>
-                    <p class="mt-3 text-slate-600">Mobiles, tablets, watches, accessories and allied technology products,
-                        along with diversified verticals such as e-commerce, fashion, beauty and IT services.</p>
-                </details>
-                <details class="soft-card rounded-3xl p-6">
-                    <summary class="cursor-pointer font-black text-slate-950">Does GPT Group support retail partners?
-                    </summary>
-                    <p class="mt-3 text-slate-600">Yes. The company supports retail IRs, wholesale partners, KDR networks
-                        and B2B accounts with product availability and launch coordination.</p>
-                </details>
-                <details class="soft-card rounded-3xl p-6">
-                    <summary class="cursor-pointer font-black text-slate-950">Can brands use GPT Group for Oman market
-                        expansion?</summary>
-                    <p class="mt-3 text-slate-600">Yes. GPT Group provides market coverage support across key locations
-                        including Muscat, Sur and Salalah.</p>
-                </details>
-                <details class="soft-card rounded-3xl p-6">
-                    <summary class="cursor-pointer font-black text-slate-950">Is the website ready for real enquiries?
-                    </summary>
-                    <p class="mt-3 text-slate-600">The front-end form layout is ready. Connect it with backend email/CRM
-                        logic when deploying.</p>
-                </details>
+                @foreach($faqSection->activeItems as $faq)
+                    <details class="soft-card rounded-3xl p-6" {{ $faq->is_open ? 'open' : '' }}>
+                        <summary class="cursor-pointer font-black text-slate-950">
+                            {{ $faq->question }}
+                        </summary>
+
+                        <p class="mt-3 text-slate-600">
+                            {{ $faq->answer }}
+                        </p>
+                    </details>
+                @endforeach
             </div>
         </div>
     </section>
+@endif
+
+
 
     {{-- 19. CTA + ENQUIRY --}}
 
@@ -1357,4 +1430,80 @@
             }
         });
     </script>
+
+    <style>
+    .logo-marquee,
+    .testimonial-marquee {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .logo-marquee-track {
+        display: flex;
+        width: max-content;
+        gap: 1rem;
+        animation: logoMarquee 35s linear infinite;
+    }
+
+    .logo-marquee:hover .logo-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .logo-marquee-item {
+        flex: 0 0 180px;
+        min-height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes logoMarquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .testimonial-marquee-track {
+        display: flex;
+        width: max-content;
+        gap: 1.5rem;
+        animation: testimonialMarquee 45s linear infinite;
+    }
+
+    .testimonial-marquee:hover .testimonial-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .testimonial-marquee-item {
+        flex: 0 0 390px;
+        max-width: 390px;
+        min-height: 280px;
+    }
+
+    @keyframes testimonialMarquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .logo-marquee-item {
+            flex-basis: 150px;
+        }
+
+        .testimonial-marquee-item {
+            flex-basis: 310px;
+            max-width: 310px;
+        }
+    }
+</style>
 @endsection

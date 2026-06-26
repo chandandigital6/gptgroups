@@ -88,7 +88,33 @@ class FrontController extends Controller
         ->latest()
         ->first();
 
-        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection','productBrands','productCategories','upcomingProducts','latestProducts','companyOverview','networkSection','retailOutletSection','strategySection'));
+         $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('home')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+         $partnerLogoSection = \App\Models\PartnerLogoSection::with('activeLogos')
+        ->active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+         $testimonialSection = \App\Models\TestimonialSection::with('activeTestimonials')
+        ->active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+         $serviceSection = \App\Models\ServiceSection::with('activeItems')
+        ->active()
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+
+        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection','productBrands','productCategories','upcomingProducts','latestProducts','companyOverview','networkSection','retailOutletSection','strategySection','faqSection','partnerLogoSection','testimonialSection','serviceSection'));
     }
 
 
@@ -326,6 +352,12 @@ public function brandCategories(ProductBrand $brand)
 
     public function services()
     {
-        return view('front.services');
+        $repairServiceSection = \App\Models\RepairServiceSection::with('activeItems')
+        ->active()
+        ->forPage('services')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+        return view('front.services',compact('repairServiceSection'));
     }
 }

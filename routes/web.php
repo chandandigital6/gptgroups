@@ -9,13 +9,19 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CompanyOverviewController;
+use App\Http\Controllers\FaqSectionController;
 use App\Http\Controllers\FounderSectionController;
 use App\Http\Controllers\NetworkSectionController;
+use App\Http\Controllers\PageHeroController;
+use App\Http\Controllers\PartnerLogoSectionController;
 use App\Http\Controllers\ProductBrandController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\RepairServiceSectionController;
 use App\Http\Controllers\RetailOutletSectionController;
+use App\Http\Controllers\ServiceSectionController;
 use App\Http\Controllers\StrategySectionController;
 use App\Http\Controllers\TeamMemberController;
+use App\Http\Controllers\TestimonialSectionController;
 use App\Http\Controllers\WhatWeDoSectionController;
 
 
@@ -226,6 +232,35 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
     Route::delete('/strategy-sections/{strategySection}', [StrategySectionController::class, 'destroy'])
         ->name('strategy-sections.destroy');
 
+
+
+        Route::get('/faq-sections', [FaqSectionController::class, 'index'])
+        ->name('faq-sections.index');
+
+    Route::get('/faq-sections/create', [FaqSectionController::class, 'create'])
+        ->name('faq-sections.create');
+
+    Route::post('/faq-sections', [FaqSectionController::class, 'store'])
+        ->name('faq-sections.store');
+
+    Route::get('/faq-sections/{faqSection}', [FaqSectionController::class, 'show'])
+        ->name('faq-sections.show');
+
+    Route::get('/faq-sections/{faqSection}/edit', [FaqSectionController::class, 'edit'])
+        ->name('faq-sections.edit');
+
+    Route::put('/faq-sections/{faqSection}', [FaqSectionController::class, 'update'])
+        ->name('faq-sections.update');
+
+    Route::delete('/faq-sections/{faqSection}', [FaqSectionController::class, 'destroy'])
+        ->name('faq-sections.destroy');
+
+
+    Route::resource('partner-logo-sections', PartnerLogoSectionController::class);
+    Route::resource('testimonial-sections', TestimonialSectionController::class);
+    Route::resource('service-sections', ServiceSectionController::class);
+    Route::resource('page-heroes', PageHeroController::class);
+     Route::resource('repair-service-sections', RepairServiceSectionController::class);
 
 });
 
