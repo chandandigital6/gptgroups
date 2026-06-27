@@ -34,127 +34,190 @@
 </section>
 
 
+
 {{-- GPT CARE --}}
-<section id="gpt-care" class="service-section-light py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    GPT Care
-                </p>
+@if($gptCareSection)
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Professional mobile repair service centres.
+    <section id="gpt-care" class="service-section-light py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+
+                <div>
+                    @if(!empty($gptCareSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $gptCareSection->label }}
+                        </p>
+                    @endif
+
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                        {{ $gptCareSection->title }}
+                    </h2>
+
+                    @if(!empty($gptCareSection->description_1))
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $gptCareSection->description_1 }}
+                        </p>
+                    @endif
+
+                    @if(!empty($gptCareSection->description_2))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $gptCareSection->description_2 }}
+                        </p>
+                    @endif
+
+                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+                        @if(!empty($gptCareSection->feature_1_title))
+                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                                <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-xl font-black text-white">
+                                    ✓
+                                </div>
+
+                                <h3 class="mt-5 text-xl font-black text-slate-950">
+                                    {{ $gptCareSection->feature_1_title }}
+                                </h3>
+
+                                @if(!empty($gptCareSection->feature_1_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                                        {{ $gptCareSection->feature_1_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if(!empty($gptCareSection->feature_2_title))
+                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                                <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 text-xl font-black text-white">
+                                    ✓
+                                </div>
+
+                                <h3 class="mt-5 text-xl font-black text-slate-950">
+                                    {{ $gptCareSection->feature_2_title }}
+                                </h3>
+
+                                @if(!empty($gptCareSection->feature_2_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                                        {{ $gptCareSection->feature_2_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
+
+                    <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
+
+                        @if(!empty($gptCareSection->image))
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="{{ asset('storage/' . $gptCareSection->image) }}"
+                                alt="{{ $gptCareSection->image_alt ?: $gptCareSection->title }}"
+                            >
+                        @else
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=1200&q=80"
+                                alt="{{ $gptCareSection->title }}"
+                            >
+                        @endif
+
+                        @if(!empty($gptCareSection->card_title) || !empty($gptCareSection->card_description))
+                            <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
+                                @if(!empty($gptCareSection->card_title))
+                                    <p class="text-2xl font-black text-slate-950">
+                                        {{ $gptCareSection->card_title }}
+                                    </p>
+                                @endif
+
+                                @if(!empty($gptCareSection->card_description))
+                                    <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
+                                        {{ $gptCareSection->card_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+@endif
+
+
+
+
+{{-- REPAIR OPTIONS MAIN --}}
+
+@if($repairOptionSection && $repairOptionSection->activeItems->count())
+
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                @if(!empty($repairOptionSection->label))
+                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        {{ $repairOptionSection->label }}
+                    </p>
+                @endif
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    {{ $repairOptionSection->title }}
                 </h2>
 
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    GPT Care understands how important your mobile device is for daily communication, work and entertainment. The service provides professional, reliable and efficient mobile repairs at repair centres across Oman.
-                </p>
-
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    From minor glitches to major repairs, GPT Care handles a wide range of issues for major smartphone brands with trained technicians, genuine parts and customer-focused service.
-                </p>
-
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-xl font-black text-white">✓</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Expert Technicians</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">
-                            Trained repair specialists for major mobile brands and models.
-                        </p>
-                    </div>
-
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 text-xl font-black text-white">✓</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Genuine Parts</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">
-                            Brand-approved parts to maintain device performance and durability.
-                        </p>
-                    </div>
-                </div>
+                @if(!empty($repairOptionSection->description))
+                    <p class="mt-5 text-lg leading-8 text-slate-600">
+                        {{ $repairOptionSection->description }}
+                    </p>
+                @endif
             </div>
 
-            <div class="relative">
-                <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($repairOptionSection->activeItems as $item)
+                    @php
+                        $boxClass = match($item->theme) {
+                            'cyan' => 'border-cyan-100 bg-cyan-50',
+                            'blue' => 'border-blue-100 bg-blue-50',
+                            'white' => 'border-slate-100 bg-white',
+                            'slate' => 'border-slate-100 bg-slate-50',
+                            default => 'border-slate-100 bg-slate-50',
+                        };
 
-                <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
-                    <img
-                        class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
-                        src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=1200&q=80"
-                        alt="GPT Care Mobile Repair"
-                    >
+                        $iconClass = match($item->theme) {
+                            'cyan' => 'bg-cyan-500',
+                            'blue' => 'bg-blue-600',
+                            'slate' => 'bg-slate-800',
+                            default => 'bg-blue-600',
+                        };
+                    @endphp
 
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black text-slate-950">
-                            Mobile Repair in Oman
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            Screen, battery, software, water damage and more.
-                        </p>
+                    <div class="service-card-hover rounded-[2rem] border {{ $boxClass }} p-8">
+                        <div class="grid h-14 w-14 place-items-center rounded-2xl {{ $iconClass }} text-2xl font-black text-white">
+                            {{ $item->icon_text ?: $loop->iteration }}
+                        </div>
+
+                        <h3 class="mt-6 text-2xl font-black text-slate-950">
+                            {{ $item->title }}
+                        </h3>
+
+                        @if(!empty($item->description))
+                            <p class="mt-3 leading-7 text-slate-600">
+                                {{ $item->description }}
+                            </p>
+                        @endif
                     </div>
-                </div>
+                @endforeach
             </div>
 
         </div>
-    </div>
-</section>
+    </section>
 
-
-{{-- GPT CARE PROCESS --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        <div class="mx-auto max-w-3xl text-center">
-            <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                Repair Options
-            </p>
-
-            <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                Get your device fixed easily.
-            </h2>
-
-            <p class="mt-5 text-lg leading-8 text-slate-600">
-                Customers can choose from service centre visit, support call, online booking or pickup and delivery.
-            </p>
-        </div>
-
-        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">1</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">At Our Centres</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Drop by conveniently located GPT Care repair centres across Oman.
-                </p>
-            </div>
-
-            <div class="service-card-hover rounded-[2rem] border border-cyan-100 bg-cyan-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">2</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Reach Out</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Contact the support team for repair advice or to schedule an appointment.
-                </p>
-            </div>
-
-            <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">3</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Online Booking</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Book a repair service online in just a few clicks.
-                </p>
-            </div>
-
-            <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">4</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Pickup & Delivery</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Customers can opt for pickup and delivery when visiting a centre is not possible.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
+@endif
 
 
 {{-- REPAIR SERVICES --}}
@@ -213,179 +276,211 @@
 
 
 {{-- B2B PROGRAM --}}
-<section id="b2b-program" class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-            <div class="relative order-2 lg:order-1">
-                <div class="absolute -inset-5 rounded-full bg-blue-300/20 blur-3xl"></div>
+@if($b2bProgramSection)
 
-                <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
-                    <img
-                        class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
-                        alt="GPT B2B Program"
-                    >
+    <section id="b2b-program" class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black text-slate-950">
-                            B2B Growth Support
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            Distribution, operational efficiency and long-term partnership.
-                        </p>
+                <div class="relative order-2 lg:order-1">
+                    <div class="absolute -inset-5 rounded-full bg-blue-300/20 blur-3xl"></div>
+
+                    <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
+                        @if($b2bProgramSection->image)
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="{{ asset('storage/' . $b2bProgramSection->image) }}"
+                                alt="{{ $b2bProgramSection->image_alt ?: $b2bProgramSection->title }}"
+                            >
+                        @endif
+
+                        @if($b2bProgramSection->card_title || $b2bProgramSection->card_description)
+                            <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
+                                <p class="text-2xl font-black text-slate-950">
+                                    {{ $b2bProgramSection->card_title }}
+                                </p>
+
+                                <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
+                                    {{ $b2bProgramSection->card_description }}
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
-            </div>
 
-            <div class="order-1 lg:order-2">
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    GPT B2B Programs
-                </p>
+                <div class="order-1 lg:order-2">
+                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        {{ $b2bProgramSection->label }}
+                    </p>
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Business-to-business distribution programs.
-                </h2>
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                        {{ $b2bProgramSection->title }}
+                    </h2>
 
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    GPT Group’s B2B programs are designed to empower organizations with top-tier service, innovative solutions and seamless distribution of mobile devices, smartphones, tablets and accessories.
-                </p>
-
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    The program is built on integrity, transparency and speed of execution, helping partners improve operational efficiency and achieve business goals.
-                </p>
-
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <h3 class="text-xl font-black text-slate-950">Seamless Distribution</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">
-                            Mobile devices, smartphones, tablets and accessories for business needs.
+                    @if($b2bProgramSection->description_1)
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $b2bProgramSection->description_1 }}
                         </p>
-                    </div>
+                    @endif
 
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <h3 class="text-xl font-black text-slate-950">Tailor-Made Strategies</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">
-                            Client-specific plans to maximize operational efficiency.
+                    @if($b2bProgramSection->description_2)
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $b2bProgramSection->description_2 }}
                         </p>
+                    @endif
+
+                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+                        @if($b2bProgramSection->feature_1_title)
+                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $b2bProgramSection->feature_1_title }}
+                                </h3>
+
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
+                                    {{ $b2bProgramSection->feature_1_description }}
+                                </p>
+                            </div>
+                        @endif
+
+                        @if($b2bProgramSection->feature_2_title)
+                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $b2bProgramSection->feature_2_title }}
+                                </h3>
+
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
+                                    {{ $b2bProgramSection->feature_2_description }}
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 
 
 {{-- B2B BENEFITS --}}
-<section class="service-section-light py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="mx-auto max-w-3xl text-center">
-            <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                B2B Program Benefits
-            </p>
+@if($b2bBenefitSection && $b2bBenefitSection->activeItems->count())
+    
+    <section class="service-section-light py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                Built for reliable business partnerships.
-            </h2>
-
-            <p class="mt-5 text-lg leading-8 text-slate-600">
-                GPT B2B helps organizations navigate market complexity with support, speed and transparent processes.
-            </p>
-        </div>
-
-        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">I</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Integrity</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Transparent and productive business interactions for long-term trust.
-                </p>
-            </div>
-
-            <div class="service-card-hover rounded-[2rem] border border-cyan-100 bg-cyan-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">S</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Speed</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Fast execution for distribution, supply and partner support.
-                </p>
-            </div>
-
-            <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">T</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Training</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Product knowledge, partner enablement and market guidance.
-                </p>
-            </div>
-
-            <div class="service-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">G</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Growth</h3>
-                <p class="mt-3 leading-7 text-slate-600">
-                    Support for business goals, operational efficiency and long-term scale.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-{{-- FAQ --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        <div class="grid gap-12 lg:grid-cols-2">
-            <div>
+            <div class="mx-auto max-w-3xl text-center">
                 <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    FAQs
+                    {{ $b2bBenefitSection->label }}
                 </p>
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-                    Service questions.
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    {{ $b2bBenefitSection->title }}
                 </h2>
 
                 <p class="mt-5 text-lg leading-8 text-slate-600">
-                    Quick answers for mobile repair customers and B2B partners.
+                    {{ $b2bBenefitSection->description }}
                 </p>
             </div>
 
-            <div class="grid gap-4">
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm" open>
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">What does GPT Care repair?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        GPT Care handles cracked screens, battery drain issues, software/startup problems, slow performance, water damage and other mobile issues.
-                    </p>
-                </details>
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($b2bBenefitSection->activeItems as $item)
+                    @php
+                        $boxClass = match($item->theme) {
+                            'cyan' => 'border-cyan-100 bg-cyan-50',
+                            'slate' => 'border-slate-100 bg-slate-50',
+                            default => 'border-slate-100 bg-slate-50',
+                        };
 
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">Does GPT Care use genuine parts?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        Yes. GPT Care mentions use of genuine / brand-approved components to maintain device performance and durability.
-                    </p>
-                </details>
+                        $iconClass = match($item->theme) {
+                            'cyan' => 'bg-cyan-500',
+                            default => 'bg-blue-600',
+                        };
+                    @endphp
 
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">What is GPT B2B Program?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        GPT B2B Program supports organizations with distribution of mobile devices, smartphones, tablets and accessories, plus operational efficiency support.
-                    </p>
-                </details>
+                    <div class="service-card-hover rounded-[2rem] border {{ $boxClass }} p-8">
+                        <div class="grid h-14 w-14 place-items-center rounded-2xl {{ $iconClass }} text-2xl font-black text-white">
+                            {{ $item->icon_text }}
+                        </div>
 
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">How can I contact GPT Group?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        You can contact GPT Group at +968 2450-1533 or info@gptgroups.com.
-                    </p>
-                </details>
+                        <h3 class="mt-6 text-2xl font-black text-slate-950">
+                            {{ $item->title }}
+                        </h3>
+
+                        <p class="mt-3 leading-7 text-slate-600">
+                            {{ $item->description }}
+                        </p>
+                    </div>
+                @endforeach
             </div>
+
         </div>
+    </section>
+@endif
 
-    </div>
-</section>
 
+
+{{-- FAQ --}}
+
+@if($faqSection && $faqSection->activeItems->count())
+
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="grid gap-12 lg:grid-cols-2">
+
+                <div>
+                    @if(!empty($faqSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $faqSection->label }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                            {{ $faqSection->title }}
+                        </h2>
+                    @endif
+
+                    @if(!empty($faqSection->description))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $faqSection->description }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->button_text))
+                        <a href="{{ $faqSection->button_link ?: '#' }}"
+                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                            {{ $faqSection->button_text }}
+                        </a>
+                    @endif
+                </div>
+
+                <div class="grid gap-4">
+                    @foreach($faqSection->activeItems as $faq)
+                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
+                                 {{ $faq->is_open ? 'open' : '' }}>
+
+                            <summary class="cursor-pointer text-lg font-black text-slate-950">
+                                {{ $faq->question }}
+                            </summary>
+
+                            @if(!empty($faq->answer))
+                                <p class="mt-3 leading-7 text-slate-600">
+                                    {{ $faq->answer }}
+                                </p>
+                            @endif
+                        </details>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+@endif
 
 
 {{-- SERVICE FORM --}}

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\B2bBenefitSectionController;
+use App\Http\Controllers\B2bProgramSectionController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -16,6 +18,7 @@ use App\Http\Controllers\PageHeroController;
 use App\Http\Controllers\PartnerLogoSectionController;
 use App\Http\Controllers\ProductBrandController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\QuickFactSectionController;
 use App\Http\Controllers\RepairServiceSectionController;
 use App\Http\Controllers\RetailOutletSectionController;
 use App\Http\Controllers\ServiceSectionController;
@@ -261,6 +264,9 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
     Route::resource('service-sections', ServiceSectionController::class);
     Route::resource('page-heroes', PageHeroController::class);
      Route::resource('repair-service-sections', RepairServiceSectionController::class);
+      Route::resource('b2b-program-sections', B2bProgramSectionController::class);
+    Route::resource('b2b-benefit-sections', B2bBenefitSectionController::class);
+     Route::resource('quick-fact-sections', QuickFactSectionController::class);
 
 });
 

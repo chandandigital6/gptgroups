@@ -134,7 +134,14 @@ class FrontController extends Controller
             ->orderBy('sort_order', 'asc')
             ->latest()
             ->first();
-        return view('front.about', compact('founderSection', 'teamMembers', 'whatWeDoSection'));
+
+             $quickFactSection = \App\Models\QuickFactSection::with('activeItems')
+        ->active()
+        ->forPage($pageSlug ?? 'about')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+        return view('front.about', compact('founderSection', 'teamMembers', 'whatWeDoSection','quickFactSection'));
     }
 
 
@@ -350,14 +357,60 @@ public function brandCategories(ProductBrand $brand)
         return view('front.contact');
     }
 
-    public function services()
-    {
-        $repairServiceSection = \App\Models\RepairServiceSection::with('activeItems')
+  public function services()
+{
+    $repairServiceSection = \App\Models\RepairServiceSection::with('activeItems')
         ->active()
         ->forPage('services')
         ->orderBy('sort_order')
         ->latest()
         ->first();
-        return view('front.services',compact('repairServiceSection'));
-    }
+
+           // GPT Care Section
+    $gptCareSection = \App\Models\B2bProgramSection::active()
+        ->forPage('services-care')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+
+    $b2bProgramSection = \App\Models\B2bProgramSection::active()
+        ->forPage('services')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+    // B2B Benefits Section
+    $b2bBenefitSection = \App\Models\B2bBenefitSection::with('activeItems')
+        ->active()
+        ->forPage('services')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+    // Repair Options Main Section
+    $repairOptionSection = \App\Models\B2bBenefitSection::with('activeItems')
+        ->active()
+        ->forPage('services-main')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+              $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('services')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+    return view('front.services', compact(
+        'repairServiceSection',
+        'b2bProgramSection',
+        'b2bBenefitSection',
+        'repairOptionSection',
+        'gptCareSection',
+        'faqSection',
+    ));
 }
+}
+    

@@ -54,6 +54,11 @@
                     {{ __('FAQs') }}
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="chart-bar-square" :href="route('quick-fact-sections.index')"
+                    :current="request()->routeIs('quick-fact-sections.*')" wire:navigate>
+                    {{ __('Quick Facts') }}
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="photo" :href="route('partner-logo-sections.index')"
                     :current="request()->routeIs('partner-logo-sections.*')" wire:navigate>
                     {{ __('Partner Logos') }}
@@ -72,6 +77,16 @@
                 <flux:sidebar.item icon="wrench-screwdriver" :href="route('repair-service-sections.index')"
                     :current="request()->routeIs('repair-service-sections.*')" wire:navigate>
                     {{ __('Repair Services') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="building-office" :href="route('b2b-program-sections.index')"
+                    :current="request()->routeIs('b2b-program-sections.*')" wire:navigate>
+                    {{ __('B2B Program') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="sparkles" :href="route('b2b-benefit-sections.index')"
+                    :current="request()->routeIs('b2b-benefit-sections.*')" wire:navigate>
+                    {{ __('B2B Benefits') }}
                 </flux:sidebar.item>
 
                 <flux:sidebar.item icon="wrench-screwdriver" :href="route('service-sections.index')"
