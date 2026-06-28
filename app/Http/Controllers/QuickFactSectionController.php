@@ -8,33 +8,40 @@ use Illuminate\Support\Facades\DB;
 
 class QuickFactSectionController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = QuickFactSection::withCount('items');
+   public function index(Request $request)
+{
+    $search = trim((string) $request->get('search'));
+    $pageSlug = trim((string) $request->get('page_slug'));
 
-        if ($request->filled('search')) {
-            $search = trim($request->search);
+    $query = QuickFactSection::withCount('items');
 
-            $query->where(function ($q) use ($search) {
-                $q->where('page_slug', 'like', "%{$search}%")
-                    ->orWhere('label', 'like', "%{$search}%")
-                    ->orWhere('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-
-        if ($request->filled('page_slug')) {
-            $query->where('page_slug', $request->page_slug);
-        }
-
-        $quickFactSections = $query
-            ->orderBy('sort_order')
-            ->orderByDesc('id')
-            ->paginate(10)
-            ->withQueryString();
-
-        return view('quick_fact_sections.index', compact('quickFactSections'));
+    if ($search !== '') {
+        $query->where(function ($q) use ($search) {
+            $q->where('page_slug', 'like', "%{$search}%")
+                ->orWhere('label', 'like', "%{$search}%")
+                ->orWhere('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        });
     }
+
+    if ($pageSlug !== '') {
+        $query->where('page_slug', $pageSlug);
+    }
+
+    $quickFactSections = $query
+        ->orderByRaw('COALESCE(sort_order, 0) ASC')
+        ->orderByDesc('id')
+        ->get();
+
+    $stats = [
+        'total' => QuickFactSection::count(),
+        'active' => QuickFactSection::where('status', 1)->count(),
+        'items' => \App\Models\QuickFactItem::count(),
+        'pages' => QuickFactSection::whereNotNull('page_slug')->distinct()->count('page_slug'),
+    ];
+
+    return view('quick_fact_sections.index', compact('quickFactSections', 'stats'));
+}
 
     public function create()
     {
