@@ -75,123 +75,10 @@
 
 
 {{-- CAREERS HERO --}}
-<section class="relative overflow-hidden career-soft-bg">
-    <div class="absolute -top-24 -right-20 h-96 w-96 rounded-full bg-cyan-300 career-blob"></div>
-    <div class="absolute top-44 -left-28 h-96 w-96 rounded-full bg-blue-300 career-blob"></div>
-
-    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-
-            {{-- Content --}}
-            <div>
-                <div class="inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-black text-blue-700 shadow-sm">
-                    <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
-                    Careers at GPT Group
-                </div>
-
-                <h1 class="mt-7 text-5xl font-black leading-[.95] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-                    Join Our
-                    <span class="mt-2 block career-gradient-text">
-                        Growing Team
-                    </span>
-                </h1>
-
-                <p class="mt-7 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
-                    GPT Group is always looking for passionate, motivated and talented people who want to grow in sales, marketing, retail, hospitality, IT services and operations.
-                </p>
-
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#open-positions"
-                        class="inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                        View Open Positions
-                    </a>
-
-                    <a href="#apply-now"
-                        class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50">
-                        Apply Now
-                    </a>
-                </div>
-
-                <div class="mt-9 grid max-w-xl grid-cols-2 gap-4 sm:grid-cols-4">
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black career-gradient-text">8+</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Roles</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black career-gradient-text">Oman</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Location</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black career-gradient-text">0+</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Freshers</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black career-gradient-text">Hybrid</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Options</p>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Image --}}
-            <div class="relative">
-                <div class="absolute -inset-6 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative overflow-hidden rounded-[2.75rem] border border-white bg-white/85 p-4 shadow-2xl ring-1 ring-cyan-100 backdrop-blur-xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85"
-                        alt="GPT Group Careers"
-                        class="h-[330px] w-full rounded-[2.2rem] object-cover sm:h-[430px] lg:h-[500px]"
-                    >
-
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black leading-tight text-slate-950">
-                            Learn. Perform. Lead.
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            A growth environment for motivated people across sales, retail, hospitality, IT and operations.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
+@include('front.sections.page_hero', ['pageSlug' => 'carriers'])
 
 {{-- CAREER STATS --}}
-<section class="relative z-10 -mt-8 bg-transparent">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                <p class="text-4xl font-black career-gradient-text">8+</p>
-                <p class="mt-2 font-bold text-slate-700">Open Roles</p>
-                <p class="mt-2 text-sm leading-6 text-slate-500">Sales, marketing, retail and operations opportunities.</p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                <p class="text-4xl font-black career-gradient-text">Oman</p>
-                <p class="mt-2 font-bold text-slate-700">Career Location</p>
-                <p class="mt-2 text-sm leading-6 text-slate-500">Muscat and Seeb based openings.</p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                <p class="text-4xl font-black career-gradient-text">0+</p>
-                <p class="mt-2 font-bold text-slate-700">Freshers Welcome</p>
-                <p class="mt-2 text-sm leading-6 text-slate-500">Internships and entry-level opportunities.</p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                <p class="text-4xl font-black career-gradient-text">Hybrid</p>
-                <p class="mt-2 font-bold text-slate-700">Work Options</p>
-                <p class="mt-2 text-sm leading-6 text-slate-500">In-office and hybrid positions available.</p>
-            </div>
-        </div>
-    </div>
-</section>
+@include('front.sections.quick_facts', ['pageSlug' => 'carriers'])
 
 
 {{-- INTRO --}}
@@ -267,67 +154,68 @@
 
 
 {{-- WHY WORK WITH US --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="mx-auto max-w-3xl text-center">
-            <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                Why Work With GPT Groups?
-            </p>
 
-            <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                A workplace designed for growth.
-            </h2>
+@if($whyWorkSection && $whyWorkSection->activeItems->count())
 
-            <p class="mt-5 text-lg leading-8 text-slate-600">
-                GPT Group focuses on excellence, career development, recognition, work-life balance and diverse career paths.
-            </p>
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                    {{ $whyWorkSection->label }}
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    {{ $whyWorkSection->title }}
+                </h2>
+
+                <p class="mt-5 text-lg leading-8 text-slate-600">
+                    {{ $whyWorkSection->description }}
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+                @foreach($whyWorkSection->activeItems as $item)
+
+                    @php
+                        $boxClass = match($item->theme) {
+                            'cyan' => 'border-cyan-100 bg-cyan-50',
+                            'blue' => 'border-blue-100 bg-blue-50',
+                            'white' => 'border-slate-100 bg-white shadow-sm',
+                            'slate' => 'border-slate-100 bg-slate-50',
+                            default => 'border-slate-100 bg-slate-50',
+                        };
+
+                        $iconClass = match($item->theme) {
+                            'cyan' => 'bg-cyan-500',
+                            'blue' => 'bg-blue-600',
+                            'slate' => 'bg-slate-700',
+                            default => 'bg-blue-600',
+                        };
+                    @endphp
+
+                    <div class="career-card-hover rounded-[2rem] border {{ $boxClass }} p-7">
+                        <div class="grid h-14 w-14 place-items-center rounded-2xl {{ $iconClass }} text-2xl font-black text-white">
+                            {{ $item->icon_text }}
+                        </div>
+
+                        <h3 class="mt-6 text-xl font-black text-slate-950">
+                            {{ $item->title }}
+                        </h3>
+
+                        <p class="mt-3 text-sm leading-7 text-slate-600">
+                            {{ $item->description }}
+                        </p>
+                    </div>
+
+                @endforeach
+            </div>
+
         </div>
+    </section>
 
-        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-7">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">01</div>
-                <h3 class="mt-6 text-xl font-black text-slate-950">Culture of Excellence</h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                    High standards in service delivery and employee work culture.
-                </p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-cyan-100 bg-cyan-50 p-7">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">02</div>
-                <h3 class="mt-6 text-xl font-black text-slate-950">Career Growth</h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                    Training, skill development and leadership opportunities.
-                </p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-7">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">03</div>
-                <h3 class="mt-6 text-xl font-black text-slate-950">Rewards</h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                    Recognition through awards, incentives, appraisals and promotions.
-                </p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-7">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">04</div>
-                <h3 class="mt-6 text-xl font-black text-slate-950">Work-Life Balance</h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                    Positive work environment with flexible scheduling.
-                </p>
-            </div>
-
-            <div class="career-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-7">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">05</div>
-                <h3 class="mt-6 text-xl font-black text-slate-950">Diverse Paths</h3>
-                <p class="mt-3 text-sm leading-7 text-slate-600">
-                    Opportunities in hotel management, IT, sales, marketing and operations.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
+@endif
 
 
 {{-- OPEN POSITIONS --}}

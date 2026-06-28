@@ -49,83 +49,14 @@
 </style>
 
 {{-- PRODUCTS HERO --}}
-<section class="relative overflow-hidden products-soft-bg">
-    <div class="absolute -top-24 -right-20 h-96 w-96 rounded-full bg-cyan-300 products-blob"></div>
-    <div class="absolute top-44 -left-28 h-96 w-96 rounded-full bg-blue-300 products-blob"></div>
+@include('front.sections.page_hero', ['pageSlug' => 'products'])
 
-    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-
-            <div>
-                <div class="inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-black text-blue-700 shadow-sm">
-                    <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
-                    GPT Product Portfolio
-                </div>
-
-                <h1 class="mt-7 text-5xl font-black leading-[.95] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-                    Explore All
-                    <span class="mt-2 block products-gradient-text">Products</span>
-                </h1>
-
-                <p class="mt-7 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
-                    Browse latest, upcoming and regular products across GPT Group's brand ecosystem for retail, dealer, B2B and customer channels.
-                </p>
-
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#product-list" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                        View Products
-                    </a>
-
-                    <a href="{{ route('brands') }}" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50">
-                        Browse Brands
-                    </a>
-                </div>
-
-                <div class="mt-9 grid max-w-xl grid-cols-2 gap-4 sm:grid-cols-4">
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black products-gradient-text">Latest</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">New Launches</p>
-                    </div>
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black products-gradient-text">B2B</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Supply</p>
-                    </div>
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black products-gradient-text">Retail</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Ready</p>
-                    </div>
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black products-gradient-text">GPT</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Support</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -inset-6 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative overflow-hidden rounded-[2.75rem] border border-white bg-white/85 p-4 shadow-2xl ring-1 ring-cyan-100 backdrop-blur-xl">
-                    <img class="h-[330px] w-full rounded-[2.2rem] object-cover sm:h-[430px] lg:h-[500px]"
-                         src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=85"
-                         alt="GPT Products">
-
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black leading-tight text-slate-950">
-                            Products for modern distribution
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            Smartphones, tablets, accessories, gadgets and technology products for growing markets.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 {{-- QUICK HIGHLIGHTS --}}
-<section class="relative z-10 -mt-8 bg-transparent">
+
+@include('front.sections.quick_facts', ['pageSlug' => 'products'])
+
+{{-- <section class="relative z-10 -mt-8 bg-transparent">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <div class="rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
@@ -153,7 +84,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 {{-- PRODUCT LIST --}}
 <section id="product-list" class="products-section-light py-16 lg:py-24">
@@ -265,60 +196,131 @@
 </section>
 
 {{-- PRODUCT SUPPORT --}}
-<section class="products-section-soft py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">Distribution Ready</p>
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Products built for retail sell-through.
-                </h2>
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    GPT Group supports products with retail partner visibility, stock coordination, market support and B2B enquiry handling.
-                </p>
 
-                <div class="mt-8 grid gap-4">
-                    <div class="flex gap-4 rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
-                        <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 font-black text-blue-700">✓</div>
-                        <div>
-                            <h3 class="font-black text-slate-950">Model-wise listing</h3>
-                            <p class="mt-1 text-sm leading-6 text-slate-500">Show actual models, SKU codes and stock status.</p>
-                        </div>
-                    </div>
+{{-- PRODUCT SUPPORT --}}
 
-                    <div class="flex gap-4 rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
-                        <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 font-black text-blue-700">✓</div>
-                        <div>
-                            <h3 class="font-black text-slate-950">Retail partner banner area</h3>
-                            <p class="mt-1 text-sm leading-6 text-slate-500">Show offers, partner benefits and launch promotions.</p>
-                        </div>
-                    </div>
+@if($productSupportSection)
 
-                    <div class="flex gap-4 rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
-                        <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 font-black text-blue-700">✓</div>
-                        <div>
-                            <h3 class="font-black text-slate-950">B2B enquiry CTA</h3>
-                            <p class="mt-1 text-sm leading-6 text-slate-500">Collect wholesale, dealer and business supply enquiries.</p>
-                        </div>
+    <section class="products-section-soft py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid items-center gap-12 lg:grid-cols-2">
+
+                <div>
+                    @if(!empty($productSupportSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $productSupportSection->label }}
+                        </p>
+                    @endif
+
+                    @if(!empty($productSupportSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                            {{ $productSupportSection->title }}
+                        </h2>
+                    @endif
+
+                    @if(!empty($productSupportSection->description_1))
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $productSupportSection->description_1 }}
+                        </p>
+                    @endif
+
+                    @if(!empty($productSupportSection->description_2))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $productSupportSection->description_2 }}
+                        </p>
+                    @endif
+
+                    <div class="mt-8 grid gap-4">
+
+                        @if(!empty($productSupportSection->feature_1_title))
+                            <div class="flex gap-4 rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
+                                <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 font-black text-blue-700">
+                                    ✓
+                                </div>
+
+                                <div>
+                                    <h3 class="font-black text-slate-950">
+                                        {{ $productSupportSection->feature_1_title }}
+                                    </h3>
+
+                                    @if(!empty($productSupportSection->feature_1_description))
+                                        <p class="mt-1 text-sm leading-6 text-slate-500">
+                                            {{ $productSupportSection->feature_1_description }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(!empty($productSupportSection->feature_2_title))
+                            <div class="flex gap-4 rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-sm">
+                                <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 font-black text-blue-700">
+                                    ✓
+                                </div>
+
+                                <div>
+                                    <h3 class="font-black text-slate-950">
+                                        {{ $productSupportSection->feature_2_title }}
+                                    </h3>
+
+                                    @if(!empty($productSupportSection->feature_2_description))
+                                        <p class="mt-1 text-sm leading-6 text-slate-500">
+                                            {{ $productSupportSection->feature_2_description }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
-            </div>
 
-            <div class="relative">
-                <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
-                <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
-                    <img class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
-                         src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85"
-                         alt="Product Distribution">
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black text-slate-950">Stock and partner support</p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">Product movement, dealer supply and market execution under one system.</p>
+                <div class="relative">
+                    <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
+
+                    <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
+
+                        @if(!empty($productSupportSection->image))
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="{{ asset('storage/' . $productSupportSection->image) }}"
+                                alt="{{ $productSupportSection->image_alt ?: $productSupportSection->title }}"
+                            >
+                        @else
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85"
+                                alt="{{ $productSupportSection->title ?? 'Product Distribution' }}"
+                            >
+                        @endif
+
+                        @if(!empty($productSupportSection->card_title) || !empty($productSupportSection->card_description))
+                            <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
+
+                                @if(!empty($productSupportSection->card_title))
+                                    <p class="text-2xl font-black text-slate-950">
+                                        {{ $productSupportSection->card_title }}
+                                    </p>
+                                @endif
+
+                                @if(!empty($productSupportSection->card_description))
+                                    <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
+                                        {{ $productSupportSection->card_description }}
+                                    </p>
+                                @endif
+
+                            </div>
+                        @endif
+
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+@endif
+
 
 {{-- STOCK ENQUIRY --}}
 <section id="stock-enquiry" class="bg-white py-16 lg:py-24">
@@ -359,36 +361,66 @@
 </section>
 
 {{-- FAQ --}}
-<section class="products-section-light py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2">
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">FAQs</p>
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-                    Product enquiry questions.
-                </h2>
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    Useful answers for retailers, dealers, wholesale partners and B2B buyers.
-                </p>
+{{-- FAQ --}}
+
+@if($faqSection && $faqSection->activeItems->count())
+
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="grid gap-12 lg:grid-cols-2">
+
+                <div>
+                    @if(!empty($faqSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $faqSection->label }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                            {{ $faqSection->title }}
+                        </h2>
+                    @endif
+
+                    @if(!empty($faqSection->description))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $faqSection->description }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->button_text))
+                        <a href="{{ $faqSection->button_link ?: '#' }}"
+                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                            {{ $faqSection->button_text }}
+                        </a>
+                    @endif
+                </div>
+
+                <div class="grid gap-4">
+                    @foreach($faqSection->activeItems as $faq)
+                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
+                                 {{ $faq->is_open ? 'open' : '' }}>
+
+                            <summary class="cursor-pointer text-lg font-black text-slate-950">
+                                {{ $faq->question }}
+                            </summary>
+
+                            @if(!empty($faq->answer))
+                                <p class="mt-3 leading-7 text-slate-600">
+                                    {{ $faq->answer }}
+                                </p>
+                            @endif
+                        </details>
+                    @endforeach
+                </div>
+
             </div>
 
-            <div class="grid gap-4">
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6" open>
-                    <summary class="cursor-pointer text-lg font-black">Can this page show actual SKUs?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">Yes. You can connect this layout with backend inventory and show product models, SKU codes, stock status and pricing.</p>
-                </details>
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                    <summary class="cursor-pointer text-lg font-black">Can dealers ask for bulk quantity?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">Yes. The enquiry form is suitable for dealer, wholesale and B2B bulk requirements.</p>
-                </details>
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                    <summary class="cursor-pointer text-lg font-black">Can offers and banners be added?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">Yes. Add promotional banners, retail partner offers and launch support sections according to active campaigns.</p>
-                </details>
-            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+@endif
 
 {{-- CTA --}}
 <section class="products-section-soft py-16 lg:py-24">

@@ -134,6 +134,11 @@ class B2bProgramSectionController extends Controller
 
             'sort_order' => 'nullable|integer|min:0',
             'status' => 'nullable|boolean',
+            'feature_3_title' => 'nullable|string|max:255',
+'feature_3_description' => 'nullable|string',
+
+'feature_4_title' => 'nullable|string|max:255',
+'feature_4_description' => 'nullable|string',
         ]);
     }
 }

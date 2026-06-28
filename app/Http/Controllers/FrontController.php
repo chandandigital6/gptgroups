@@ -141,31 +141,14 @@ class FrontController extends Controller
         ->orderBy('sort_order')
         ->latest()
         ->first();
+
+
+          
         return view('front.about', compact('founderSection', 'teamMembers', 'whatWeDoSection','quickFactSection'));
     }
 
 
 
-
-//    public function brands()
-//     {
-//         $brands = ProductBrand::where('status', 1)
-//             ->withCount([
-//                 'products' => function ($query) {
-//                     $query->where('status', 1);
-//                 },
-//                 'categories' => function ($query) {
-//                     $query->where('status', 1);
-//                 },
-//             ])
-//             ->orderBy('sort_order', 'asc')
-//             ->latest()
-//             ->paginate(12);
-
-//         return view('front.brands', compact('brands'));
-//     }
-
-  
 
 
 public function brands()
@@ -195,7 +178,28 @@ public function brands()
         ->limit(6)
         ->get();
 
-    return view('front.brands', compact('brands', 'productCategories'));
+        //Brand Portfolio
+        $brandsPortfolio = \App\Models\B2bProgramSection::active()
+        ->forPage('brand-portfolio')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+            $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('brands')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+          // Partner Support
+    $partnerSupportSection = \App\Models\B2bProgramSection::active()
+        ->forPage('brand-partner-support')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+    return view('front.brands', compact('brands', 'productCategories','brandsPortfolio','faqSection','partnerSupportSection'));
 }
 
 
@@ -268,7 +272,19 @@ public function brandCategories(ProductBrand $brand)
             ->latest()
             ->paginate(12);
 
-        return view('front.products', compact('products'));
+   $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('products')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+        $productSupportSection = \App\Models\B2bProgramSection::active()
+    ->forPage('product-support')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+        return view('front.products', compact('products','faqSection','productSupportSection'));
     }
 
     public function productDetail($slug)
@@ -296,67 +312,105 @@ public function brandCategories(ProductBrand $brand)
 
     
 
-    public function productDetailold($slug)
-{
-    $product = Product::with(['brand', 'category'])
-        ->where('slug', $slug)
-        ->where('status', 1)
-        ->firstOrFail();
-
-    $relatedProducts = Product::with(['brand', 'category'])
-        ->where('status', 1)
-        ->where('id', '!=', $product->id)
-        ->where(function ($query) use ($product) {
-            $query->where('product_brand_id', $product->product_brand_id)
-                ->orWhere('product_category_id', $product->product_category_id);
-        })
-        ->orderBy('sort_order', 'asc')
-        ->latest()
-        ->limit(4)
-        ->get();
-
-    return view('front.product_detail', compact('product', 'relatedProducts'));
-}
-
-
-
     public function groups_company()
     {
-        return view('front.groups_company');
+          $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('Company')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+        
+        $businessModelSection = \App\Models\B2bProgramSection::active()
+    ->forPage('business-model-groups-company')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+    $groupPrinciplesSection = \App\Models\B2bProgramSection::active()
+    ->forPage('group-principles')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+     $businessVerticalSection = \App\Models\BusinessVerticalSection::with('activeItems')
+        ->active()
+        ->forPage($pageSlug ?? 'groups-companies')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+        return view('front.groups_company', compact('faqSection','businessModelSection','groupPrinciplesSection','businessVerticalSection'));
     }
 
 
 
     public function network()
     {
-        return view('front.network');
+
+        $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('network')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+        $operatingModelSection = \App\Models\B2bProgramSection::active()
+    ->forPage('network-operating-model')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+
+    // Coverage Locations Section
+$coverageLocationSection = \App\Models\B2bBenefitSection::with('activeItems')
+    ->active()
+    ->forPage('coverage-locations-network')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+
+// Channels Section
+$channelNetworkSection = \App\Models\B2bBenefitSection::with('activeItems')
+    ->active()
+    ->forPage('channel-network')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+    
+        return view('front.network',compact('faqSection','operatingModelSection','channelNetworkSection','coverageLocationSection'));
     }
 
 
 
     public function news()
     {
-        return view('front.news');
+        $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('news')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+        $featuredUpdateSection = \App\Models\B2bProgramSection::active()
+    ->forPage('news-feature')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+    $newsCategorySection = \App\Models\B2bBenefitSection::with('activeItems')
+    ->active()
+    ->forPage('news-categories')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+        return view('front.news', compact('faqSection','featuredUpdateSection','newsCategorySection'));
     }
 
 
-    public function retail_outlet()
-    {
-        return view('front.retail_outlet');
-    }
 
 
-
-    public function carriers()
-    {
-        return view('front.carriers');
-    }
-
-    public function contact()
-    {
-        return view('front.contact');
-    }
-
+    
   public function services()
 {
     $repairServiceSection = \App\Models\RepairServiceSection::with('activeItems')
@@ -412,5 +466,51 @@ public function brandCategories(ProductBrand $brand)
         'faqSection',
     ));
 }
+
+
+    public function retail_outlet()
+    {
+         $faqSection = \App\Models\FaqSection::with('activeItems')
+        ->active()
+        ->forPage('retail-outlets')
+        ->orderBy('sort_order')
+        ->latest()
+        ->first();
+
+        $storeSetupSupportSection = \App\Models\B2bProgramSection::active()
+    ->forPage('retail-outlets-store')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+    $channelSupportSection = \App\Models\B2bBenefitSection::with('activeItems')
+    ->active()
+    ->forPage('retail-outlets')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+
+
+        return view('front.retail_outlet',compact('faqSection','storeSetupSupportSection','channelSupportSection'));
+    }
+
+
+  public function carriers()
+    {
+        // Why Work With Us Section
+$whyWorkSection = \App\Models\B2bBenefitSection::with('activeItems')
+    ->active()
+    ->forPage('why-work-with-us')
+    ->orderBy('sort_order')
+    ->latest()
+    ->first();
+        return view('front.carriers',compact('whyWorkSection'));
+    }
+
+    public function contact()
+    {
+        return view('front.contact');
+    }
+
 }
     

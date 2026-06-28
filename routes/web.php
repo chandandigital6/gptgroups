@@ -10,6 +10,7 @@ use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BusinessVerticalSectionController;
 use App\Http\Controllers\CompanyOverviewController;
 use App\Http\Controllers\FaqSectionController;
 use App\Http\Controllers\FounderSectionController;
@@ -267,6 +268,7 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
       Route::resource('b2b-program-sections', B2bProgramSectionController::class);
     Route::resource('b2b-benefit-sections', B2bBenefitSectionController::class);
      Route::resource('quick-fact-sections', QuickFactSectionController::class);
+       Route::resource('business-vertical-sections', BusinessVerticalSectionController::class);
 
 });
 

@@ -95,88 +95,131 @@
     </section>
 
     {{-- QUICK STATS --}}
-    <section class="relative z-10 -mt-10">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-slate-100">
-                    <p class="text-4xl font-black text-gradient">Android</p>
-                    <p class="mt-2 font-black text-slate-800">Brand Ecosystem</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-500">Samsung, Nokia, Vivo, Xiaomi, Huawei and more.</p>
-                </div>
 
-                <div class="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-slate-100">
-                    <p class="text-4xl font-black text-gradient">Apple</p>
-                    <p class="mt-2 font-black text-slate-800">Premium Devices</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-500">iPhone, iPad and MacBook product categories.</p>
-                </div>
+    {{-- <section class="relative z-10 -mt-10"> --}}
+    @include('front.sections.quick_facts', ['pageSlug' => 'brands'])
 
-                <div class="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-slate-100">
-                    <p class="text-4xl font-black text-gradient">B2B</p>
-                    <p class="mt-2 font-black text-slate-800">Distribution</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-500">Business supply, dealer network and retail support.</p>
-                </div>
+        
+    {{-- </section> --}}
 
-                <div class="rounded-[2rem] bg-white p-7 shadow-xl ring-1 ring-slate-100">
-                    <p class="text-4xl font-black text-gradient">GCC</p>
-                    <p class="mt-2 font-black text-slate-800">Market Support</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-500">Oman, UAE, Kuwait and regional execution.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     {{-- BRAND INTRO --}}
+
+@if($brandsPortfolio)
+
     <section class="bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid items-center gap-12 lg:grid-cols-2">
+
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">Brand Portfolio</p>
+                    @if(!empty($brandsPortfolio->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $brandsPortfolio->label }}
+                        </p>
+                    @endif
 
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                        One destination for modern technology products.
-                    </h2>
+                    @if(!empty($brandsPortfolio->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                            {{ $brandsPortfolio->title }}
+                        </h2>
+                    @endif
 
-                    <p class="mt-6 text-lg leading-8 text-slate-600">
-                        GPT Group is a dynamic distribution company providing diverse technology products for the digital
-                        age. The portfolio includes mobile devices, security solutions, display products, gadgets and
-                        mobile accessories.
-                    </p>
+                    @if(!empty($brandsPortfolio->description_1))
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $brandsPortfolio->description_1 }}
+                        </p>
+                    @endif
 
-                    <p class="mt-5 text-lg leading-8 text-slate-600">
-                        The group works with leading smartphone brands and supports authorized store setup, retail
-                        visibility, product distribution and after-sales service across Oman and GCC markets.
-                    </p>
+                    @if(!empty($brandsPortfolio->description_2))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $brandsPortfolio->description_2 }}
+                        </p>
+                    @endif
 
                     <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        <div class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
-                            <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-xl font-black text-blue-700">01</div>
-                            <h3 class="mt-5 text-xl font-black text-slate-950">Brand Distribution</h3>
-                            <p class="mt-2 text-sm leading-6 text-slate-500">Channel-wise product supply, stock movement and reseller support.</p>
-                        </div>
 
-                        <div class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
-                            <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-xl font-black text-cyan-700">02</div>
-                            <h3 class="mt-5 text-xl font-black text-slate-950">Retail Visibility</h3>
-                            <p class="mt-2 text-sm leading-6 text-slate-500">Launch campaigns, product display and customer-facing brand presence.</p>
-                        </div>
+                        @if(!empty($brandsPortfolio->feature_1_title))
+                            <div class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
+                                <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-xl font-black text-blue-700">
+                                    01
+                                </div>
+
+                                <h3 class="mt-5 text-xl font-black text-slate-950">
+                                    {{ $brandsPortfolio->feature_1_title }}
+                                </h3>
+
+                                @if(!empty($brandsPortfolio->feature_1_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $brandsPortfolio->feature_1_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if(!empty($brandsPortfolio->feature_2_title))
+                            <div class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
+                                <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-xl font-black text-cyan-700">
+                                    02
+                                </div>
+
+                                <h3 class="mt-5 text-xl font-black text-slate-950">
+                                    {{ $brandsPortfolio->feature_2_title }}
+                                </h3>
+
+                                @if(!empty($brandsPortfolio->feature_2_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $brandsPortfolio->feature_2_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
                     </div>
                 </div>
 
                 <div class="relative overflow-hidden rounded-[2.5rem] bg-slate-50 p-5 shadow-xl ring-1 ring-slate-100">
-                    <img class="h-[520px] w-full rounded-[2rem] object-cover"
-                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"
-                        alt="Brand partnership">
 
-                    <div class="mt-5 rounded-[1.75rem] bg-white p-6 shadow-lg ring-1 ring-slate-100">
-                        <p class="text-2xl font-black text-slate-950">Global Brands. Local Execution.</p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            Distribution, servicing, retail partner growth and market expansion.
-                        </p>
-                    </div>
+                    @if(!empty($brandsPortfolio->image))
+                        <img
+                            class="h-[520px] w-full rounded-[2rem] object-cover"
+                            src="{{ asset('storage/' . $brandsPortfolio->image) }}"
+                            alt="{{ $brandsPortfolio->image_alt ?: $brandsPortfolio->title }}"
+                        >
+                    @else
+                        <img
+                            class="h-[520px] w-full rounded-[2rem] object-cover"
+                            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"
+                            alt="{{ $brandsPortfolio->title ?? 'Brand partnership' }}"
+                        >
+                    @endif
+
+                    @if(!empty($brandsPortfolio->card_title) || !empty($brandsPortfolio->card_description))
+                        <div class="mt-5 rounded-[1.75rem] bg-white p-6 shadow-lg ring-1 ring-slate-100">
+
+                            @if(!empty($brandsPortfolio->card_title))
+                                <p class="text-2xl font-black text-slate-950">
+                                    {{ $brandsPortfolio->card_title }}
+                                </p>
+                            @endif
+
+                            @if(!empty($brandsPortfolio->card_description))
+                                <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
+                                    {{ $brandsPortfolio->card_description }}
+                                </p>
+                            @endif
+
+                        </div>
+                    @endif
+
                 </div>
+
             </div>
         </div>
     </section>
+
+@endif
+
 
     {{-- BRAND PORTFOLIO --}}
     <section id="brand-portfolio" class="bg-slate-50 py-16 lg:py-24">
@@ -355,57 +398,143 @@
     @endif
 
     {{-- PARTNER SUPPORT --}}
+   
+    {{-- PARTNER SUPPORT --}}
+
+@if($partnerSupportSection)
+
     <section class="bg-slate-50 py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid items-center gap-12 lg:grid-cols-2">
+
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">Partner Assist Programmes</p>
+                    @if(!empty($partnerSupportSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $partnerSupportSection->label }}
+                        </p>
+                    @endif
 
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                        Helping brands and retailers grow faster.
-                    </h2>
+                    @if(!empty($partnerSupportSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                            {{ $partnerSupportSection->title }}
+                        </h2>
+                    @endif
 
-                    <p class="mt-6 text-lg leading-8 text-slate-600">
-                        GPT Group assists individuals and businesses to set up authorized store outlets in Oman, Kuwait
-                        and UAE by supporting brand standards, store setup formalities and retail execution.
-                    </p>
+                    @if(!empty($partnerSupportSection->description_1))
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $partnerSupportSection->description_1 }}
+                        </p>
+                    @endif
+
+                    @if(!empty($partnerSupportSection->description_2))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $partnerSupportSection->description_2 }}
+                        </p>
+                    @endif
 
                     <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
-                            <h3 class="text-xl font-black text-slate-950">Store Setup Assistance</h3>
-                            <p class="mt-2 text-sm leading-6 text-slate-500">Authorized reseller program for brand outlet setup and requirements.</p>
-                        </div>
 
-                        <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
-                            <h3 class="text-xl font-black text-slate-950">Servicing & Marketing</h3>
-                            <p class="mt-2 text-sm leading-6 text-slate-500">Brand-based and multi-brand repair outlet network with customer support.</p>
-                        </div>
+                        @if(!empty($partnerSupportSection->feature_1_title))
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $partnerSupportSection->feature_1_title }}
+                                </h3>
 
-                        <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
-                            <h3 class="text-xl font-black text-slate-950">Demand Generation</h3>
-                            <p class="mt-2 text-sm leading-6 text-slate-500">Campaigns, promotions and product launch visibility.</p>
-                        </div>
+                                @if(!empty($partnerSupportSection->feature_1_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $partnerSupportSection->feature_1_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
 
-                        <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
-                            <h3 class="text-xl font-black text-slate-950">Supply Chain Support</h3>
-                            <p class="mt-2 text-sm leading-6 text-slate-500">Stock planning, distribution and partner availability support.</p>
-                        </div>
+                        @if(!empty($partnerSupportSection->feature_2_title))
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $partnerSupportSection->feature_2_title }}
+                                </h3>
+
+                                @if(!empty($partnerSupportSection->feature_2_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $partnerSupportSection->feature_2_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if(!empty($partnerSupportSection->feature_3_title))
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $partnerSupportSection->feature_3_title }}
+                                </h3>
+
+                                @if(!empty($partnerSupportSection->feature_3_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $partnerSupportSection->feature_3_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if(!empty($partnerSupportSection->feature_4_title))
+                            <div class="rounded-[1.75rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $partnerSupportSection->feature_4_title }}
+                                </h3>
+
+                                @if(!empty($partnerSupportSection->feature_4_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $partnerSupportSection->feature_4_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
                     </div>
                 </div>
 
                 <div class="relative overflow-hidden rounded-[2.5rem] bg-white p-5 shadow-xl ring-1 ring-slate-100">
-                    <img class="h-[520px] w-full rounded-[2rem] object-cover"
-                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"
-                        alt="Partner support">
 
-                    <div class="mt-5 rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
-                        <p class="text-3xl font-black text-slate-950">Brand Growth Support</p>
-                        <p class="mt-2 text-slate-600">Distribution, training, service and retail execution.</p>
-                    </div>
+                    @if(!empty($partnerSupportSection->image))
+                        <img
+                            class="h-[520px] w-full rounded-[2rem] object-cover"
+                            src="{{ asset('storage/' . $partnerSupportSection->image) }}"
+                            alt="{{ $partnerSupportSection->image_alt ?: $partnerSupportSection->title }}"
+                        >
+                    @else
+                        <img
+                            class="h-[520px] w-full rounded-[2rem] object-cover"
+                            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"
+                            alt="{{ $partnerSupportSection->title ?? 'Partner support' }}"
+                        >
+                    @endif
+
+                    @if(!empty($partnerSupportSection->card_title) || !empty($partnerSupportSection->card_description))
+                        <div class="mt-5 rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
+
+                            @if(!empty($partnerSupportSection->card_title))
+                                <p class="text-3xl font-black text-slate-950">
+                                    {{ $partnerSupportSection->card_title }}
+                                </p>
+                            @endif
+
+                            @if(!empty($partnerSupportSection->card_description))
+                                <p class="mt-2 text-slate-600">
+                                    {{ $partnerSupportSection->card_description }}
+                                </p>
+                            @endif
+
+                        </div>
+                    @endif
+
                 </div>
+
             </div>
         </div>
     </section>
+
+@endif
+
 
     {{-- BRAND LOGOS --}}
     <section class="bg-white py-16 lg:py-24">
@@ -506,51 +635,65 @@
     </section>
 
     {{-- FAQ --}}
+
+@if($faqSection && $faqSection->activeItems->count())
+
     <section class="bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
             <div class="grid gap-12 lg:grid-cols-2">
+
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">FAQs</p>
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-                        Brand questions.
-                    </h2>
-                    <p class="mt-5 text-lg leading-8 text-slate-600">
-                        Quick answers for retailers, dealers, B2B buyers and brand partners.
-                    </p>
+                    @if(!empty($faqSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $faqSection->label }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                            {{ $faqSection->title }}
+                        </h2>
+                    @endif
+
+                    @if(!empty($faqSection->description))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $faqSection->description }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->button_text))
+                        <a href="{{ $faqSection->button_link ?: '#' }}"
+                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                            {{ $faqSection->button_text }}
+                        </a>
+                    @endif
                 </div>
 
                 <div class="grid gap-4">
-                    <details class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100" open>
-                        <summary class="cursor-pointer text-lg font-black text-slate-950">Which brand categories does GPT Group handle?</summary>
-                        <p class="mt-3 leading-7 text-slate-600">
-                            GPT Group handles mobile devices, smartphones, tablets, accessories, gadgets, display products and security solutions.
-                        </p>
-                    </details>
+                    @foreach($faqSection->activeItems as $faq)
+                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
+                                 {{ $faq->is_open ? 'open' : '' }}>
 
-                    <details class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
-                        <summary class="cursor-pointer text-lg font-black text-slate-950">Which smartphone brands are mentioned in GPT Group ecosystem?</summary>
-                        <p class="mt-3 leading-7 text-slate-600">
-                            Samsung, Nokia, Vivo, Xiaomi, Huawei, BlackBerry, Sony, Micromax and Apple ecosystem products are mentioned in GPT Group’s public brand content.
-                        </p>
-                    </details>
+                            <summary class="cursor-pointer text-lg font-black text-slate-950">
+                                {{ $faq->question }}
+                            </summary>
 
-                    <details class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
-                        <summary class="cursor-pointer text-lg font-black text-slate-950">Does GPT Group support authorized store setup?</summary>
-                        <p class="mt-3 leading-7 text-slate-600">
-                            Yes. GPT Group assists businesses and individuals with authorized store outlet setup in Oman, Kuwait and UAE.
-                        </p>
-                    </details>
-
-                    <details class="rounded-[1.75rem] bg-slate-50 p-6 ring-1 ring-slate-100">
-                        <summary class="cursor-pointer text-lg font-black text-slate-950">How can a brand contact GPT Group?</summary>
-                        <p class="mt-3 leading-7 text-slate-600">
-                            Use the enquiry form or contact GPT Group through the Contact page for distribution, retail and B2B partnership.
-                        </p>
-                    </details>
+                            @if(!empty($faq->answer))
+                                <p class="mt-3 leading-7 text-slate-600">
+                                    {{ $faq->answer }}
+                                </p>
+                            @endif
+                        </details>
+                    @endforeach
                 </div>
+
             </div>
+
         </div>
     </section>
+
+@endif
 
     {{-- CTA --}}
     <section class="bg-slate-50 py-16 lg:py-24">

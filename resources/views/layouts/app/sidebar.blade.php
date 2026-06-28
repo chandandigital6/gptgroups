@@ -44,6 +44,11 @@
                     {{ __('Retail Outlets') }}
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="rectangle-stack" :href="route('business-vertical-sections.index')"
+                    :current="request()->routeIs('business-vertical-sections.*')" wire:navigate>
+                    {{ __('Business Verticals') }}
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="chart-bar-square" :href="route('strategy-sections.index')"
                     :current="request()->routeIs('strategy-sections.*')" wire:navigate>
                     {{ __('Strategies') }}

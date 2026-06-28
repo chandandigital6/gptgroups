@@ -389,7 +389,8 @@
 
     {{-- 03. STATS --}}
     <section class="section-muted py-14 lg:py-18">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        @include('front.sections.quick_facts', ['pageSlug' => 'home'])
+        {{-- <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 <div class="soft-card soft-card-hover rounded-[28px] p-6">
                     <p class="text-gradient text-4xl font-black">20+</p>
@@ -408,7 +409,7 @@
                     <p class="mt-2 font-semibold text-slate-600">Oman, UAE, Kuwait</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
 
     {{-- 04. COMPANY OVERVIEW --}}

@@ -421,66 +421,7 @@
 
 
 
-{{-- FAQ --}}
 
-@if($faqSection && $faqSection->activeItems->count())
-
-    <section class="bg-white py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-            <div class="grid gap-12 lg:grid-cols-2">
-
-                <div>
-                    @if(!empty($faqSection->label))
-                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                            {{ $faqSection->label }}
-                        </p>
-                    @endif
-
-                    @if(!empty($faqSection->title))
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-                            {{ $faqSection->title }}
-                        </h2>
-                    @endif
-
-                    @if(!empty($faqSection->description))
-                        <p class="mt-5 text-lg leading-8 text-slate-600">
-                            {{ $faqSection->description }}
-                        </p>
-                    @endif
-
-                    @if(!empty($faqSection->button_text))
-                        <a href="{{ $faqSection->button_link ?: '#' }}"
-                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                            {{ $faqSection->button_text }}
-                        </a>
-                    @endif
-                </div>
-
-                <div class="grid gap-4">
-                    @foreach($faqSection->activeItems as $faq)
-                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
-                                 {{ $faq->is_open ? 'open' : '' }}>
-
-                            <summary class="cursor-pointer text-lg font-black text-slate-950">
-                                {{ $faq->question }}
-                            </summary>
-
-                            @if(!empty($faq->answer))
-                                <p class="mt-3 leading-7 text-slate-600">
-                                    {{ $faq->answer }}
-                                </p>
-                            @endif
-                        </details>
-                    @endforeach
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-@endif
 
 
 {{-- SERVICE FORM --}}
@@ -568,6 +509,66 @@
 </section>
 
 
+{{-- FAQ --}}
+
+@if($faqSection && $faqSection->activeItems->count())
+
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="grid gap-12 lg:grid-cols-2">
+
+                <div>
+                    @if(!empty($faqSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $faqSection->label }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                            {{ $faqSection->title }}
+                        </h2>
+                    @endif
+
+                    @if(!empty($faqSection->description))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $faqSection->description }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->button_text))
+                        <a href="{{ $faqSection->button_link ?: '#' }}"
+                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                            {{ $faqSection->button_text }}
+                        </a>
+                    @endif
+                </div>
+
+                <div class="grid gap-4">
+                    @foreach($faqSection->activeItems as $faq)
+                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
+                                 {{ $faq->is_open ? 'open' : '' }}>
+
+                            <summary class="cursor-pointer text-lg font-black text-slate-950">
+                                {{ $faq->question }}
+                            </summary>
+
+                            @if(!empty($faq->answer))
+                                <p class="mt-3 leading-7 text-slate-600">
+                                    {{ $faq->answer }}
+                                </p>
+                            @endif
+                        </details>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+@endif
 
 
 {{-- CTA --}}

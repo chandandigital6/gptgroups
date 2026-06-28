@@ -1,3 +1,27 @@
+
+@once
+    <style>
+        .text-gradient {
+            background: linear-gradient(90deg, #2563eb, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .soft-card {
+            border: 1px solid rgba(226, 232, 240, .95);
+            background: rgba(255, 255, 255, .92);
+            box-shadow: 0 18px 55px rgba(15, 23, 42, .07);
+            transition: all .35s ease;
+        }
+
+        .soft-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 28px 75px rgba(37, 99, 235, .13);
+        }
+    </style>
+@endonce
+
 @php
     $quickFactSection = \App\Models\QuickFactSection::with('activeItems')
         ->active()
@@ -54,3 +78,4 @@
         </div>
     </section>
 @endif
+

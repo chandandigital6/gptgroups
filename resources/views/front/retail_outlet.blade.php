@@ -70,93 +70,15 @@
 
 
 {{-- HERO --}}
-<section class="relative overflow-hidden outlet-soft-bg">
-    <div class="absolute -top-24 -right-20 h-96 w-96 rounded-full bg-cyan-300 outlet-blob"></div>
-    <div class="absolute top-44 -left-28 h-96 w-96 rounded-full bg-blue-300 outlet-blob"></div>
+@include('front.sections.page_hero', ['pageSlug' => 'retail-outlets'])
 
-    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-
-            <div>
-                <div class="inline-flex items-center gap-3 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-sm font-black text-blue-700 shadow-sm">
-                    <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
-                    Retail Outlets
-                </div>
-
-                <h1 class="mt-7 text-5xl font-black leading-[.95] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-                    Retail Presence
-                    <span class="mt-2 block outlet-gradient-text">
-                        Across Oman
-                    </span>
-                </h1>
-
-                <p class="mt-7 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
-                    GPT Group supports authorized mobile retail stores, showrooms, service centres and partner outlets with brand visibility, supply-chain execution and customer-focused retail operations.
-                </p>
-
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#outlets"
-                        class="inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                        View Outlets
-                    </a>
-
-                    <a href="{{ route('contact') }}"
-                        class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1 hover:bg-slate-50">
-                        Partner Enquiry
-                    </a>
-                </div>
-
-                <div class="mt-9 grid max-w-xl grid-cols-2 gap-4 sm:grid-cols-4">
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black outlet-gradient-text">Retail</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Showrooms</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black outlet-gradient-text">Oman</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Locations</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black outlet-gradient-text">B2B</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Support</p>
-                    </div>
-
-                    <div class="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm backdrop-blur">
-                        <p class="text-2xl font-black outlet-gradient-text">Care</p>
-                        <p class="mt-1 text-xs font-bold text-slate-500">Service</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -inset-6 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative overflow-hidden rounded-[2.75rem] border border-white bg-white/85 p-4 shadow-2xl ring-1 ring-cyan-100 backdrop-blur-xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=85"
-                        alt="GPT Retail Outlets"
-                        class="h-[330px] w-full rounded-[2.2rem] object-cover sm:h-[430px] lg:h-[500px]"
-                    >
-
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black leading-tight text-slate-950">
-                            Retail + Service Network
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            Showrooms, partner outlets, service centres and authorized store support.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 
 {{-- QUICK FACTS --}}
-<section class="relative z-10 -mt-8 bg-transparent">
+
+@include('front.sections.quick_facts', ['pageSlug' => 'retail-outlets'])
+
+{{-- <section class="relative z-10 -mt-8 bg-transparent">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <div class="outlet-card-hover rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
@@ -184,7 +106,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 
 {{-- CUSTOMER SATISFACTION --}}
@@ -254,51 +176,68 @@
 
 
 {{-- CHANNEL SUPPORT --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="mx-auto max-w-3xl text-center">
-            <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                Retail Channels
-            </p>
+{{-- CHANNEL SUPPORT --}}
 
-            <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                Complete channel support.
-            </h2>
+@if($channelSupportSection && $channelSupportSection->activeItems->count())
 
-            <p class="mt-5 text-lg leading-8 text-slate-600">
-                GPT Group works with retail showrooms, wholesale partners, service centres, key dealer retailers and B2B customers.
-            </p>
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                    {{ $channelSupportSection->label }}
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    {{ $channelSupportSection->title }}
+                </h2>
+
+                <p class="mt-5 text-lg leading-8 text-slate-600">
+                    {{ $channelSupportSection->description }}
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($channelSupportSection->activeItems as $item)
+
+                    @php
+                        $boxClass = match($item->theme) {
+                            'cyan' => 'border-cyan-100 bg-cyan-50',
+                            'blue' => 'border-blue-100 bg-blue-50',
+                            'slate' => 'border-slate-100 bg-slate-50',
+                            default => 'border-slate-100 bg-slate-50',
+                        };
+
+                        $iconClass = match($item->theme) {
+                            'cyan' => 'bg-cyan-500',
+                            'blue' => 'bg-blue-600',
+                            'slate' => 'bg-slate-700',
+                            default => 'bg-blue-600',
+                        };
+                    @endphp
+
+                    <div class="outlet-card-hover rounded-[2rem] border {{ $boxClass }} p-8">
+                        <div class="grid h-14 w-14 place-items-center rounded-2xl {{ $iconClass }} text-2xl font-black text-white">
+                            {{ $item->icon_text }}
+                        </div>
+
+                        <h3 class="mt-6 text-2xl font-black text-slate-950">
+                            {{ $item->title }}
+                        </h3>
+
+                        <p class="mt-3 leading-7 text-slate-600">
+                            {{ $item->description }}
+                        </p>
+                    </div>
+
+                @endforeach
+            </div>
+
         </div>
+    </section>
 
-        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="outlet-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">R</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Retail IRs</h3>
-                <p class="mt-3 leading-7 text-slate-600">Customer-facing retail counters for direct product availability and customer reach.</p>
-            </div>
-
-            <div class="outlet-card-hover rounded-[2rem] border border-cyan-100 bg-cyan-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">W</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">Wholesale</h3>
-                <p class="mt-3 leading-7 text-slate-600">Bulk distribution, stock movement and regional partner fulfilment support.</p>
-            </div>
-
-            <div class="outlet-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white">K</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">KDR Network</h3>
-                <p class="mt-3 leading-7 text-slate-600">Key dealer retailers for premium product categories and market visibility.</p>
-            </div>
-
-            <div class="outlet-card-hover rounded-[2rem] border border-slate-100 bg-slate-50 p-8">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-cyan-500 text-2xl font-black text-white">B</div>
-                <h3 class="mt-6 text-2xl font-black text-slate-950">B2B Sales</h3>
-                <p class="mt-3 leading-7 text-slate-600">Corporate, institutional and business product supply requirements.</p>
-            </div>
-        </div>
-
-    </div>
-</section>
+@endif
 
 
 {{-- OUTLETS LIST --}}
@@ -450,74 +389,143 @@
 
 
 {{-- STORE SETUP SUPPORT --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+{{-- STORE SETUP SUPPORT --}}
 
-            <div class="relative order-2 lg:order-1">
-                <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
+@if($storeSetupSupportSection)
 
-                <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
-                    <img
-                        class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
-                        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
-                        alt="Retail store support"
-                    >
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-                    <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
-                        <p class="text-2xl font-black text-slate-950">
-                            Authorized store support
-                        </p>
-                        <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
-                            From setup planning to retail customer experience.
-                        </p>
+                <div class="relative order-2 lg:order-1">
+                    <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
+
+                    <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
+
+                        @if(!empty($storeSetupSupportSection->image))
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="{{ asset('storage/' . $storeSetupSupportSection->image) }}"
+                                alt="{{ $storeSetupSupportSection->image_alt ?: $storeSetupSupportSection->title }}"
+                            >
+                        @else
+                            <img
+                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
+                                alt="{{ $storeSetupSupportSection->title ?? 'Retail store support' }}"
+                            >
+                        @endif
+
+                        @if(!empty($storeSetupSupportSection->card_title) || !empty($storeSetupSupportSection->card_description))
+                            <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
+                                @if(!empty($storeSetupSupportSection->card_title))
+                                    <p class="text-2xl font-black text-slate-950">
+                                        {{ $storeSetupSupportSection->card_title }}
+                                    </p>
+                                @endif
+
+                                @if(!empty($storeSetupSupportSection->card_description))
+                                    <p class="mt-2 text-base font-semibold leading-7 text-slate-600">
+                                        {{ $storeSetupSupportSection->card_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
                     </div>
                 </div>
-            </div>
 
-            <div class="order-1 lg:order-2">
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Store Setup
-                </p>
+                <div class="order-1 lg:order-2">
+                    @if(!empty($storeSetupSupportSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $storeSetupSupportSection->label }}
+                        </p>
+                    @endif
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Empowering businesses to operate successful mobile stores.
-                </h2>
+                    @if(!empty($storeSetupSupportSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                            {{ $storeSetupSupportSection->title }}
+                        </h2>
+                    @endif
 
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    GPT Group supports businesses and entrepreneurs in opening authorized mobile store outlets by leveraging industry expertise and partnerships with leading technology brands.
-                </p>
+                    @if(!empty($storeSetupSupportSection->description_1))
+                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                            {{ $storeSetupSupportSection->description_1 }}
+                        </p>
+                    @endif
 
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    With understanding of local and regional markets in Oman and the GCC, GPT Group provides end-to-end solutions that simplify the store setup process and help maintain brand standards.
-                </p>
+                    @if(!empty($storeSetupSupportSection->description_2))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $storeSetupSupportSection->description_2 }}
+                        </p>
+                    @endif
 
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <h3 class="text-xl font-black text-slate-950">Brand Standards</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Consistent showroom look, product display and customer experience.</p>
-                    </div>
+                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
 
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <h3 class="text-xl font-black text-slate-950">Retail Planning</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Product range, stock planning and launch campaign support.</p>
-                    </div>
+                        @if(!empty($storeSetupSupportSection->feature_1_title))
+                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $storeSetupSupportSection->feature_1_title }}
+                                </h3>
 
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <h3 class="text-xl font-black text-slate-950">Supply Chain</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Efficient product movement and availability management.</p>
-                    </div>
+                                @if(!empty($storeSetupSupportSection->feature_1_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                                        {{ $storeSetupSupportSection->feature_1_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
 
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <h3 class="text-xl font-black text-slate-950">Customer Experience</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Retail service approach for customer satisfaction and repeat business.</p>
-                    </div>
-                </div>
-            </div>
+                        @if(!empty($storeSetupSupportSection->feature_2_title))
+                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $storeSetupSupportSection->feature_2_title }}
+                                </h3>
 
-        </div>
+                                @if(!empty($storeSetupSupportSection->feature_2_description))
+                                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                                        {{ $storeSetupSupportSection->feature_2_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if(!empty($storeSetupSupportSection->feature_3_title))
+    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+        <h3 class="text-xl font-black text-slate-950">
+            {{ $storeSetupSupportSection->feature_3_title }}
+        </h3>
+
+        @if(!empty($storeSetupSupportSection->feature_3_description))
+            <p class="mt-2 text-sm leading-6 text-slate-600">
+                {{ $storeSetupSupportSection->feature_3_description }}
+            </p>
+        @endif
     </div>
-</section>
+@endif
+
+@if(!empty($storeSetupSupportSection->feature_4_title))
+    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+        <h3 class="text-xl font-black text-slate-950">
+            {{ $storeSetupSupportSection->feature_4_title }}
+        </h3>
+
+        @if(!empty($storeSetupSupportSection->feature_4_description))
+            <p class="mt-2 text-sm leading-6 text-slate-600">
+                {{ $storeSetupSupportSection->feature_4_description }}
+            </p>
+        @endif
+    </div>
+@endif
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+@endif
 
 
 {{-- LOCATION CTA --}}
@@ -603,57 +611,65 @@
 
 
 {{-- FAQ --}}
-<section class="bg-white py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="grid gap-12 lg:grid-cols-2">
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    FAQs
-                </p>
+@if($faqSection && $faqSection->activeItems->count())
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-                    Retail outlet questions.
-                </h2>
+    <section class="bg-white py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    Useful information for customers, retailers, dealers and entrepreneurs interested in GPT Group outlets.
-                </p>
+            <div class="grid gap-12 lg:grid-cols-2">
+
+                <div>
+                    @if(!empty($faqSection->label))
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $faqSection->label }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->title))
+                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                            {{ $faqSection->title }}
+                        </h2>
+                    @endif
+
+                    @if(!empty($faqSection->description))
+                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                            {{ $faqSection->description }}
+                        </p>
+                    @endif
+
+                    @if(!empty($faqSection->button_text))
+                        <a href="{{ $faqSection->button_link ?: '#' }}"
+                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                            {{ $faqSection->button_text }}
+                        </a>
+                    @endif
+                </div>
+
+                <div class="grid gap-4">
+                    @foreach($faqSection->activeItems as $faq)
+                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
+                                 {{ $faq->is_open ? 'open' : '' }}>
+
+                            <summary class="cursor-pointer text-lg font-black text-slate-950">
+                                {{ $faq->question }}
+                            </summary>
+
+                            @if(!empty($faq->answer))
+                                <p class="mt-3 leading-7 text-slate-600">
+                                    {{ $faq->answer }}
+                                </p>
+                            @endif
+                        </details>
+                    @endforeach
+                </div>
+
             </div>
 
-            <div class="grid gap-4">
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm" open>
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">Which brands are available at GPT outlets?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        Listed outlets mention Samsung, Honor and Apple availability. Product availability can vary by outlet and stock.
-                    </p>
-                </details>
-
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">Can I open an authorized mobile store with GPT Group?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        Yes. GPT Group supports businesses and entrepreneurs with authorized mobile store setup, brand standards and retail execution.
-                    </p>
-                </details>
-
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">Does GPT Group support wholesale and B2B supply?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        Yes. GPT Group works with retail, wholesale, key dealer retailers and B2B customers for product supply and partner support.
-                    </p>
-                </details>
-
-                <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
-                    <summary class="cursor-pointer text-lg font-black text-slate-950">How can I contact GPT Group?</summary>
-                    <p class="mt-3 leading-7 text-slate-600">
-                        You can contact via helpline +968 2450-1533 or email info@gptgroups.com.
-                    </p>
-                </details>
-            </div>
         </div>
+    </section>
 
-    </div>
-</section>
+@endif
 
 
 {{-- CTA --}}
