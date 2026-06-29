@@ -177,7 +177,6 @@
 
 {{-- CHANNEL SUPPORT --}}
 
-{{-- CHANNEL SUPPORT --}}
 
 @if($channelSupportSection && $channelSupportSection->activeItems->count())
 
@@ -241,154 +240,128 @@
 
 
 {{-- OUTLETS LIST --}}
-<section id="outlets" class="outlet-section-soft py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Our Outlets
-                </p>
+@if($storeOutletSection && $storeOutletSection->activeOutlets->count())
+    <section id="{{ $storeOutletSection->section_id ?: 'outlets' }}" class="outlet-section-soft py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                    Retail & Service Locations
-                </h2>
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                    @if($storeOutletSection->label)
+                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                            {{ $storeOutletSection->label }}
+                        </p>
+                    @endif
 
-                <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                    Official showrooms and partner outlets listed for customer convenience and business visibility.
-                </p>
+                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                        {{ $storeOutletSection->title }}
+                    </h2>
+
+                    @if($storeOutletSection->description)
+                        <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                            {{ $storeOutletSection->description }}
+                        </p>
+                    @endif
+                </div>
+
+                @if($storeOutletSection->button_text)
+                    <a href="{{ $storeOutletSection->button_link ?: '#' }}"
+                       class="inline-flex w-fit rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                        {{ $storeOutletSection->button_text }}
+                    </a>
+                @endif
             </div>
 
-            <a href="{{ route('contact') }}"
-                class="inline-flex w-fit rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
-                Open Partner Outlet
-            </a>
-        </div>
+            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                @foreach($storeOutletSection->activeOutlets as $outlet)
+                    @php
+                        $badgeClass = match($outlet->theme) {
+                            'cyan' => 'bg-cyan-500',
+                            'slate' => 'bg-slate-800',
+                            'pink' => 'bg-pink-500',
+                            default => 'bg-blue-600',
+                        };
+                    @endphp
 
-        @php
-            $outlets = [
-                [
-                    'title' => 'GPT Samsung Lounge',
-                    'subtitle' => 'Showroom @ Ruwi, Muscat',
-                    'image' => 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=900&q=80',
-                    'badge' => 'Official Showroom',
-                    'badgeClass' => 'bg-blue-600',
-                    'details' => [
-                        'Company' => 'Global Phone Technology',
-                        'Brands' => 'Samsung, Honor, Apple',
-                        'Contact Person' => 'Mr. Shafi',
-                        'Contact No' => '+968 7258 8851',
-                    ],
-                ],
-                [
-                    'title' => 'GPT Hikvision Salalah',
-                    'subtitle' => 'Showroom @ Salalah',
-                    'image' => 'https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?auto=format&fit=crop&w=900&q=80',
-                    'badge' => 'Showroom',
-                    'badgeClass' => 'bg-cyan-500',
-                    'details' => [
-                        'Outlet' => 'Globtech Mobile Showroom',
-                        'Location' => 'Ruwi Heights, Muscat, Oman',
-                        'Brands' => 'Samsung, Honor, Apple',
-                        'Contact' => 'Mr. Sudhanshu Mishra | +968 9810 0827',
-                    ],
-                ],
-                [
-                    'title' => 'GPT Service Centre',
-                    'subtitle' => 'Service Centre @ Sur, Muscat',
-                    'image' => 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=900&q=80',
-                    'badge' => 'Service Centre',
-                    'badgeClass' => 'bg-blue-600',
-                    'details' => [
-                        'Outlet' => 'Globtech Mobile Showroom',
-                        'Address' => 'ONTC Bus Stop, Sur, Oman',
-                        'Brands' => 'Samsung, Honor, Apple',
-                        'Service' => 'Customer support and product assistance',
-                    ],
-                ],
-                [
-                    'title' => 'Honor Phone Outlet',
-                    'subtitle' => 'Showroom @ Sohar',
-                    'image' => 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=900&q=80',
-                    'badge' => 'Official Showroom',
-                    'badgeClass' => 'bg-blue-600',
-                    'details' => [
-                        'Location' => 'Al Hambar, Sohar, Oman',
-                        'Brands' => 'Samsung, Honor, Apple',
-                        'Contact Person' => 'Mr. Sudhanshu Mishra',
-                        'Contact No' => '+968 9810 0827',
-                    ],
-                ],
-                [
-                    'title' => 'GPT Samsung Lounge',
-                    'subtitle' => 'Showroom @ Salalah',
-                    'image' => 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=80',
-                    'badge' => 'Showroom',
-                    'badgeClass' => 'bg-cyan-500',
-                    'details' => [
-                        'Outlet' => 'Honor Phone Outlet',
-                        'Location' => 'Salalah, Oman',
-                        'Brands' => 'Samsung, Honor, Apple',
-                        'Contact' => 'Mr. Sudhanshu Mishra | +968 9810 0827',
-                    ],
-                ],
-            ];
-        @endphp
+                    <div class="group outlet-card-hover overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
+                        <div class="relative h-56 overflow-hidden">
+                            @if($outlet->image)
+                                <img src="{{ asset('storage/' . $outlet->image) }}"
+                                     alt="{{ $outlet->image_alt ?: $outlet->title }}"
+                                     class="h-full w-full object-cover transition duration-500 group-hover:scale-110">
+                            @endif
 
-        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            @foreach ($outlets as $outlet)
-                <div class="group outlet-card-hover overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm">
-                    <div class="relative h-56 overflow-hidden">
-                        <img
-                            src="{{ $outlet['image'] }}"
-                            alt="{{ $outlet['title'] }}"
-                            class="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                        >
-                        <span class="absolute left-5 top-5 rounded-full {{ $outlet['badgeClass'] }} px-4 py-2 text-xs font-black text-white">
-                            {{ $outlet['badge'] }}
-                        </span>
-                    </div>
-
-                    <div class="p-7">
-                        <h3 class="text-2xl font-black text-slate-950">
-                            {{ $outlet['title'] }}
-                        </h3>
-
-                        <p class="mt-2 font-bold text-blue-700">
-                            {{ $outlet['subtitle'] }}
-                        </p>
-
-                        <div class="mt-5 space-y-3 text-sm leading-6 text-slate-600">
-                            @foreach ($outlet['details'] as $label => $value)
-                                <p><b>{{ $label }}:</b> {{ $value }}</p>
-                            @endforeach
+                            @if($outlet->badge)
+                                <span class="absolute left-5 top-5 rounded-full {{ $badgeClass }} px-4 py-2 text-xs font-black text-white">
+                                    {{ $outlet->badge }}
+                                </span>
+                            @endif
                         </div>
 
-                        <a href="{{ route('contact') }}"
-                            class="mt-7 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white transition hover:bg-blue-500">
-                            Contact Outlet
-                        </a>
+                        <div class="p-7">
+                            <h3 class="text-2xl font-black text-slate-950">
+                                {{ $outlet->title }}
+                            </h3>
+
+                            @if($outlet->subtitle)
+                                <p class="mt-2 font-bold text-blue-700">
+                                    {{ $outlet->subtitle }}
+                                </p>
+                            @endif
+
+                            @if($outlet->activeDetails->count())
+                                <div class="mt-5 space-y-3 text-sm leading-6 text-slate-600">
+                                    @foreach($outlet->activeDetails as $detail)
+                                        <p>
+                                            <b>{{ $detail->label }}:</b> {{ $detail->value }}
+                                        </p>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if($outlet->button_text)
+                                <a href="{{ $outlet->button_link ?: '#' }}"
+                                   class="mt-7 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white transition hover:bg-blue-500">
+                                    {{ $outlet->button_text }}
+                                </a>
+                            @endif
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
 
-            <div class="rounded-[2rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 text-white shadow-xl">
-                <p class="font-black uppercase tracking-[.25em] text-blue-100">Partner Outlet</p>
-                <h3 class="mt-4 text-3xl font-black leading-tight">Want to open an authorized mobile store?</h3>
-                <p class="mt-4 leading-7 text-blue-50">
-                    GPT Group supports businesses and entrepreneurs with authorized mobile store setup, brand standards, retail guidance and market execution.
-                </p>
-                <a href="{{ route('contact') }}" class="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 transition hover:-translate-y-1">
-                    Start Enquiry
-                </a>
+                @if($storeOutletSection->cta_title)
+                    <div class="rounded-[2rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 text-white shadow-xl">
+                        @if($storeOutletSection->cta_label)
+                            <p class="font-black uppercase tracking-[.25em] text-blue-100">
+                                {{ $storeOutletSection->cta_label }}
+                            </p>
+                        @endif
+
+                        <h3 class="mt-4 text-3xl font-black leading-tight">
+                            {{ $storeOutletSection->cta_title }}
+                        </h3>
+
+                        @if($storeOutletSection->cta_description)
+                            <p class="mt-4 leading-7 text-blue-50">
+                                {{ $storeOutletSection->cta_description }}
+                            </p>
+                        @endif
+
+                        @if($storeOutletSection->cta_button_text)
+                            <a href="{{ $storeOutletSection->cta_button_link ?: '#' }}"
+                               class="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 transition hover:-translate-y-1">
+                                {{ $storeOutletSection->cta_button_text }}
+                            </a>
+                        @endif
+                    </div>
+                @endif
             </div>
+
         </div>
+    </section>
+@endif
 
-    </div>
-</section>
 
-
-{{-- STORE SETUP SUPPORT --}}
 {{-- STORE SETUP SUPPORT --}}
 
 @if($storeSetupSupportSection)

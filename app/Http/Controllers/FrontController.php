@@ -604,8 +604,15 @@ public function show($slug)
             ->latest()
             ->first();
 
+             $storeOutletSection = \App\Models\StoreOutletSection::with('activeOutlets.activeDetails')
+        ->active()
+        ->forPage($pageSlug ?? 'outlets')
+        ->orderBy('sort_order')
+        ->orderByDesc('id')
+        ->first();
 
-        return view('front.retail_outlet', compact('faqSection', 'storeSetupSupportSection', 'channelSupportSection'));
+
+        return view('front.retail_outlet', compact('faqSection', 'storeSetupSupportSection', 'channelSupportSection','storeOutletSection'));
     }
 
 

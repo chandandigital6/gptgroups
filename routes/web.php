@@ -25,6 +25,7 @@ use App\Http\Controllers\QuickFactSectionController;
 use App\Http\Controllers\RepairServiceSectionController;
 use App\Http\Controllers\RetailOutletSectionController;
 use App\Http\Controllers\ServiceSectionController;
+use App\Http\Controllers\StoreOutletSectionController;
 use App\Http\Controllers\StrategySectionController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\TestimonialSectionController;
@@ -156,7 +157,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
-     Route::get('/company-overviews', [CompanyOverviewController::class, 'index'])
+    Route::get('/company-overviews', [CompanyOverviewController::class, 'index'])
         ->name('company-overviews.index');
 
     Route::get('/company-overviews/create', [CompanyOverviewController::class, 'create'])
@@ -180,7 +181,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 
 
-Route::get('/network-sections', [NetworkSectionController::class, 'index'])
+    Route::get('/network-sections', [NetworkSectionController::class, 'index'])
         ->name('network-sections.index');
 
     Route::get('/network-sections/create', [NetworkSectionController::class, 'create'])
@@ -203,7 +204,7 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
 
 
 
-         Route::get('/retail-outlet-sections', [RetailOutletSectionController::class, 'index'])
+    Route::get('/retail-outlet-sections', [RetailOutletSectionController::class, 'index'])
         ->name('retail-outlet-sections.index');
 
     Route::get('/retail-outlet-sections/create', [RetailOutletSectionController::class, 'create'])
@@ -227,7 +228,7 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
 
 
 
-          Route::get('/strategy-sections', [StrategySectionController::class, 'index'])
+    Route::get('/strategy-sections', [StrategySectionController::class, 'index'])
         ->name('strategy-sections.index');
 
     Route::get('/strategy-sections/create', [StrategySectionController::class, 'create'])
@@ -250,7 +251,7 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
 
 
 
-        Route::get('/faq-sections', [FaqSectionController::class, 'index'])
+    Route::get('/faq-sections', [FaqSectionController::class, 'index'])
         ->name('faq-sections.index');
 
     Route::get('/faq-sections/create', [FaqSectionController::class, 'create'])
@@ -276,15 +277,16 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
     Route::resource('testimonial-sections', TestimonialSectionController::class);
     Route::resource('service-sections', ServiceSectionController::class);
     Route::resource('page-heroes', PageHeroController::class);
-     Route::resource('repair-service-sections', RepairServiceSectionController::class);
-      Route::resource('b2b-program-sections', B2bProgramSectionController::class);
+    Route::resource('repair-service-sections', RepairServiceSectionController::class);
+    Route::resource('b2b-program-sections', B2bProgramSectionController::class);
     Route::resource('b2b-benefit-sections', B2bBenefitSectionController::class);
-     Route::resource('quick-fact-sections', QuickFactSectionController::class);
-       Route::resource('business-vertical-sections', BusinessVerticalSectionController::class);
+    Route::resource('quick-fact-sections', QuickFactSectionController::class);
+    Route::resource('business-vertical-sections', BusinessVerticalSectionController::class);
 
-          Route::resource('news-categories', NewsCategoryController::class);
+    Route::resource('news-categories', NewsCategoryController::class);
     Route::resource('news-posts', NewsPostController::class);
 
+    Route::resource('store-outlet-sections', StoreOutletSectionController::class);
 });
 
 
