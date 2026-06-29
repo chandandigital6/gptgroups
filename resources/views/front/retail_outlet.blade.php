@@ -110,70 +110,11 @@
 
 
 {{-- CUSTOMER SATISFACTION --}}
-<section class="outlet-section-light py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Customer Satisfaction
-                </p>
-
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    We aim for professional telecom retail execution.
-                </h2>
-
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    GPT Group’s vision is to become one of the most professional and respected telecom distributors in Oman and the UAE, creating value for partners and retail customers.
-                </p>
-
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    The company supports retail growth through automated distribution processes, demand generation activities, product knowledge and training, efficient supply-chain management and customer service.
-                </p>
-
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-xl font-black text-white">01</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Demand Generation</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Promotional campaigns and market visibility for partner stores.</p>
-                    </div>
-
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 text-xl font-black text-white">02</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Product Training</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Product knowledge and support for sales teams and retail counters.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative grid grid-cols-2 gap-5">
-                    <img class="h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80"
-                        alt="Retail outlet">
-
-                    <img class="mt-10 h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-                        alt="Technology retail">
-
-                    <div class="rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                        <p class="text-4xl font-black outlet-gradient-text">GPT</p>
-                        <p class="mt-3 text-lg font-bold text-slate-950">Retail Support</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-600">Store setup, visibility and market execution.</p>
-                    </div>
-
-                    <img class="mt-10 h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80"
-                        alt="Supply chain">
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
+@include('front.sections.common_split_section', [
+    'pageSlug' => 'outlets',
+    'sectionKey' => 'customer-satisfaction'
+])
 
 {{-- CHANNEL SUPPORT --}}
 
@@ -502,6 +443,7 @@
 
 
 {{-- LOCATION CTA --}}
+
 <section class="outlet-section-soft py-16 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-2 lg:items-stretch">

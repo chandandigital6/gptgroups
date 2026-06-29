@@ -611,6 +611,8 @@ public function show($slug)
         ->orderByDesc('id')
         ->first();
 
+        
+
 
         return view('front.retail_outlet', compact('faqSection', 'storeSetupSupportSection', 'channelSupportSection','storeOutletSection'));
     }

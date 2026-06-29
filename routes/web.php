@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BusinessVerticalSectionController;
+use App\Http\Controllers\CommonSplitSectionController;
 use App\Http\Controllers\CompanyOverviewController;
 use App\Http\Controllers\FaqSectionController;
 use App\Http\Controllers\FounderSectionController;
@@ -287,6 +288,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('news-posts', NewsPostController::class);
 
     Route::resource('store-outlet-sections', StoreOutletSectionController::class);
+     Route::resource('common-split-sections', CommonSplitSectionController::class);
 });
 
 

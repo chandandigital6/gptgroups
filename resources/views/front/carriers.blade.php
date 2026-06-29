@@ -82,75 +82,12 @@
 
 
 {{-- INTRO --}}
-<section class="career-section-light py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Career Growth
-                </p>
+@include('front.sections.common_split_section', [
+    'pageSlug' => 'carriers',
+    'sectionKey' => 'career-growth'
+])
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Great service starts with great people.
-                </h2>
-
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    At GPT Groups, career opportunities are built for people who want to learn, perform and grow. The group offers opportunities across sales, marketing, IT services, operations, hospitality and retail business functions.
-                </p>
-
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    Whether you are a fresher, intern or experienced professional, GPT Group gives you a platform to work with dynamic teams, business partners and customer-focused operations.
-                </p>
-
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-xl font-black text-white">01</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Training & Skill Growth</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Build practical sales, service, marketing and operations skills.</p>
-                    </div>
-
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 text-xl font-black text-white">02</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Real Business Exposure</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Work across products, partners, customers and live campaigns.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative grid grid-cols-2 gap-5">
-                    <img
-                        class="h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80"
-                        alt="GPT career team"
-                    >
-
-                    <img
-                        class="mt-10 h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
-                        alt="Team meeting"
-                    >
-
-                    <div class="rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                        <p class="text-4xl font-black career-gradient-text">Grow</p>
-                        <p class="mt-3 text-lg font-bold text-slate-950">Learn. Perform. Lead.</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-600">A career environment for motivated people.</p>
-                    </div>
-
-                    <img
-                        class="mt-10 h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80"
-                        alt="Professional career"
-                    >
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 
 {{-- WHY WORK WITH US --}}

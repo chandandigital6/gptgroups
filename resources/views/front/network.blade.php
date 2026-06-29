@@ -86,81 +86,12 @@
 
 
 {{-- NETWORK INTRO --}}
-<section class="network-section-light py-16 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
-            <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                    Distribution Network
-                </p>
+@include('front.sections.common_split_section', [
+    'pageSlug' => 'network',
+    'sectionKey' => 'distribution-network'
+])
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Built for fast stock movement and partner success.
-                </h2>
-
-                <p class="mt-6 text-lg leading-8 text-slate-600">
-                    GPT Group’s market network is designed to support retail availability, wholesale movement, warehouse coordination, KDR partners and B2B supply requirements.
-                </p>
-
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    The network connects product distribution with retail visibility, supply-chain planning, partner onboarding and customer service across key Oman locations.
-                </p>
-
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-xl font-black text-white">01</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Warehouse Execution</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">
-                            Product storage, dispatch planning and faster stock availability.
-                        </p>
-                    </div>
-
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
-                        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-500 text-xl font-black text-white">02</div>
-                        <h3 class="mt-5 text-xl font-black text-slate-950">Retail Enablement</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">
-                            Product knowledge, retail display and partner support.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl"></div>
-
-                <div class="relative grid grid-cols-2 gap-5">
-                    <img
-                        class="h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80"
-                        alt="Warehouse network"
-                    >
-
-                    <img
-                        class="mt-10 h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80"
-                        alt="Retail network"
-                    >
-
-                    <div class="rounded-[2rem] border border-slate-100 bg-white p-7 shadow-xl">
-                        <p class="text-4xl font-black network-gradient-text">Oman</p>
-                        <p class="mt-3 text-lg font-bold text-slate-950">Retail + Warehouse</p>
-                        <p class="mt-3 text-sm leading-6 text-slate-600">
-                            Coverage across Sur, Salalah, Muscat-Ghala and Sohar.
-                        </p>
-                    </div>
-
-                    <img
-                        class="mt-10 h-72 w-full rounded-[2rem] object-cover shadow-xl"
-                        src="https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=900&q=80"
-                        alt="Partner support"
-                    >
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 
 

@@ -49,6 +49,12 @@
                     {{ __('Store Outlets') }}
                 </flux:sidebar.item>
 
+
+                <flux:sidebar.item icon="rectangle-group" :href="route('common-split-sections.index')"
+                    :current="request()->routeIs('common-split-sections.*')" wire:navigate>
+                    {{ __('Common Split Sections') }}
+                </flux:sidebar.item>
+
                 <flux:sidebar.item icon="rectangle-stack" :href="route('business-vertical-sections.index')"
                     :current="request()->routeIs('business-vertical-sections.*')" wire:navigate>
                     {{ __('Business Verticals') }}
