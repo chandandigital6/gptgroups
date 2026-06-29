@@ -15,6 +15,8 @@ use App\Http\Controllers\CompanyOverviewController;
 use App\Http\Controllers\FaqSectionController;
 use App\Http\Controllers\FounderSectionController;
 use App\Http\Controllers\NetworkSectionController;
+use App\Http\Controllers\NewsCategoryController;
+use App\Http\Controllers\NewsPostController;
 use App\Http\Controllers\PageHeroController;
 use App\Http\Controllers\PartnerLogoSectionController;
 use App\Http\Controllers\ProductBrandController;
@@ -39,7 +41,17 @@ Route::get('/carriers', [FrontController::class, 'carriers'])->name('carriers');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
 Route::get('/groups_company', [FrontController::class, 'groups_company'])->name('groups_company');
 Route::get('/network', [FrontController::class, 'network'])->name('network');
-Route::get('/news', [FrontController::class, 'news'])->name('news');
+
+Route::get('/news', [FrontController::class, 'news'])
+    ->name('news');
+
+Route::get('/news/category/{slug}', [FrontController::class, 'category'])
+    ->name('front.news.category');
+
+Route::get('/news/{slug}', [FrontController::class, 'show'])
+    ->name('front.news.show');
+
+
 Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
 Route::get('/products', [FrontController::class, 'products'])->name('products');
 Route::get('/services', [FrontController::class, 'services'])->name('services');
@@ -269,6 +281,9 @@ Route::get('/network-sections', [NetworkSectionController::class, 'index'])
     Route::resource('b2b-benefit-sections', B2bBenefitSectionController::class);
      Route::resource('quick-fact-sections', QuickFactSectionController::class);
        Route::resource('business-vertical-sections', BusinessVerticalSectionController::class);
+
+          Route::resource('news-categories', NewsCategoryController::class);
+    Route::resource('news-posts', NewsPostController::class);
 
 });
 

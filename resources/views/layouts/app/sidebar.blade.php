@@ -131,7 +131,15 @@
                     {{ __('Products') }}
                 </flux:sidebar.item>
 
+                <flux:sidebar.item icon="tag" :href="route('news-categories.index')"
+                    :current="request()->routeIs('news-categories.*')" wire:navigate>
+                    {{ __('News Categories') }}
+                </flux:sidebar.item>
 
+                <flux:sidebar.item icon="newspaper" :href="route('news-posts.index')"
+                    :current="request()->routeIs('news-posts.*')" wire:navigate>
+                    {{ __('News Posts') }}
+                </flux:sidebar.item>
 
                 <flux:sidebar.item icon="users" :href="route('users.index')"
                     :current="request()->routeIs('users.*')" wire:navigate>
