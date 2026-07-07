@@ -31,6 +31,11 @@ use App\Http\Controllers\StrategySectionController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\TestimonialSectionController;
 use App\Http\Controllers\WhatWeDoSectionController;
+use App\Http\Controllers\CareerSectionController;
+use App\Http\Controllers\JobPositionController;
+use App\Http\Controllers\HiringProcessStepController;
+use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\CareerController;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -288,10 +293,20 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('news-posts', NewsPostController::class);
 
     Route::resource('store-outlet-sections', StoreOutletSectionController::class);
-     Route::resource('common-split-sections', CommonSplitSectionController::class);
+    Route::resource('common-split-sections', CommonSplitSectionController::class);
+
+
+    Route::resource('career-sections', CareerSectionController::class);
+    Route::resource('job-positions', JobPositionController::class);
+    Route::resource('hiring-process-steps', HiringProcessStepController::class);
+
+    Route::resource('job-applications', JobApplicationController::class)
+        ->only(['index', 'show', 'update', 'destroy']);
 });
 
 
+Route::post('/career/apply', [CareerController::class, 'apply'])
+    ->name('career.apply');
 
 
 

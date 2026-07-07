@@ -152,6 +152,27 @@
                     {{ __('News Posts') }}
                 </flux:sidebar.item>
 
+
+<flux:sidebar.item icon="tag" :href="route('job-positions.index')"
+    :current="request()->routeIs('job-positions.*')" wire:navigate>
+    {{ __('Job Positions') }}
+</flux:sidebar.item>
+
+<flux:sidebar.item icon="tag" :href="route('hiring-process-steps.index')"
+    :current="request()->routeIs('hiring-process-steps.*')" wire:navigate>
+    {{ __('Hiring Process') }}
+</flux:sidebar.item>
+
+<flux:sidebar.item icon="tag" :href="route('job-applications.index')"
+    :current="request()->routeIs('job-applications.*')" wire:navigate>
+    {{ __('Job Applications') }}
+</flux:sidebar.item>
+
+<flux:sidebar.item icon="tag" :href="route('career-sections.index')"
+    :current="request()->routeIs('career-sections.*')" wire:navigate>
+    {{ __('Career Sections') }}
+</flux:sidebar.item>
+
                 <flux:sidebar.item icon="users" :href="route('users.index')"
                     :current="request()->routeIs('users.*')" wire:navigate>
                     {{ __('Users') }}

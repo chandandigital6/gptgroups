@@ -15,7 +15,11 @@ use App\Models\Product;
 use App\Models\FaqSection;
 use App\Models\B2bProgramSection;
 use App\Models\B2bBenefitSection;
-
+use App\Models\CareerSection;
+use App\Models\HiringProcessStep;
+use App\Models\JobApplication;
+use App\Models\JobPosition;
+use Illuminate\Validation\Rule;
 
 class FrontController extends Controller
 {
@@ -627,7 +631,25 @@ public function show($slug)
             ->orderBy('sort_order')
             ->latest()
             ->first();
-        return view('front.carriers', compact('whyWorkSection'));
+
+
+             $careerSections = CareerSection::active()
+            ->get()
+            ->keyBy('section_key');
+
+        $jobPositions = JobPosition::active()
+            ->ordered()
+            ->get();
+
+        $hiringProcessSteps = HiringProcessStep::active()
+            ->ordered()
+            ->get();
+        return view('front.carriers', compact('whyWorkSection'
+        ,
+        'careerSections',
+            'jobPositions',
+            'hiringProcessSteps'
+        ));
     }
 
     public function contact()
