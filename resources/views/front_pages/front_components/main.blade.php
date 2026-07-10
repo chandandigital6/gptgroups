@@ -22,8 +22,8 @@
     <link rel="canonical" href="{{ url()->current() }}">
 
     {{-- Favicon --}}
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/favicon_io/favicon-32x32.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/favicon_io/favicon-16x16.png') }}">
 
     {{-- Open Graph / Facebook / WhatsApp --}}
     <meta property="og:type" content="website">

@@ -1186,52 +1186,73 @@
 
     {{-- 16. PARTNER LOGOS --}}
 
-   @if($partnerLogoSection && $partnerLogoSection->activeLogos->count())
-    <section class="section-muted py-16 lg:py-24 overflow-hidden">
+{{-- 16. PARTNER LOGOS --}}
+@if ($partnerLogoSection && $partnerLogoSection->activeLogos->count())
+    <section class="section-muted overflow-hidden py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                <div>
+
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div class="max-w-2xl">
                     <p class="font-black uppercase tracking-[.25em] text-blue-700">
                         {{ $partnerLogoSection->label }}
                     </p>
 
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-6xl">
                         {{ $partnerLogoSection->title }}
                     </h2>
                 </div>
 
-                @if($partnerLogoSection->description)
-                    <p class="max-w-xl text-lg text-slate-600">
+                @if ($partnerLogoSection->description)
+                    <p class="max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
                         {{ $partnerLogoSection->description }}
                     </p>
                 @endif
             </div>
 
-            <div class="logo-marquee mt-10">
-                <div class="logo-marquee-track">
-                    @foreach($partnerLogoSection->activeLogos->concat($partnerLogoSection->activeLogos) as $logo)
-                        <div class="logo-marquee-item soft-card soft-card-hover rounded-3xl p-6 text-center font-black text-slate-700">
-                            @if($logo->logo)
-                                <img src="{{ asset('storage/' . $logo->logo) }}"
-                                     class="mx-auto h-14 w-full object-contain"
-                                     alt="{{ $logo->name }}">
-                            @else
-                                {{ $logo->name }}
-                            @endif
-                        </div>
-                    @endforeach
+            <div class="relative mt-12 pb-8">
+
+                <div
+                    class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-slate-50 to-transparent sm:w-24">
+                </div>
+
+                <div
+                    class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-slate-50 to-transparent sm:w-24">
+                </div>
+
+                <div class="logo-marquee py-2">
+                    <div class="logo-marquee-track">
+                        @foreach ($partnerLogoSection->activeLogos->concat($partnerLogoSection->activeLogos) as $logo)
+                            <div
+                                class="logo-marquee-item soft-card soft-card-hover flex h-32 items-center justify-center rounded-[28px] border border-slate-200/70 bg-white px-7 py-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+                                @if ($logo->logo)
+                                    <img
+                                        src="{{ asset('storage/' . $logo->logo) }}"
+                                        class="h-14 w-full max-w-[150px] object-contain"
+                                        alt="{{ $logo->name }}"
+                                        loading="lazy"
+                                    >
+                                @else
+                                    <span class="text-center text-xl font-black text-slate-700">
+                                        {{ $logo->name }}
+                                    </span>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 @endif
 
-    {{-- 17. TESTIMONIALS --}}
-   
-    @if($testimonialSection && $testimonialSection->activeTestimonials->count())
-  
-    <section class="bg-white py-16 lg:py-24 overflow-hidden">
+
+{{-- 17. TESTIMONIALS --}}
+@if ($testimonialSection && $testimonialSection->activeTestimonials->count())
+    <section class="overflow-hidden bg-white py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
             <div class="mx-auto max-w-3xl text-center">
                 <p class="font-black uppercase tracking-[.25em] text-blue-700">
                     {{ $testimonialSection->label }}
@@ -1241,28 +1262,33 @@
                     {{ $testimonialSection->title }}
                 </h2>
 
-                @if($testimonialSection->description)
+                @if ($testimonialSection->description)
                     <p class="mt-4 text-lg text-slate-600">
                         {{ $testimonialSection->description }}
                     </p>
                 @endif
             </div>
 
-            <div class="testimonial-marquee mt-12">
+            <div class="testimonial-marquee mt-12 pb-4">
                 <div class="testimonial-marquee-track">
-                    @foreach($testimonialSection->activeTestimonials->concat($testimonialSection->activeTestimonials) as $testimonial)
-                        <div class="testimonial-marquee-item soft-card soft-card-hover rounded-[34px] p-8">
+                    @foreach ($testimonialSection->activeTestimonials->concat($testimonialSection->activeTestimonials) as $testimonial)
+                        <div
+                            class="testimonial-marquee-item soft-card soft-card-hover rounded-[34px] p-8">
+
                             <p class="text-xl leading-8 text-slate-700">
                                 “{{ $testimonial->message }}”
                             </p>
 
                             <div class="mt-6 flex items-center gap-3">
-                                @if($testimonial->image)
-                                    <img src="{{ asset('storage/' . $testimonial->image) }}"
-                                         class="h-12 w-12 rounded-full object-cover"
-                                         alt="{{ $testimonial->name }}">
+                                @if ($testimonial->image)
+                                    <img
+                                        src="{{ asset('storage/' . $testimonial->image) }}"
+                                        class="h-12 w-12 rounded-full object-cover"
+                                        alt="{{ $testimonial->name }}"
+                                    >
                                 @else
-                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-black text-blue-700">
+                                    <div
+                                        class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-black text-blue-700">
                                         {{ strtoupper(substr($testimonial->name ?? 'P', 0, 1)) }}
                                     </div>
                                 @endif
@@ -1272,15 +1298,18 @@
                                         {{ $testimonial->name }}
                                     </p>
 
-                                    <p class="text-slate-500">
-                                        {{ $testimonial->location }}
-                                    </p>
+                                    @if ($testimonial->location)
+                                        <p class="text-slate-500">
+                                            {{ $testimonial->location }}
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
+
         </div>
     </section>
 @endif
@@ -1460,78 +1489,88 @@
     </script>
 
     <style>
+    
     .logo-marquee,
-    .testimonial-marquee {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
+.testimonial-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.logo-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+    animation: logoMarquee 35s linear infinite;
+}
+
+.logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+}
+
+.logo-marquee-item {
+    flex: 0 0 210px;
+    min-width: 210px;
+}
+
+@keyframes logoMarquee {
+    from {
+        transform: translateX(0);
     }
 
-    .logo-marquee-track {
-        display: flex;
-        width: max-content;
-        gap: 1rem;
-        animation: logoMarquee 35s linear infinite;
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.testimonial-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+    animation: testimonialMarquee 45s linear infinite;
+}
+
+.testimonial-marquee:hover .testimonial-marquee-track {
+    animation-play-state: paused;
+}
+
+.testimonial-marquee-item {
+    flex: 0 0 390px;
+    width: 390px;
+    min-height: 280px;
+}
+
+@keyframes testimonialMarquee {
+    from {
+        transform: translateX(0);
     }
 
-    .logo-marquee:hover .logo-marquee-track {
-        animation-play-state: paused;
+    to {
+        transform: translateX(-50%);
     }
+}
 
+@media (max-width: 640px) {
     .logo-marquee-item {
-        flex: 0 0 180px;
-        min-height: 110px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    @keyframes logoMarquee {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-
-    .testimonial-marquee-track {
-        display: flex;
-        width: max-content;
-        gap: 1.5rem;
-        animation: testimonialMarquee 45s linear infinite;
-    }
-
-    .testimonial-marquee:hover .testimonial-marquee-track {
-        animation-play-state: paused;
+        flex-basis: 160px;
+        min-width: 160px;
     }
 
     .testimonial-marquee-item {
-        flex: 0 0 390px;
-        max-width: 390px;
-        min-height: 280px;
+        flex-basis: 310px;
+        width: 310px;
     }
+}
 
-    @keyframes testimonialMarquee {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
+@media (prefers-reduced-motion: reduce) {
+    .logo-marquee-track,
+    .testimonial-marquee-track {
+        animation: none;
     }
-
-    @media (max-width: 640px) {
-        .logo-marquee-item {
-            flex-basis: 150px;
-        }
-
-        .testimonial-marquee-item {
-            flex-basis: 310px;
-            max-width: 310px;
-        }
-    }
+}
 </style>
 @endsection
