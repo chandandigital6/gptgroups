@@ -908,7 +908,8 @@
     @endif
 
     {{-- 12. CAMPAIGNS --}}
-    <section class="section-muted py-16 lg:py-24">
+
+    {{-- <section class="section-muted py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mb-10 text-center">
                 <p class="font-black uppercase tracking-[.3em] text-blue-700">Campaigns & Offers</p>
@@ -986,7 +987,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- 13. STRATEGY --}}
 
