@@ -190,170 +190,239 @@
     @endphp
 
     {{-- 01. HERO / BANNER --}}
-    @if (isset($banners) && $banners->count() > 0)
-        <section class="relative overflow-hidden home-soft-bg">
-            <div class="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-cyan-300 home-blob"></div>
-            <div class="absolute -left-28 top-40 h-96 w-96 rounded-full bg-blue-300 home-blob"></div>
+    {{-- 01. HERO / BANNER --}}
+@if (isset($banners) && $banners->count() > 0)
+    <section class="relative overflow-hidden home-soft-bg">
 
-            <div class="swiper bannerSwiper relative z-10">
-                <div class="swiper-wrapper">
-                    @foreach ($banners as $banner)
-                        @php
-                            $theme = $bannerThemeClasses($banner->theme ?? 'cyan');
+        {{-- Decorative Background --}}
+        <div class="home-blob absolute -right-20 -top-24 h-96 w-96 rounded-full bg-cyan-300"></div>
+        <div class="home-blob absolute -left-28 top-40 h-96 w-96 rounded-full bg-blue-300"></div>
 
-                            $desktopImage = $banner->desktop_image
-                                ? asset('storage/' . $banner->desktop_image)
-                                : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=85';
+        <div class="swiper bannerSwiper relative z-10">
+            <div class="swiper-wrapper">
 
-                            $mobileImage = $banner->mobile_image
-                                ? asset('storage/' . $banner->mobile_image)
-                                : $desktopImage;
-                            $productImage = $banner->product_image
-                                ? asset('storage/' . $banner->product_image)
-                                : $desktopImage;
+                @foreach ($banners as $banner)
+                    @php
+                        $theme = $bannerThemeClasses($banner->theme ?? 'cyan');
 
-                            $buttonLink = $banner->button_link ?: '#';
-                            $secondButtonLink = $banner->second_button_link ?: '#';
-                        @endphp
+                        $desktopImage = $banner->desktop_image
+                            ? asset('storage/' . $banner->desktop_image)
+                            : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=85';
 
-                        <div class="swiper-slide">
-                            <div class="relative min-h-[760px] overflow-hidden sm:min-h-[820px] lg:min-h-[680px]">
-                                <picture>
-                                    <source media="(max-width: 767px)" srcset="{{ $mobileImage }}">
-                                    <img src="{{ $desktopImage }}" alt="{{ $banner->title }}"
-                                        class="banner-bg absolute inset-0 h-full w-full object-cover opacity-[0.06]">
-                                </picture>
+                        $mobileImage = $banner->mobile_image
+                            ? asset('storage/' . $banner->mobile_image)
+                            : $desktopImage;
 
-                                <div class="absolute inset-0 bg-white/80"></div>
-                                <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-blue-50/70"></div>
+                        $productImage = $banner->product_image
+                            ? asset('storage/' . $banner->product_image)
+                            : $desktopImage;
+
+                        $buttonLink = $banner->button_link ?: '#';
+                        $secondButtonLink = $banner->second_button_link ?: '#';
+                    @endphp
+
+                    <div class="swiper-slide">
+                        <div class="relative min-h-[720px] overflow-hidden sm:min-h-[760px] lg:min-h-[650px]">
+
+                            {{-- Background Image --}}
+                            <picture>
+                                <source media="(max-width: 767px)" srcset="{{ $mobileImage }}">
+
+                                <img
+                                    src="{{ $desktopImage }}"
+                                    alt="{{ $banner->title }}"
+                                    class="banner-bg absolute inset-0 h-full w-full object-cover opacity-[0.05]"
+                                >
+                            </picture>
+
+                            {{-- Background Overlays --}}
+                            <div class="absolute inset-0 bg-white/85"></div>
+
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-blue-50/75">
+                            </div>
+
+                            <div
+                                class="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_34%),radial-gradient(circle_at_82%_38%,rgba(59,130,246,.15),transparent_35%)]">
+                            </div>
+
+                            {{-- Main Content --}}
+                            <div
+                                class="relative z-10 mx-auto flex min-h-[720px] max-w-7xl items-center px-4 py-10 sm:min-h-[760px] sm:px-6 lg:min-h-[650px] lg:px-8">
+
                                 <div
-                                    class="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_34%),radial-gradient(circle_at_82%_38%,rgba(59,130,246,.15),transparent_35%)]">
-                                </div>
+                                    class="grid w-full gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-12">
 
-                                <div
-                                    class="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-4 py-12 sm:min-h-[820px] sm:px-6 lg:min-h-[680px] lg:px-8">
-                                    <div class="grid w-full gap-10 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
-                                        <div class="order-2 max-w-2xl text-slate-950 lg:order-1">
-                                            @if ($banner->badge)
-                                                <div
-                                                    class="inline-flex items-center gap-3 rounded-full border {{ $theme['badge'] }} px-5 py-2 text-xs font-black shadow-sm sm:text-sm">
-                                                    <span class="h-2.5 w-2.5 rounded-full {{ $theme['dot'] }}"></span>
-                                                    {{ $banner->badge }}
-                                                </div>
-                                            @endif
+                                    {{-- Text Content --}}
+                                    <div class="order-2 max-w-[580px] text-slate-950 lg:order-1">
 
-                                            <h1
-                                                class="mt-6 text-4xl font-black leading-[.98] tracking-tight sm:text-5xl lg:text-5xl xl:text-6xl">
-                                                {{ $banner->title }}
-
-                                                @if ($banner->highlight)
-                                                    <span class="mt-2 block {{ $theme['highlight'] }}">
-                                                        {{ $banner->highlight }}
-                                                    </span>
-                                                @endif
-                                            </h1>
-
-                                            @if ($banner->description)
-                                                <p
-                                                    class="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg lg:text-xl">
-                                                    {{ $banner->description }}
-                                                </p>
-                                            @endif
-
-                                            <div class="mt-8 flex flex-wrap gap-4">
-                                                @if ($banner->button_text)
-                                                    <a href="{{ $buttonLink }}"
-                                                        class="inline-flex items-center justify-center rounded-full {{ $theme['button'] }} px-7 py-4 text-sm font-black shadow-xl transition hover:-translate-y-1">
-                                                        {{ $banner->button_text }}
-                                                    </a>
-                                                @endif
-
-                                                @if ($banner->second_button_text)
-                                                    <a href="{{ $secondButtonLink }}" class="btn-white">
-                                                        {{ $banner->second_button_text }}
-                                                    </a>
-                                                @endif
-                                            </div>
-
-                                            {{-- <div class="mt-9 grid max-w-xl grid-cols-3 gap-3">
-                                                <div class="soft-card rounded-2xl p-4">
-                                                    <p class="text-xl font-black text-slate-950 sm:text-2xl">2016</p>
-                                                    <p class="mt-1 text-xs font-semibold text-slate-500">Founded</p>
-                                                </div>
-                                                <div class="soft-card rounded-2xl p-4">
-                                                    <p class="text-xl font-black text-slate-950 sm:text-2xl">GCC</p>
-                                                    <p class="mt-1 text-xs font-semibold text-slate-500">Market</p>
-                                                </div>
-                                                <div class="soft-card rounded-2xl p-4">
-                                                    <p class="text-xl font-black text-slate-950 sm:text-2xl">B2B</p>
-                                                    <p class="mt-1 text-xs font-semibold text-slate-500">Supply</p>
-                                                </div>
-                                            </div> --}}
-                                        </div>
-
-                                        <a href="{{ $buttonLink }}"
-                                            class="banner-product-card order-1 group relative mx-auto block w-full max-w-[640px] overflow-hidden rounded-[2.75rem] border border-white bg-white/85 p-3 shadow-2xl backdrop-blur-xl ring-1 {{ $theme['ring'] }} transition hover:-translate-y-2 lg:order-2 lg:max-w-none">
+                                        @if ($banner->badge)
                                             <div
-                                                class="relative h-[280px] overflow-hidden rounded-[2.2rem] bg-white sm:h-[390px] lg:h-[500px]">
-                                                <img src="{{ $productImage }}"
-                                                    alt="{{ $banner->highlight ?: $banner->title }}"
-                                                    class="banner-product-img h-full w-full object-cover object-center">
+                                                class="inline-flex items-center gap-3 rounded-full border {{ $theme['badge'] }} px-5 py-2 text-xs font-black shadow-sm sm:text-sm">
+
+                                                <span
+                                                    class="h-2.5 w-2.5 rounded-full {{ $theme['dot'] }}">
+                                                </span>
+
+                                                {{ $banner->badge }}
                                             </div>
+                                        @endif
 
+                                        {{-- Title --}}
+                                        <h1
+                                            class="mt-5 text-[38px] font-black leading-[1.02] tracking-tight sm:text-[46px] lg:text-[46px] xl:text-[54px]">
 
-                                        </a>
+                                            {{ $banner->title }}
+
+                                            @if ($banner->highlight)
+                                                <span
+                                                    class="mt-2 block text-[34px] leading-[1.05] sm:text-[42px] lg:text-[42px] xl:text-[49px] {{ $theme['highlight'] }}">
+
+                                                    {{ $banner->highlight }}
+                                                </span>
+                                            @endif
+                                        </h1>
+
+                                        {{-- Description --}}
+                                        @if ($banner->description)
+                                            <p
+                                                class="mt-5 max-w-[540px] text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:text-[18px]">
+
+                                                {{ $banner->description }}
+                                            </p>
+                                        @endif
+
+                                        {{-- Buttons --}}
+                                        <div class="mt-7 flex flex-wrap gap-4">
+
+                                            @if ($banner->button_text)
+                                                <a
+                                                    href="{{ $buttonLink }}"
+                                                    class="inline-flex items-center justify-center rounded-full {{ $theme['button'] }} px-7 py-3.5 text-sm font-black shadow-xl transition duration-300 hover:-translate-y-1">
+
+                                                    {{ $banner->button_text }}
+                                                </a>
+                                            @endif
+
+                                            @if ($banner->second_button_text)
+                                                <a
+                                                    href="{{ $secondButtonLink }}"
+                                                    class="btn-white">
+
+                                                    {{ $banner->second_button_text }}
+                                                </a>
+                                            @endif
+
+                                        </div>
                                     </div>
+
+                                    {{-- Product Image Card --}}
+                                    <a
+                                        href="{{ $buttonLink }}"
+                                        class="banner-product-card group relative order-1 mx-auto block w-full max-w-[620px] overflow-hidden rounded-[2.4rem] border border-white bg-white/90 p-3 shadow-2xl backdrop-blur-xl ring-1 {{ $theme['ring'] }} transition duration-300 hover:-translate-y-2 lg:order-2">
+
+                                        <div
+                                            class="relative h-[270px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-50 via-white to-blue-50 sm:h-[360px] lg:h-[455px]">
+
+                                            <img
+                                                src="{{ $productImage }}"
+                                                alt="{{ $banner->highlight ?: $banner->title }}"
+                                                class="banner-product-img h-full w-full object-contain object-center p-4 sm:p-6 lg:p-7 transition duration-500 group-hover:scale-[1.03]"
+                                            >
+
+                                        </div>
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
+
+            </div>
+
+            {{-- Previous Button --}}
+            <div
+                class="banner-prev absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl ring-1 ring-slate-100 transition hover:scale-105 md:left-6 md:h-12 md:w-12">
+
+                ‹
+            </div>
+
+            {{-- Next Button --}}
+            <div
+                class="banner-next absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl ring-1 ring-slate-100 transition hover:scale-105 md:right-6 md:h-12 md:w-12">
+
+                ›
+            </div>
+
+            {{-- Pagination --}}
+            <div class="banner-pagination absolute z-20 !bottom-5"></div>
+        </div>
+    </section>
+@else
+
+    {{-- Default Banner --}}
+    <section class="relative overflow-hidden home-soft-bg">
+
+        <div class="home-blob absolute -right-20 -top-24 h-96 w-96 rounded-full bg-cyan-300"></div>
+        <div class="home-blob absolute -left-28 top-40 h-96 w-96 rounded-full bg-blue-300"></div>
+
+        <div
+            class="relative z-10 mx-auto grid min-h-[650px] max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
+
+            {{-- Default Text --}}
+            <div class="max-w-[580px]">
+
+                <p
+                    class="inline-flex rounded-full bg-blue-50 px-5 py-2 text-sm font-black text-blue-700">
+
+                    Authorized Telecom Distribution • Oman & GCC
+                </p>
+
+                <h1
+                    class="mt-6 text-[42px] font-black leading-[1.02] text-slate-950 sm:text-[52px] lg:text-[56px]">
+
+                    Smart Technology
+
+                    <span class="block text-gradient">
+                        For Modern Business
+                    </span>
+                </h1>
+
+                <p class="mt-6 max-w-[540px] text-lg leading-8 text-slate-600">
+                    Smartphones, accessories, security products and business technology
+                    solutions from trusted global brands.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a class="btn-blue" href="{{ url('/brands') }}">
+                        Explore Brands
+                    </a>
+
+                    <a class="btn-white" href="{{ url('/contact-us') }}">
+                        Partner Enquiry
+                    </a>
                 </div>
+            </div>
+
+            {{-- Default Image --}}
+            <div
+                class="overflow-hidden rounded-[2.4rem] border border-white bg-white/90 p-3 shadow-2xl">
 
                 <div
-                    class="banner-prev absolute left-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl ring-1 ring-slate-100 md:left-6 md:h-12 md:w-12">
-                    ‹</div>
-                <div
-                    class="banner-next absolute right-4 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl ring-1 ring-slate-100 md:right-6 md:h-12 md:w-12">
-                    ›</div>
-                <div class="banner-pagination absolute z-20 !bottom-6"></div>
-            </div>
-        </section>
-    @else
-        <section class="relative overflow-hidden home-soft-bg">
-            <div class="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-cyan-300 home-blob"></div>
-            <div class="absolute -left-28 top-40 h-96 w-96 rounded-full bg-blue-300 home-blob"></div>
-            <div
-                class="relative z-10 mx-auto grid min-h-[680px] max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8">
-                <div>
-                    <p class="inline-flex rounded-full bg-blue-50 px-5 py-2 font-black text-blue-700">
-                        Authorized Telecom Distribution • Oman & GCC
-                    </p>
-                    <h1 class="mt-8 text-5xl font-black leading-[.95] text-slate-950 md:text-7xl">
-                        Tech Distributor For The
-                        <span class="text-gradient">Modern Age</span>
-                    </h1>
-                    <p class="mt-7 text-xl leading-8 text-slate-600">
-                        GPT Group is focused on telecom distribution, retail partner growth, supply-chain execution, brand
-                        programs and IT solutions.
-                    </p>
-                    <div class="mt-9 flex flex-wrap gap-4">
-                        <a class="btn-blue" href="{{ url('/brands') }}">Explore Brands</a>
-                        <a class="btn-white" href="{{ url('/network') }}">View Network</a>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img class="h-[560px] w-full rounded-[44px] object-cover shadow-2xl"
+                    class="h-[320px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-50 via-white to-blue-50 sm:h-[430px] lg:h-[480px]">
+
+                    <img
                         src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80"
-                        alt="GPT Group">
-                    <div
-                        class="absolute -bottom-8 left-6 right-6 rounded-[32px] bg-white p-6 shadow-xl sm:left-8 sm:right-auto sm:max-w-xs">
-                        <p class="text-2xl font-black text-slate-950">Global Brands. Local Execution.</p>
-                        <p class="mt-2 text-slate-500">Distribution, servicing, marketing and reseller support.</p>
-                    </div>
+                        alt="GPT Group Technology"
+                        class="h-full w-full object-cover object-center"
+                    >
                 </div>
             </div>
-        </section>
-    @endif
+
+        </div>
+    </section>
+@endif
 
     {{-- 02. QUICK FEATURES --}}
 
