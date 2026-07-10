@@ -174,7 +174,7 @@ class FrontController extends Controller
             ])
             ->orderBy('sort_order', 'asc')
             ->latest()
-            ->paginate(12);
+            ->paginate(50);
 
         $productCategories = ProductCategory::with('brand')
             ->where('status', 1)
@@ -280,7 +280,7 @@ class FrontController extends Controller
             ->where('status', 1)
             ->orderBy('sort_order', 'asc')
             ->latest()
-            ->paginate(12);
+            ->paginate(40);
 
         $faqSection = \App\Models\FaqSection::with('activeItems')
             ->active()
