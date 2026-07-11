@@ -215,9 +215,9 @@
 
     {{-- Mobile / Tablet Menu --}}
     <div
-        id="mobileMenu"
-        class="hidden border-t border-slate-100 bg-white xl:hidden"
-    >
+    id="mobileMenu"
+    class="hidden max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-100 bg-white xl:hidden"
+>
         <div class="mx-auto grid w-full max-w-[1280px] gap-2 px-4 py-5 font-semibold sm:px-6 lg:px-8">
 
             @foreach ($navItems as $item)
