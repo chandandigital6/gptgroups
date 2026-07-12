@@ -448,6 +448,69 @@
 
     </section>
 
+
+      {{-- 06. COMPANY OVERVIEW --}}
+
+    @if ($companyOverview)
+        <section class="section-soft py-16 lg:py-24">
+            <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+                <div>
+                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
+                        {{ $companyOverview->label }}
+                    </p>
+
+                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-6xl">
+                        {{ $companyOverview->title }}
+                    </h2>
+
+                    <p class="mt-6 text-lg leading-8 text-slate-600">
+                        {{ $companyOverview->description }}
+                    </p>
+
+                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+                        @if ($companyOverview->card_1_title || $companyOverview->card_1_description)
+                            <div class="soft-card rounded-3xl p-6">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $companyOverview->card_1_title }}
+                                </h3>
+
+                                <p class="mt-2 text-slate-600">
+                                    {{ $companyOverview->card_1_description }}
+                                </p>
+                            </div>
+                        @endif
+
+                        @if ($companyOverview->card_2_title || $companyOverview->card_2_description)
+                            <div class="soft-card rounded-3xl p-6">
+                                <h3 class="text-xl font-black text-slate-950">
+                                    {{ $companyOverview->card_2_title }}
+                                </h3>
+
+                                <p class="mt-2 text-slate-600">
+                                    {{ $companyOverview->card_2_description }}
+                                </p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-5">
+                    @foreach (['image_1', 'image_2', 'image_3', 'image_4'] as $index => $imageField)
+                        @php
+                            $altField = $imageField . '_alt';
+                        @endphp
+
+                        @if ($companyOverview->{$imageField})
+                            <img class="{{ in_array($index, [1, 3]) ? 'mt-10' : '' }} h-64 w-full rounded-[32px] object-cover shadow-xl sm:h-72"
+                                src="{{ asset('storage/' . $companyOverview->{$imageField}) }}"
+                                alt="{{ $companyOverview->{$altField} ?: 'Company Overview Image' }}">
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- 04. ABOUT GPT GROUP - STATIC CORPORATE INTRODUCTION --}}
 
     <section class="bg-white py-16 lg:py-24">
@@ -642,67 +705,7 @@
     </section>
 
 
-    {{-- 06. COMPANY OVERVIEW --}}
-
-    @if ($companyOverview)
-        <section class="section-soft py-16 lg:py-24">
-            <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-                <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                        {{ $companyOverview->label }}
-                    </p>
-
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-6xl">
-                        {{ $companyOverview->title }}
-                    </h2>
-
-                    <p class="mt-6 text-lg leading-8 text-slate-600">
-                        {{ $companyOverview->description }}
-                    </p>
-
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        @if ($companyOverview->card_1_title || $companyOverview->card_1_description)
-                            <div class="soft-card rounded-3xl p-6">
-                                <h3 class="text-xl font-black text-slate-950">
-                                    {{ $companyOverview->card_1_title }}
-                                </h3>
-
-                                <p class="mt-2 text-slate-600">
-                                    {{ $companyOverview->card_1_description }}
-                                </p>
-                            </div>
-                        @endif
-
-                        @if ($companyOverview->card_2_title || $companyOverview->card_2_description)
-                            <div class="soft-card rounded-3xl p-6">
-                                <h3 class="text-xl font-black text-slate-950">
-                                    {{ $companyOverview->card_2_title }}
-                                </h3>
-
-                                <p class="mt-2 text-slate-600">
-                                    {{ $companyOverview->card_2_description }}
-                                </p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-5">
-                    @foreach (['image_1', 'image_2', 'image_3', 'image_4'] as $index => $imageField)
-                        @php
-                            $altField = $imageField . '_alt';
-                        @endphp
-
-                        @if ($companyOverview->{$imageField})
-                            <img class="{{ in_array($index, [1, 3]) ? 'mt-10' : '' }} h-64 w-full rounded-[32px] object-cover shadow-xl sm:h-72"
-                                src="{{ asset('storage/' . $companyOverview->{$imageField}) }}"
-                                alt="{{ $companyOverview->{$altField} ?: 'Company Overview Image' }}">
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
+  
 
     {{-- 05. PRODUCT BRANDS --}}
 
@@ -854,7 +857,7 @@
 
     {{-- 07. LATEST PRODUCTS --}}
 
-    @if (isset($latestProducts) && $latestProducts->count() > 0)
+    {{-- @if (isset($latestProducts) && $latestProducts->count() > 0)
         <section class="bg-white py-16 lg:py-24">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -934,7 +937,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
     {{-- 08. UPCOMING PRODUCTS --}}
 
