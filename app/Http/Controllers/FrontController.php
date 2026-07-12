@@ -656,4 +656,38 @@ public function show($slug)
     {
         return view('front.contact');
     }
+
+
+
+
+
+
+
+
+    public function businessVerticals()
+{
+    return view('front_pages.business_verticals.index');
+}
+
+public function mobileConsumerElectronics()
+{
+    return view('front_pages.business_verticals.mobile_consumer_electronics');
+}
+
+public function securitySolutions()
+{
+    return view('front_pages.business_verticals.security_solutions');
+}
+
+public function itInfrastructureSolutions()
+{
+    return view('front_pages.business_verticals.it_infrastructure');
+}
+
+public function tradingDistribution()
+{
+    return view('front_pages.business_verticals.trading_distribution');
+}
+
+
 }

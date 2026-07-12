@@ -66,6 +66,33 @@ Route::get('/product/{slug}', [FrontController::class, 'productDetail'])->name('
 
 
 
+Route::prefix('business-verticals')
+    ->name('business.')
+    ->group(function () {
+        Route::get('/', [FrontController::class, 'businessVerticals'])
+            ->name('index');
+
+        Route::get(
+            '/mobile-consumer-electronics',
+            [FrontController::class, 'mobileConsumerElectronics']
+        )->name('mobile');
+
+        Route::get(
+            '/security-solutions',
+            [FrontController::class, 'securitySolutions']
+        )->name('security');
+
+        Route::get(
+            '/it-infrastructure-solutions',
+            [FrontController::class, 'itInfrastructureSolutions']
+        )->name('infrastructure');
+
+        Route::get(
+            '/trading-distribution',
+            [FrontController::class, 'tradingDistribution']
+        )->name('trading');
+    });
+
 
 
 
