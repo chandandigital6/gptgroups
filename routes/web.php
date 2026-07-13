@@ -63,6 +63,7 @@ Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('r
 Route::get('/products', [FrontController::class, 'products'])->name('products');
 Route::get('/services', [FrontController::class, 'services'])->name('services');
 Route::get('/product/{slug}', [FrontController::class, 'productDetail'])->name('product.detail');
+Route::get('/vendor', [FrontController::class, 'vendor'])->name('vendor');
 
 
 

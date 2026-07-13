@@ -1,18 +1,15 @@
 @extends('front_pages.front_components.main')
 
 @section('content')
+
+
     <style>
         :root {
             --gpt-blue: #2563eb;
+            --gpt-blue-dark: #1d4ed8;
             --gpt-cyan: #06b6d4;
+            --gpt-cyan-light: #22d3ee;
             --gpt-slate: #0f172a;
-        }
-
-        .home-soft-bg {
-            background:
-                radial-gradient(circle at 88% 10%, rgba(103, 232, 249, .32), transparent 28%),
-                radial-gradient(circle at 8% 45%, rgba(147, 197, 253, .34), transparent 30%),
-                linear-gradient(135deg, #ffffff 0%, #f8fafc 42%, #eff6ff 100%);
         }
 
         .section-soft {
@@ -51,395 +48,578 @@
             box-shadow: 0 26px 70px rgba(15, 23, 42, .12);
         }
 
-        .btn-blue {
+        /*
+            |--------------------------------------------------------------------------
+            | GPT GROUP CORPORATE BANNER
+            |--------------------------------------------------------------------------
+            */
+
+        .gpt-hero {
+            position: relative;
+            min-height: clamp(480px, calc(100svh - 80px), 570px);
+            overflow: hidden;
+            background: #eff6ff;
+        }
+
+        .gpt-hero-bg {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(1.02) contrast(1.01);
+            transition: transform 8s ease;
+        }
+
+        .bannerSwiper .swiper-slide-active .gpt-hero-bg {
+            transform: scale(1.045);
+        }
+
+        .gpt-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg,
+                    rgba(255, 255, 255, .96) 0%,
+                    rgba(248, 250, 252, .90) 38%,
+                    rgba(239, 246, 255, .66) 68%,
+                    rgba(219, 234, 254, .30) 100%);
+        }
+
+        .gpt-hero-bottom-shade {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(34, 211, 238, .14), transparent 34%),
+                radial-gradient(circle at 82% 35%, rgba(37, 99, 235, .12), transparent 34%),
+                linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(239, 246, 255, .18));
+        }
+
+        .gpt-hero-copy {
+            position: relative;
+            z-index: 10;
+            max-width: 650px;
+            padding-bottom: 95px;
+        }
+
+        .gpt-hero-badge {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: .7rem;
+            border: 1px solid rgba(37, 99, 235, .16);
             border-radius: 999px;
-            background: linear-gradient(90deg, #2563eb, #06b6d4);
-            color: #ffffff;
+            background: rgba(255, 255, 255, .88);
+            padding: .52rem .9rem;
+            color: #1d4ed8;
+            font-size: .68rem;
             font-weight: 900;
-            padding: .75rem 1.5rem;
-            box-shadow: 0 16px 35px rgba(37, 99, 235, .22);
-            transition: transform .25s ease, box-shadow .25s ease;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, .08);
+            backdrop-filter: blur(10px);
         }
 
-        .btn-blue:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 45px rgba(37, 99, 235, .28);
-        }
-
-        .btn-white {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .gpt-hero-badge-dot {
+            height: .55rem;
+            width: .55rem;
             border-radius: 999px;
-            border: 1px solid #e2e8f0;
-            background: #ffffff;
+            background: var(--gpt-cyan-light);
+            box-shadow: 0 0 0 6px rgba(34, 211, 238, .18);
+        }
+
+        .gpt-hero-title {
+            margin-top: 1rem;
+            max-width: 680px;
             color: #0f172a;
+            font-size: clamp(2.35rem, 4.35vw, 4.55rem);
             font-weight: 900;
-            padding: .75rem 1.5rem;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
-            transition: transform .25s ease, background .25s ease;
+            line-height: .98;
+            letter-spacing: -.045em;
+            text-wrap: balance;
         }
 
-        .btn-white:hover {
-            transform: translateY(-3px);
-            background: #f8fafc;
+        .gpt-hero-highlight {
+            display: block;
+            margin-top: .35rem;
+            background: linear-gradient(90deg, var(--gpt-blue), var(--gpt-cyan-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .bannerSwiper .swiper-pagination-bullet,
-        .productSwiper .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            background: #cbd5e1;
-            opacity: 1;
+        .gpt-hero-description {
+            margin-top: 1.2rem;
+            max-width: 570px;
+            color: #475569;
+            font-size: clamp(.95rem, 1.25vw, 1.12rem);
+            font-weight: 600;
+            line-height: 1.5;
         }
 
-        .bannerSwiper .swiper-pagination-bullet-active,
-        .productSwiper .swiper-pagination-bullet-active {
-            width: 34px;
-            border-radius: 999px;
-            background: #2563eb;
+        .gpt-action-panel {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 20;
+            display: grid;
+            width: min(520px, 45vw);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .banner-bg {
-            transition: transform 7s ease;
+        .gpt-action-card {
+            min-height: 165px;
+            padding: 1.35rem 1.45rem;
+            color: #ffffff;
+            transition: transform .3s ease, filter .3s ease;
         }
 
-        .bannerSwiper .swiper-slide-active .banner-bg {
-            transform: scale(1.08);
+        .gpt-action-card:hover {
+            transform: translateY(-7px);
+            filter: brightness(1.06);
         }
 
-        .banner-product-img {
-            transition: transform .8s ease;
+        .gpt-action-card:first-child {
+            background: linear-gradient(135deg, var(--gpt-blue-dark), var(--gpt-blue));
         }
 
-        .banner-product-card:hover .banner-product-img {
-            transform: scale(1.06);
+        .gpt-action-card:last-child {
+            background: linear-gradient(135deg, #0891b2, var(--gpt-cyan));
+        }
+
+        .gpt-action-icon {
+            display: grid;
+            height: 2.7rem;
+            width: 2.7rem;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .28);
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, .08);
+            color: #ffffff;
+            font-size: 1.4rem;
+        }
+
+        .gpt-action-title {
+            margin-top: .85rem;
+            font-size: 1.02rem;
+            font-weight: 900;
+        }
+
+        .gpt-action-text {
+            margin-top: .3rem;
+            color: rgba(255, 255, 255, .88);
+            font-size: .82rem;
+            line-height: 1.42;
+        }
+
+        .gpt-action-arrow {
+            margin-top: .65rem;
+            display: inline-flex;
+            font-size: 1.35rem;
+            line-height: 1;
         }
 
         .banner-prev,
-        .banner-next,
-        .product-prev,
-        .product-next {
-            transition: all .3s ease;
+        .banner-next {
+            position: absolute;
+            top: 50%;
+            z-index: 30;
+            display: grid;
+            height: 46px;
+            width: 46px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .34);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, .42);
+            color: #ffffff;
+            font-size: 1.7rem;
+            backdrop-filter: blur(10px);
+            transition: transform .25s ease, background .25s ease;
+        }
+
+        .banner-prev {
+            left: 1.25rem;
+        }
+
+        .banner-next {
+            right: 1.25rem;
         }
 
         .banner-prev:hover,
         .banner-next:hover {
             transform: translateY(-50%) scale(1.08);
+            background: var(--gpt-blue);
         }
 
-        .product-prev:hover,
-        .product-next:hover {
-            transform: scale(1.08);
+        .banner-pagination {
+            position: absolute;
+            bottom: 1.15rem !important;
+            left: 1.5rem !important;
+            z-index: 30;
+            width: auto !important;
         }
 
-        .home-blob {
-            filter: blur(10px);
-            opacity: .42;
-            animation: homeBlob 7s ease-in-out infinite alternate;
+        .bannerSwiper .swiper-pagination-bullet {
+            height: 9px;
+            width: 9px;
+            background: rgba(255, 255, 255, .65);
+            opacity: 1;
         }
 
-        @keyframes homeBlob {
-            from {
-                transform: translateY(0) scale(1);
-            }
-
-            to {
-                transform: translateY(22px) scale(1.08);
-            }
+        .bannerSwiper .swiper-pagination-bullet-active {
+            width: 34px;
+            border-radius: 999px;
+            background: var(--gpt-cyan-light);
         }
 
-        /* Banner ko screen ke andar compact aur fully visible rakhne ke liye */
-        .hero-slide,
-        .hero-content {
-            min-height: clamp(520px, calc(100svh - 88px), 640px);
-        }
+        @media (max-width: 1199px) {}
 
         @media (max-width: 1023px) {
-
-            .hero-slide,
-            .hero-content {
+            .gpt-hero {
                 min-height: auto;
+            }
+
+            .gpt-hero-copy {
+                padding-bottom: 2rem;
+            }
+
+            .gpt-action-panel {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                width: 100%;
+            }
+
+            .gpt-product-preview {
+                display: none;
             }
         }
 
         @media (max-width: 767px) {
+            .gpt-hero {
+                min-height: 620px;
+            }
+
+            .gpt-hero-overlay {
+                background:
+                    linear-gradient(180deg,
+                        rgba(255, 255, 255, .94) 0%,
+                        rgba(248, 250, 252, .84) 50%,
+                        rgba(239, 246, 255, .94) 100%);
+            }
+
+            .gpt-hero-copy {
+                padding-top: 2.2rem;
+            }
+
+            .gpt-hero-title {
+                font-size: clamp(2.15rem, 10vw, 3.35rem);
+                line-height: 1;
+            }
+
+            .gpt-hero-description {
+                margin-top: 1.2rem;
+                max-width: 570px;
+                color: #475569;
+                font-size: clamp(.95rem, 1.25vw, 1.12rem);
+                font-weight: 600;
+                line-height: 1.5;
+            }
+
+            .gpt-action-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .gpt-action-card {
+                min-height: auto;
+                padding: 1.3rem 1.2rem;
+            }
+
+            .gpt-action-card:last-child {
+                display: none;
+            }
 
             .banner-prev,
             .banner-next {
-                display: none !important;
+                display: none;
             }
-        }
 
-        .brandSwiper {
-            overflow: visible;
-        }
-
-        .brandSwiper .swiper-slide {
-            height: auto;
-        }
-
-        .brandSwiper .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            background: #cbd5e1;
-            opacity: 1;
-        }
-
-        .brandSwiper .swiper-pagination-bullet-active {
-            width: 34px;
-            border-radius: 999px;
-            background: #2563eb;
+            .banner-pagination {
+                bottom: .75rem !important;
+            }
         }
     </style>
 
     @php
-        $bannerThemeClasses = function ($theme) {
-            return match ($theme) {
-                'yellow' => [
-                    'badge' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
-                    'highlight' => 'text-gradient',
-                    'button' => 'bg-yellow-400 text-slate-950 hover:bg-yellow-300',
-                    'dot' => 'bg-yellow-400',
-                    'ring' => 'ring-yellow-200',
-                ],
-                'emerald' => [
-                    'badge' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                    'highlight' => 'text-gradient',
-                    'button' => 'bg-emerald-500 text-white hover:bg-emerald-400',
-                    'dot' => 'bg-emerald-500',
-                    'ring' => 'ring-emerald-200',
-                ],
-                default => [
-                    'badge' => 'bg-blue-50 text-blue-700 border-blue-100',
-                    'highlight' => 'text-gradient',
-                    'button' => 'bg-blue-600 text-white hover:bg-blue-500',
-                    'dot' => 'bg-cyan-400',
-                    'ring' => 'ring-cyan-100',
-                ],
-            };
-        };
+        $themeMap = [
+            'cyan' => [
+                'primary' => '#2563eb',
+                'secondary' => '#06b6d4',
+            ],
+            'yellow' => [
+                'primary' => '#2563eb',
+                'secondary' => '#facc15',
+            ],
+            'emerald' => [
+                'primary' => '#2563eb',
+                'secondary' => '#10b981',
+            ],
+        ];
     @endphp
 
-    {{-- 01. HERO / BANNER --}}
+    {{-- 01. DYNAMIC CORPORATE HERO --}}
     @if (isset($banners) && $banners->count() > 0)
-        <section class="relative overflow-hidden home-soft-bg">
-
-            {{-- Decorative Background --}}
-            <div class="home-blob absolute -right-20 -top-24 h-96 w-96 rounded-full bg-cyan-300"></div>
-            <div class="home-blob absolute -left-28 top-40 h-96 w-96 rounded-full bg-blue-300"></div>
-
-            <div class="swiper bannerSwiper relative z-10">
+        <section class="relative overflow-hidden">
+            <div class="swiper bannerSwiper">
                 <div class="swiper-wrapper">
-
                     @foreach ($banners as $banner)
                         @php
-                            $theme = $bannerThemeClasses($banner->theme ?? 'cyan');
-
                             $desktopImage = $banner->desktop_image
                                 ? asset('storage/' . $banner->desktop_image)
-                                : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=85';
+                                : 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1900&q=88';
 
                             $mobileImage = $banner->mobile_image
                                 ? asset('storage/' . $banner->mobile_image)
                                 : $desktopImage;
 
-                            $productImage = $banner->product_image
-                                ? asset('storage/' . $banner->product_image)
-                                : $desktopImage;
+                            $primaryLink = $banner->button_link ?: route('business.index');
+                            $secondaryLink = $banner->second_button_link ?: route('contact');
 
-                            $buttonLink = $banner->button_link ?: '#';
-                            $secondButtonLink = $banner->second_button_link ?: '#';
+                            $primaryTitle = $banner->button_text ?: 'Explore Solutions';
+                            $secondaryTitle = $banner->second_button_text ?: 'Partner With Us';
+
+                            $activeTheme = $themeMap[$banner->theme] ?? $themeMap['cyan'];
                         @endphp
 
                         <div class="swiper-slide">
-                            <div class="hero-slide relative overflow-hidden">
-
-                                {{-- Background Image --}}
+                            <div class="gpt-hero"
+                                style="
+                                    --slide-primary: {{ $activeTheme['primary'] }};
+                                    --slide-secondary: {{ $activeTheme['secondary'] }};
+                                ">
                                 <picture>
                                     <source media="(max-width: 767px)" srcset="{{ $mobileImage }}">
 
-                                    <img src="{{ $desktopImage }}" alt="{{ $banner->title }}"
-                                        class="banner-bg absolute inset-0 h-full w-full object-cover opacity-[0.05]">
+                                    <img src="{{ $desktopImage }}" alt="{{ $banner->title }}" class="gpt-hero-bg">
                                 </picture>
 
-                                {{-- Background Overlays --}}
-                                <div class="absolute inset-0 bg-white/85"></div>
-
-                                <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-blue-50/75">
-                                </div>
+                                <div class="gpt-hero-overlay"></div>
+                                <div class="gpt-hero-bottom-shade"></div>
 
                                 <div
-                                    class="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_34%),radial-gradient(circle_at_82%_38%,rgba(59,130,246,.15),transparent_35%)]">
-                                </div>
+                                    class="relative z-10 mx-auto flex min-h-[inherit] max-w-7xl items-center px-5 py-8 sm:px-8 lg:px-14 lg:py-7 xl:px-20">
+                                    <div class="gpt-hero-copy">
+                                        @if ($banner->badge)
+                                            <div class="gpt-hero-badge">
+                                                <span class="gpt-hero-badge-dot"
+                                                    style="background: {{ $activeTheme['secondary'] }}"></span>
 
-                                {{-- Main Content --}}
-                                <div
-                                    class="hero-content relative z-10 mx-auto flex max-w-7xl items-center px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-6">
-
-                                    <div
-                                        class="grid w-full gap-5 sm:gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-10">
-
-                                        {{-- Text Content --}}
-                                        <div class="order-2 max-w-[540px] text-slate-950 lg:order-1">
-
-                                            @if ($banner->badge)
-                                                <div
-                                                    class="inline-flex items-center gap-3 rounded-full border {{ $theme['badge'] }} px-4 py-1.5 text-[11px] font-black shadow-sm sm:text-xs">
-
-                                                    <span class="h-2.5 w-2.5 rounded-full {{ $theme['dot'] }}">
-                                                    </span>
-
-                                                    {{ $banner->badge }}
-                                                </div>
-                                            @endif
-
-                                            {{-- Title --}}
-                                            <h1
-                                                class="mt-4 text-[30px] font-black leading-[1.05] tracking-tight sm:text-[38px] lg:text-[40px] xl:text-[46px]">
-
-                                                {{ $banner->title }}
-
-                                                @if ($banner->highlight)
-                                                    <span
-                                                        class="mt-1.5 block text-[27px] leading-[1.08] sm:text-[34px] lg:text-[36px] xl:text-[42px] {{ $theme['highlight'] }}">
-
-                                                        {{ $banner->highlight }}
-                                                    </span>
-                                                @endif
-                                            </h1>
-
-                                            {{-- Description --}}
-                                            @if ($banner->description)
-                                                <p
-                                                    class="mt-4 max-w-[510px] text-sm leading-6 text-slate-600 sm:text-base sm:leading-7 lg:text-[16px]">
-
-                                                    {{ $banner->description }}
-                                                </p>
-                                            @endif
-
-                                            {{-- Buttons --}}
-                                            <div class="mt-5 flex flex-wrap gap-3">
-
-                                                @if ($banner->button_text)
-                                                    <a href="{{ $buttonLink }}"
-                                                        class="inline-flex items-center justify-center rounded-full {{ $theme['button'] }} px-6 py-3 text-sm font-black shadow-xl transition duration-300 hover:-translate-y-1">
-
-                                                        {{ $banner->button_text }}
-                                                    </a>
-                                                @endif
-
-                                                @if ($banner->second_button_text)
-                                                    <a href="{{ $secondButtonLink }}" class="btn-white">
-
-                                                        {{ $banner->second_button_text }}
-                                                    </a>
-                                                @endif
-
+                                                {{ $banner->badge }}
                                             </div>
-                                        </div>
+                                        @endif
 
-                                        {{-- Product Image Card --}}
-                                        <a href="{{ $buttonLink }}"
-                                            class="banner-product-card group relative order-1 mx-auto block w-full max-w-[560px] overflow-hidden rounded-[2.4rem] border border-white bg-white/90 p-3 shadow-2xl backdrop-blur-xl ring-1 {{ $theme['ring'] }} transition duration-300 hover:-translate-y-2 lg:order-2">
+                                        <h1 class="gpt-hero-title">
+                                            {{ $banner->title }}
 
-                                            <div
-                                                class="relative h-[220px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-50 via-white to-blue-50 sm:h-[300px] lg:h-[370px] xl:h-[400px]">
+                                            @if ($banner->highlight)
+                                                <span class="gpt-hero-highlight"
+                                                    style="
+                                                        background: linear-gradient(
+                                                            90deg,
+                                                            {{ $activeTheme['primary'] }},
+                                                            {{ $activeTheme['secondary'] }}
+                                                        );
+                                                        -webkit-background-clip: text;
+                                                        background-clip: text;
+                                                        color: transparent;
+                                                    ">
+                                                    {{ $banner->highlight }}
+                                                </span>
+                                            @endif
+                                        </h1>
 
-                                                <img src="{{ $productImage }}"
-                                                    alt="{{ $banner->highlight ?: $banner->title }}"
-                                                    class="banner-product-img h-full w-full object-contain object-center p-4 sm:p-6 lg:p-7 transition duration-500 group-hover:scale-[1.03]">
-
-                                            </div>
-                                        </a>
-
+                                        @if ($banner->description)
+                                            <p class="gpt-hero-description">
+                                                {{ $banner->description }}
+                                            </p>
+                                        @endif
                                     </div>
+                                </div>
+
+                                <div class="gpt-action-panel">
+                                    <a href="{{ $primaryLink }}" class="gpt-action-card"
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                {{ $activeTheme['primary'] }},
+                                                #2563eb
+                                            );
+                                        ">
+                                        <span class="gpt-action-icon">
+                                            ⌘
+                                        </span>
+
+                                        <h2 class="gpt-action-title">
+                                            {{ $primaryTitle }}
+                                        </h2>
+
+                                        <p class="gpt-action-text">
+                                            Discover GPT Group’s technology, distribution and enterprise solutions.
+                                        </p>
+
+                                        <span class="gpt-action-arrow">
+                                            →
+                                        </span>
+                                    </a>
+
+                                    <a href="{{ $secondaryLink }}" class="gpt-action-card"
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                {{ $activeTheme['secondary'] }},
+                                                #06b6d4
+                                            );
+                                        ">
+                                        <span class="gpt-action-icon">
+                                            ◎
+                                        </span>
+
+                                        <h2 class="gpt-action-title">
+                                            {{ $secondaryTitle }}
+                                        </h2>
+
+                                        <p class="gpt-action-text">
+                                            Connect for distribution partnerships, projects and market expansion.
+                                        </p>
+
+                                        <span class="gpt-action-arrow">
+                                            →
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-
                 </div>
 
-                {{-- Previous Button --}}
-                <div
-                    class="banner-prev absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl ring-1 ring-slate-100 transition hover:scale-105 md:left-6 md:h-12 md:w-12">
-
+                <button type="button" class="banner-prev" aria-label="Previous banner">
                     ‹
-                </div>
+                </button>
 
-                {{-- Next Button --}}
-                <div
-                    class="banner-next absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-xl ring-1 ring-slate-100 transition hover:scale-105 md:right-6 md:h-12 md:w-12">
-
+                <button type="button" class="banner-next" aria-label="Next banner">
                     ›
-                </div>
+                </button>
 
-                {{-- Pagination --}}
-                <div class="banner-pagination absolute z-20 !bottom-3"></div>
+                <div class="banner-pagination"></div>
             </div>
         </section>
     @else
-        {{-- Default Banner --}}
-        <section class="relative overflow-hidden home-soft-bg">
+        {{-- DEFAULT BANNER --}}
+        <section class="gpt-hero">
+            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1900&q=88"
+                alt="GPT Group Technology Solutions" class="gpt-hero-bg">
 
-            <div class="home-blob absolute -right-20 -top-24 h-96 w-96 rounded-full bg-cyan-300"></div>
-            <div class="home-blob absolute -left-28 top-40 h-96 w-96 rounded-full bg-blue-300"></div>
+            <div class="gpt-hero-overlay"></div>
+            <div class="gpt-hero-bottom-shade"></div>
 
             <div
-                class="hero-content relative z-10 mx-auto grid max-w-7xl items-center gap-7 px-4 py-8 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8 lg:py-6">
+                class="relative z-10 mx-auto flex min-h-[inherit] max-w-7xl items-center px-5 py-8 sm:px-8 lg:px-14 lg:py-7 xl:px-20">
+                <div class="gpt-hero-copy">
+                    <div class="gpt-hero-badge">
+                        <span class="gpt-hero-badge-dot"></span>
+                        Technology Distribution & Solutions
+                    </div>
 
-                {{-- Default Text --}}
-                <div class="max-w-[580px]">
-
-                    <p class="inline-flex rounded-full bg-blue-50 px-5 py-2 text-sm font-black text-blue-700">
-
-                        Authorized Telecom Distribution • Oman & GCC
-                    </p>
-
-                    <h1 class="mt-4 text-[32px] font-black leading-[1.05] text-slate-950 sm:text-[40px] lg:text-[46px]">
-
-                        Smart Technology
-
-                        <span class="block text-gradient">
-                            For Modern Business
+                    <h1 class="gpt-hero-title">
+                        Empowering businesses through
+                        <span class="gpt-hero-highlight">
+                            technology and reliable solutions.
                         </span>
                     </h1>
 
-                    <p class="mt-4 max-w-[510px] text-base leading-7 text-slate-600">
-                        Smartphones, accessories, security products and business technology
-                        solutions from trusted global brands.
+                    <p class="gpt-hero-description">
+                        Mobile distribution, integrated security, IT infrastructure
+                        and trading expertise across Oman and the GCC.
+                    </p>
+                </div>
+            </div>
+
+            <div class="gpt-action-panel">
+                <a href="{{ route('business.index') }}" class="gpt-action-card">
+                    <span class="gpt-action-icon">
+                        ⌘
+                    </span>
+
+                    <h2 class="gpt-action-title">
+                        Explore Solutions
+                    </h2>
+
+                    <p class="gpt-action-text">
+                        Discover GPT Group’s business divisions and technology capabilities.
                     </p>
 
-                    <div class="mt-5 flex flex-wrap gap-3">
-                        <a class="btn-blue" href="{{ url('/brands') }}">
-                            Explore Brands
-                        </a>
+                    <span class="gpt-action-arrow">
+                        →
+                    </span>
+                </a>
 
-                        <a class="btn-white" href="{{ url('/contact-us') }}">
-                            Partner Enquiry
-                        </a>
-                    </div>
-                </div>
+                <a href="{{ route('contact') }}" class="gpt-action-card">
+                    <span class="gpt-action-icon">
+                        ◎
+                    </span>
 
-                {{-- Default Image --}}
-                <div class="overflow-hidden rounded-[2.4rem] border border-white bg-white/90 p-3 shadow-2xl">
+                    <h2 class="gpt-action-title">
+                        Partner With Us
+                    </h2>
 
-                    <div
-                        class="h-[240px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-50 via-white to-blue-50 sm:h-[320px] lg:h-[400px]">
+                    <p class="gpt-action-text">
+                        Connect for distribution partnerships, enterprise projects and market expansion.
+                    </p>
 
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80"
-                            alt="GPT Group Technology" class="h-full w-full object-cover object-center">
-                    </div>
-                </div>
-
+                    <span class="gpt-action-arrow">
+                        →
+                    </span>
+                </a>
             </div>
         </section>
     @endif
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (
+                typeof Swiper !== 'undefined' &&
+                document.querySelector('.bannerSwiper')
+            ) {
+                new Swiper('.bannerSwiper', {
+                    loop: true,
+                    speed: 1000,
+                    effect: 'fade',
+
+                    fadeEffect: {
+                        crossFade: true,
+                    },
+
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    },
+
+                    navigation: {
+                        nextEl: '.banner-next',
+                        prevEl: '.banner-prev',
+                    },
+
+                    pagination: {
+                        el: '.banner-pagination',
+                        clickable: true,
+                    },
+                });
+            }
+        });
+    </script>
 
 
     {{-- 03. STATS --}}
@@ -449,1188 +629,1287 @@
     </section>
 
 
-      {{-- 06. COMPANY OVERVIEW --}}
+   
 
-    @if ($companyOverview)
-        <section class="section-soft py-16 lg:py-24">
-            <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-                <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
+{{-- 06. COMPANY OVERVIEW --}}
+@if ($companyOverview)
+    <section class="section-soft py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto grid max-w-7xl items-center gap-7 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
+            <div>
+                @if ($companyOverview->label)
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
                         {{ $companyOverview->label }}
                     </p>
+                @endif
 
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-6xl">
-                        {{ $companyOverview->title }}
-                    </h2>
+                <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                    {{ $companyOverview->title }}
+                </h2>
 
-                    <p class="mt-6 text-lg leading-8 text-slate-600">
+                @if ($companyOverview->description)
+                    <p class="mt-4 max-w-2xl text-base leading-7 text-slate-600 lg:text-[17px]">
                         {{ $companyOverview->description }}
                     </p>
+                @endif
 
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        @if ($companyOverview->card_1_title || $companyOverview->card_1_description)
-                            <div class="soft-card rounded-3xl p-6">
-                                <h3 class="text-xl font-black text-slate-950">
+                <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                    @if ($companyOverview->card_1_title || $companyOverview->card_1_description)
+                        <div class="soft-card rounded-2xl p-5">
+                            @if ($companyOverview->card_1_title)
+                                <h3 class="text-lg font-black text-slate-950">
                                     {{ $companyOverview->card_1_title }}
                                 </h3>
+                            @endif
 
-                                <p class="mt-2 text-slate-600">
+                            @if ($companyOverview->card_1_description)
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
                                     {{ $companyOverview->card_1_description }}
                                 </p>
-                            </div>
-                        @endif
+                            @endif
+                        </div>
+                    @endif
 
-                        @if ($companyOverview->card_2_title || $companyOverview->card_2_description)
-                            <div class="soft-card rounded-3xl p-6">
-                                <h3 class="text-xl font-black text-slate-950">
+                    @if ($companyOverview->card_2_title || $companyOverview->card_2_description)
+                        <div class="soft-card rounded-2xl p-5">
+                            @if ($companyOverview->card_2_title)
+                                <h3 class="text-lg font-black text-slate-950">
                                     {{ $companyOverview->card_2_title }}
                                 </h3>
+                            @endif
 
-                                <p class="mt-2 text-slate-600">
+                            @if ($companyOverview->card_2_description)
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
                                     {{ $companyOverview->card_2_description }}
                                 </p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-5">
-                    @foreach (['image_1', 'image_2', 'image_3', 'image_4'] as $index => $imageField)
-                        @php
-                            $altField = $imageField . '_alt';
-                        @endphp
-
-                        @if ($companyOverview->{$imageField})
-                            <img class="{{ in_array($index, [1, 3]) ? 'mt-10' : '' }} h-64 w-full rounded-[32px] object-cover shadow-xl sm:h-72"
-                                src="{{ asset('storage/' . $companyOverview->{$imageField}) }}"
-                                alt="{{ $companyOverview->{$altField} ?: 'Company Overview Image' }}">
-                        @endif
-                    @endforeach
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
-        </section>
-    @endif
 
-    {{-- 04. ABOUT GPT GROUP - STATIC CORPORATE INTRODUCTION --}}
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                @foreach (['image_1', 'image_2', 'image_3', 'image_4'] as $index => $imageField)
+                    @php
+                        $altField = $imageField . '_alt';
+                    @endphp
 
-    <section class="bg-white py-16 lg:py-24">
-        <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_.95fr] lg:px-8">
-            <div>
-                <p class="font-black uppercase tracking-[.25em] text-blue-700">About GPT Group</p>
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Technology distribution and solutions built for modern markets.
-                </h2>
-                <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                    GPT Group is a diversified technology distribution and solutions company serving businesses, channel
-                    partners and consumers across Oman and the GCC. Our strength combines trusted brands, market execution,
-                    technical capability and reliable after-sales support.
+                    @if ($companyOverview->{$imageField})
+                        <img
+                            class="{{ in_array($index, [1, 3]) ? 'mt-5 sm:mt-7' : '' }} h-44 w-full rounded-2xl object-cover shadow-lg sm:h-52 lg:h-56"
+                            src="{{ asset('storage/' . $companyOverview->{$imageField}) }}"
+                            alt="{{ $companyOverview->{$altField} ?: 'Company Overview Image' }}"
+                            loading="lazy"
+                        >
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
+
+{{-- 07. ABOUT GPT GROUP --}}
+<section class="bg-white py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto grid max-w-7xl items-center gap-7 px-4 sm:px-6 lg:grid-cols-[1.05fr_.95fr] lg:gap-10 lg:px-8">
+        <div>
+            <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                About GPT Group
+            </p>
+
+            <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Technology distribution and solutions built for modern markets.
+            </h2>
+
+            <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600 lg:text-[17px]">
+                GPT Group is a diversified technology distribution and solutions company serving businesses,
+                channel partners and consumers across Oman and the GCC. Our strength combines trusted brands,
+                market execution, technical capability and reliable after-sales support.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+                <a href="{{ route('about') }}" class="btn-blue px-6 py-3 text-sm">
+                    Discover GPT Group
+                </a>
+
+                <a href="{{ route('contact') }}" class="btn-white px-6 py-3 text-sm">
+                    Talk to Our Team
+                </a>
+            </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+            <div class="soft-card soft-card-hover rounded-2xl p-5">
+                <p class="text-gradient text-3xl font-black">01</p>
+                <h3 class="mt-3 text-xl font-black text-slate-950">
+                    Distribution Strength
+                </h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Strong retail, wholesale and B2B execution across key technology categories.
                 </p>
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="{{ url('/about-us') }}" class="btn-blue">Discover GPT Group</a>
-                    <a href="{{ url('/contact-us') }}" class="btn-white">Talk to Our Team</a>
-                </div>
             </div>
 
-            <div class="grid gap-5 sm:grid-cols-2">
-                <div class="soft-card soft-card-hover rounded-[2rem] p-7">
-                    <p class="text-gradient text-4xl font-black">01</p>
-                    <h3 class="mt-4 text-2xl font-black text-slate-950">Distribution Strength</h3>
-                    <p class="mt-3 leading-7 text-slate-600">Strong retail, wholesale and B2B execution across key
-                        technology categories.</p>
-                </div>
-                <div class="soft-card soft-card-hover rounded-[2rem] p-7 sm:mt-8">
-                    <p class="text-gradient text-4xl font-black">02</p>
-                    <h3 class="mt-4 text-2xl font-black text-slate-950">Solution Expertise</h3>
-                    <p class="mt-3 leading-7 text-slate-600">Integrated security, infrastructure and enterprise technology
-                        solutions.</p>
-                </div>
+            <div class="soft-card soft-card-hover rounded-2xl p-5 sm:mt-5">
+                <p class="text-gradient text-3xl font-black">02</p>
+                <h3 class="mt-3 text-xl font-black text-slate-950">
+                    Solution Expertise
+                </h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Integrated security, infrastructure and enterprise technology solutions.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    {{-- 05. OUR BUSINESS VERTICALS - STATIC DATA --}}
-    <section class="section-muted py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="font-black uppercase tracking-[.25em] text-blue-700">Our Business Verticals</p>
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">Four pillars. One technology
-                    ecosystem.</h2>
-                <p class="mt-5 text-lg leading-8 text-slate-600">We connect brands, products and business solutions through
-                    a complete distribution and execution platform.</p>
-            </div>
+{{-- 08. OUR BUSINESS VERTICALS --}}
+<section class="section-muted py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+            <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                Our Business Verticals
+            </p>
 
-            @php
-                $businessVerticals = [
-                    [
-                        'number' => '01',
-                        'title' => 'Mobile & Consumer Electronics',
-                        'description' =>
-                            'Smartphones, tablets, wearables, accessories and consumer technology from trusted global brands.',
-                        'link' => url('/brands'),
-                    ],
-                    [
-                        'number' => '02',
-                        'title' => 'Security & Surveillance Solutions',
-                        'description' =>
-                            'CCTV, video surveillance, access control and intelligent security systems for modern environments.',
-                        'link' => url('/services'),
-                    ],
-                    [
-                        'number' => '03',
-                        'title' => 'IT Infrastructure & Enterprise Solutions',
-                        'description' =>
-                            'Networking, servers, cloud-ready infrastructure and enterprise technology implementation.',
-                        'link' => url('/services'),
-                    ],
-                    [
-                        'number' => '04',
-                        'title' => 'Trading & Distribution',
-                        'description' =>
-                            'End-to-end sourcing, distribution, channel development and market expansion across Oman and the GCC.',
-                        'link' => url('/network'),
-                    ],
-                ];
-            @endphp
+            <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                Four pillars. One technology ecosystem.
+            </h2>
 
-            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                @foreach ($businessVerticals as $vertical)
-                    <a href="{{ $vertical['link'] }}" class="soft-card soft-card-hover group rounded-[2.25rem] p-7">
-                        <div class="flex items-center justify-between gap-4">
-                            <span class="text-gradient text-4xl font-black">{{ $vertical['number'] }}</span>
-                            <span
-                                class="grid h-11 w-11 place-items-center rounded-full bg-blue-50 text-xl text-blue-700 transition group-hover:bg-blue-600 group-hover:text-white">→</span>
-                        </div>
-                        <h3 class="mt-6 text-2xl font-black leading-tight text-slate-950">{{ $vertical['title'] }}</h3>
-                        <p class="mt-4 text-sm leading-7 text-slate-600">{{ $vertical['description'] }}</p>
-                    </a>
-                @endforeach
-            </div>
+            <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
+                We connect brands, products and business solutions through a complete distribution and execution platform.
+            </p>
         </div>
-    </section>
 
+        @php
+            $businessVerticals = [
+                [
+                    'number' => '01',
+                    'title' => 'Mobile & Consumer Electronics',
+                    'description' => 'Smartphones, tablets, wearables, accessories and consumer technology from trusted global brands.',
+                    'link' => route('business.mobile'),
+                ],
+                [
+                    'number' => '02',
+                    'title' => 'Security & Surveillance Solutions',
+                    'description' => 'CCTV, video surveillance, access control and intelligent security systems.',
+                    'link' => route('business.security'),
+                ],
+                [
+                    'number' => '03',
+                    'title' => 'IT Infrastructure & Enterprise Solutions',
+                    'description' => 'Networking, structured cabling and scalable business infrastructure.',
+                    'link' => route('business.infrastructure'),
+                ],
+                [
+                    'number' => '04',
+                    'title' => 'Trading & Distribution',
+                    'description' => 'Sourcing, supply chain, channel development and GCC market expansion.',
+                    'link' => route('business.trading'),
+                ],
+            ];
+        @endphp
 
+        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            @foreach ($businessVerticals as $vertical)
+                <a
+                    href="{{ $vertical['link'] }}"
+                    class="soft-card soft-card-hover group rounded-2xl p-5"
+                >
+                    <div class="flex items-center justify-between gap-4">
+                        <span class="text-gradient text-3xl font-black">
+                            {{ $vertical['number'] }}
+                        </span>
 
-    {{-- 19. OUR MARKET PRESENCE - STATIC DATA --}}
+                        <span class="grid h-9 w-9 place-items-center rounded-full bg-blue-50 text-lg text-blue-700 transition group-hover:bg-blue-600 group-hover:text-white">
+                            →
+                        </span>
+                    </div>
 
-    <section class="bg-white py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid items-center gap-12 lg:grid-cols-2">
-                <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">Our Market Presence</p>
-                    <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">Connected
-                        across Oman. Ready for GCC growth.</h2>
-                    <p class="mt-6 text-lg leading-8 text-slate-600">GPT Group supports retailers, resellers, enterprises
-                        and technology partners through a growing distribution and service network.</p>
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        <div class="soft-card rounded-[1.75rem] p-6">
-                            <p class="text-gradient text-3xl font-black">Oman</p>
-                            <p class="mt-2 text-slate-600">Muscat, Sohar, Sur, Salalah and growing regional coverage.</p>
-                        </div>
-                        <div class="soft-card rounded-[1.75rem] p-6">
-                            <p class="text-gradient text-3xl font-black">GCC</p>
-                            <p class="mt-2 text-slate-600">Strategic expansion and cross-market distribution capability.
-                            </p>
-                        </div>
+                    <h3 class="mt-4 text-xl font-black leading-tight text-slate-950">
+                        {{ $vertical['title'] }}
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-6 text-slate-600">
+                        {{ $vertical['description'] }}
+                    </p>
+                </a>
+            @endforeach
+        </div>
+
+        <div class="mt-7 text-center">
+            <a href="{{ route('business.index') }}" class="btn-blue px-6 py-3 text-sm">
+                View All Business Verticals
+            </a>
+        </div>
+    </div>
+</section>
+
+{{-- 09. OUR MARKET PRESENCE --}}
+<section class="bg-white py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
+            <div>
+                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                    Our Market Presence
+                </p>
+
+                <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                    Connected across Oman. Ready for GCC growth.
+                </h2>
+
+                <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
+                    GPT Group supports retailers, resellers, enterprises and technology partners through
+                    a growing distribution and service network.
+                </p>
+
+                <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div class="soft-card rounded-2xl p-5">
+                        <p class="text-gradient text-2xl font-black">Oman</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-600">
+                            Muscat, Sohar, Sur, Salalah and growing regional coverage.
+                        </p>
+                    </div>
+
+                    <div class="soft-card rounded-2xl p-5">
+                        <p class="text-gradient text-2xl font-black">GCC</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-600">
+                            Strategic expansion and cross-market distribution capability.
+                        </p>
                     </div>
                 </div>
-                <div
-                    class="rounded-[2.5rem] bg-gradient-to-br from-slate-950 via-blue-950 to-blue-700 p-8 text-white shadow-2xl sm:p-10 lg:p-12">
-                    <p class="text-sm font-black uppercase tracking-[.25em] text-cyan-300">Channel Network</p>
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        <div class="rounded-[1.75rem] bg-white/10 p-6 backdrop-blur">
-                            <p class="text-4xl font-black">B2B</p>
-                            <p class="mt-2 text-blue-100">Enterprise and institutional supply</p>
-                        </div>
-                        <div class="rounded-[1.75rem] bg-white/10 p-6 backdrop-blur">
-                            <p class="text-4xl font-black">Retail</p>
-                            <p class="mt-2 text-blue-100">Consumer-facing product availability</p>
-                        </div>
-                        <div class="rounded-[1.75rem] bg-white/10 p-6 backdrop-blur">
-                            <p class="text-4xl font-black">Wholesale</p>
-                            <p class="mt-2 text-blue-100">Dealer and reseller distribution</p>
-                        </div>
-                        <div class="rounded-[1.75rem] bg-white/10 p-6 backdrop-blur">
-                            <p class="text-4xl font-black">Support</p>
-                            <p class="mt-2 text-blue-100">Service and partner enablement</p>
-                        </div>
+            </div>
+
+            <div class="rounded-[2rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-6 text-white shadow-xl sm:p-7 lg:p-8">
+                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-100">
+                    Channel Network
+                </p>
+
+                <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                    <div class="rounded-2xl bg-white/12 p-5 backdrop-blur">
+                        <p class="text-2xl font-black">B2B</p>
+                        <p class="mt-1 text-sm leading-6 text-blue-50">
+                            Enterprise and institutional supply
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl bg-white/12 p-5 backdrop-blur">
+                        <p class="text-2xl font-black">Retail</p>
+                        <p class="mt-1 text-sm leading-6 text-blue-50">
+                            Consumer-facing product availability
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl bg-white/12 p-5 backdrop-blur">
+                        <p class="text-2xl font-black">Wholesale</p>
+                        <p class="mt-1 text-sm leading-6 text-blue-50">
+                            Dealer and reseller distribution
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl bg-white/12 p-5 backdrop-blur">
+                        <p class="text-2xl font-black">Support</p>
+                        <p class="mt-1 text-sm leading-6 text-blue-50">
+                            Service and partner enablement
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    {{-- 20. WHY CHOOSE GPT GROUP - STATIC DATA --}}
+{{-- 10. WHY CHOOSE GPT GROUP --}}
+<section class="section-muted py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+            <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                Why Choose GPT Group
+            </p>
 
-    <section class="section-muted py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="font-black uppercase tracking-[.25em] text-blue-700">Why Choose GPT Group</p>
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">A reliable partner from market
-                    entry to customer delivery.</h2>
-            </div>
-            @php
-                $whyChooseUs = [
-                    [
-                        'title' => 'Trusted Brand Partnerships',
-                        'text' => 'Access to established technology brands and dependable product portfolios.',
-                    ],
-                    [
-                        'title' => 'Strong Market Execution',
-                        'text' =>
-                            'Retail, wholesale and enterprise channels managed through practical local expertise.',
-                    ],
-                    [
-                        'title' => 'Technical Solution Capability',
-                        'text' =>
-                            'Experienced support for security, infrastructure and integrated technology projects.',
-                    ],
-                    [
-                        'title' => 'Reliable After-Sales Support',
-                        'text' =>
-                            'Responsive service, partner assistance and long-term business relationship management.',
-                    ],
-                ];
-            @endphp
-            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                @foreach ($whyChooseUs as $index => $item)
-                    <div class="soft-card soft-card-hover rounded-[2rem] p-7">
-                        <span
-                            class="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-lg font-black text-white">{{ $index + 1 }}</span>
-                        <h3 class="mt-6 text-2xl font-black text-slate-950">{{ $item['title'] }}</h3>
-                        <p class="mt-3 leading-7 text-slate-600">{{ $item['text'] }}</p>
-                    </div>
-                @endforeach
-            </div>
+            <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                A reliable partner from market entry to customer delivery.
+            </h2>
         </div>
-    </section>
 
+        @php
+            $whyChooseUs = [
+                [
+                    'title' => 'Trusted Brand Partnerships',
+                    'text' => 'Access to established technology brands and dependable product portfolios.',
+                ],
+                [
+                    'title' => 'Strong Market Execution',
+                    'text' => 'Retail, wholesale and enterprise channels managed through local expertise.',
+                ],
+                [
+                    'title' => 'Technical Solution Capability',
+                    'text' => 'Support for security, infrastructure and integrated technology projects.',
+                ],
+                [
+                    'title' => 'Reliable After-Sales Support',
+                    'text' => 'Responsive service, partner assistance and long-term relationship management.',
+                ],
+            ];
+        @endphp
+
+        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            @foreach ($whyChooseUs as $index => $item)
+                <div class="soft-card soft-card-hover rounded-2xl p-5">
+                    <span class="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-sm font-black text-white">
+                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                    </span>
+
+                    <h3 class="mt-4 text-xl font-black text-slate-950">
+                        {{ $item['title'] }}
+                    </h3>
+
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                        {{ $item['text'] }}
+                    </p>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 
   
 
-    {{-- 05. PRODUCT BRANDS --}}
+{{-- 05. PRODUCT BRANDS --}}
+@if (isset($productBrands) && $productBrands->count() > 0)
+    <section class="bg-white py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-    @if (isset($productBrands) && $productBrands->count() > 0)
-        <section class="bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-                <div class="mx-auto max-w-3xl text-center">
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
+            <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                <div class="max-w-3xl">
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
                         Key Brands
                     </p>
 
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
+                    <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                         Product Brand Ecosystem
                     </h2>
 
-                    <p class="mt-5 text-lg text-slate-600">
+                    <p class="mt-3 text-base leading-7 text-slate-600 lg:text-[17px]">
                         Explore brand-wise products, categories and latest launches.
                     </p>
                 </div>
 
-                <div class="mt-12 flex justify-end gap-3">
-                    <div
-                        class="brand-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg ring-1 ring-slate-100">
-                        ‹</div>
-                    <div
-                        class="brand-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg ring-1 ring-slate-100">
-                        ›</div>
+                <div class="flex gap-2">
+                    <button
+                        type="button"
+                        class="brand-prev grid h-10 w-10 cursor-pointer place-items-center rounded-full bg-white text-xl text-slate-950 shadow-md ring-1 ring-slate-100 transition hover:bg-blue-600 hover:text-white"
+                        aria-label="Previous brand"
+                    >
+                        ‹
+                    </button>
+
+                    <button
+                        type="button"
+                        class="brand-next grid h-10 w-10 cursor-pointer place-items-center rounded-full bg-white text-xl text-slate-950 shadow-md ring-1 ring-slate-100 transition hover:bg-blue-600 hover:text-white"
+                        aria-label="Next brand"
+                    >
+                        ›
+                    </button>
                 </div>
+            </div>
 
-                <div class="swiper brandSwiper mt-6 overflow-hidden">
-                    <div class="swiper-wrapper pb-14">
-                        @foreach ($productBrands as $brand)
-                            <div class="swiper-slide">
-                                <a href="{{ route('brands.show', $brand->slug) }}"
-                                    class="soft-card soft-card-hover group block h-full overflow-hidden rounded-[34px]">
-
-                                    <div class="h-52 bg-gradient-to-br from-white to-blue-50 p-6">
-                                        @if ($brand->logo)
-                                            <img class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
-                                                src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }}">
-                                        @elseif($brand->banner_image)
-                                            <img class="h-full w-full rounded-[24px] object-cover transition duration-500 group-hover:scale-110"
-                                                src="{{ asset('storage/' . $brand->banner_image) }}"
-                                                alt="{{ $brand->name }}">
-                                        @else
-                                            <div class="grid h-full w-full place-items-center rounded-[24px] bg-blue-50">
-                                                <span
-                                                    class="text-5xl font-black text-blue-700">{{ strtoupper(substr($brand->name, 0, 1)) }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="p-7">
-                                        <div class="flex items-center justify-between gap-4">
-                                            <h3 class="text-2xl font-black text-slate-950">{{ $brand->name }}</h3>
-                                            <span
-                                                class="grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">→</span>
+            <div class="swiper brandSwiper mt-7 overflow-hidden">
+                <div class="swiper-wrapper pb-10">
+                    @foreach ($productBrands as $brand)
+                        <div class="swiper-slide h-auto">
+                            <a
+                                href="{{ route('brands.show', $brand->slug) }}"
+                                class="soft-card soft-card-hover group block h-full overflow-hidden rounded-2xl"
+                            >
+                                <div class="h-40 bg-gradient-to-br from-white to-blue-50 p-5 sm:h-44">
+                                    @if ($brand->logo)
+                                        <img
+                                            class="h-full w-full object-contain transition duration-500 group-hover:scale-105"
+                                            src="{{ asset('storage/' . $brand->logo) }}"
+                                            alt="{{ $brand->name }}"
+                                            loading="lazy"
+                                        >
+                                    @elseif($brand->banner_image)
+                                        <img
+                                            class="h-full w-full rounded-xl object-cover transition duration-500 group-hover:scale-105"
+                                            src="{{ asset('storage/' . $brand->banner_image) }}"
+                                            alt="{{ $brand->name }}"
+                                            loading="lazy"
+                                        >
+                                    @else
+                                        <div class="grid h-full w-full place-items-center rounded-xl bg-blue-50">
+                                            <span class="text-4xl font-black text-blue-700">
+                                                {{ strtoupper(substr($brand->name, 0, 1)) }}
+                                            </span>
                                         </div>
+                                    @endif
+                                </div>
 
-                                        @if ($brand->description)
-                                            <p class="mt-2 line-clamp-2 text-slate-600">{{ $brand->description }}</p>
-                                        @endif
+                                <div class="p-5">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <h3 class="text-xl font-black text-slate-950">
+                                            {{ $brand->name }}
+                                        </h3>
 
-                                        <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-blue-700">
-                                            {{ $brand->products_count }} Products</p>
+                                        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-slate-100 text-lg text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
+                                            →
+                                        </span>
                                     </div>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="brand-pagination"></div>
+
+                                    @if ($brand->description)
+                                        <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">
+                                            {{ $brand->description }}
+                                        </p>
+                                    @endif
+
+                                    <p class="mt-3 text-[11px] font-black uppercase tracking-[.18em] text-blue-700">
+                                        {{ $brand->products_count }} Products
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
 
-                {{-- View All Brands Button --}}
-                <div class="mt-12 text-center">
-                    <a href="{{ url('/brands') }}"
-                        class="inline-flex items-center justify-center gap-3 rounded-full bg-blue-700 px-8 py-4 text-sm font-black uppercase tracking-[.15em] text-white shadow-lg shadow-blue-700/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-800 hover:shadow-xl">
-                        View All Brands
+                <div class="brand-pagination"></div>
+            </div>
 
-                        <span class="text-xl leading-none">
+            <div class="mt-7 text-center">
+                <a
+                    href="{{ route('brands') }}"
+                    class="inline-flex items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-xs font-black uppercase tracking-[.14em] text-white shadow-lg shadow-blue-700/20 transition hover:-translate-y-1 hover:bg-blue-800"
+                >
+                    View All Brands
+                    <span class="text-lg leading-none">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+@endif
+
+{{-- 06. PRODUCT CATEGORIES --}}
+@if (isset($productCategories) && $productCategories->count() > 0)
+    <section class="section-muted py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                    Categories
+                </p>
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    Product Ecosystem
+                </h2>
+
+                <p class="mt-3 text-base leading-7 text-slate-600 lg:text-[17px]">
+                    Explore GPT Group product categories in a clean and structured way.
+                </p>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach ($productCategories as $category)
+                    @if ($category->brand)
+                        <a
+                            href="{{ route('brands.categories.show', [$category->brand->slug, $category->slug]) }}"
+                            class="soft-card soft-card-hover group block rounded-2xl p-4"
+                        >
+                    @else
+                        <div class="soft-card soft-card-hover group rounded-2xl p-4">
+                    @endif
+
+                    @if ($category->image)
+                        <img
+                            class="h-40 w-full rounded-xl object-cover transition duration-500 group-hover:scale-[1.03] sm:h-44"
+                            src="{{ asset('storage/' . $category->image) }}"
+                            alt="{{ $category->name }}"
+                            loading="lazy"
+                        >
+                    @else
+                        <div class="grid h-40 w-full place-items-center rounded-xl bg-blue-50 text-sm text-slate-400 sm:h-44">
+                            No Image
+                        </div>
+                    @endif
+
+                    <div class="mt-4 flex items-start justify-between gap-3">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-950">
+                                {{ $category->name }}
+                            </h3>
+
+                            @if ($category->brand)
+                                <p class="mt-1 text-[11px] font-black uppercase tracking-[.16em] text-blue-700">
+                                    {{ $category->brand->name }}
+                                </p>
+                            @endif
+                        </div>
+
+                        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue-600 text-lg text-white transition group-hover:bg-cyan-500">
                             →
                         </span>
-                    </a>
-                </div>
-
-            </div>
-        </section>
-    @endif
-
-    {{-- 06. PRODUCT CATEGORIES --}}
-
-    @if (isset($productCategories) && $productCategories->count() > 0)
-        <section class="section-muted py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-3xl text-center">
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">Categories</p>
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">Product Ecosystem</h2>
-                    <p class="mt-5 text-lg leading-8 text-slate-600">GPT Group ke product categories ko clean and premium
-                        way me show karein.</p>
-                </div>
-
-                <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    @foreach ($productCategories as $category)
-                        @if ($category->brand)
-                            <a href="{{ route('brands.categories.show', [$category->brand->slug, $category->slug]) }}"
-                                class="soft-card soft-card-hover group block rounded-[2rem] p-5">
-                            @else
-                                <div class="soft-card soft-card-hover group rounded-[2rem] p-5">
-                        @endif
-
-                        @if ($category->image)
-                            <img class="h-52 w-full rounded-[1.5rem] object-cover transition duration-500 group-hover:scale-105"
-                                src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}">
-                        @else
-                            <div class="grid h-52 w-full place-items-center rounded-[1.5rem] bg-blue-50 text-slate-400">No
-                                Image</div>
-                        @endif
-
-                        <div class="mt-6 flex items-start justify-between gap-4">
-                            <div>
-                                <h3 class="text-2xl font-black text-slate-950">{{ $category->name }}</h3>
-                                @if ($category->brand)
-                                    <p class="mt-1 text-xs font-black uppercase tracking-[.2em] text-blue-700">
-                                        {{ $category->brand->name }}</p>
-                                @endif
-                            </div>
-                            <span
-                                class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-blue-600 text-xl text-white transition group-hover:bg-cyan-500">→</span>
-                        </div>
-
-                        @if ($category->description)
-                            <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">{{ $category->description }}</p>
-                        @endif
-
-                        <p class="mt-4 text-xs font-black uppercase tracking-[.2em] text-blue-700">
-                            {{ $category->products_count }} Products</p>
-
-                        @if ($category->brand)
-                            </a>
-                        @else
-                </div>
-    @endif
-    @endforeach
-    </div>
-    </div>
-    </section>
-    @endif
-
-    {{-- 07. LATEST PRODUCTS --}}
-
-    {{-- @if (isset($latestProducts) && $latestProducts->count() > 0)
-        <section class="bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                    <div>
-                        <p class="font-black uppercase tracking-[.3em] text-blue-700">New Launches</p>
-                        <h2 class="mt-3 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">Latest
-                            Products</h2>
-                        <p class="mt-4 max-w-2xl text-lg leading-8 text-slate-600">Smartphones, tablets, watches and
-                            accessories ko premium product cards me showcase karein.</p>
                     </div>
 
-                    <div class="flex gap-3">
-                        <div
-                            class="product-prev grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg ring-1 ring-slate-100">
-                            ‹</div>
-                        <div
-                            class="product-next grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white text-2xl text-slate-950 shadow-lg ring-1 ring-slate-100">
-                            ›</div>
-                    </div>
-                </div>
-
-                <div class="swiper productSwiper mt-12">
-                    <div class="swiper-wrapper pb-14">
-                        @foreach ($latestProducts as $product)
-                            <div class="swiper-slide">
-                                <a href="{{ route('product.detail', $product->slug) }}"
-                                    class="soft-card soft-card-hover group block overflow-hidden rounded-[2rem]">
-                                    <div class="relative h-80 bg-gradient-to-br from-white to-blue-50 p-7">
-                                        @if ($product->badge)
-                                            <span
-                                                class="absolute left-5 top-5 rounded-full bg-blue-600 px-4 py-2 text-xs font-black text-white">{{ $product->badge }}</span>
-                                        @endif
-
-                                        @if ($product->brand)
-                                            <span
-                                                class="absolute right-5 top-5 rounded-full bg-white px-4 py-2 text-xs font-black text-blue-700 shadow">{{ $product->brand->name }}</span>
-                                        @endif
-
-                                        @if ($product->image)
-                                            <img class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
-                                                src="{{ asset('storage/' . $product->image) }}"
-                                                alt="{{ $product->name }}">
-                                        @else
-                                            <div
-                                                class="grid h-full w-full place-items-center rounded-[1.5rem] bg-white text-slate-400">
-                                                No Image</div>
-                                        @endif
-                                    </div>
-
-                                    <div class="p-6">
-                                        <div class="flex items-start justify-between gap-4">
-                                            <div>
-                                                <h3 class="text-2xl font-black text-slate-950">{{ $product->name }}</h3>
-                                                @if ($product->short_description)
-                                                    <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">
-                                                        {{ $product->short_description }}</p>
-                                                @endif
-                                            </div>
-                                            <span
-                                                class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-slate-100 text-2xl text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">→</span>
-                                        </div>
-
-                                        @if (is_array($product->tags) && count($product->tags))
-                                            <div class="mt-5 flex flex-wrap gap-2">
-                                                @foreach ($product->tags as $tag)
-                                                    <span
-                                                        class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">{{ $tag }}</span>
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="product-pagination"></div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
-    {{-- 08. UPCOMING PRODUCTS --}}
-
-    {{-- @if (isset($upcomingProducts) && $upcomingProducts->count() > 0)
-        <section class="section-muted py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mb-12">
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">Coming Soon</p>
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">Upcoming Products</h2>
-                    <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">New product launches and upcoming devices
-                        for dealers and partners.</p>
-                </div>
-
-                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    @foreach ($upcomingProducts as $product)
-                        <a href="{{ route('product.detail', $product->slug) }}"
-                            class="soft-card soft-card-hover group overflow-hidden rounded-[2rem]">
-                            <div class="relative h-72 bg-gradient-to-br from-white to-cyan-50 p-6">
-                                <span
-                                    class="absolute left-5 top-5 rounded-full bg-cyan-500 px-4 py-2 text-xs font-black text-white">Upcoming</span>
-
-                                @if ($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                        class="h-full w-full object-contain transition duration-500 group-hover:scale-110">
-                                @else
-                                    <div class="grid h-full w-full place-items-center rounded-2xl bg-white text-slate-400">
-                                        No Image</div>
-                                @endif
-                            </div>
-
-                            <div class="p-6">
-                                <h3 class="text-2xl font-black text-slate-950">{{ $product->name }}</h3>
-
-                                @if ($product->launch_date)
-                                    <p class="mt-2 text-sm font-bold text-blue-700">Launch:
-                                        {{ $product->launch_date->format('d M Y') }}</p>
-                                @endif
-
-                                @if ($product->short_description)
-                                    <p class="mt-3 line-clamp-2 text-sm leading-6 text-slate-500">
-                                        {{ $product->short_description }}</p>
-                                @endif
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
-    {{-- 09. WHAT WE DO --}}
-    @if (isset($whatWeDoSection) && $whatWeDoSection)
-        <section class="bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid items-center gap-12 lg:grid-cols-2">
-                    <div class="order-1 lg:order-2">
-                        @if ($whatWeDoSection->image)
-                            <img class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
-                                src="{{ asset('storage/' . $whatWeDoSection->image) }}"
-                                alt="{{ $whatWeDoSection->title }}">
-                        @else
-                            <img class="h-[360px] w-full rounded-[2rem] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[2.5rem]"
-                                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
-                                alt="{{ $whatWeDoSection->title }}">
-                        @endif
-
-                        @if ($whatWeDoSection->overlay_title || $whatWeDoSection->overlay_text)
-                            <div class="soft-card relative -mt-20 mx-6 rounded-[2rem] p-7">
-                                @if ($whatWeDoSection->overlay_title)
-                                    <p class="text-3xl font-black text-slate-950">{{ $whatWeDoSection->overlay_title }}
-                                    </p>
-                                @endif
-                                @if ($whatWeDoSection->overlay_text)
-                                    <p class="mt-2 text-slate-600">{{ $whatWeDoSection->overlay_text }}</p>
-                                @endif
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="order-2 lg:order-1">
-                        @if ($whatWeDoSection->label)
-                            <p class="font-black uppercase tracking-[.3em] text-blue-700">{{ $whatWeDoSection->label }}
-                            </p>
-                        @endif
-
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                            {{ $whatWeDoSection->title }}</h2>
-
-                        @if ($whatWeDoSection->description)
-                            <p class="mt-6 text-lg leading-8 text-slate-600">{{ $whatWeDoSection->description }}</p>
-                        @endif
-
-                        <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                            @foreach ([1, 2, 3, 4] as $i)
-                                @php
-                                    $cardTitle = $whatWeDoSection->{'card_' . $i . '_title'} ?? null;
-                                    $cardDesc = $whatWeDoSection->{'card_' . $i . '_description'} ?? null;
-                                @endphp
-
-                                @if ($cardTitle || $cardDesc)
-                                    <div class="soft-card soft-card-hover rounded-[1.75rem] p-6">
-                                        @if ($cardTitle)
-                                            <h3 class="text-xl font-black text-slate-950">{{ $cardTitle }}</h3>
-                                        @endif
-                                        @if ($cardDesc)
-                                            <p class="mt-2 text-sm leading-6 text-slate-500">{{ $cardDesc }}</p>
-                                        @endif
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
-
-    {{-- 10. SERVICES --}}
-
-    {{-- @if ($serviceSection && $serviceSection->activeItems->count())
-        <section class="section-muted py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-3xl text-center">
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                        {{ $serviceSection->label }}
-                    </p>
-
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
-                        {{ $serviceSection->title }}
-                    </h2>
-
-                    <p class="mt-5 text-lg leading-8 text-slate-600">
-                        {{ $serviceSection->description }}
-                    </p>
-                </div>
-
-                <div class="mt-12 grid gap-6 md:grid-cols-2">
-                    @foreach ($serviceSection->activeItems as $item)
-                        <a href="{{ $item->button_link ?: '#' }}"
-                            class="soft-card soft-card-hover group overflow-hidden rounded-[2.5rem]">
-                            @if ($item->image)
-                                <img class="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
-                                    src="{{ asset('storage/' . $item->image) }}"
-                                    alt="{{ $item->image_alt ?: $item->title }}">
-                            @endif
-
-                            <div class="p-8">
-                                <p
-                                    class="font-black uppercase tracking-[.25em] {{ $item->accent_color === 'cyan' ? 'text-cyan-600' : 'text-blue-700' }}">
-                                    {{ $item->label }}
-                                </p>
-
-                                <h3 class="mt-4 text-3xl font-black text-slate-950">
-                                    {{ $item->title }}
-                                </h3>
-
-                                <p class="mt-3 leading-7 text-slate-600">
-                                    {{ $item->description }}
-                                </p>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
-    {{-- 11. NETWORK --}}
-
-    @if ($networkSection)
-        <section class="bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid items-center gap-12 lg:grid-cols-2">
-                    <div>
-                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
-                            {{ $networkSection->label }}
-                        </p>
-
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                            {{ $networkSection->title }}
-                        </h2>
-
-                        <p class="mt-6 text-lg leading-8 text-slate-600">
-                            {{ $networkSection->description }}
-                        </p>
-
-                        <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                            @if ($networkSection->card_1_title || $networkSection->card_1_description)
-                                <div class="soft-card rounded-[1.75rem] p-6">
-                                    <h3 class="text-xl font-black text-slate-950">
-                                        {{ $networkSection->card_1_title }}
-                                    </h3>
-
-                                    <p class="mt-2 text-sm leading-6 text-slate-500">
-                                        {{ $networkSection->card_1_description }}
-                                    </p>
-                                </div>
-                            @endif
-
-                            @if ($networkSection->card_2_title || $networkSection->card_2_description)
-                                <div class="soft-card rounded-[1.75rem] p-6">
-                                    <h3 class="text-xl font-black text-slate-950">
-                                        {{ $networkSection->card_2_title }}
-                                    </h3>
-
-                                    <p class="mt-2 text-sm leading-6 text-slate-500">
-                                        {{ $networkSection->card_2_description }}
-                                    </p>
-                                </div>
-                            @endif
-                        </div>
-
-                        @if ($networkSection->button_text)
-                            <a href="{{ $networkSection->button_link ?: '#' }}" class="btn-blue mt-8">
-                                {{ $networkSection->button_text }}
-                            </a>
-                        @endif
-                    </div>
-
-                    <div class="relative">
-                        @if ($networkSection->image)
-                            <img class="h-[560px] w-full rounded-[2.5rem] object-cover shadow-2xl"
-                                src="{{ asset('storage/' . $networkSection->image) }}"
-                                alt="{{ $networkSection->image_alt ?: 'GPT Network' }}">
-                        @endif
-
-                        @if ($networkSection->overlay_title || $networkSection->overlay_description)
-                            <div class="soft-card absolute -bottom-8 left-6 right-6 rounded-[2rem] p-7">
-                                <p class="text-3xl font-black text-slate-950">
-                                    {{ $networkSection->overlay_title }}
-                                </p>
-
-                                <p class="mt-2 text-slate-600">
-                                    {{ $networkSection->overlay_description }}
-                                </p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
-
-
-
-    {{-- 13. STRATEGY --}}
-
-    @if ($strategySection)
-        <section class="bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-3xl text-center">
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                        {{ $strategySection->label }}
-                    </p>
-
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
-                        {{ $strategySection->title }}
-                    </h2>
-
-                    <p class="mt-5 text-lg text-slate-600">
-                        {{ $strategySection->description }}
-                    </p>
-                </div>
-
-                <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    @foreach ([1, 2, 3, 4] as $i)
-                        @php
-                            $numberField = 'strategy_' . $i . '_number';
-                            $titleField = 'strategy_' . $i . '_title';
-                            $descriptionField = 'strategy_' . $i . '_description';
-                        @endphp
-
-                        @if ($strategySection->{$numberField} || $strategySection->{$titleField} || $strategySection->{$descriptionField})
-                            <div class="soft-card soft-card-hover rounded-[34px] p-8">
-                                <span class="text-gradient text-4xl font-black">
-                                    {{ $strategySection->{$numberField} }}
-                                </span>
-
-                                <h3 class="mt-5 text-2xl font-black text-slate-950">
-                                    {{ $strategySection->{$titleField} }}
-                                </h3>
-
-                                <p class="mt-3 text-slate-600">
-                                    {{ $strategySection->{$descriptionField} }}
-                                </p>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
-    {{-- 14. RETAIL OUTLETS --}}
-
-    @if ($retailOutletSection)
-        <section class="section-muted overflow-hidden py-16 lg:py-24">
-            <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-                <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                        {{ $retailOutletSection->label }}
-                    </p>
-
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
-                        {{ $retailOutletSection->title }}
-                    </h2>
-
-                    <p class="mt-6 text-lg leading-8 text-slate-600">
-                        {{ $retailOutletSection->description }}
-                    </p>
-
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                        @foreach ([1, 2, 3, 4] as $i)
-                            @php
-                                $titleField = 'card_' . $i . '_title';
-                                $descriptionField = 'card_' . $i . '_description';
-                            @endphp
-
-                            @if ($retailOutletSection->{$titleField} || $retailOutletSection->{$descriptionField})
-                                <div class="soft-card rounded-3xl p-6">
-                                    <h3 class="font-black text-slate-950">
-                                        {{ $retailOutletSection->{$titleField} }}
-                                    </h3>
-
-                                    <p class="mt-2 text-slate-600">
-                                        {{ $retailOutletSection->{$descriptionField} }}
-                                    </p>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-
-                    @if ($retailOutletSection->button_text)
-                        <a class="btn-blue mt-8" href="{{ $retailOutletSection->button_link ?: '#' }}">
-                            {{ $retailOutletSection->button_text }}
-                        </a>
-                    @endif
-                </div>
-
-                <div class="grid grid-cols-2 gap-5">
-                    @foreach (['image_1', 'image_2', 'image_3', 'image_4'] as $index => $imageField)
-                        @php
-                            $altField = $imageField . '_alt';
-                        @endphp
-
-                        @if ($retailOutletSection->{$imageField})
-                            <img class="{{ in_array($index, [1, 3]) ? 'mt-10' : '' }} h-64 w-full rounded-[32px] object-cover shadow-xl sm:h-72"
-                                src="{{ asset('storage/' . $retailOutletSection->{$imageField}) }}"
-                                alt="{{ $retailOutletSection->{$altField} ?: 'Retail Outlet Image' }}">
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
-
-    {{-- 15. FOUNDER --}}
-
-    {{-- @if (isset($founderSection) && $founderSection)
-        <section class="bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid items-center gap-12 lg:grid-cols-2">
-                    <div class="order-1 lg:order-2">
-                        @if ($founderSection->image)
-                            <img class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
-                                src="{{ asset('storage/' . $founderSection->image) }}"
-                                alt="{{ $founderSection->title }}">
-                        @else
-                            <img class="h-[360px] w-full rounded-[32px] object-cover shadow-2xl sm:h-[460px] lg:h-[560px] lg:rounded-[44px]"
-                                src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" alt="{{ $founderSection->title }}">
-                        @endif
-                    </div>
-
-                    <div class="order-2 lg:order-1">
-                        @if ($founderSection->label)
-                            <p class="font-black uppercase tracking-[.25em] text-blue-700">{{ $founderSection->label }}
-                            </p>
-                        @endif
-
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-5xl lg:text-6xl">
-                            {{ $founderSection->title }}</h2>
-
-                        @if ($founderSection->description)
-                            <p class="mt-6 text-lg leading-8 text-slate-600">{{ $founderSection->description }}</p>
-                        @endif
-
-                        <div class="mt-8 grid gap-4 sm:grid-cols-3">
-                            @foreach ([1, 2, 3] as $i)
-                                @php
-                                    $statValue = $founderSection->{'stat_' . $i . '_value'} ?? null;
-                                    $statLabel = $founderSection->{'stat_' . $i . '_label'} ?? null;
-                                @endphp
-
-                                @if ($statValue || $statLabel)
-                                    <div class="soft-card rounded-3xl p-5">
-                                        <p class="text-gradient text-3xl font-black">{{ $statValue }}</p>
-                                        <p class="font-semibold text-slate-600">{{ $statLabel }}</p>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-
-                        @if ($founderSection->button_text)
-                            <a href="{{ $founderSection->button_link ?: '#' }}" class="btn-blue mt-8">
-                                {{ $founderSection->button_text }}
-                            </a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
-    {{-- 16. PARTNER LOGOS --}}
-
-    {{-- 16. PARTNER LOGOS --}}
-    @if ($partnerLogoSection && $partnerLogoSection->activeLogos->count())
-        <section class="section-muted overflow-hidden py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-                <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                    <div class="max-w-2xl">
-                        <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                            {{ $partnerLogoSection->label }}
-                        </p>
-
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 md:text-6xl">
-                            {{ $partnerLogoSection->title }}
-                        </h2>
-                    </div>
-
-                    @if ($partnerLogoSection->description)
-                        <p class="max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-                            {{ $partnerLogoSection->description }}
+                    @if ($category->description)
+                        <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">
+                            {{ $category->description }}
                         </p>
                     @endif
-                </div>
 
-                <div class="relative mt-12 pb-8">
-
-                    <div
-                        class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-slate-50 to-transparent sm:w-24">
-                    </div>
-
-                    <div
-                        class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-slate-50 to-transparent sm:w-24">
-                    </div>
-
-                    <div class="logo-marquee py-2">
-                        <div class="logo-marquee-track">
-                            @foreach ($partnerLogoSection->activeLogos->concat($partnerLogoSection->activeLogos) as $logo)
-                                <div
-                                    class="logo-marquee-item soft-card soft-card-hover flex h-32 items-center justify-center rounded-[28px] border border-slate-200/70 bg-white px-7 py-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-                                    @if ($logo->logo)
-                                        <img src="{{ asset('storage/' . $logo->logo) }}"
-                                            class="h-14 w-full max-w-[150px] object-contain" alt="{{ $logo->name }}"
-                                            loading="lazy">
-                                    @else
-                                        <span class="text-center text-xl font-black text-slate-700">
-                                            {{ $logo->name }}
-                                        </span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    @endif
-
-
-    {{-- 17. TESTIMONIALS --}}
-    @if ($testimonialSection && $testimonialSection->activeTestimonials->count())
-        <section class="overflow-hidden bg-white py-16 lg:py-24">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-                <div class="mx-auto max-w-3xl text-center">
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                        {{ $testimonialSection->label }}
+                    <p class="mt-3 text-[11px] font-black uppercase tracking-[.16em] text-blue-700">
+                        {{ $category->products_count }} Products
                     </p>
 
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
-                        {{ $testimonialSection->title }}
-                    </h2>
-
-                    @if ($testimonialSection->description)
-                        <p class="mt-4 text-lg text-slate-600">
-                            {{ $testimonialSection->description }}
-                        </p>
-                    @endif
-                </div>
-
-                <div class="testimonial-marquee mt-12 pb-4">
-                    <div class="testimonial-marquee-track">
-                        @foreach ($testimonialSection->activeTestimonials->concat($testimonialSection->activeTestimonials) as $testimonial)
-                            <div class="testimonial-marquee-item soft-card soft-card-hover rounded-[34px] p-8">
-
-                                <p class="text-xl leading-8 text-slate-700">
-                                    “{{ $testimonial->message }}”
-                                </p>
-
-                                <div class="mt-6 flex items-center gap-3">
-                                    @if ($testimonial->image)
-                                        <img src="{{ asset('storage/' . $testimonial->image) }}"
-                                            class="h-12 w-12 rounded-full object-cover" alt="{{ $testimonial->name }}">
-                                    @else
-                                        <div
-                                            class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-black text-blue-700">
-                                            {{ strtoupper(substr($testimonial->name ?? 'P', 0, 1)) }}
-                                        </div>
-                                    @endif
-
-                                    <div>
-                                        <p class="font-black text-slate-950">
-                                            {{ $testimonial->name }}
-                                        </p>
-
-                                        @if ($testimonial->location)
-                                            <p class="text-slate-500">
-                                                {{ $testimonial->location }}
-                                            </p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    @endif
-
-    {{-- 18. FAQ --}}
-
-    @if ($faqSection)
-        <section class="section-muted py-16 lg:py-24">
-            <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-                <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">
-                        {{ $faqSection->label }}
-                    </p>
-
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 md:text-6xl">
-                        {{ $faqSection->title }}
-                    </h2>
-
-                    <p class="mt-5 text-lg text-slate-600">
-                        {{ $faqSection->description }}
-                    </p>
-
-                    @if ($faqSection->button_text)
-                        <a class="btn-blue mt-8" href="{{ $faqSection->button_link ?: '#' }}">
-                            {{ $faqSection->button_text }}
+                    @if ($category->brand)
                         </a>
+                    @else
+                        </div>
                     @endif
-                </div>
-
-                <div class="grid gap-4">
-                    @foreach ($faqSection->activeItems as $faq)
-                        <details class="soft-card rounded-3xl p-6" {{ $faq->is_open ? 'open' : '' }}>
-                            <summary class="cursor-pointer font-black text-slate-950">
-                                {{ $faq->question }}
-                            </summary>
-
-                            <p class="mt-3 text-slate-600">
-                                {{ $faq->answer }}
-                            </p>
-                        </details>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
-
-
-    {{-- 21. LATEST NEWS & UPDATES - STATIC DATA --}}
-
-    <section class="bg-white py-16 lg:py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                    <p class="font-black uppercase tracking-[.25em] text-blue-700">Latest News & Updates</p>
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">What is happening at GPT
-                        Group.</h2>
-                </div>
-                <a href="{{ url('/news') }}" class="btn-white">View All Updates</a>
-            </div>
-            @php
-                $latestNewsStatic = [
-                    [
-                        'category' => 'Business',
-                        'title' => 'Expanding technology distribution across Oman',
-                        'text' =>
-                            'GPT Group continues to strengthen its partner and reseller network across key markets.',
-                    ],
-                    [
-                        'category' => 'Solutions',
-                        'title' => 'Integrated security solutions for modern businesses',
-                        'text' =>
-                            'New surveillance and access-control capabilities designed for commercial environments.',
-                    ],
-                    [
-                        'category' => 'Partnerships',
-                        'title' => 'Building stronger connections with global technology brands',
-                        'text' => 'Our team is focused on reliable market execution and long-term brand development.',
-                    ],
-                ];
-            @endphp
-            <div class="mt-12 grid gap-6 lg:grid-cols-3">
-                @foreach ($latestNewsStatic as $news)
-                    <article class="soft-card soft-card-hover rounded-[2rem] p-7">
-                        <p class="text-xs font-black uppercase tracking-[.2em] text-blue-700">{{ $news['category'] }}</p>
-                        <h3 class="mt-4 text-2xl font-black leading-tight text-slate-950">{{ $news['title'] }}</h3>
-                        <p class="mt-4 leading-7 text-slate-600">{{ $news['text'] }}</p>
-                        <a href="{{ url('/news') }}"
-                            class="mt-6 inline-flex items-center gap-2 font-black text-blue-700">Read More
-                            <span>→</span></a>
-                    </article>
                 @endforeach
             </div>
         </div>
     </section>
+@endif
 
-    {{-- 22. CTA + ENQUIRY --}}
+{{-- 09. WHAT WE DO --}}
+@if (isset($whatWeDoSection) && $whatWeDoSection)
+    <section class="bg-white py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
 
-    <section class="overflow-hidden bg-white py-12 sm:py-16 lg:py-24">
-        <div class="mx-auto grid max-w-7xl items-stretch gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
-            <div
-                class="rounded-[2rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-6 text-white shadow-xl sm:rounded-[2.75rem] sm:p-8 md:p-10 lg:p-14">
-                <p class="text-xs font-black uppercase tracking-[.20em] text-blue-100 sm:text-sm sm:tracking-[.25em]">Call
-                    To Action</p>
-                <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl md:text-5xl lg:text-6xl">Ready to build your
-                    distribution advantage?</h2>
-                <p class="mt-4 text-base leading-7 text-blue-50 sm:mt-5 sm:text-lg sm:leading-8">Connect with GPT Group for
-                    brand partnership, product distribution, retail outlet support, B2B enquiries and market expansion.</p>
+                <div class="order-1 lg:order-2">
+                    @if ($whatWeDoSection->image)
+                        <img
+                            class="h-[280px] w-full rounded-2xl object-cover shadow-xl sm:h-[340px] lg:h-[410px]"
+                            src="{{ asset('storage/' . $whatWeDoSection->image) }}"
+                            alt="{{ $whatWeDoSection->title }}"
+                            loading="lazy"
+                        >
+                    @else
+                        <img
+                            class="h-[280px] w-full rounded-2xl object-cover shadow-xl sm:h-[340px] lg:h-[410px]"
+                            src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
+                            alt="{{ $whatWeDoSection->title }}"
+                            loading="lazy"
+                        >
+                    @endif
 
-                <div class="mt-7 grid gap-3 sm:mt-8 sm:flex sm:gap-4">
-                    <a class="inline-flex justify-center rounded-full bg-white px-6 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1"
-                        href="{{ url('/contact-us') }}">Partner Enquiry</a>
-                    <a class="inline-flex justify-center rounded-full bg-slate-950 px-6 py-3.5 text-sm font-black text-white shadow-lg transition hover:-translate-y-1"
-                        href="{{ url('/brands') }}">Explore Products</a>
+                    @if ($whatWeDoSection->overlay_title || $whatWeDoSection->overlay_text)
+                        <div class="soft-card relative -mt-12 mx-4 rounded-2xl p-5 sm:mx-6">
+                            @if ($whatWeDoSection->overlay_title)
+                                <p class="text-xl font-black text-slate-950 sm:text-2xl">
+                                    {{ $whatWeDoSection->overlay_title }}
+                                </p>
+                            @endif
+
+                            @if ($whatWeDoSection->overlay_text)
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
+                                    {{ $whatWeDoSection->overlay_text }}
+                                </p>
+                            @endif
+                        </div>
+                    @endif
                 </div>
-            </div>
 
-            <div class="soft-card min-w-0 rounded-[2rem] p-6 sm:rounded-[2.75rem] sm:p-8 md:p-10 lg:p-14">
-                <p class="text-xs font-black uppercase tracking-[.20em] text-blue-700 sm:text-sm sm:tracking-[.25em]">
-                    Enquiry</p>
-                <h3 class="mt-4 text-2xl font-black leading-tight text-slate-950 sm:text-3xl lg:text-4xl">Quick Contact
-                    Form</h3>
+                <div class="order-2 lg:order-1">
+                    @if ($whatWeDoSection->label)
+                        <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                            {{ $whatWeDoSection->label }}
+                        </p>
+                    @endif
 
-                <form action="#" method="POST" class="mt-6 grid gap-3 sm:mt-7 sm:gap-4">
-                    @csrf
+                    <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        {{ $whatWeDoSection->title }}
+                    </h2>
 
-                    <input type="text" name="name"
-                        class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500 sm:px-5 sm:py-4 sm:text-base"
-                        placeholder="Full Name">
+                    @if ($whatWeDoSection->description)
+                        <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
+                            {{ $whatWeDoSection->description }}
+                        </p>
+                    @endif
 
-                    <input type="text" name="company"
-                        class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500 sm:px-5 sm:py-4 sm:text-base"
-                        placeholder="Company / Brand Name">
+                    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                        @foreach ([1, 2, 3, 4] as $i)
+                            @php
+                                $cardTitle = $whatWeDoSection->{'card_' . $i . '_title'} ?? null;
+                                $cardDesc = $whatWeDoSection->{'card_' . $i . '_description'} ?? null;
+                            @endphp
 
-                    <input type="text" name="contact"
-                        class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500 sm:px-5 sm:py-4 sm:text-base"
-                        placeholder="Phone / Email">
+                            @if ($cardTitle || $cardDesc)
+                                <div class="soft-card soft-card-hover rounded-2xl p-5">
+                                    @if ($cardTitle)
+                                        <h3 class="text-lg font-black text-slate-950">
+                                            {{ $cardTitle }}
+                                        </h3>
+                                    @endif
 
-                    <select name="enquiry_type"
-                        class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-700 outline-none focus:border-blue-500 sm:px-5 sm:py-4 sm:text-base">
-                        <option>Distribution Partnership</option>
-                        <option>Retail Outlet</option>
-                        <option>B2B Supply</option>
-                        <option>Career</option>
-                    </select>
-
-                    <textarea name="message"
-                        class="h-28 w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500 sm:px-5 sm:py-4 sm:text-base"
-                        placeholder="Message"></textarea>
-
-                    <button type="submit" class="btn-blue mt-1 w-full">
-                        Submit Enquiry
-                    </button>
-                </form>
+                                    @if ($cardDesc)
+                                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                                            {{ $cardDesc }}
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+@endif
 
-    {{-- SWIPER --}}
+{{-- 11. NETWORK --}}
+@if ($networkSection)
+    <section class="bg-white py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
 
+                <div>
+                    @if ($networkSection->label)
+                        <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                            {{ $networkSection->label }}
+                        </p>
+                    @endif
+
+                    <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        {{ $networkSection->title }}
+                    </h2>
+
+                    @if ($networkSection->description)
+                        <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
+                            {{ $networkSection->description }}
+                        </p>
+                    @endif
+
+                    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                        @if ($networkSection->card_1_title || $networkSection->card_1_description)
+                            <div class="soft-card rounded-2xl p-5">
+                                @if ($networkSection->card_1_title)
+                                    <h3 class="text-lg font-black text-slate-950">
+                                        {{ $networkSection->card_1_title }}
+                                    </h3>
+                                @endif
+
+                                @if ($networkSection->card_1_description)
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $networkSection->card_1_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if ($networkSection->card_2_title || $networkSection->card_2_description)
+                            <div class="soft-card rounded-2xl p-5">
+                                @if ($networkSection->card_2_title)
+                                    <h3 class="text-lg font-black text-slate-950">
+                                        {{ $networkSection->card_2_title }}
+                                    </h3>
+                                @endif
+
+                                @if ($networkSection->card_2_description)
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        {{ $networkSection->card_2_description }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+
+                    @if ($networkSection->button_text)
+                        <a
+                            href="{{ $networkSection->button_link ?: '#' }}"
+                            class="btn-blue mt-6 px-6 py-3 text-sm"
+                        >
+                            {{ $networkSection->button_text }}
+                        </a>
+                    @endif
+                </div>
+
+                <div class="relative pb-8">
+                    @if ($networkSection->image)
+                        <img
+                            class="h-[300px] w-full rounded-2xl object-cover shadow-xl sm:h-[360px] lg:h-[420px]"
+                            src="{{ asset('storage/' . $networkSection->image) }}"
+                            alt="{{ $networkSection->image_alt ?: 'GPT Network' }}"
+                            loading="lazy"
+                        >
+                    @endif
+
+                    @if ($networkSection->overlay_title || $networkSection->overlay_description)
+                        <div class="soft-card absolute bottom-0 left-4 right-4 rounded-2xl p-5 sm:left-6 sm:right-6">
+                            @if ($networkSection->overlay_title)
+                                <p class="text-xl font-black text-slate-950 sm:text-2xl">
+                                    {{ $networkSection->overlay_title }}
+                                </p>
+                            @endif
+
+                            @if ($networkSection->overlay_description)
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
+                                    {{ $networkSection->overlay_description }}
+                                </p>
+                            @endif
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+@endif
+
+{{-- 13. STRATEGY --}}
+@if ($strategySection)
+    <section class="bg-white py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                @if ($strategySection->label)
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                        {{ $strategySection->label }}
+                    </p>
+                @endif
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    {{ $strategySection->title }}
+                </h2>
+
+                @if ($strategySection->description)
+                    <p class="mt-3 text-base leading-7 text-slate-600 lg:text-[17px]">
+                        {{ $strategySection->description }}
+                    </p>
+                @endif
+            </div>
+
+            <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                @foreach ([1, 2, 3, 4] as $i)
+                    @php
+                        $numberField = 'strategy_' . $i . '_number';
+                        $titleField = 'strategy_' . $i . '_title';
+                        $descriptionField = 'strategy_' . $i . '_description';
+                    @endphp
+
+                    @if (
+                        $strategySection->{$numberField}
+                        || $strategySection->{$titleField}
+                        || $strategySection->{$descriptionField}
+                    )
+                        <div class="soft-card soft-card-hover rounded-2xl p-5">
+                            <span class="text-gradient text-3xl font-black">
+                                {{ $strategySection->{$numberField} }}
+                            </span>
+
+                            @if ($strategySection->{$titleField})
+                                <h3 class="mt-4 text-xl font-black text-slate-950">
+                                    {{ $strategySection->{$titleField} }}
+                                </h3>
+                            @endif
+
+                            @if ($strategySection->{$descriptionField})
+                                <p class="mt-2 text-sm leading-6 text-slate-600">
+                                    {{ $strategySection->{$descriptionField} }}
+                                </p>
+                            @endif
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
+
+{{-- 14. RETAIL OUTLETS --}}
+@if ($retailOutletSection)
+    <section class="section-muted overflow-hidden py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto grid max-w-7xl items-center gap-7 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
+
+            <div>
+                @if ($retailOutletSection->label)
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                        {{ $retailOutletSection->label }}
+                    </p>
+                @endif
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    {{ $retailOutletSection->title }}
+                </h2>
+
+                @if ($retailOutletSection->description)
+                    <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
+                        {{ $retailOutletSection->description }}
+                    </p>
+                @endif
+
+                <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                    @foreach ([1, 2, 3, 4] as $i)
+                        @php
+                            $titleField = 'card_' . $i . '_title';
+                            $descriptionField = 'card_' . $i . '_description';
+                        @endphp
+
+                        @if (
+                            $retailOutletSection->{$titleField}
+                            || $retailOutletSection->{$descriptionField}
+                        )
+                            <div class="soft-card rounded-2xl p-5">
+                                @if ($retailOutletSection->{$titleField})
+                                    <h3 class="text-lg font-black text-slate-950">
+                                        {{ $retailOutletSection->{$titleField} }}
+                                    </h3>
+                                @endif
+
+                                @if ($retailOutletSection->{$descriptionField})
+                                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                                        {{ $retailOutletSection->{$descriptionField} }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                @if ($retailOutletSection->button_text)
+                    <a
+                        class="btn-blue mt-6 px-6 py-3 text-sm"
+                        href="{{ $retailOutletSection->button_link ?: '#' }}"
+                    >
+                        {{ $retailOutletSection->button_text }}
+                    </a>
+                @endif
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                @foreach (['image_1', 'image_2', 'image_3', 'image_4'] as $index => $imageField)
+                    @php
+                        $altField = $imageField . '_alt';
+                    @endphp
+
+                    @if ($retailOutletSection->{$imageField})
+                        <img
+                            class="{{ in_array($index, [1, 3]) ? 'mt-5 sm:mt-7' : '' }} h-44 w-full rounded-2xl object-cover shadow-lg sm:h-52 lg:h-56"
+                            src="{{ asset('storage/' . $retailOutletSection->{$imageField}) }}"
+                            alt="{{ $retailOutletSection->{$altField} ?: 'Retail Outlet Image' }}"
+                            loading="lazy"
+                        >
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
+
+  
+{{-- 16. PARTNER LOGOS --}}
+@if ($partnerLogoSection && $partnerLogoSection->activeLogos->count())
+    <section class="section-muted overflow-hidden py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                <div class="max-w-2xl">
+                    @if ($partnerLogoSection->label)
+                        <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                            {{ $partnerLogoSection->label }}
+                        </p>
+                    @endif
+
+                    <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        {{ $partnerLogoSection->title }}
+                    </h2>
+                </div>
+
+                @if ($partnerLogoSection->description)
+                    <p class="max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
+                        {{ $partnerLogoSection->description }}
+                    </p>
+                @endif
+            </div>
+
+            <div class="relative mt-7 pb-3">
+                <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-slate-50 to-transparent sm:w-16"></div>
+                <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-slate-50 to-transparent sm:w-16"></div>
+
+                <div class="logo-marquee py-1">
+                    <div class="logo-marquee-track">
+                        @foreach ($partnerLogoSection->activeLogos->concat($partnerLogoSection->activeLogos) as $logo)
+                            <div class="logo-marquee-item soft-card soft-card-hover flex h-24 items-center justify-center rounded-2xl border border-slate-200/70 bg-white px-5 py-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                @if ($logo->logo)
+                                    <img
+                                        src="{{ asset('storage/' . $logo->logo) }}"
+                                        class="h-10 w-full max-w-[125px] object-contain"
+                                        alt="{{ $logo->name }}"
+                                        loading="lazy"
+                                    >
+                                @else
+                                    <span class="text-center text-base font-black text-slate-700">
+                                        {{ $logo->name }}
+                                    </span>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+@endif
+
+{{-- 17. TESTIMONIALS --}}
+@if ($testimonialSection && $testimonialSection->activeTestimonials->count())
+    <section class="overflow-hidden bg-white py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-3xl text-center">
+                @if ($testimonialSection->label)
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                        {{ $testimonialSection->label }}
+                    </p>
+                @endif
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    {{ $testimonialSection->title }}
+                </h2>
+
+                @if ($testimonialSection->description)
+                    <p class="mt-3 text-base leading-7 text-slate-600">
+                        {{ $testimonialSection->description }}
+                    </p>
+                @endif
+            </div>
+
+            <div class="testimonial-marquee mt-7 pb-2">
+                <div class="testimonial-marquee-track">
+                    @foreach ($testimonialSection->activeTestimonials->concat($testimonialSection->activeTestimonials) as $testimonial)
+                        <div class="testimonial-marquee-item soft-card soft-card-hover rounded-2xl p-5">
+
+                            <p class="text-base leading-7 text-slate-700">
+                                “{{ $testimonial->message }}”
+                            </p>
+
+                            <div class="mt-4 flex items-center gap-3">
+                                @if ($testimonial->image)
+                                    <img
+                                        src="{{ asset('storage/' . $testimonial->image) }}"
+                                        class="h-10 w-10 rounded-full object-cover"
+                                        alt="{{ $testimonial->name }}"
+                                        loading="lazy"
+                                    >
+                                @else
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-xs font-black text-blue-700">
+                                        {{ strtoupper(substr($testimonial->name ?? 'P', 0, 1)) }}
+                                    </div>
+                                @endif
+
+                                <div>
+                                    <p class="text-sm font-black text-slate-950">
+                                        {{ $testimonial->name }}
+                                    </p>
+
+                                    @if ($testimonial->location)
+                                        <p class="text-xs text-slate-500">
+                                            {{ $testimonial->location }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+        </div>
+    </section>
+@endif
+
+{{-- 18. FAQ --}}
+@if ($faqSection)
+    <section class="section-muted py-10 sm:py-12 lg:py-14">
+        <div class="mx-auto grid max-w-7xl gap-7 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
+
+            <div>
+                @if ($faqSection->label)
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                        {{ $faqSection->label }}
+                    </p>
+                @endif
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    {{ $faqSection->title }}
+                </h2>
+
+                @if ($faqSection->description)
+                    <p class="mt-3 text-base leading-7 text-slate-600">
+                        {{ $faqSection->description }}
+                    </p>
+                @endif
+
+                @if ($faqSection->button_text)
+                    <a
+                        class="btn-blue mt-6 px-6 py-3 text-sm"
+                        href="{{ $faqSection->button_link ?: '#' }}"
+                    >
+                        {{ $faqSection->button_text }}
+                    </a>
+                @endif
+            </div>
+
+            <div class="grid gap-3">
+                @foreach ($faqSection->activeItems as $faq)
+                    <details class="soft-card rounded-2xl p-5" {{ $faq->is_open ? 'open' : '' }}>
+                        <summary class="cursor-pointer text-sm font-black text-slate-950 sm:text-base">
+                            {{ $faq->question }}
+                        </summary>
+
+                        <p class="mt-3 text-sm leading-6 text-slate-600">
+                            {{ $faq->answer }}
+                        </p>
+                    </details>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+@endif
+
+{{-- 21. LATEST NEWS & UPDATES --}}
+<section class="bg-white py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
+                    Latest News & Updates
+                </p>
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    What is happening at GPT Group.
+                </h2>
+            </div>
+
+            <a href="{{ route('news') }}" class="btn-white px-6 py-3 text-sm">
+                View All Updates
+            </a>
+        </div>
+
+        @php
+            $latestNewsStatic = [
+                [
+                    'category' => 'Business',
+                    'title' => 'Expanding technology distribution across Oman',
+                    'text' => 'GPT Group continues to strengthen its partner and reseller network across key markets.',
+                ],
+                [
+                    'category' => 'Solutions',
+                    'title' => 'Integrated security solutions for modern businesses',
+                    'text' => 'New surveillance and access-control capabilities designed for commercial environments.',
+                ],
+                [
+                    'category' => 'Partnerships',
+                    'title' => 'Building stronger connections with global technology brands',
+                    'text' => 'Our team is focused on reliable market execution and long-term brand development.',
+                ],
+            ];
+        @endphp
+
+        <div class="mt-8 grid gap-4 lg:grid-cols-3">
+            @foreach ($latestNewsStatic as $news)
+                <article class="soft-card soft-card-hover rounded-2xl p-5">
+                    <p class="text-[11px] font-black uppercase tracking-[.18em] text-blue-700">
+                        {{ $news['category'] }}
+                    </p>
+
+                    <h3 class="mt-3 text-xl font-black leading-tight text-slate-950">
+                        {{ $news['title'] }}
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-6 text-slate-600">
+                        {{ $news['text'] }}
+                    </p>
+
+                    <a
+                        href="{{ route('news') }}"
+                        class="mt-4 inline-flex items-center gap-2 text-sm font-black text-blue-700"
+                    >
+                        Read More
+                        <span>→</span>
+                    </a>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 22. CTA + ENQUIRY --}}
+<section class="overflow-hidden bg-white py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto grid max-w-7xl items-stretch gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:gap-7 lg:px-8">
+
+        <div class="rounded-[2rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-6 text-white shadow-xl sm:p-7 lg:p-9">
+            <p class="text-xs font-black uppercase tracking-[.20em] text-blue-100">
+                Call To Action
+            </p>
+
+            <h2 class="mt-3 text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
+                Ready to build your distribution advantage?
+            </h2>
+
+            <p class="mt-4 text-base leading-7 text-blue-50">
+                Connect with GPT Group for brand partnership, product distribution,
+                retail outlet support, B2B enquiries and market expansion.
+            </p>
+
+            <div class="mt-6 grid gap-3 sm:flex">
+                <a
+                    class="inline-flex justify-center rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1"
+                    href="{{ route('contact') }}"
+                >
+                    Partner Enquiry
+                </a>
+
+                <a
+                    class="inline-flex justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1"
+                    href="{{ route('brands') }}"
+                >
+                    Explore Products
+                </a>
+            </div>
+        </div>
+
+        <div class="soft-card min-w-0 rounded-[2rem] p-6 sm:p-7 lg:p-9">
+            <p class="text-xs font-black uppercase tracking-[.20em] text-blue-700">
+                Enquiry
+            </p>
+
+            <h3 class="mt-3 text-2xl font-black leading-tight text-slate-950 sm:text-3xl">
+                Quick Contact Form
+            </h3>
+
+            <form action="#" method="POST" class="mt-5 grid gap-3">
+                @csrf
+
+                <input
+                    type="text"
+                    name="name"
+                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500"
+                    placeholder="Full Name"
+                >
+
+                <input
+                    type="text"
+                    name="company"
+                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500"
+                    placeholder="Company / Brand Name"
+                >
+
+                <input
+                    type="text"
+                    name="contact"
+                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500"
+                    placeholder="Phone / Email"
+                >
+
+                <select
+                    name="enquiry_type"
+                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none focus:border-blue-500"
+                >
+                    <option>Distribution Partnership</option>
+                    <option>Retail Outlet</option>
+                    <option>B2B Supply</option>
+                    <option>Career</option>
+                </select>
+
+                <textarea
+                    name="message"
+                    class="h-24 w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none placeholder:text-slate-400 focus:border-blue-500"
+                    placeholder="Message"
+                ></textarea>
+
+                <button type="submit" class="btn-blue mt-1 w-full py-3 text-sm">
+                    Submit Enquiry
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{{-- COMPACT MARQUEE CSS --}}
+<style>
+    .logo-marquee,
+    .testimonial-marquee {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .logo-marquee-track {
+        display: flex;
+        width: max-content;
+        gap: .9rem;
+        padding-block: .25rem;
+        animation: logoMarquee 32s linear infinite;
+    }
+
+    .logo-marquee:hover .logo-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .logo-marquee-item {
+        flex: 0 0 170px;
+        min-width: 170px;
+    }
+
+    .testimonial-marquee-track {
+        display: flex;
+        width: max-content;
+        gap: 1rem;
+        padding-block: .25rem;
+        animation: testimonialMarquee 42s linear infinite;
+    }
+
+    .testimonial-marquee:hover .testimonial-marquee-track {
+        animation-play-state: paused;
+    }
+
+    .testimonial-marquee-item {
+        flex: 0 0 320px;
+        width: 320px;
+        min-height: 205px;
+    }
+
+    @keyframes logoMarquee {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes testimonialMarquee {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .logo-marquee-item {
+            flex-basis: 140px;
+            min-width: 140px;
+        }
+
+        .testimonial-marquee-item {
+            flex-basis: 280px;
+            width: 280px;
+            min-height: 190px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .logo-marquee-track,
+        .testimonial-marquee-track {
+            animation: none;
+        }
+    }
+</style>
+  
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1734,90 +2013,6 @@
         });
     </script>
 
-    <style>
-        .logo-marquee,
-        .testimonial-marquee {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .logo-marquee-track {
-            display: flex;
-            width: max-content;
-            gap: 1.25rem;
-            padding-top: 0.5rem;
-            padding-bottom: 0.75rem;
-            animation: logoMarquee 35s linear infinite;
-        }
-
-        .logo-marquee:hover .logo-marquee-track {
-            animation-play-state: paused;
-        }
-
-        .logo-marquee-item {
-            flex: 0 0 210px;
-            min-width: 210px;
-        }
-
-        @keyframes logoMarquee {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        .testimonial-marquee-track {
-            display: flex;
-            width: max-content;
-            gap: 1.5rem;
-            padding-top: 0.5rem;
-            padding-bottom: 0.75rem;
-            animation: testimonialMarquee 45s linear infinite;
-        }
-
-        .testimonial-marquee:hover .testimonial-marquee-track {
-            animation-play-state: paused;
-        }
-
-        .testimonial-marquee-item {
-            flex: 0 0 390px;
-            width: 390px;
-            min-height: 280px;
-        }
-
-        @keyframes testimonialMarquee {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .logo-marquee-item {
-                flex-basis: 160px;
-                min-width: 160px;
-            }
-
-            .testimonial-marquee-item {
-                flex-basis: 310px;
-                width: 310px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .logo-marquee-track,
-            .testimonial-marquee-track {
-                animation: none;
-            }
-        }
-    </style>
+   
 
 @endsection

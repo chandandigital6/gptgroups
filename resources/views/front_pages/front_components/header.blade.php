@@ -1,3 +1,4 @@
+
 @php
     $navItems = [
         [
@@ -5,10 +6,31 @@
             'route' => 'home',
             'active' => ['home'],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | About
+        |--------------------------------------------------------------------------
+        */
         [
             'label' => 'About',
             'route' => 'about',
-            'active' => ['about'],
+            'active' => [
+                'about',
+                'carriers',
+            ],
+            'children' => [
+                [
+                    'label' => 'About GPT Group',
+                    'route' => 'about',
+                    'active' => ['about'],
+                ],
+                [
+                    'label' => 'Careers',
+                    'route' => 'carriers',
+                    'active' => ['carriers'],
+                ],
+            ],
         ],
 
         /*
@@ -49,27 +71,52 @@
             ],
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | Brands
+        |--------------------------------------------------------------------------
+        */
         [
             'label' => 'Brands',
             'route' => 'brands',
-            'active' => ['brands', 'brands.*', 'products', 'product.detail'],
+            'active' => [
+                'brands',
+                'brands.*',
+                'products',
+                'product.detail',
+            ],
             'children' => [
                 [
                     'label' => 'All Brands',
                     'route' => 'brands',
-                    'active' => ['brands', 'brands.*'],
+                    'active' => [
+                        'brands',
+                        'brands.*',
+                    ],
                 ],
                 [
                     'label' => 'Products',
                     'route' => 'products',
-                    'active' => ['products', 'product.detail'],
+                    'active' => [
+                        'products',
+                        'product.detail',
+                    ],
                 ],
             ],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Services
+        |--------------------------------------------------------------------------
+        */
         [
             'label' => 'Services',
             'route' => 'services',
-            'active' => ['services', 'retail_outlet'],
+            'active' => [
+                'services',
+                'retail_outlet',
+            ],
             'children' => [
                 [
                     'label' => 'Services',
@@ -83,6 +130,12 @@
                 ],
             ],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Company
+        |--------------------------------------------------------------------------
+        */
         [
             'label' => 'Company',
             'route' => 'network',
@@ -101,7 +154,10 @@
                 [
                     'label' => 'News',
                     'route' => 'news',
-                    'active' => ['news', 'front.news.*'],
+                    'active' => [
+                        'news',
+                        'front.news.*',
+                    ],
                 ],
                 [
                     'label' => 'Group Companies',
@@ -110,11 +166,23 @@
                 ],
             ],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Vendor
+        |--------------------------------------------------------------------------
+        */
         [
-            'label' => 'Careers',
-            'route' => 'carriers',
-            'active' => ['carriers'],
+            'label' => 'Vendor',
+            'route' => 'vendor',
+            'active' => ['vendor'],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Contact
+        |--------------------------------------------------------------------------
+        */
         [
             'label' => 'Contact',
             'route' => 'contact',
@@ -122,6 +190,11 @@
         ],
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Company Links
+    |--------------------------------------------------------------------------
+    */
     $footerCompanyLinks = [
         [
             'label' => 'About GPT Group',
@@ -144,11 +217,20 @@
             'route' => 'carriers',
         ],
         [
+            'label' => 'Vendor',
+            'route' => 'vendor',
+        ],
+        [
             'label' => 'Contact Us',
             'route' => 'contact',
         ],
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Service Links
+    |--------------------------------------------------------------------------
+    */
     $footerServiceLinks = [
         [
             'label' => 'Mobile & Consumer Electronics',
@@ -172,6 +254,11 @@
         ],
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Product Links
+    |--------------------------------------------------------------------------
+    */
     $footerProductLinks = [
         [
             'label' => 'Our Brands',
@@ -196,11 +283,15 @@
     <div class="containerx flex h-20 items-center justify-between gap-4">
 
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
+        <a
+            href="{{ route('home') }}"
+            class="flex shrink-0 items-center gap-3"
+        >
             <img
                 src="{{ asset('assets/logo/GPT-Group-Logo.webp') }}"
                 alt="GPT Group Logo"
                 class="h-14 w-auto max-w-[170px] object-contain"
+                loading="eager"
             >
         </a>
 
@@ -230,6 +321,7 @@
                                 class="h-4 w-4 transition duration-200 group-hover:rotate-180"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
+                                aria-hidden="true"
                             >
                                 <path
                                     fill-rule="evenodd"
@@ -239,13 +331,11 @@
                             </svg>
                         </a>
 
-                        {{-- Dropdown --}}
+                        {{-- Desktop Dropdown --}}
                         <div
                             class="invisible absolute left-0 top-full z-50 min-w-[310px] translate-y-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-2 group-hover:opacity-100"
                         >
-                            <div
-                                class="overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white p-2 shadow-2xl shadow-slate-900/10"
-                            >
+                            <div class="overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white p-2 shadow-2xl shadow-slate-900/10">
                                 @foreach ($item['children'] as $child)
                                     @php
                                         $childActive = request()->routeIs(...$child['active']);
@@ -331,9 +421,7 @@
                             </span>
                         </button>
 
-                        <div
-                            class="mobileDropdownMenu {{ $isActive ? '' : 'hidden' }} mt-1 grid gap-1"
-                        >
+                        <div class="mobileDropdownMenu {{ $isActive ? '' : 'hidden' }} mt-1 grid gap-1">
                             @foreach ($item['children'] as $child)
                                 @php
                                     $childActive = request()->routeIs(...$child['active']);

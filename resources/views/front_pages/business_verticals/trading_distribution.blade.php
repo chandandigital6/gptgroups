@@ -1,3 +1,4 @@
+
 @extends('front_pages.front_components.main')
 
 @section('content')
@@ -11,139 +12,198 @@
 
     .vertical-soft-bg {
         background:
-            radial-gradient(circle at 88% 10%, rgba(103, 232, 249, .25), transparent 28%),
-            radial-gradient(circle at 8% 42%, rgba(147, 197, 253, .28), transparent 30%),
-            linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eff6ff 100%);
+            radial-gradient(
+                circle at 88% 10%,
+                rgba(103, 232, 249, 0.20),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 8% 42%,
+                rgba(147, 197, 253, 0.22),
+                transparent 30%
+            ),
+            linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #f8fafc 46%,
+                #eff6ff 100%
+            );
     }
 
     .vertical-muted {
         background:
-            radial-gradient(circle at top right, rgba(34, 211, 238, .08), transparent 28%),
-            linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            radial-gradient(
+                circle at top right,
+                rgba(34, 211, 238, 0.06),
+                transparent 28%
+            ),
+            linear-gradient(
+                180deg,
+                #ffffff 0%,
+                #f8fafc 100%
+            );
     }
 
     .text-gradient {
-        background: linear-gradient(90deg, var(--gpt-blue), var(--gpt-cyan));
+        background: linear-gradient(
+            90deg,
+            var(--gpt-blue),
+            var(--gpt-cyan)
+        );
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
     }
 
     .section-label {
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: .28em;
         color: #1d4ed8;
+        font-size: 0.75rem;
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
     }
 
     .soft-card {
-        border: 1px solid rgba(226, 232, 240, .95);
-        background: rgba(255, 255, 255, .94);
-        box-shadow: 0 18px 55px rgba(15, 23, 42, .07);
-        transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 12px 38px rgba(15, 23, 42, 0.06);
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
     }
 
     .soft-card:hover {
-        transform: translateY(-7px);
-        border-color: rgba(37, 99, 235, .18);
-        box-shadow: 0 28px 75px rgba(37, 99, 235, .13);
+        transform: translateY(-5px);
+        border-color: rgba(37, 99, 235, 0.18);
+        box-shadow: 0 20px 52px rgba(37, 99, 235, 0.11);
     }
 
     .hero-card {
-        border: 1px solid rgba(226, 232, 240, .95);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        border-radius: 1.5rem;
         background: #ffffff;
-        box-shadow: 0 24px 80px rgba(15, 23, 42, .12);
+        box-shadow: 0 16px 48px rgba(15, 23, 42, 0.09);
     }
 
     .number-box {
         display: grid;
-        height: 3rem;
-        width: 3rem;
+        height: 2.5rem;
+        width: 2.5rem;
         place-items: center;
-        border-radius: 1rem;
+        border-radius: 0.8rem;
         background: #eff6ff;
         color: #1d4ed8;
+        font-size: 0.8rem;
         font-weight: 900;
     }
 
     .check-item {
         display: flex;
         align-items: flex-start;
-        gap: 1rem;
-        border-radius: 1rem;
-        background: #ffffff;
-        padding: 1rem;
-        box-shadow: 0 1px 3px rgba(15, 23, 42, .06);
+        gap: 0.75rem;
         border: 1px solid #f1f5f9;
+        border-radius: 0.9rem;
+        background: #ffffff;
+        padding: 0.75rem 0.85rem;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
 
     .check-icon {
-        margin-top: .15rem;
+        margin-top: 0.1rem;
         display: grid;
-        height: 1.75rem;
-        width: 1.75rem;
-        flex-shrink: 0;
+        height: 1.45rem;
+        width: 1.45rem;
+        flex: 0 0 1.45rem;
         place-items: center;
         border-radius: 999px;
-        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        background: linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
         color: #ffffff;
-        font-size: .75rem;
+        font-size: 0.62rem;
         font-weight: 900;
     }
 </style>
 
-
-<section class="vertical-soft-bg overflow-hidden py-16 lg:py-24">
+<section class="vertical-soft-bg overflow-hidden py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+
+        <div class="grid items-center gap-7 lg:grid-cols-[1.05fr_.95fr] lg:gap-10">
+
             <div>
-                <a href="{{ route('business.index') }}"
-                   class="inline-flex items-center gap-2 text-sm font-black text-blue-700">
+                <a
+                    href="{{ route('business.index') }}"
+                    class="inline-flex items-center gap-2 text-xs font-black text-blue-700 sm:text-sm"
+                >
                     ← Back to Business Verticals
                 </a>
 
-                <p class="section-label mt-6">Trading & Distribution</p>
-
-                <h1 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-7xl">
-                    Connecting global technology brands with <span class="block text-gradient">regional market opportunities.</span>
-                </h1>
-
-                <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                    GPT Group operates as a trusted trading and distribution partner, connecting global technology brands with businesses and consumers across multiple markets.
+                <p class="section-label mt-4">
+                    Trading & Distribution
                 </p>
 
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="{{ route('contact') }}"
-                       class="rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-7 py-4 text-sm font-black text-white shadow-xl transition hover:-translate-y-1">
+                <h1 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                    Connecting global technology brands with
+
+                    <span class="block text-gradient">
+                        regional market opportunities.
+                    </span>
+                </h1>
+
+                <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600 lg:text-[17px]">
+                    GPT Group is a trusted trading and distribution partner
+                    connecting technology brands with regional markets.
+                </p>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+
+                    <a
+                        href="{{ route('contact') }}"
+                        class="rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1"
+                    >
                         Request a Consultation
                     </a>
 
-                    <a href="#solutions"
-                       class="rounded-full border border-slate-200 bg-white px-7 py-4 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1">
+                    <a
+                        href="#solutions"
+                        class="rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-md transition hover:-translate-y-1"
+                    >
                         Explore Solutions
                     </a>
+
                 </div>
             </div>
 
-            <div class="hero-card overflow-hidden rounded-[2.5rem] p-4">
+            <div class="hero-card overflow-hidden p-3">
                 <img
-                    class="h-[360px] w-full rounded-[2rem] object-cover sm:h-[480px]"
                     src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=85"
                     alt="Trading & Distribution"
+                    class="h-[260px] w-full rounded-[1.2rem] object-cover sm:h-[320px] lg:h-[360px]"
+                    loading="lazy"
                 >
             </div>
+
         </div>
     </div>
 </section>
 
-<section id="solutions" class="bg-white py-16 lg:py-24">
+<section id="solutions" class="bg-white py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center">
-            <p class="section-label">Solutions & Services</p>
 
-            <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+        <div class="mx-auto max-w-3xl text-center">
+
+            <p class="section-label">
+                Solutions & Services
+            </p>
+
+            <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                 Complete capabilities for customers and partners.
             </h2>
+
         </div>
 
         @php
@@ -183,135 +243,278 @@
             ];
         @endphp
 
-        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            @foreach($services as $service)
-                <div class="soft-card rounded-[2rem] p-7">
+        <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+            @foreach ($services as $service)
+                <div class="soft-card p-5">
+
                     <span class="number-box">
                         {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                     </span>
 
-                    <h3 class="mt-5 text-2xl font-black text-slate-950">
+                    <h3 class="mt-4 text-xl font-black text-slate-950">
                         {{ $service['title'] }}
                     </h3>
 
-                    @if(!empty($service['items']))
-                        <div class="mt-5 space-y-3">
-                            @foreach($service['items'] as $item)
-                                <div class="check-item">
-                                    <span class="check-icon">✓</span>
-                                    <p class="font-semibold text-slate-700">
-                                        {{ $item }}
-                                    </p>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
+                    <div class="mt-4 space-y-2.5">
+
+                        @foreach ($service['items'] as $item)
+                            <div class="check-item">
+
+                                <span class="check-icon">
+                                    ✓
+                                </span>
+
+                                <p class="text-sm font-semibold leading-5 text-slate-700">
+                                    {{ $item }}
+                                </p>
+
+                            </div>
+                        @endforeach
+
+                    </div>
+
                 </div>
             @endforeach
+
         </div>
+
     </div>
 </section>
 
-<section class="vertical-muted py-16 lg:py-24">
+{{-- <section class="vertical-muted py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
-            <div>
-                <p class="section-label">Technology Brands</p>
 
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl">
+        <div class="grid gap-7 lg:grid-cols-[.8fr_1.2fr] lg:gap-10">
+
+            <div>
+                <p class="section-label">
+                    Technology Brands
+                </p>
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                     Brands associated with this division.
                 </h2>
 
-                <p class="mt-5 text-lg leading-8 text-slate-600">
-                    Brand availability and partnership scope may vary by market,
-                    commercial agreement and product category.
+                <p class="mt-3 text-base leading-7 text-slate-600">
+                    Brand availability and partnership scope may vary by
+                    market and product category.
                 </p>
             </div>
 
-            <div class="grid gap-5 sm:grid-cols-2">
-                @php
-                    $brands = ["Mobile & Electronics Brands", "Security Technology Brands", "Infrastructure Brands", "Upcoming Partnerships"];
-                @endphp
+            @php
+                $brands = [
+                    'Mobile & Electronics Brands',
+                    'Security Technology Brands',
+                    'Infrastructure Brands',
+                    'Upcoming Partnerships',
+                ];
+            @endphp
 
-                @foreach($brands as $brand)
-                    <div class="soft-card rounded-[1.75rem] p-7">
-                        <div class="grid h-20 place-items-center rounded-2xl bg-blue-50">
-                            <p class="text-2xl font-black text-slate-950">
+            <div class="grid gap-3 sm:grid-cols-2">
+
+                @foreach ($brands as $brand)
+                    <div class="soft-card p-4">
+
+                        <div class="grid min-h-14 place-items-center rounded-xl bg-blue-50 px-4 py-3 text-center">
+                            <p class="text-lg font-black text-slate-950">
                                 {{ $brand }}
                             </p>
                         </div>
 
-                        <p class="mt-4 text-sm leading-6 text-slate-500">
-                            Product distribution, channel support and market development through GPT Group.
+                        <p class="mt-3 text-xs leading-5 text-slate-500">
+                            Distribution, channel support and market development
+                            through GPT Group.
                         </p>
+
                     </div>
                 @endforeach
+
             </div>
+
         </div>
+
+    </div>
+</section> --}}
+
+
+<section class="vertical-muted py-10 sm:py-12 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="grid items-center gap-7 lg:grid-cols-[.8fr_1.2fr] lg:gap-10">
+
+            {{-- Left Content --}}
+            <div class="flex h-full flex-col items-center justify-center text-center lg:px-6">
+                <p class="section-label">
+                    Technology Portfolio
+                </p>
+
+                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                    Technology divisions and partnerships.
+                </h2>
+
+                <p class="mt-3 max-w-xl text-base leading-7 text-slate-600">
+                    Explore GPT Group’s business presence across mobile electronics,
+                    security technology, infrastructure solutions and upcoming
+                    partnership opportunities.
+                </p>
+            </div>
+
+            @php
+                $brands = [
+                    [
+                        'title' => 'Mobile & Electronics Brands',
+                        'image' => 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80',
+                        'link' => route('business.mobile'),
+                        'description' => 'Smartphones, tablets, accessories and consumer electronics from leading technology brands.',
+                    ],
+                    [
+                        'title' => 'Security Technology Brands',
+                        'image' => 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1000&q=80',
+                        'link' => route('business.security'),
+                        'description' => 'Video surveillance, smart security, access control and monitoring solutions.',
+                    ],
+                    [
+                        'title' => 'Infrastructure Brands',
+                        'image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80',
+                        'link' => route('business.infrastructure'),
+                        'description' => 'Fiber optics, structured cabling, networking and communication infrastructure solutions.',
+                    ],
+                    [
+                        'title' => 'Upcoming Partnerships',
+                        'image' => 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=80',
+                        'link' => route('contact'),
+                        'description' => 'New brand collaborations, distribution opportunities and strategic business partnerships.',
+                    ],
+                ];
+            @endphp
+
+            {{-- Division Cards --}}
+            <div class="grid gap-4 sm:grid-cols-2">
+                @foreach ($brands as $brand)
+                    <a
+                        href="{{ $brand['link'] }}"
+                        class="soft-card group block overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+                    >
+                        {{-- Image --}}
+                        <div class="relative h-40 overflow-hidden bg-slate-100">
+                            <img
+                                src="{{ $brand['image'] }}"
+                                alt="{{ $brand['title'] }}"
+                                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80';"
+                            >
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent"></div>
+
+                            <h3 class="absolute bottom-4 left-4 right-4 text-lg font-black leading-tight text-white">
+                                {{ $brand['title'] }}
+                            </h3>
+                        </div>
+
+                        {{-- Content --}}
+                        <div class="p-4">
+                            <p class="text-sm leading-6 text-slate-600">
+                                {{ $brand['description'] }}
+                            </p>
+
+                            <div class="mt-3 flex items-center justify-between">
+                                <span class="text-xs font-black uppercase tracking-[.14em] text-blue-700">
+                                    Explore Division
+                                </span>
+
+                                <span class="grid h-8 w-8 place-items-center rounded-full bg-blue-50 text-sm font-black text-blue-700 transition group-hover:bg-blue-600 group-hover:text-white">
+                                    →
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+        </div>
+
     </div>
 </section>
 
-<section class="bg-white py-16 lg:py-24">
+<section class="bg-white py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
         @php
             $strengths = [
                 [
                     'title' => 'Reliable Route to Market',
-                    'description' => 'Structured market access for brands seeking growth in Oman and selected regional markets.',
+                    'description' => 'Structured access for brands seeking growth in Oman and regional markets.',
                 ],
                 [
                     'title' => 'Supply Chain Coordination',
-                    'description' => 'A practical approach to sourcing, inventory, logistics and customer fulfilment.',
+                    'description' => 'Practical sourcing, inventory, logistics and fulfilment support.',
                 ],
                 [
                     'title' => 'Long-Term Partnerships',
-                    'description' => 'Commercial relationships built on transparency, responsiveness and shared growth.',
+                    'description' => 'Transparent and responsive commercial relationships.',
                 ],
             ];
         @endphp
 
-        <div class="grid gap-6 lg:grid-cols-3">
-            @foreach($strengths as $strength)
-                <div class="soft-card rounded-[2rem] p-8">
-                    <p class="text-gradient text-4xl font-black">
+        <div class="grid gap-4 lg:grid-cols-3">
+
+            @foreach ($strengths as $strength)
+                <div class="soft-card p-5">
+
+                    <p class="text-gradient text-3xl font-black">
                         {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                     </p>
 
-                    <h3 class="mt-5 text-2xl font-black text-slate-950">
+                    <h3 class="mt-3 text-xl font-black text-slate-950">
                         {{ $strength['title'] }}
                     </h3>
 
-                    <p class="mt-3 leading-7 text-slate-600">
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
                         {{ $strength['description'] }}
                     </p>
+
                 </div>
             @endforeach
+
         </div>
+
     </div>
 </section>
 
-<section class="vertical-muted py-16 lg:py-24">
+<section class="vertical-muted py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="rounded-[2.5rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 text-white shadow-2xl sm:p-12 lg:p-16">
-            <div class="grid items-center gap-8 lg:grid-cols-2">
+
+        <div class="rounded-[1.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-6 text-white shadow-xl sm:p-8 lg:p-10">
+
+            <div class="grid items-center gap-6 lg:grid-cols-2">
+
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-100">
+                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-100">
                         Start a Conversation
                     </p>
 
-                    <h2 class="mt-4 text-4xl font-black leading-tight sm:text-5xl">
+                    <h2 class="mt-3 text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
                         Discuss your requirement with GPT Group.
                     </h2>
                 </div>
 
                 <div class="lg:text-right">
-                    <a href="{{ route('contact') }}"
-                       class="inline-flex rounded-full bg-white px-8 py-4 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1">
+                    <a
+                        href="{{ route('contact') }}"
+                        class="inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1"
+                    >
                         Send Enquiry
                     </a>
                 </div>
+
             </div>
+
         </div>
+
     </div>
 </section>
+
 @endsection
+

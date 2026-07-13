@@ -38,8 +38,8 @@
     }
 
     .network-card-hover:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 28px 70px rgba(15, 23, 42, .14);
+        transform: translateY(-5px);
+        box-shadow: 0 18px 48px rgba(15, 23, 42, .14);
     }
 
     .network-section-light {
@@ -54,10 +54,10 @@
 
     .network-input {
         width: 100%;
-        border-radius: 1rem;
+        border-radius: .75rem;
         border: 1px solid #e2e8f0;
         background: #ffffff;
-        padding: 1rem 1.25rem;
+        padding: .75rem 1rem;
         color: #0f172a;
         outline: none;
         transition: all .25s ease;
@@ -99,24 +99,24 @@
 
 @if($coverageLocationSection && $coverageLocationSection->activeItems->count())
 
-    <section id="coverage" class="bg-white py-16 lg:py-24">
+    <section id="coverage" class="bg-white py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
             <div class="mx-auto max-w-3xl text-center">
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                <p class="font-black uppercase tracking-[.22em] text-blue-700">
                     {{ $coverageLocationSection->label }}
                 </p>
 
-                <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                     {{ $coverageLocationSection->title }}
                 </h2>
 
-                <p class="mt-5 text-lg leading-8 text-slate-600">
+                <p class="mt-3 text-base leading-7 text-slate-600">
                     {{ $coverageLocationSection->description }}
                 </p>
             </div>
 
-            <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div class="mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 @foreach($coverageLocationSection->activeItems as $item)
 
                     @php
@@ -136,12 +136,12 @@
                         };
                     @endphp
 
-                    <div class="network-card-hover rounded-[2rem] border {{ $boxClass }} p-8">
-                        <div class="grid h-14 w-14 place-items-center rounded-2xl {{ $iconClass }} text-2xl font-black text-white">
+                    <div class="network-card-hover rounded-2xl border {{ $boxClass }} p-5">
+                        <div class="grid h-11 w-11 place-items-center rounded-2xl {{ $iconClass }} text-xl font-black text-white">
                             {{ $item->icon_text }}
                         </div>
 
-                        <h3 class="mt-6 text-2xl font-black text-slate-950">
+                        <h3 class="mt-4 text-xl font-black text-slate-950">
                             {{ $item->title }}
                         </h3>
 
@@ -164,31 +164,31 @@
 
 @if($channelNetworkSection && $channelNetworkSection->activeItems->count())
 
-    <section class="network-section-soft py-16 lg:py-24">
+    <section class="network-section-soft py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                    <p class="font-black uppercase tracking-[.22em] text-blue-700">
                         {{ $channelNetworkSection->label }}
                     </p>
 
-                    <h2 class="mt-4 text-4xl font-black text-slate-950 sm:text-5xl lg:text-6xl">
+                    <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                         {{ $channelNetworkSection->title }}
                     </h2>
 
-                    <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                    <p class="mt-3 max-w-2xl text-base leading-7 text-slate-600">
                         {{ $channelNetworkSection->description }}
                     </p>
                 </div>
 
                 <a href="{{ route('contact') }}"
-                    class="inline-flex w-fit rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                    class="inline-flex w-fit rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
                     Become Partner
                 </a>
             </div>
 
-            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach($channelNetworkSection->activeItems as $item)
 
                     @php
@@ -208,12 +208,12 @@
                         };
                     @endphp
 
-                    <div class="network-card-hover rounded-[2rem] border {{ $boxClass }} p-8 shadow-sm">
-                        <div class="grid h-14 w-14 place-items-center rounded-2xl {{ $iconClass }} text-2xl font-black text-white">
+                    <div class="network-card-hover rounded-2xl border {{ $boxClass }} p-5 shadow-sm">
+                        <div class="grid h-11 w-11 place-items-center rounded-2xl {{ $iconClass }} text-xl font-black text-white">
                             {{ $item->icon_text }}
                         </div>
 
-                        <h3 class="mt-6 text-2xl font-black text-slate-950">
+                        <h3 class="mt-4 text-xl font-black text-slate-950">
                             {{ $item->title }}
                         </h3>
 
@@ -236,39 +236,39 @@
 
 @if($operatingModelSection)
 
-    <section class="bg-white py-16 lg:py-24">
+    <section class="bg-white py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+            <div class="grid gap-7 lg:grid-cols-2 lg:items-center">
 
                 <div>
                     @if(!empty($operatingModelSection->label))
-                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        <p class="font-black uppercase tracking-[.22em] text-blue-700">
                             {{ $operatingModelSection->label }}
                         </p>
                     @endif
 
                     @if(!empty($operatingModelSection->title))
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                        <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                             {{ $operatingModelSection->title }}
                         </h2>
                     @endif
 
                     @if(!empty($operatingModelSection->description_1))
-                        <p class="mt-6 text-lg leading-8 text-slate-600">
+                        <p class="mt-4 text-base leading-7 text-slate-600">
                             {{ $operatingModelSection->description_1 }}
                         </p>
                     @endif
 
                     @if(!empty($operatingModelSection->description_2))
-                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                        <p class="mt-3 text-base leading-7 text-slate-600">
                             {{ $operatingModelSection->description_2 }}
                         </p>
                     @endif
 
-                    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+                    <div class="mt-4 grid gap-5 sm:grid-cols-2">
 
                         @if(!empty($operatingModelSection->feature_1_title))
-                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                            <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5">
                                 <h3 class="text-xl font-black text-slate-950">
                                     {{ $operatingModelSection->feature_1_title }}
                                 </h3>
@@ -282,7 +282,7 @@
                         @endif
 
                         @if(!empty($operatingModelSection->feature_2_title))
-                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                            <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5">
                                 <h3 class="text-xl font-black text-slate-950">
                                     {{ $operatingModelSection->feature_2_title }}
                                 </h3>
@@ -296,7 +296,7 @@
                         @endif
 
                         @if(!empty($operatingModelSection->feature_3_title))
-                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                            <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5">
                                 <h3 class="text-xl font-black text-slate-950">
                                     {{ $operatingModelSection->feature_3_title }}
                                 </h3>
@@ -310,7 +310,7 @@
                         @endif
 
                         @if(!empty($operatingModelSection->feature_4_title))
-                            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6">
+                            <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5">
                                 <h3 class="text-xl font-black text-slate-950">
                                     {{ $operatingModelSection->feature_4_title }}
                                 </h3>
@@ -329,27 +329,27 @@
                 <div class="relative">
                     <div class="absolute -inset-6 rounded-full bg-blue-300/20 blur-3xl"></div>
 
-                    <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-4 shadow-2xl">
+                    <div class="relative overflow-hidden rounded-[1.75rem] border border-slate-100 bg-white p-4 shadow-2xl">
 
                         @if(!empty($operatingModelSection->image))
                             <img
-                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                class="h-[420px] w-full rounded-2xl object-cover lg:h-[560px]"
                                 src="{{ asset('storage/' . $operatingModelSection->image) }}"
                                 alt="{{ $operatingModelSection->image_alt ?: $operatingModelSection->title }}"
                             >
                         @else
                             <img
-                                class="h-[420px] w-full rounded-[2rem] object-cover lg:h-[560px]"
+                                class="h-[420px] w-full rounded-2xl object-cover lg:h-[560px]"
                                 src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"
                                 alt="{{ $operatingModelSection->title ?? 'Warehouse operations' }}"
                             >
                         @endif
 
                         @if(!empty($operatingModelSection->card_title) || !empty($operatingModelSection->card_description))
-                            <div class="mt-5 rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-lg">
+                            <div class="mt-3 rounded-2xl border border-slate-100 bg-white p-5 shadow-lg">
 
                                 @if(!empty($operatingModelSection->card_title))
-                                    <p class="text-2xl font-black text-slate-950">
+                                    <p class="text-xl font-black text-slate-950">
                                         {{ $operatingModelSection->card_title }}
                                     </p>
                                 @endif
@@ -374,39 +374,39 @@
 
 
 {{-- MAP STYLE SECTION --}}
-<section class="network-section-soft py-16 lg:py-24">
+<section class="network-section-soft py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="grid gap-8 lg:grid-cols-3 lg:items-stretch">
+        <div class="grid gap-5 lg:grid-cols-3 lg:items-stretch">
             <div>
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                <p class="font-black uppercase tracking-[.22em] text-blue-700">
                     Network Map
                 </p>
 
-                <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     Key support points in Oman.
                 </h2>
 
-                <p class="mt-5 text-lg leading-8 text-slate-600">
+                <p class="mt-3 text-base leading-7 text-slate-600">
                     Use this section to show your exact map locations or Google Map embeds for warehouse and outlet points.
                 </p>
 
-                <div class="mt-8 grid gap-4">
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-sm">
+                <div class="mt-4 grid gap-4">
+                    <div class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
                         <h3 class="text-xl font-black text-slate-950">Muscat / Ghala</h3>
                         <p class="mt-2 text-sm leading-6 text-slate-600">Warehouse and main supply point.</p>
                     </div>
 
-                    <div class="rounded-[1.75rem] border border-slate-100 bg-white p-6 shadow-sm">
+                    <div class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
                         <h3 class="text-xl font-black text-slate-950">Sohar / Sur / Salalah</h3>
                         <p class="mt-2 text-sm leading-6 text-slate-600">Regional market and partner support.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-3 shadow-xl lg:col-span-2">
+            <div class="overflow-hidden rounded-[1.75rem] border border-slate-100 bg-white p-3 shadow-xl lg:col-span-2">
                 <iframe
-                    class="h-[480px] w-full rounded-[2rem]"
+                    class="h-[480px] w-full rounded-2xl"
                     src="https://www.google.com/maps?q=Oman&output=embed"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
@@ -421,12 +421,12 @@
 
 {{-- NETWORK ENQUIRY --}}
 
-<section class="bg-white py-16 lg:py-24">
+<section class="bg-white py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-2 lg:items-stretch">
 
-            <div class="rounded-[2.5rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 text-white shadow-xl sm:p-10">
-                <p class="font-black uppercase tracking-[.3em] text-blue-100">
+            <div class="rounded-[1.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-5 text-white shadow-xl sm:p-7">
+                <p class="font-black uppercase tracking-[.22em] text-blue-100">
                     Network Partnership
                 </p>
 
@@ -434,25 +434,25 @@
                     Want to join GPT Group’s distribution network?
                 </h2>
 
-                <p class="mt-5 text-lg leading-8 text-blue-50">
+                <p class="mt-3 text-base leading-7 text-blue-50">
                     Connect for retail partnership, wholesale supply, KDR network, B2B distribution and regional product availability.
                 </p>
 
-                <div class="mt-8 grid gap-5 sm:grid-cols-2">
-                    <div class="rounded-[1.75rem] bg-white/15 p-6">
+                <div class="mt-4 grid gap-5 sm:grid-cols-2">
+                    <div class="rounded-2xl bg-white/15 p-5">
                         <h3 class="text-xl font-black">Retail Partners</h3>
                         <p class="mt-2 text-sm leading-6 text-blue-50">Customer-facing sales and product visibility.</p>
                     </div>
 
-                    <div class="rounded-[1.75rem] bg-white/15 p-6">
+                    <div class="rounded-2xl bg-white/15 p-5">
                         <h3 class="text-xl font-black">B2B Supply</h3>
                         <p class="mt-2 text-sm leading-6 text-blue-50">Corporate, institutional and bulk product needs.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="rounded-[2.5rem] border border-slate-100 bg-slate-50 p-8 shadow-xl sm:p-10">
-                <p class="font-black uppercase tracking-[.3em] text-blue-700">
+            <div class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-5 shadow-xl sm:p-7">
+                <p class="font-black uppercase tracking-[.22em] text-blue-700">
                     Quick Enquiry
                 </p>
 
@@ -460,7 +460,7 @@
                     Submit network enquiry
                 </h3>
 
-                <form action="#" method="POST" class="mt-7 grid gap-4">
+                <form action="#" method="POST" class="mt-3 grid gap-4">
                     @csrf
 
                     <div class="grid gap-4 sm:grid-cols-2">
@@ -507,7 +507,7 @@
 
                     <button
                         type="submit"
-                        class="inline-flex justify-center rounded-full bg-blue-600 px-8 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500"
+                        class="inline-flex justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500"
                     >
                         Submit Enquiry
                     </button>
@@ -523,33 +523,33 @@
 
 @if($faqSection && $faqSection->activeItems->count())
 
-    <section class="bg-white py-16 lg:py-24">
+    <section class="bg-white py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            <div class="grid gap-12 lg:grid-cols-2">
+            <div class="grid gap-7 lg:grid-cols-2">
 
                 <div>
                     @if(!empty($faqSection->label))
-                        <p class="font-black uppercase tracking-[.3em] text-blue-700">
+                        <p class="font-black uppercase tracking-[.22em] text-blue-700">
                             {{ $faqSection->label }}
                         </p>
                     @endif
 
                     @if(!empty($faqSection->title))
-                        <h2 class="mt-4 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+                        <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                             {{ $faqSection->title }}
                         </h2>
                     @endif
 
                     @if(!empty($faqSection->description))
-                        <p class="mt-5 text-lg leading-8 text-slate-600">
+                        <p class="mt-3 text-base leading-7 text-slate-600">
                             {{ $faqSection->description }}
                         </p>
                     @endif
 
                     @if(!empty($faqSection->button_text))
                         <a href="{{ $faqSection->button_link ?: '#' }}"
-                           class="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
+                           class="mt-4 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:bg-blue-500">
                             {{ $faqSection->button_text }}
                         </a>
                     @endif
@@ -557,7 +557,7 @@
 
                 <div class="grid gap-4">
                     @foreach($faqSection->activeItems as $faq)
-                        <details class="rounded-[1.75rem] border border-slate-100 bg-slate-50 p-6 shadow-sm"
+                        <details class="rounded-2xl border border-slate-100 bg-slate-50 p-5 shadow-sm"
                                  {{ $faq->is_open ? 'open' : '' }}>
 
                             <summary class="cursor-pointer text-lg font-black text-slate-950">
@@ -583,12 +583,12 @@
 
 
 {{-- CTA --}}
-<section class="network-section-soft py-16 lg:py-24">
+<section class="network-section-soft py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-8 text-white shadow-2xl sm:p-12 lg:p-16">
-            <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div class="overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-5 text-white shadow-2xl sm:p-8 lg:p-10">
+            <div class="grid gap-5 lg:grid-cols-2 lg:items-center">
                 <div>
-                    <p class="font-black uppercase tracking-[.3em] text-blue-100">
+                    <p class="font-black uppercase tracking-[.22em] text-blue-100">
                         Build With GPT Group
                     </p>
 
@@ -596,14 +596,14 @@
                         Expand through a stronger distribution network.
                     </h2>
 
-                    <p class="mt-5 text-lg leading-8 text-blue-50">
+                    <p class="mt-3 text-base leading-7 text-blue-50">
                         Partner with GPT Group for retail coverage, warehouse-backed distribution, wholesale supply and B2B market growth.
                     </p>
                 </div>
 
                 <div class="lg:text-right">
                     <a href="{{ route('contact') }}"
-                        class="inline-flex rounded-full bg-white px-8 py-4 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1">
+                        class="inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1">
                         Contact Now
                     </a>
                 </div>

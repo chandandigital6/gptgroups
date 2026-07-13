@@ -659,7 +659,10 @@ public function show($slug)
 
 
 
+public function vendor(){
 
+return view('front.vendor');
+}
 
 
 
