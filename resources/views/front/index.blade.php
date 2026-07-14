@@ -971,200 +971,442 @@
 
   
 
-{{-- 05. PRODUCT BRANDS --}}
-@if (isset($productBrands) && $productBrands->count() > 0)
-    <section class="bg-white py-10 sm:py-12 lg:py-14">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                <div class="max-w-3xl">
-                    <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
-                        Key Brands
-                    </p>
+{{-- =========================================================
+    05. GPT GROUP FEATURED BRANDS
+========================================================= --}}
 
-                    <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
-                        Product Brand Ecosystem
-                    </h2>
+@php
+    /*
+    |--------------------------------------------------------------------------
+    | Homepage Featured Brands
+    |--------------------------------------------------------------------------
+    | Samsung and Hikvision are primary brands.
+    | Remaining important brands are shown after them.
+    */
 
-                    <p class="mt-3 text-base leading-7 text-slate-600 lg:text-[17px]">
-                        Explore brand-wise products, categories and latest launches.
-                    </p>
+    $featuredProductBrands = [
+        [
+            'name' => 'Samsung',
+            'logo_names' => ['sumsung', 'samsung'],
+            'website' => 'https://www.samsung.com/',
+            'category' => 'Mobile & Consumer Electronics',
+            'description' => 'Smartphones, tablets, displays, wearables and connected consumer technology.',
+            'priority' => true,
+            'priority_text' => 'Primary Brand',
+        ],
+        [
+            'name' => 'Hikvision',
+            'logo_names' => ['hikvision'],
+            'website' => 'https://www.hikvision.com/en/',
+            'category' => 'Security & Surveillance',
+            'description' => 'Professional CCTV, video surveillance, access control, intercom and security solutions.',
+            'priority' => true,
+            'priority_text' => 'Primary Brand',
+        ],
+        [
+            'name' => 'Vivo',
+            'logo_names' => ['vivo'],
+            'website' => 'https://www.vivo.com/en/',
+            'category' => 'Smartphones',
+            'description' => 'Modern smartphones focused on design, camera performance and user experience.',
+            'priority' => false,
+        ],
+        [
+            'name' => 'Nothing',
+            'logo_names' => ['nothing'],
+            'website' => 'https://nothing.tech/',
+            'category' => 'Smartphones & Audio',
+            'description' => 'Design-led smartphones, wireless audio products and connected devices.',
+            'priority' => false,
+        ],
+        // [
+        //     'name' => 'Xiaomi',
+        //     'logo_names' => ['mi', 'xiaomi'],
+        //     'website' => 'https://www.mi.com/global/',
+        //     'category' => 'Mobile & Smart Devices',
+        //     'description' => 'Smartphones, smart-home products and connected consumer electronics.',
+        //     'priority' => false,
+        // ],
+        // [
+        //     'name' => 'EZVIZ',
+        //     'logo_names' => ['New Project (7)', 'ezviz'],
+        //     'website' => 'https://www.ezviz.com/',
+        //     'category' => 'Smart Security',
+        //     'description' => 'Smart cameras, home security and connected monitoring solutions.',
+        //     'priority' => false,
+        // ],
+        // [
+        //     'name' => 'Anker',
+        //     'logo_names' => ['anker'],
+        //     'website' => 'https://www.anker.com/',
+        //     'category' => 'Power & Accessories',
+        //     'description' => 'Charging products, power banks and premium mobile accessories.',
+        //     'priority' => false,
+        // ],
+        // [
+        //     'name' => 'SanDisk',
+        //     'logo_names' => ['sandisk'],
+        //     'website' => 'https://www.sandisk.com/',
+        //     'category' => 'Storage Solutions',
+        //     'description' => 'Memory cards, flash drives and portable digital storage products.',
+        //     'priority' => false,
+        // ],
+    ];
+@endphp
+
+<section class="relative overflow-hidden bg-white py-10 sm:py-12 lg:py-16">
+
+    {{-- Background decoration --}}
+    <div class="pointer-events-none absolute right-0 top-0 h-72 w-72 rounded-full bg-cyan-100/40 blur-3xl"></div>
+    <div class="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-blue-100/40 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-[11px] font-black uppercase tracking-[.18em] text-blue-700">
+                    <span class="h-2 w-2 rounded-full bg-cyan-500"></span>
+                    GPT Group Featured Brands
                 </div>
 
-                <div class="flex gap-2">
-                    <button
-                        type="button"
-                        class="brand-prev grid h-10 w-10 cursor-pointer place-items-center rounded-full bg-white text-xl text-slate-950 shadow-md ring-1 ring-slate-100 transition hover:bg-blue-600 hover:text-white"
-                        aria-label="Previous brand"
-                    >
-                        ‹
-                    </button>
-
-                    <button
-                        type="button"
-                        class="brand-next grid h-10 w-10 cursor-pointer place-items-center rounded-full bg-white text-xl text-slate-950 shadow-md ring-1 ring-slate-100 transition hover:bg-blue-600 hover:text-white"
-                        aria-label="Next brand"
-                    >
-                        ›
-                    </button>
-                </div>
-            </div>
-
-            <div class="swiper brandSwiper mt-7 overflow-hidden">
-                <div class="swiper-wrapper pb-10">
-                    @foreach ($productBrands as $brand)
-                        <div class="swiper-slide h-auto">
-                            <a
-                                href="{{ route('brands.show', $brand->slug) }}"
-                                class="soft-card soft-card-hover group block h-full overflow-hidden rounded-2xl"
-                            >
-                                <div class="h-40 bg-gradient-to-br from-white to-blue-50 p-5 sm:h-44">
-                                    @if ($brand->logo)
-                                        <img
-                                            class="h-full w-full object-contain transition duration-500 group-hover:scale-105"
-                                            src="{{ asset('storage/' . $brand->logo) }}"
-                                            alt="{{ $brand->name }}"
-                                            loading="lazy"
-                                        >
-                                    @elseif($brand->banner_image)
-                                        <img
-                                            class="h-full w-full rounded-xl object-cover transition duration-500 group-hover:scale-105"
-                                            src="{{ asset('storage/' . $brand->banner_image) }}"
-                                            alt="{{ $brand->name }}"
-                                            loading="lazy"
-                                        >
-                                    @else
-                                        <div class="grid h-full w-full place-items-center rounded-xl bg-blue-50">
-                                            <span class="text-4xl font-black text-blue-700">
-                                                {{ strtoupper(substr($brand->name, 0, 1)) }}
-                                            </span>
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <div class="p-5">
-                                    <div class="flex items-center justify-between gap-4">
-                                        <h3 class="text-xl font-black text-slate-950">
-                                            {{ $brand->name }}
-                                        </h3>
-
-                                        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-slate-100 text-lg text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
-                                            →
-                                        </span>
-                                    </div>
-
-                                    @if ($brand->description)
-                                        <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">
-                                            {{ $brand->description }}
-                                        </p>
-                                    @endif
-
-                                    <p class="mt-3 text-[11px] font-black uppercase tracking-[.18em] text-blue-700">
-                                        {{ $brand->products_count }} Products
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-
-                <div class="brand-pagination"></div>
-            </div>
-
-            <div class="mt-7 text-center">
-                <a
-                    href="{{ route('brands') }}"
-                    class="inline-flex items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-xs font-black uppercase tracking-[.14em] text-white shadow-lg shadow-blue-700/20 transition hover:-translate-y-1 hover:bg-blue-800"
-                >
-                    View All Brands
-                    <span class="text-lg leading-none">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-@endif
-
-{{-- 06. PRODUCT CATEGORIES --}}
-@if (isset($productCategories) && $productCategories->count() > 0)
-    <section class="section-muted py-10 sm:py-12 lg:py-14">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
-                    Categories
-                </p>
-
-                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
-                    Product Ecosystem
+                <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                    Trusted global technology brands,
+                    <span class="block bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
+                        supported by GPT Group in Oman.
+                    </span>
                 </h2>
 
-                <p class="mt-3 text-base leading-7 text-slate-600 lg:text-[17px]">
-                    Explore GPT Group product categories in a clean and structured way.
+                <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600 lg:text-[17px]">
+                    GPT Group brings together established brands across mobile devices,
+                    consumer electronics, professional security, smart-home technology,
+                    digital storage and mobile accessories.
+                </p>
+
+                <p class="mt-3 max-w-3xl text-sm font-semibold leading-6 text-slate-500">
+                    Samsung and Hikvision are central to our technology portfolio,
+                    supported by selected brands that serve retail, dealer, corporate
+                    and project-based requirements across Oman.
                 </p>
             </div>
 
-            <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ($productCategories as $category)
-                    @if ($category->brand)
-                        <a
-                            href="{{ route('brands.categories.show', [$category->brand->slug, $category->slug]) }}"
-                            class="soft-card soft-card-hover group block rounded-2xl p-4"
-                        >
-                    @else
-                        <div class="soft-card soft-card-hover group rounded-2xl p-4">
+            <a
+                href="{{ url('/brands') }}"
+                class="inline-flex w-fit items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-xs font-black uppercase tracking-[.14em] text-white shadow-lg shadow-blue-700/20 transition hover:-translate-y-1 hover:bg-blue-800"
+            >
+                Explore All Brands
+                <span class="text-lg leading-none">→</span>
+            </a>
+        </div>
+
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+            @foreach ($featuredProductBrands as $brand)
+                @php
+                    $firstLogo = asset(
+                        'assets/logo brands/' .
+                        $brand['logo_names'][0] .
+                        '.png'
+                    );
+
+                    $candidatePaths = collect($brand['logo_names'])
+                        ->flatMap(function ($name) {
+                            return [
+                                asset('assets/logo brands/' . $name . '.png'),
+                                asset('assets/logo brands/' . $name . '.jpg'),
+                                asset('assets/logo brands/' . $name . '.jpeg'),
+                                asset('assets/logo brands/' . $name . '.webp'),
+                            ];
+                        })
+                        ->values()
+                        ->toJson();
+                @endphp
+
+                <a
+                    href="{{ $brand['website'] }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit {{ $brand['name'] }} official website"
+                    class="group relative block overflow-hidden rounded-2xl border bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-xl
+                        {{ $brand['priority'] ? 'border-blue-300 ring-2 ring-blue-100' : 'border-slate-100' }}"
+                >
+
+                    @if ($brand['priority'])
+                        <span class="absolute right-3 top-3 z-10 rounded-full bg-blue-700 px-3 py-1 text-[9px] font-black uppercase tracking-[.14em] text-white shadow-lg">
+                            {{ $brand['priority_text'] }}
+                        </span>
                     @endif
 
-                    @if ($category->image)
+                    <div class="relative grid h-40 place-items-center overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 p-5">
+
                         <img
-                            class="h-40 w-full rounded-xl object-cover transition duration-500 group-hover:scale-[1.03] sm:h-44"
-                            src="{{ asset('storage/' . $category->image) }}"
-                            alt="{{ $category->name }}"
+                            src="{{ $firstLogo }}"
+                            alt="{{ $brand['name'] }} logo"
+                            class="featured-brand-logo h-full w-full object-contain transition duration-500 group-hover:scale-105"
+                            data-candidates='{{ $candidatePaths }}'
+                            data-index="0"
                             loading="lazy"
                         >
-                    @else
-                        <div class="grid h-40 w-full place-items-center rounded-xl bg-blue-50 text-sm text-slate-400 sm:h-44">
-                            No Image
+
+                        <div class="featured-brand-fallback absolute inset-0 hidden h-full w-full place-items-center bg-gradient-to-br from-blue-50 to-cyan-50">
+                            <span class="px-4 text-center text-2xl font-black text-blue-700">
+                                {{ $brand['name'] }}
+                            </span>
                         </div>
-                    @endif
-
-                    <div class="mt-4 flex items-start justify-between gap-3">
-                        <div>
-                            <h3 class="text-xl font-black text-slate-950">
-                                {{ $category->name }}
-                            </h3>
-
-                            @if ($category->brand)
-                                <p class="mt-1 text-[11px] font-black uppercase tracking-[.16em] text-blue-700">
-                                    {{ $category->brand->name }}
-                                </p>
-                            @endif
-                        </div>
-
-                        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue-600 text-lg text-white transition group-hover:bg-cyan-500">
-                            →
-                        </span>
                     </div>
 
-                    @if ($category->description)
-                        <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">
-                            {{ $category->description }}
-                        </p>
-                    @endif
+                    <div class="p-5">
 
-                    <p class="mt-3 text-[11px] font-black uppercase tracking-[.16em] text-blue-700">
-                        {{ $category->products_count }} Products
-                    </p>
+                        <span class="inline-flex rounded-full bg-blue-50 px-3 py-1 text-[10px] font-black uppercase tracking-[.12em] text-blue-700">
+                            {{ $brand['category'] }}
+                        </span>
 
-                    @if ($category->brand)
-                        </a>
-                    @else
+                        <div class="mt-3 flex items-start justify-between gap-3">
+                            <h3 class="text-xl font-black text-slate-950">
+                                {{ $brand['name'] }}
+                            </h3>
+
+                            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-slate-100 text-lg text-slate-500 transition group-hover:bg-blue-600 group-hover:text-white">
+                                ↗
+                            </span>
                         </div>
-                    @endif
-                @endforeach
-            </div>
+
+                        <p class="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">
+                            {{ $brand['description'] }}
+                        </p>
+
+                        <p class="mt-4 text-[10px] font-black uppercase tracking-[.16em] text-blue-700">
+                            Official Brand Website
+                        </p>
+                    </div>
+                </a>
+            @endforeach
+
         </div>
-    </section>
-@endif
+    </div>
+</section>
+
+
+{{-- =========================================================
+    06. GPT GROUP MAIN PRODUCT CATEGORIES
+========================================================= --}}
+
+@php
+    $gptProductCategories = [
+        [
+            'number' => '01',
+            'name' => 'Mobile & Consumer Electronics',
+            'image' => 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1400&q=85',
+            'description' => 'Smartphones, feature phones, tablets, displays, wearables and connected consumer electronic products for modern customers.',
+            'brands' => 'Samsung, Vivo, Nothing, Xiaomi, Redmi, Nokia, LAVA and LG',
+            'link' => 'https://www.samsung.com/',
+            'label' => 'Core Segment',
+        ],
+        [
+            'number' => '02',
+            'name' => 'Security & Surveillance Solutions',
+            'image' => 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=85',
+            'description' => 'CCTV cameras, IP surveillance, DVR, NVR, access control, video intercom and centralized security solutions.',
+            'brands' => 'Hikvision and EZVIZ',
+            'link' => 'https://www.hikvision.com/en/',
+            'label' => 'Core Segment',
+        ],
+        [
+            'number' => '03',
+            'name' => 'Smart Home & Automation',
+            'image' => 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1400&q=85',
+            'description' => 'Smart cameras, intelligent lighting, voice-enabled products, automation controls and connected living solutions.',
+            'brands' => 'LifeSmart, Yasmina, EZVIZ and Xiaomi',
+            'link' => 'https://iot.ilifesmart.com/',
+            'label' => 'Smart Technology',
+        ],
+        [
+            'number' => '04',
+            'name' => 'IT, Storage & Mobile Accessories',
+            'image' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1400&q=85',
+            'description' => 'Storage devices, keyboards, mice, webcams, chargers, power banks, cables, adapters and digital accessories.',
+            'brands' => 'Logitech, SanDisk, UGREEN, Anker and Romoss',
+            'link' => 'https://www.logitech.com/',
+            'label' => 'Business & Consumer',
+        ],
+    ];
+@endphp
+
+<section class="relative overflow-hidden bg-slate-50 py-10 sm:py-12 lg:py-16">
+
+    <div class="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-blue-100/50 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="mx-auto max-w-4xl text-center">
+
+            <div class="inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-4 py-2 text-[11px] font-black uppercase tracking-[.18em] text-cyan-700">
+                GPT Group Product Portfolio
+            </div>
+
+            <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Technology solutions designed for
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
+                    customers and businesses across Oman.
+                </span>
+            </h2>
+
+            <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
+                GPT Group supports a broad technology ecosystem covering mobile
+                innovation, consumer electronics, professional security,
+                smart-home products and essential digital accessories.
+            </p>
+
+            <p class="mt-3 text-sm font-semibold leading-6 text-slate-500">
+                Our focused category structure helps retail customers, dealers,
+                corporate buyers and project teams identify suitable products
+                and technology solutions from trusted international brands.
+            </p>
+        </div>
+
+
+        <div class="mt-9 grid gap-5 md:grid-cols-2">
+
+            @foreach ($gptProductCategories as $category)
+                <a
+                    href="{{ $category['link'] }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Explore {{ $category['name'] }}"
+                    class="group overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+                >
+
+                    <div class="relative h-64 overflow-hidden sm:h-72">
+
+                        <img
+                            src="{{ $category['image'] }}"
+                            alt="{{ $category['name'] }}"
+                            class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                            loading="lazy"
+                        >
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/35 to-transparent"></div>
+
+                        <div class="absolute left-5 top-5 flex items-center gap-2">
+                            <span class="grid h-11 w-11 place-items-center rounded-full bg-white text-sm font-black text-blue-700 shadow-lg">
+                                {{ $category['number'] }}
+                            </span>
+
+                            <span class="rounded-full border border-white/20 bg-slate-950/40 px-3 py-1.5 text-[10px] font-black uppercase tracking-[.14em] text-white backdrop-blur">
+                                {{ $category['label'] }}
+                            </span>
+                        </div>
+
+                        <div class="absolute bottom-5 left-5 right-5">
+                            <h3 class="text-2xl font-black leading-tight text-white sm:text-3xl">
+                                {{ $category['name'] }}
+                            </h3>
+
+                            <p class="mt-2 text-xs font-bold uppercase tracking-[.12em] text-cyan-200">
+                                GPT Group Technology Segment
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="p-5 sm:p-6">
+
+                        <p class="text-sm leading-6 text-slate-600">
+                            {{ $category['description'] }}
+                        </p>
+
+                        <div class="mt-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+                            <p class="text-[10px] font-black uppercase tracking-[.17em] text-slate-400">
+                                Associated Brands
+                            </p>
+
+                            <p class="mt-1.5 text-xs font-bold leading-5 text-blue-700">
+                                {{ $category['brands'] }}
+                            </p>
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between gap-4">
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-[.15em] text-slate-400">
+                                    Available Through
+                                </p>
+
+                                <p class="mt-1 text-sm font-black text-slate-950">
+                                    GPT Group Oman
+                                </p>
+                            </div>
+
+                            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-blue-700 text-lg text-white transition group-hover:bg-cyan-500">
+                                ↗
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+
+        </div>
+
+
+     
+    </div>
+</section>
+
+
+{{-- =========================================================
+    FEATURED BRAND LOGO FALLBACK
+========================================================= --}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelectorAll('.featured-brand-logo').forEach(function (image) {
+            let candidates = [];
+
+            try {
+                candidates = JSON.parse(image.dataset.candidates || '[]');
+            } catch (error) {
+                candidates = [];
+            }
+
+            let index = Number(image.dataset.index || 0);
+
+            image.addEventListener('error', function handleLogoError() {
+                index += 1;
+
+                if (index < candidates.length) {
+                    image.dataset.index = index;
+                    image.src = candidates[index];
+                    return;
+                }
+
+                image.classList.add('hidden');
+
+                const parent = image.parentElement;
+
+                if (!parent) {
+                    return;
+                }
+
+                const fallback = parent.querySelector(
+                    '.featured-brand-fallback'
+                );
+
+                if (fallback) {
+                    fallback.classList.remove('hidden');
+                    fallback.classList.add('grid');
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
+
+
 
 {{-- 09. WHAT WE DO --}}
 @if (isset($whatWeDoSection) && $whatWeDoSection)
@@ -1664,73 +1906,7 @@
     </section>
 @endif
 
-{{-- 21. LATEST NEWS & UPDATES --}}
-<section class="bg-white py-10 sm:py-12 lg:py-14">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
-                    Latest News & Updates
-                </p>
-
-                <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
-                    What is happening at GPT Group.
-                </h2>
-            </div>
-
-            <a href="{{ route('news') }}" class="btn-white px-6 py-3 text-sm">
-                View All Updates
-            </a>
-        </div>
-
-        @php
-            $latestNewsStatic = [
-                [
-                    'category' => 'Business',
-                    'title' => 'Expanding technology distribution across Oman',
-                    'text' => 'GPT Group continues to strengthen its partner and reseller network across key markets.',
-                ],
-                [
-                    'category' => 'Solutions',
-                    'title' => 'Integrated security solutions for modern businesses',
-                    'text' => 'New surveillance and access-control capabilities designed for commercial environments.',
-                ],
-                [
-                    'category' => 'Partnerships',
-                    'title' => 'Building stronger connections with global technology brands',
-                    'text' => 'Our team is focused on reliable market execution and long-term brand development.',
-                ],
-            ];
-        @endphp
-
-        <div class="mt-8 grid gap-4 lg:grid-cols-3">
-            @foreach ($latestNewsStatic as $news)
-                <article class="soft-card soft-card-hover rounded-2xl p-5">
-                    <p class="text-[11px] font-black uppercase tracking-[.18em] text-blue-700">
-                        {{ $news['category'] }}
-                    </p>
-
-                    <h3 class="mt-3 text-xl font-black leading-tight text-slate-950">
-                        {{ $news['title'] }}
-                    </h3>
-
-                    <p class="mt-3 text-sm leading-6 text-slate-600">
-                        {{ $news['text'] }}
-                    </p>
-
-                    <a
-                        href="{{ route('news') }}"
-                        class="mt-4 inline-flex items-center gap-2 text-sm font-black text-blue-700"
-                    >
-                        Read More
-                        <span>→</span>
-                    </a>
-                </article>
-            @endforeach
-        </div>
-    </div>
-</section>
 
 {{-- 22. CTA + ENQUIRY --}}
 <section class="overflow-hidden bg-white py-10 sm:py-12 lg:py-14">

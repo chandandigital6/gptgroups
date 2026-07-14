@@ -1,5 +1,5 @@
 
-@php
+{{-- @php
     $navItems = [
         [
             'label' => 'Home',
@@ -277,7 +277,286 @@
             'route' => 'contact',
         ],
     ];
+@endphp --}}
+
+
+
+@php
+    $navItems = [
+        [
+            'label' => 'Home',
+            'route' => 'home',
+            'active' => ['home'],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | About
+        |--------------------------------------------------------------------------
+        */
+        [
+            'label' => 'About',
+            'route' => 'about',
+            'active' => [
+                'about',
+                'oman-vision',
+                'carriers',
+            ],
+            'children' => [
+                [
+                    'label' => 'About GPT Group',
+                    'route' => 'about',
+                    'active' => ['about'],
+                ],
+                [
+                    'label' => 'Oman Vision 2040',
+                    'route' => 'oman-vision',
+                    'active' => ['oman-vision'],
+                ],
+                [
+                    'label' => 'Careers',
+                    'route' => 'carriers',
+                    'active' => ['carriers'],
+                ],
+            ],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Business Verticals
+        |--------------------------------------------------------------------------
+        */
+        [
+            'label' => 'Business Verticals',
+            'route' => 'business.index',
+            'active' => ['business.*'],
+            'children' => [
+                [
+                    'label' => 'All Business Verticals',
+                    'route' => 'business.index',
+                    'active' => ['business.index'],
+                ],
+                [
+                    'label' => 'Mobile & Consumer Electronics',
+                    'route' => 'business.mobile',
+                    'active' => ['business.mobile'],
+                ],
+                [
+                    'label' => 'Security Solutions',
+                    'route' => 'business.security',
+                    'active' => ['business.security'],
+                ],
+                [
+                    'label' => 'IT Infrastructure Solutions',
+                    'route' => 'business.infrastructure',
+                    'active' => ['business.infrastructure'],
+                ],
+                [
+                    'label' => 'Trading & Distribution',
+                    'route' => 'business.trading',
+                    'active' => ['business.trading'],
+                ],
+            ],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Brands
+        |--------------------------------------------------------------------------
+        |
+        | Brands के अंदर का dropdown हटा दिया गया है।
+        | अब यह सीधे Brands page पर जाएगा।
+        |
+        */
+        [
+            'label' => 'Brands',
+            'route' => 'brands',
+            'active' => [
+                'brands',
+                'brands.*',
+            ],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Services
+        |--------------------------------------------------------------------------
+        */
+        [
+            'label' => 'Services',
+            'route' => 'services',
+            'active' => [
+                'services',
+                'retail_outlet',
+            ],
+            'children' => [
+                [
+                    'label' => 'Services',
+                    'route' => 'services',
+                    'active' => ['services'],
+                ],
+                [
+                    'label' => 'Retail Outlets',
+                    'route' => 'retail_outlet',
+                    'active' => ['retail_outlet'],
+                ],
+            ],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Company
+        |--------------------------------------------------------------------------
+        */
+        [
+            'label' => 'Company',
+            'route' => 'network',
+            'active' => [
+                'network',
+                'news',
+                'front.news.*',
+                'groups_company',
+            ],
+            'children' => [
+                [
+                    'label' => 'Network',
+                    'route' => 'network',
+                    'active' => ['network'],
+                ],
+                [
+                    'label' => 'News',
+                    'route' => 'news',
+                    'active' => [
+                        'news',
+                        'front.news.*',
+                    ],
+                ],
+                [
+                    'label' => 'Group Companies',
+                    'route' => 'groups_company',
+                    'active' => ['groups_company'],
+                ],
+            ],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Vendor
+        |--------------------------------------------------------------------------
+        */
+        [
+            'label' => 'Vendor',
+            'route' => 'vendor',
+            'active' => ['vendor'],
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Contact
+        |--------------------------------------------------------------------------
+        */
+        [
+            'label' => 'Contact',
+            'route' => 'contact',
+            'active' => ['contact'],
+        ],
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Company Links
+    |--------------------------------------------------------------------------
+    */
+    $footerCompanyLinks = [
+        [
+            'label' => 'About GPT Group',
+            'route' => 'about',
+        ],
+        [
+            'label' => 'Oman Vision 2040',
+            'route' => 'oman-vision',
+        ],
+        [
+            'label' => 'Business Verticals',
+            'route' => 'business.index',
+        ],
+        [
+            'label' => 'Our Network',
+            'route' => 'network',
+        ],
+        [
+            'label' => 'Group Companies',
+            'route' => 'groups_company',
+        ],
+        [
+            'label' => 'Careers',
+            'route' => 'carriers',
+        ],
+        [
+            'label' => 'Vendor',
+            'route' => 'vendor',
+        ],
+        [
+            'label' => 'Contact Us',
+            'route' => 'contact',
+        ],
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Service Links
+    |--------------------------------------------------------------------------
+    */
+    $footerServiceLinks = [
+        [
+            'label' => 'Mobile & Consumer Electronics',
+            'route' => 'business.mobile',
+        ],
+        [
+            'label' => 'Security Solutions',
+            'route' => 'business.security',
+        ],
+        [
+            'label' => 'IT Infrastructure Solutions',
+            'route' => 'business.infrastructure',
+        ],
+        [
+            'label' => 'Trading & Distribution',
+            'route' => 'business.trading',
+        ],
+        [
+            'label' => 'Retail Outlets',
+            'route' => 'retail_outlet',
+        ],
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Footer Product Links
+    |--------------------------------------------------------------------------
+    */
+    $footerProductLinks = [
+        [
+            'label' => 'Our Brands',
+            'route' => 'brands',
+        ],
+        [
+            'label' => 'All Products',
+            'route' => 'products',
+        ],
+        [
+            'label' => 'Offers & Launches',
+            'route' => 'news',
+        ],
+        [
+            'label' => 'Partner Enquiry',
+            'route' => 'contact',
+        ],
+    ];
 @endphp
+
+
+
 
 <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/90 shadow-sm backdrop-blur-xl">
     <div class="containerx flex h-20 items-center justify-between gap-4">

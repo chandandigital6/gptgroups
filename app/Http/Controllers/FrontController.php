@@ -666,6 +666,10 @@ return view('front.vendor');
 
 
 
+public function omanVision(){
+    
+    return view('front.oman_vision');
+}
 
     public function businessVerticals()
 {

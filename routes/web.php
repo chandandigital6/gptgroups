@@ -58,6 +58,8 @@ Route::get('/news/category/{slug}', [FrontController::class, 'category'])
 Route::get('/news/{slug}', [FrontController::class, 'show'])
     ->name('front.news.show');
 
+    Route::get('/oman-vision-2040', [FrontController::class, 'omanVision'])
+    ->name('oman-vision');
 
 Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
 Route::get('/products', [FrontController::class, 'products'])->name('products');
