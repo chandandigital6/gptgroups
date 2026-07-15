@@ -2,45 +2,250 @@
 
 @section('content')
 
-{{-- =========================================================
-    LAVA STYLE CLEAN FULL-WIDTH BANNER
-========================================================= --}}
-
 <style>
     /*
     |--------------------------------------------------------------------------
-    | Main Banner
+    | GPT Clean Split Banner
     |--------------------------------------------------------------------------
     */
 
-    .lava-banner-section {
+    :root {
+        --gpt-blue: #1268dc;
+        --gpt-blue-dark: #063b87;
+        --gpt-cyan: #08b8d8;
+        --gpt-navy: #071d3a;
+        --gpt-text: #0f2747;
+        --gpt-white: #ffffff;
+    }
+
+    .gpt-hero-section {
+        position: relative;
+        width: 100%;
+        padding: 18px 18px 24px;
+        overflow: hidden;
+        background:
+            radial-gradient(
+                circle at 8% 20%,
+                rgba(18, 104, 220, .08),
+                transparent 30%
+            ),
+            radial-gradient(
+                circle at 92% 80%,
+                rgba(8, 184, 216, .10),
+                transparent 28%
+            ),
+            #f7fbff;
+    }
+
+    .gpt-hero-container {
+        width: min(1320px, 100%);
+        margin: 0 auto;
+    }
+
+    .gpt-hero-swiper {
         position: relative;
         width: 100%;
         overflow: hidden;
-        background: #020617;
+        border: 1px solid rgba(18, 104, 220, .10);
+        border-radius: 26px;
+        background: #ffffff;
+        box-shadow:
+            0 22px 60px rgba(15, 39, 71, .10),
+            0 4px 16px rgba(15, 39, 71, .05);
     }
 
-    .lava-banner-swiper {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .lava-banner-slide {
+    .gpt-hero-slide {
         position: relative;
-        width: 100%;
-        height: clamp(480px, calc(100vh - 80px), 680px);
-        min-height: 480px;
+        display: grid;
+        grid-template-columns: minmax(420px, .92fr) minmax(0, 1.45fr);
+        min-height: 430px;
         overflow: hidden;
-        background: #020617;
+        background: #ffffff;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Full Clear Banner Image
+    | Left Content Panel
     |--------------------------------------------------------------------------
     */
 
-    .lava-banner-picture {
+    .gpt-hero-content-panel {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        padding: 45px 48px 54px;
+        overflow: hidden;
+        background:
+            linear-gradient(
+                140deg,
+                #071d3a 0%,
+                #0b438e 55%,
+                #1268dc 100%
+            );
+    }
+
+    .gpt-hero-content-panel::before {
+        position: absolute;
+        top: -110px;
+        right: -90px;
+        width: 260px;
+        height: 260px;
+        content: "";
+        border: 1px solid rgba(255, 255, 255, .13);
+        border-radius: 50%;
+    }
+
+    .gpt-hero-content-panel::after {
+        position: absolute;
+        right: -35px;
+        bottom: -110px;
+        width: 230px;
+        height: 230px;
+        content: "";
+        border-radius: 50%;
+        background: rgba(8, 184, 216, .18);
+        filter: blur(2px);
+    }
+
+    .gpt-hero-content {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .gpt-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 18px;
+        padding: 8px 13px;
+        border: 1px solid rgba(255, 255, 255, .20);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .08);
+        color: rgba(255, 255, 255, .94);
+        font-size: 10px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: .11em;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .gpt-hero-badge-dot {
+        width: 7px;
+        height: 7px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: var(--banner-secondary, #08b8d8);
+        box-shadow: 0 0 0 5px rgba(8, 184, 216, .13);
+    }
+
+    .gpt-hero-title {
+        max-width: 510px;
+        margin: 0;
+        color: #ffffff;
+        font-size: clamp(34px, 3.4vw, 55px);
+        font-weight: 900;
+        line-height: 1.02;
+        letter-spacing: -.045em;
+    }
+
+    .gpt-hero-highlight {
+        display: block;
+        margin-top: 5px;
+        color: #6ee7f5;
+    }
+
+    .gpt-hero-description {
+        max-width: 460px;
+        margin: 18px 0 0;
+        color: rgba(255, 255, 255, .78);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.7;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Buttons
+    |--------------------------------------------------------------------------
+    */
+
+    .gpt-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 11px;
+        margin-top: 26px;
+    }
+
+    .gpt-hero-button {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 11px 18px;
+        border-radius: 11px;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1;
+        text-decoration: none;
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease,
+            background .25s ease,
+            border-color .25s ease;
+    }
+
+    .gpt-hero-button:hover {
+        transform: translateY(-2px);
+    }
+
+    .gpt-hero-button-primary {
+        border: 1px solid #ffffff;
+        background: #ffffff;
+        color: #0b438e;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .14);
+    }
+
+    .gpt-hero-button-primary:hover {
+        background: #f3fbff;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, .18);
+    }
+
+    .gpt-hero-button-secondary {
+        border: 1px solid rgba(255, 255, 255, .30);
+        background: rgba(255, 255, 255, .08);
+        color: #ffffff;
+    }
+
+    .gpt-hero-button-secondary:hover {
+        border-color: rgba(255, 255, 255, .55);
+        background: rgba(255, 255, 255, .14);
+    }
+
+    .gpt-hero-button-arrow {
+        font-size: 17px;
+        line-height: 1;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Right Image Panel
+    |--------------------------------------------------------------------------
+    */
+
+    .gpt-hero-image-panel {
+        position: relative;
+        min-width: 0;
+        overflow: hidden;
+        background: #dceeff;
+    }
+
+    .gpt-hero-picture {
         position: absolute;
         inset: 0;
         display: block;
@@ -48,275 +253,200 @@
         height: 100%;
     }
 
-    .lava-banner-image {
+    .gpt-hero-image {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center;
-        transform: scale(1);
-        filter: none;
-        transition: transform 8s ease;
+        transform: scale(1.01);
+        transition: transform 7s ease;
     }
 
-    .lava-banner-swiper .swiper-slide-active .lava-banner-image {
-        transform: scale(1.015);
+    .gpt-hero-swiper .swiper-slide-active .gpt-hero-image {
+        transform: scale(1.055);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Very Light Bottom Gradient
-    |--------------------------------------------------------------------------
-    |
-    | Image को clear रखने के लिए heavy overlay नहीं है।
-    |
-    */
-
-    .lava-banner-shade {
+    .gpt-hero-image-panel::before {
         position: absolute;
         inset: 0;
         z-index: 2;
+        content: "";
         pointer-events: none;
         background:
             linear-gradient(
-                180deg,
-                transparent 58%,
-                rgba(2, 6, 23, .16) 78%,
-                rgba(2, 6, 23, .38) 100%
+                90deg,
+                rgba(7, 29, 58, .22) 0%,
+                rgba(7, 29, 58, .04) 22%,
+                transparent 55%
             );
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Optional Small Content
-    |--------------------------------------------------------------------------
-    */
-
-    .lava-banner-content {
+    .gpt-hero-image-panel::after {
         position: absolute;
-        left: clamp(35px, 6vw, 95px);
-        bottom: 65px;
-        z-index: 10;
-        width: min(440px, calc(100% - 70px));
-        color: #ffffff;
-    }
-
-    .lava-banner-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 9px;
-        padding: 6px 11px;
-        border: 1px solid rgba(255, 255, 255, .32);
-        border-radius: 999px;
-        background: rgba(2, 6, 23, .28);
-        color: #ffffff;
-        font-size: 9px;
-        font-weight: 800;
-        line-height: 1;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-    }
-
-    .lava-banner-badge-dot {
-        display: block;
-        width: 6px;
-        height: 6px;
-        flex-shrink: 0;
-        border-radius: 50%;
-        background: var(--banner-secondary, #22d3ee);
-    }
-
-    .lava-banner-title {
-        max-width: 430px;
-        margin: 0;
-        color: #ffffff;
-        font-size: clamp(26px, 3vw, 45px);
-        font-weight: 900;
-        line-height: 1.03;
-        letter-spacing: -.035em;
-        text-shadow: 0 4px 20px rgba(2, 6, 23, .42);
-    }
-
-    .lava-banner-highlight {
-        display: block;
-        margin-top: 3px;
-        color: #ffffff;
-    }
-
-    .lava-banner-description {
-        max-width: 390px;
-        margin-top: 9px;
-        color: rgba(255, 255, 255, .90);
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 1.55;
-        text-shadow: 0 2px 10px rgba(2, 6, 23, .45);
+        top: 50%;
+        left: -1px;
+        z-index: 3;
+        width: 58px;
+        height: 150%;
+        content: "";
+        pointer-events: none;
+        background: #0d4f9f;
+        transform: translateY(-50%) skewX(-7deg);
+        transform-origin: center;
+        opacity: .96;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Small Buttons
+    | Slider Navigation
     |--------------------------------------------------------------------------
     */
 
-    .lava-banner-actions {
+    .gpt-hero-slider-controls {
+        position: absolute;
+        right: 24px;
+        bottom: 22px;
+        z-index: 20;
         display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 15px;
-    }
-
-    .lava-banner-button {
-        display: inline-flex;
-        min-height: 38px;
         align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 9px 15px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 800;
-        line-height: 1;
-        transition:
-            transform .25s ease,
-            background .25s ease,
-            border-color .25s ease;
+        gap: 10px;
     }
 
-    .lava-banner-button:hover {
+    .gpt-hero-prev,
+    .gpt-hero-next {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, .65);
+        border-radius: 12px;
+        background: rgba(7, 29, 58, .65);
+        color: #ffffff;
+        font-size: 24px;
+        line-height: 1;
+        box-shadow: 0 8px 22px rgba(7, 29, 58, .20);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition:
+            background .25s ease,
+            transform .25s ease;
+    }
+
+    .gpt-hero-prev:hover,
+    .gpt-hero-next:hover {
+        background: #1268dc;
         transform: translateY(-2px);
     }
 
-    .lava-banner-button-primary {
-        border: 1px solid #ffffff;
-        background: #ffffff;
-        color: #0f172a;
-    }
-
-    .lava-banner-button-primary:hover {
-        background: #f8fafc;
-    }
-
-    .lava-banner-button-secondary {
-        border: 1px solid rgba(255, 255, 255, .62);
-        background: rgba(2, 6, 23, .20);
-        color: #ffffff;
-        backdrop-filter: blur(4px);
-    }
-
-    .lava-banner-button-secondary:hover {
-        border-color: #ffffff;
-        background: rgba(2, 6, 23, .38);
-    }
-
     /*
     |--------------------------------------------------------------------------
-    | Lava Style Navigation Arrows
+    | Pagination
     |--------------------------------------------------------------------------
     */
 
-    .lava-banner-prev,
-    .lava-banner-next {
+    .gpt-hero-bottom-info {
         position: absolute;
-        top: 50%;
-        z-index: 30;
-        display: grid;
-        width: 44px;
-        height: 70px;
-        transform: translateY(-50%);
-        cursor: pointer;
-        place-items: center;
-        border: 0;
-        background: rgba(2, 6, 23, .16);
-        color: rgba(255, 255, 255, .72);
-        font-size: 42px;
-        font-weight: 200;
-        line-height: 1;
-        transition:
-            color .25s ease,
-            background .25s ease;
-    }
-
-    .lava-banner-prev {
-        left: 18px;
-    }
-
-    .lava-banner-next {
-        right: 18px;
-    }
-
-    .lava-banner-prev:hover,
-    .lava-banner-next:hover {
-        color: #ffffff;
-        background: rgba(2, 6, 23, .34);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Number and Pagination
-    |--------------------------------------------------------------------------
-    */
-
-    .lava-banner-pagination-wrap {
-        position: absolute;
-        left: clamp(30px, 3vw, 48px);
-        bottom: 23px;
-        z-index: 30;
+        left: 48px;
+        bottom: 20px;
+        z-index: 15;
         display: flex;
-        align-items: flex-end;
-        gap: 14px;
+        align-items: center;
+        gap: 13px;
     }
 
-    .lava-banner-number {
-        min-width: 26px;
-        color: #ffffff;
-        font-size: 24px;
-        font-weight: 700;
+    .gpt-hero-slide-number {
+        min-width: 24px;
+        color: rgba(255, 255, 255, .86);
+        font-size: 13px;
+        font-weight: 800;
         line-height: 1;
-        text-shadow: 0 2px 10px rgba(2, 6, 23, .45);
     }
 
-    .lava-banner-pagination {
+    .gpt-hero-pagination {
         position: static !important;
         display: flex;
         width: auto !important;
         align-items: center;
-        gap: 5px;
-        padding-bottom: 2px;
+        gap: 6px;
     }
 
-    .lava-banner-swiper .swiper-pagination-bullet {
-        width: 5px;
-        height: 5px;
-        margin: 0 2px !important;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, .64);
+    .gpt-hero-swiper .swiper-pagination-bullet {
+        width: 7px;
+        height: 7px;
+        margin: 0 !important;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .42);
         opacity: 1;
         transition:
             width .25s ease,
             background .25s ease;
     }
 
-    .lava-banner-swiper .swiper-pagination-bullet-active {
-        width: 35px;
-        border-radius: 999px;
-        background: #ffffff;
+    .gpt-hero-swiper .swiper-pagination-bullet-active {
+        width: 28px;
+        background: #6ee7f5;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Option: Hide Admin Content
+    | Decorative Label
     |--------------------------------------------------------------------------
-    |
-    | Uploaded banner image में text/design पहले से है तो इस class को
-    | content div में add कर सकते हैं:
-    |
-    | class="lava-banner-content hidden"
-    |
     */
+
+    .gpt-image-label {
+        position: absolute;
+        top: 22px;
+        right: 22px;
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, .55);
+        border-radius: 999px;
+        background: rgba(7, 29, 58, .54);
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        backdrop-filter: blur(9px);
+        -webkit-backdrop-filter: blur(9px);
+    }
+
+    .gpt-image-label-icon {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #6ee7f5;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laptop
+    |--------------------------------------------------------------------------
+    */
+
+    @media (max-width: 1100px) {
+        .gpt-hero-slide {
+            grid-template-columns: minmax(390px, .95fr) minmax(0, 1.2fr);
+            min-height: 420px;
+        }
+
+        .gpt-hero-content-panel {
+            padding: 40px 38px 52px;
+        }
+
+        .gpt-hero-title {
+            font-size: clamp(32px, 4vw, 47px);
+        }
+
+        .gpt-hero-bottom-info {
+            left: 38px;
+        }
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -324,28 +454,63 @@
     |--------------------------------------------------------------------------
     */
 
-    @media (max-width: 1023px) {
-        .lava-banner-slide {
-            height: 560px;
-            min-height: 560px;
+    @media (max-width: 850px) {
+        .gpt-hero-section {
+            padding: 12px 12px 20px;
         }
 
-        .lava-banner-content {
-            left: 48px;
-            bottom: 66px;
-            width: min(400px, calc(100% - 96px));
+        .gpt-hero-swiper {
+            border-radius: 22px;
         }
 
-        .lava-banner-title {
-            font-size: clamp(25px, 5vw, 39px);
+        .gpt-hero-slide {
+            grid-template-columns: 1fr;
+            min-height: 620px;
         }
 
-        .lava-banner-prev {
-            left: 8px;
+        .gpt-hero-content-panel {
+            min-height: 340px;
+            padding: 35px 34px 50px;
         }
 
-        .lava-banner-next {
-            right: 8px;
+        .gpt-hero-image-panel {
+            min-height: 280px;
+        }
+
+        .gpt-hero-image-panel::after {
+            top: -28px;
+            left: 50%;
+            width: 140%;
+            height: 55px;
+            transform: translateX(-50%) skewY(-4deg);
+        }
+
+        .gpt-hero-image-panel::before {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(7, 29, 58, .20),
+                    transparent 35%
+                );
+        }
+
+        .gpt-hero-title {
+            max-width: 590px;
+            font-size: clamp(32px, 6vw, 46px);
+        }
+
+        .gpt-hero-description {
+            max-width: 580px;
+        }
+
+        .gpt-hero-slider-controls {
+            right: 18px;
+            bottom: 18px;
+        }
+
+        .gpt-image-label {
+            top: 20px;
+            right: 18px;
         }
     }
 
@@ -355,74 +520,80 @@
     |--------------------------------------------------------------------------
     */
 
-    @media (max-width: 767px) {
-        .lava-banner-slide {
-            height: 520px;
-            min-height: 520px;
+    @media (max-width: 600px) {
+        .gpt-hero-section {
+            padding: 8px 8px 16px;
         }
 
-        .lava-banner-image {
-            object-position: center;
+        .gpt-hero-swiper {
+            border-radius: 18px;
         }
 
-        .lava-banner-shade {
-            background:
-                linear-gradient(
-                    180deg,
-                    transparent 48%,
-                    rgba(2, 6, 23, .12) 66%,
-                    rgba(2, 6, 23, .66) 100%
-                );
+        .gpt-hero-slide {
+            min-height: 535px;
         }
 
-        .lava-banner-content {
-            left: 18px;
-            right: 18px;
-            bottom: 58px;
-            width: auto;
+        .gpt-hero-content-panel {
+            min-height: 315px;
+            align-items: flex-start;
+            padding: 28px 22px 48px;
         }
 
-        .lava-banner-badge {
-            margin-bottom: 7px;
-            padding: 5px 9px;
+        .gpt-hero-image-panel {
+            min-height: 220px;
+        }
+
+        .gpt-hero-badge {
+            margin-bottom: 14px;
+            padding: 7px 10px;
             font-size: 8px;
         }
 
-        .lava-banner-title {
-            max-width: 340px;
-            font-size: clamp(23px, 7.4vw, 32px);
-            line-height: 1.05;
+        .gpt-hero-title {
+            font-size: clamp(28px, 9.5vw, 38px);
+            line-height: 1.03;
         }
 
-        .lava-banner-description {
-            max-width: 330px;
-            margin-top: 7px;
-            font-size: 11px;
-            line-height: 1.45;
+        .gpt-hero-description {
+            margin-top: 13px;
+            font-size: 12px;
+            line-height: 1.55;
         }
 
-        .lava-banner-actions {
-            margin-top: 12px;
+        .gpt-hero-actions {
+            gap: 8px;
+            margin-top: 18px;
         }
 
-        .lava-banner-button {
-            min-height: 35px;
-            padding: 8px 12px;
+        .gpt-hero-button {
+            min-height: 40px;
+            padding: 10px 13px;
+            border-radius: 9px;
             font-size: 10px;
         }
 
-        .lava-banner-prev,
-        .lava-banner-next {
-            display: none;
+        .gpt-hero-bottom-info {
+            left: 22px;
+            bottom: 17px;
         }
 
-        .lava-banner-pagination-wrap {
-            left: 18px;
-            bottom: 18px;
+        .gpt-hero-slide-number {
+            font-size: 11px;
         }
 
-        .lava-banner-number {
-            font-size: 18px;
+        .gpt-hero-prev,
+        .gpt-hero-next {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            font-size: 21px;
+        }
+
+        .gpt-image-label {
+            top: 16px;
+            right: 14px;
+            padding: 7px 10px;
+            font-size: 8px;
         }
     }
 
@@ -432,23 +603,30 @@
     |--------------------------------------------------------------------------
     */
 
-    @media (max-width: 420px) {
-        .lava-banner-slide {
-            height: 480px;
-            min-height: 480px;
+    @media (max-width: 390px) {
+        .gpt-hero-slide {
+            min-height: 520px;
         }
 
-        .lava-banner-content {
-            bottom: 55px;
+        .gpt-hero-content-panel {
+            min-height: 315px;
+            padding-right: 18px;
+            padding-left: 18px;
         }
 
-        .lava-banner-title {
-            max-width: 290px;
-            font-size: 25px;
+        .gpt-hero-title {
+            font-size: 29px;
         }
 
-        .lava-banner-description {
-            display: none;
+        .gpt-hero-description {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .gpt-hero-bottom-info {
+            left: 18px;
         }
     }
 </style>
@@ -456,17 +634,17 @@
 @php
     $themeMap = [
         'cyan' => [
-            'primary' => '#2563eb',
-            'secondary' => '#06b6d4',
+            'primary' => '#1268dc',
+            'secondary' => '#08b8d8',
         ],
 
         'yellow' => [
-            'primary' => '#2563eb',
+            'primary' => '#1268dc',
             'secondary' => '#facc15',
         ],
 
         'emerald' => [
-            'primary' => '#2563eb',
+            'primary' => '#1268dc',
             'secondary' => '#10b981',
         ],
     ];
@@ -474,178 +652,196 @@
 
 @if (isset($banners) && $banners->count() > 0)
 
-    <section class="lava-banner-section">
+    <section class="gpt-hero-section">
 
-        <div class="swiper lava-banner-swiper">
+        <div class="gpt-hero-container">
 
-            <div class="swiper-wrapper">
+            <div class="swiper gpt-hero-swiper">
 
-                @foreach ($banners as $banner)
+                <div class="swiper-wrapper">
 
-                    @php
-                        $desktopImage = $banner->desktop_image
-                            ? asset('storage/' . $banner->desktop_image)
-                            : 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1920&q=92';
+                    @foreach ($banners as $banner)
 
-                        $mobileImage = $banner->mobile_image
-                            ? asset('storage/' . $banner->mobile_image)
-                            : $desktopImage;
+                        @php
+                            $desktopImage = $banner->desktop_image
+                                ? asset('storage/' . $banner->desktop_image)
+                                : 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=88';
 
-                        $primaryLink = $banner->button_link
-                            ?: route('business.index');
+                            $mobileImage = $banner->mobile_image
+                                ? asset('storage/' . $banner->mobile_image)
+                                : $desktopImage;
 
-                        $secondaryLink = $banner->second_button_link
-                            ?: route('contact');
+                            $primaryLink = $banner->button_link
+                                ?: route('business.index');
 
-                        $primaryTitle = $banner->button_text
-                            ?: 'Explore More';
+                            $secondaryLink = $banner->second_button_link
+                                ?: route('contact');
 
-                        $secondaryTitle = $banner->second_button_text
-                            ?: 'Contact Us';
+                            $primaryTitle = $banner->button_text
+                                ?: 'Explore Solutions';
 
-                        $activeTheme = $themeMap[$banner->theme]
-                            ?? $themeMap['cyan'];
-                    @endphp
+                            $secondaryTitle = $banner->second_button_text
+                                ?: 'Contact Us';
 
-                    <div class="swiper-slide">
+                            $activeTheme = $themeMap[$banner->theme]
+                                ?? $themeMap['cyan'];
+                        @endphp
 
-                        <div
-                            class="lava-banner-slide"
-                            style="
-                                --banner-primary: {{ $activeTheme['primary'] }};
-                                --banner-secondary: {{ $activeTheme['secondary'] }};
-                            "
-                        >
+                        <div class="swiper-slide">
 
-                            <picture class="lava-banner-picture">
+                            <article
+                                class="gpt-hero-slide"
+                                style="
+                                    --banner-primary: {{ $activeTheme['primary'] }};
+                                    --banner-secondary: {{ $activeTheme['secondary'] }};
+                                "
+                            >
 
-                                <source
-                                    media="(max-width: 767px)"
-                                    srcset="{{ $mobileImage }}"
-                                >
+                                {{-- Left Content --}}
+                                <div class="gpt-hero-content-panel">
 
-                                <img
-                                    src="{{ $desktopImage }}"
-                                    alt="{{ $banner->image_alt ?: $banner->title }}"
-                                    class="lava-banner-image"
-                                    loading="{{ $loop->first ? 'eager' : 'lazy' }}"
-                                    fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
-                                >
+                                    <div class="gpt-hero-content">
 
-                            </picture>
+                                        @if ($banner->badge)
+                                            <div class="gpt-hero-badge">
+                                                <span class="gpt-hero-badge-dot"></span>
 
-                            <div class="lava-banner-shade"></div>
+                                                <span>{{ $banner->badge }}</span>
+                                            </div>
+                                        @endif
 
-                            {{--
-                                =================================================
-                                OPTIONAL CONTENT
+                                        @if ($banner->title)
+                                            <h1 class="gpt-hero-title">
+                                                {{ $banner->title }}
 
-                                Banner image में पहले से heading/text है तो
-                                नीचे का पूरा lava-banner-content div हटा दें।
+                                                @if ($banner->highlight)
+                                                    <span class="gpt-hero-highlight">
+                                                        {{ $banner->highlight }}
+                                                    </span>
+                                                @endif
+                                            </h1>
+                                        @endif
 
-                                इससे केवल full clean image दिखाई देगी।
-                                =================================================
-                            --}}
+                                        @if ($banner->description)
+                                            <p class="gpt-hero-description">
+                                                {{ $banner->description }}
+                                            </p>
+                                        @endif
 
-                            <div class="lava-banner-content">
+                                        @if (
+                                            $banner->button_text ||
+                                            $banner->second_button_text
+                                        )
+                                            <div class="gpt-hero-actions">
 
-                                @if ($banner->badge)
-                                    <div class="lava-banner-badge">
-                                        <span class="lava-banner-badge-dot"></span>
+                                                @if ($banner->button_text)
+                                                    <a
+                                                        href="{{ $primaryLink }}"
+                                                        class="gpt-hero-button gpt-hero-button-primary"
+                                                    >
+                                                        <span>{{ $primaryTitle }}</span>
 
-                                        {{ $banner->badge }}
+                                                        <span class="gpt-hero-button-arrow">
+                                                            →
+                                                        </span>
+                                                    </a>
+                                                @endif
+
+                                                @if ($banner->second_button_text)
+                                                    <a
+                                                        href="{{ $secondaryLink }}"
+                                                        class="gpt-hero-button gpt-hero-button-secondary"
+                                                    >
+                                                        <span>{{ $secondaryTitle }}</span>
+
+                                                        <span class="gpt-hero-button-arrow">
+                                                            ↗
+                                                        </span>
+                                                    </a>
+                                                @endif
+
+                                            </div>
+                                        @endif
+
                                     </div>
-                                @endif
 
-                                @if ($banner->title)
-                                    <h1 class="lava-banner-title">
-                                        {{ $banner->title }}
+                                    @if ($banners->count() > 1)
+                                        <div class="gpt-hero-bottom-info">
 
-                                        @if ($banner->highlight)
-                                            <span class="lava-banner-highlight">
-                                                {{ $banner->highlight }}
+                                            <span
+                                                id="gptCurrentSlide"
+                                                class="gpt-hero-slide-number"
+                                            >
+                                                01
                                             </span>
-                                        @endif
-                                    </h1>
-                                @endif
 
-                                @if ($banner->description)
-                                    <p class="lava-banner-description">
-                                        {{ $banner->description }}
-                                    </p>
-                                @endif
+                                            <div class="gpt-hero-pagination"></div>
 
-                                @if (
-                                    $banner->button_text ||
-                                    $banner->second_button_text
-                                )
-                                    <div class="lava-banner-actions">
+                                        </div>
+                                    @endif
 
-                                        @if ($banner->button_text)
-                                            <a
-                                                href="{{ $primaryLink }}"
-                                                class="lava-banner-button lava-banner-button-primary"
-                                            >
-                                                <span>{{ $primaryTitle }}</span>
-                                                <span>→</span>
-                                            </a>
-                                        @endif
+                                </div>
 
-                                        @if ($banner->second_button_text)
-                                            <a
-                                                href="{{ $secondaryLink }}"
-                                                class="lava-banner-button lava-banner-button-secondary"
-                                            >
-                                                <span>{{ $secondaryTitle }}</span>
-                                                <span>↗</span>
-                                            </a>
-                                        @endif
+                                {{-- Right Image --}}
+                                <div class="gpt-hero-image-panel">
 
+                                    <picture class="gpt-hero-picture">
+
+                                        <source
+                                            media="(max-width: 767px)"
+                                            srcset="{{ $mobileImage }}"
+                                        >
+
+                                        <img
+                                            src="{{ $desktopImage }}"
+                                            alt="{{ $banner->image_alt ?: ($banner->title ?: 'GPT Group Banner') }}"
+                                            class="gpt-hero-image"
+                                            loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                            fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
+                                        >
+
+                                    </picture>
+
+                                    <div class="gpt-image-label">
+                                        <span class="gpt-image-label-icon"></span>
+                                        GPT Group Oman
                                     </div>
-                                @endif
 
-                            </div>
+                                </div>
+
+                            </article>
 
                         </div>
 
-                    </div>
-
-                @endforeach
-
-            </div>
-
-            @if ($banners->count() > 1)
-
-                <button
-                    type="button"
-                    class="lava-banner-prev"
-                    aria-label="Previous banner"
-                >
-                    ‹
-                </button>
-
-                <button
-                    type="button"
-                    class="lava-banner-next"
-                    aria-label="Next banner"
-                >
-                    ›
-                </button>
-
-                <div class="lava-banner-pagination-wrap">
-
-                    <span
-                        id="lavaCurrentSlide"
-                        class="lava-banner-number"
-                    >
-                        01
-                    </span>
-
-                    <div class="lava-banner-pagination"></div>
+                    @endforeach
 
                 </div>
 
-            @endif
+                @if ($banners->count() > 1)
+
+                    <div class="gpt-hero-slider-controls">
+
+                        <button
+                            type="button"
+                            class="gpt-hero-prev"
+                            aria-label="Previous banner"
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="gpt-hero-next"
+                            aria-label="Next banner"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                @endif
+
+            </div>
 
         </div>
 
@@ -654,63 +850,85 @@
 @else
 
     {{-- Default Banner --}}
-    <section class="lava-banner-section">
 
-        <div class="lava-banner-slide">
+    <section class="gpt-hero-section">
 
-            <picture class="lava-banner-picture">
+        <div class="gpt-hero-container">
 
-                <img
-                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1920&q=92"
-                    alt="GPT Group Technology Distribution and Solutions"
-                    class="lava-banner-image"
-                    loading="eager"
-                    fetchpriority="high"
-                >
+            <div class="gpt-hero-swiper">
 
-            </picture>
+                <article class="gpt-hero-slide">
 
-            <div class="lava-banner-shade"></div>
+                    <div class="gpt-hero-content-panel">
 
-            <div class="lava-banner-content">
+                        <div class="gpt-hero-content">
 
-                <div class="lava-banner-badge">
-                    <span class="lava-banner-badge-dot"></span>
-                    Technology Distribution & Solutions
-                </div>
+                            <div class="gpt-hero-badge">
+                                <span class="gpt-hero-badge-dot"></span>
 
-                <h1 class="lava-banner-title">
-                    Technology that moves
+                                Technology Distribution & Solutions
+                            </div>
 
-                    <span class="lava-banner-highlight">
-                        businesses forward.
-                    </span>
-                </h1>
+                            <h1 class="gpt-hero-title">
+                                Technology solutions
 
-                <p class="lava-banner-description">
-                    Mobile distribution, security solutions, IT infrastructure
-                    and trading expertise across Oman and the GCC.
-                </p>
+                                <span class="gpt-hero-highlight">
+                                    built for progress.
+                                </span>
+                            </h1>
 
-                <div class="lava-banner-actions">
+                            <p class="gpt-hero-description">
+                                Mobile distribution, security systems, IT
+                                infrastructure and trading expertise across
+                                Oman and the GCC.
+                            </p>
 
-                    <a
-                        href="{{ route('business.index') }}"
-                        class="lava-banner-button lava-banner-button-primary"
-                    >
-                        Explore More
-                        <span>→</span>
-                    </a>
+                            <div class="gpt-hero-actions">
 
-                    <a
-                        href="{{ route('contact') }}"
-                        class="lava-banner-button lava-banner-button-secondary"
-                    >
-                        Contact Us
-                        <span>↗</span>
-                    </a>
+                                <a
+                                    href="{{ route('business.index') }}"
+                                    class="gpt-hero-button gpt-hero-button-primary"
+                                >
+                                    <span>Explore Solutions</span>
+                                    <span class="gpt-hero-button-arrow">→</span>
+                                </a>
 
-                </div>
+                                <a
+                                    href="{{ route('contact') }}"
+                                    class="gpt-hero-button gpt-hero-button-secondary"
+                                >
+                                    <span>Contact Us</span>
+                                    <span class="gpt-hero-button-arrow">↗</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="gpt-hero-image-panel">
+
+                        <picture class="gpt-hero-picture">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=88"
+                                alt="GPT Group Technology Distribution and Solutions"
+                                class="gpt-hero-image"
+                                loading="eager"
+                                fetchpriority="high"
+                            >
+
+                        </picture>
+
+                        <div class="gpt-image-label">
+                            <span class="gpt-image-label-icon"></span>
+                            GPT Group Oman
+                        </div>
+
+                    </div>
+
+                </article>
 
             </div>
 
@@ -722,64 +940,66 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const bannerElement = document.querySelector('.lava-banner-swiper');
-        const currentSlideElement = document.getElementById('lavaCurrentSlide');
+        const bannerElement = document.querySelector('.gpt-hero-swiper');
+        const currentSlideElement = document.getElementById('gptCurrentSlide');
 
         if (
-            typeof Swiper !== 'undefined' &&
-            bannerElement
+            typeof Swiper === 'undefined' ||
+            !bannerElement ||
+            !bannerElement.querySelector('.swiper-wrapper')
         ) {
-            const lavaBannerSwiper = new Swiper('.lava-banner-swiper', {
-                loop: true,
-                speed: 900,
-                effect: 'fade',
+            return;
+        }
 
-                fadeEffect: {
-                    crossFade: true,
+        new Swiper('.gpt-hero-swiper', {
+            loop: true,
+            speed: 850,
+            effect: 'fade',
+
+            fadeEffect: {
+                crossFade: true,
+            },
+
+            autoplay: {
+                delay: 5500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+
+            navigation: {
+                nextEl: '.gpt-hero-next',
+                prevEl: '.gpt-hero-prev',
+            },
+
+            pagination: {
+                el: '.gpt-hero-pagination',
+                clickable: true,
+            },
+
+            on: {
+                init: function () {
+                    updateSlideNumber(this);
                 },
 
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
+                slideChange: function () {
+                    updateSlideNumber(this);
                 },
+            },
+        });
 
-                navigation: {
-                    nextEl: '.lava-banner-next',
-                    prevEl: '.lava-banner-prev',
-                },
-
-                pagination: {
-                    el: '.lava-banner-pagination',
-                    clickable: true,
-                },
-
-                on: {
-                    init: function () {
-                        updateSlideNumber(this);
-                    },
-
-                    slideChange: function () {
-                        updateSlideNumber(this);
-                    },
-                },
-            });
-
-            function updateSlideNumber(swiper) {
-                if (!currentSlideElement) {
-                    return;
-                }
-
-                const currentNumber = swiper.realIndex + 1;
-
-                currentSlideElement.textContent = String(
-                    currentNumber
-                ).padStart(2, '0');
+        function updateSlideNumber(swiper) {
+            if (!currentSlideElement) {
+                return;
             }
+
+            const slideNumber = swiper.realIndex + 1;
+
+            currentSlideElement.textContent = String(
+                slideNumber
+            ).padStart(2, '0');
         }
     });
 </script>
-
 
     {{-- 03. STATS --}}
     <section class="section-muted py-14 lg:py-18">
