@@ -184,63 +184,215 @@
 </div>
 
 <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-700 dark:bg-neutral-950">
-    <h2 class="mb-5 text-lg font-bold text-neutral-900 dark:text-white">
-        Hero Image & Card
-    </h2>
+    <div class="mb-5">
+        <h2 class="text-lg font-bold text-neutral-900 dark:text-white">
+            Hero Image, GIF, Video & Card
+        </h2>
 
-    @if($pageHero?->image)
-        <div class="mb-4 h-72 overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-800">
-            <img src="{{ asset('storage/' . $pageHero->image) }}"
-                 alt="{{ $pageHero->image_alt }}"
-                 class="h-full w-full object-cover">
+        <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+            Supported formats: JPG, JPEG, PNG, WEBP, GIF, MP4, WEBM and MOV.
+            Maximum file size: 30 MB.
+        </p>
+    </div>
+
+    @php
+        $existingMedia = $pageHero?->image;
+        $existingExtension = $existingMedia
+            ? strtolower(pathinfo($existingMedia, PATHINFO_EXTENSION))
+            : null;
+
+        $existingIsVideo = in_array(
+            $existingExtension,
+            ['mp4', 'webm', 'mov']
+        );
+    @endphp
+
+    {{-- Existing File Preview --}}
+    @if($existingMedia)
+        <div class="mb-5">
+            <p class="mb-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                Current Media
+            </p>
+
+            <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-black dark:border-neutral-700">
+
+                @if($existingIsVideo)
+                    <video
+                        src="{{ asset('storage/' . $existingMedia) }}"
+                        class="h-72 w-full object-cover"
+                        controls
+                        muted
+                        loop
+                        playsinline
+                    ></video>
+                @else
+                    <img
+                        src="{{ asset('storage/' . $existingMedia) }}"
+                        alt="{{ $pageHero?->image_alt ?: $pageHero?->title_line_1 }}"
+                        class="h-72 w-full object-cover"
+                    >
+                @endif
+
+            </div>
         </div>
     @endif
 
-    <div class="grid gap-5 md:grid-cols-2">
-        <div>
-            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                Hero Image
-            </label>
+    {{-- New File Preview --}}
+    <div
+        id="heroMediaPreviewWrapper"
+        class="mb-5 hidden"
+    >
+        <p class="mb-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+            New Media Preview
+        </p>
 
-            <input type="file"
-                   name="image"
-                   accept="image/*"
-                   class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm">
-        </div>
+        <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-black dark:border-neutral-700">
+            <img
+                id="heroImagePreview"
+                src=""
+                alt="Selected media preview"
+                class="hidden h-72 w-full object-cover"
+            >
 
-        <div>
-            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                Image Alt
-            </label>
-
-            <input type="text"
-                   name="image_alt"
-                   value="{{ old('image_alt', $pageHero?->image_alt ?? 'GPT Group Services') }}"
-                   class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm">
-        </div>
-
-        <div>
-            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                Image Card Title
-            </label>
-
-            <input type="text"
-                   name="card_title"
-                   value="{{ old('card_title', $pageHero?->card_title ?? 'Repair + Business Support') }}"
-                   class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm">
-        </div>
-
-        <div>
-            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                Image Card Description
-            </label>
-
-            <textarea name="card_description"
-                      rows="3"
-                      class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm">{{ old('card_description', $pageHero?->card_description ?? 'GPT Care for customers and GPT B2B Programs for business partners.') }}</textarea>
+            <video
+                id="heroVideoPreview"
+                class="hidden h-72 w-full object-cover"
+                controls
+                muted
+                loop
+                playsinline
+            ></video>
         </div>
     </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+
+        <div>
+            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                Hero Image, GIF or Video
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                id="heroMediaInput"
+                accept=".jpg,.jpeg,.png,.webp,.gif,.mp4,.webm,.mov,image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime"
+                class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 file:mr-4 file:rounded-lg file:border-0 file:bg-black file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-neutral-800 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:file:bg-white dark:file:text-black"
+            >
+
+            @error('image')
+                <p class="mt-2 text-xs font-semibold text-red-600">
+                    {{ $message }}
+                </p>
+            @enderror
+
+            <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                Recommended video: MP4, landscape ratio 16:9, short duration
+                and optimized file size.
+            </p>
+        </div>
+
+        <div>
+            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                Media Alt Text
+            </label>
+
+            <input
+                type="text"
+                name="image_alt"
+                value="{{ old('image_alt', $pageHero?->image_alt ?? 'GPT Group Services') }}"
+                placeholder="Describe image or video"
+                class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-black dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:focus:border-white"
+            >
+        </div>
+
+        <div>
+            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                Media Card Title
+            </label>
+
+            <input
+                type="text"
+                name="card_title"
+                value="{{ old('card_title', $pageHero?->card_title ?? 'Repair + Business Support') }}"
+                class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-black dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:focus:border-white"
+            >
+        </div>
+
+        <div>
+            <label class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                Media Card Description
+            </label>
+
+            <textarea
+                name="card_description"
+                rows="3"
+                class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-black dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:focus:border-white"
+            >{{ old('card_description', $pageHero?->card_description ?? 'GPT Care for customers and GPT B2B Programs for business partners.') }}</textarea>
+        </div>
+
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const mediaInput = document.getElementById('heroMediaInput');
+        const previewWrapper = document.getElementById(
+            'heroMediaPreviewWrapper'
+        );
+        const imagePreview = document.getElementById(
+            'heroImagePreview'
+        );
+        const videoPreview = document.getElementById(
+            'heroVideoPreview'
+        );
+
+        if (
+            !mediaInput ||
+            !previewWrapper ||
+            !imagePreview ||
+            !videoPreview
+        ) {
+            return;
+        }
+
+        let currentPreviewUrl = null;
+
+        mediaInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+
+            imagePreview.classList.add('hidden');
+            videoPreview.classList.add('hidden');
+
+            imagePreview.removeAttribute('src');
+            videoPreview.removeAttribute('src');
+            videoPreview.load();
+
+            if (currentPreviewUrl) {
+                URL.revokeObjectURL(currentPreviewUrl);
+                currentPreviewUrl = null;
+            }
+
+            if (!file) {
+                previewWrapper.classList.add('hidden');
+                return;
+            }
+
+            currentPreviewUrl = URL.createObjectURL(file);
+            previewWrapper.classList.remove('hidden');
+
+            if (file.type.startsWith('video/')) {
+                videoPreview.src = currentPreviewUrl;
+                videoPreview.classList.remove('hidden');
+                videoPreview.load();
+                return;
+            }
+
+            imagePreview.src = currentPreviewUrl;
+            imagePreview.classList.remove('hidden');
+        });
+    });
+</script>
 
 <div class="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-700 dark:bg-neutral-950">
     <input type="checkbox"

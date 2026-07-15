@@ -117,14 +117,60 @@
                         <div class="absolute -inset-5 rounded-full bg-cyan-300/18 blur-3xl"></div>
 
                         <div class="relative overflow-hidden rounded-[1.75rem] border border-white bg-white/88 p-3 shadow-xl ring-1 ring-cyan-100 backdrop-blur-xl">
-                            @if ($pageHero->image)
+                            {{-- @if ($pageHero->image)
                                 <img
                                     src="{{ asset('storage/' . $pageHero->image) }}"
                                     alt="{{ $pageHero->image_alt ?: $pageHero->title_line_1 }}"
                                     class="h-[250px] w-full rounded-[1.35rem] object-cover sm:h-[310px] lg:h-[350px]"
                                     loading="lazy"
                                 >
-                            @endif
+                            @endif --}}
+                            @if($pageHero->image)
+    @php
+        $mediaExtension = strtolower(
+            pathinfo(
+                $pageHero->image,
+                PATHINFO_EXTENSION
+            )
+        );
+
+        $isVideo = in_array(
+            $mediaExtension,
+            ['mp4', 'webm', 'mov']
+        );
+    @endphp
+
+    @if($isVideo)
+        <div class="relative h-full w-full">
+            <video
+                src="{{ asset('storage/' . $pageHero->image) }}"
+                class="h-full w-full object-cover"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                onmouseenter="this.play()"
+                onmouseleave="this.pause(); this.currentTime = 0;"
+            ></video>
+
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/15">
+                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-xs text-white">
+                    ▶
+                </span>
+            </div>
+        </div>
+    @else
+        <img
+            src="{{ asset('storage/' . $pageHero->image) }}"
+            class="h-full w-full object-cover"
+            alt="{{ $pageHero->image_alt ?? $pageHero->title_line_1 }}"
+        >
+    @endif
+@else
+    <div class="flex h-full w-full items-center justify-center text-xs text-neutral-400">
+        No Media
+    </div>
+@endif
 
                             @if ($pageHero->card_title || $pageHero->card_description)
                                 <div class="mt-3 rounded-xl border border-slate-100 bg-white p-4 shadow-md">

@@ -142,15 +142,59 @@
                                     <div class="flex items-center gap-3">
 
                                         <div class="h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
-                                            @if($pageHero->image)
-                                                <img src="{{ asset('storage/' . $pageHero->image) }}"
-                                                     class="h-full w-full object-cover"
-                                                     alt="{{ $pageHero->image_alt ?? $pageHero->title_line_1 }}">
-                                            @else
-                                                <div class="flex h-full w-full items-center justify-center text-xs text-neutral-400">
-                                                    No Image
-                                                </div>
-                                            @endif
+                                           @if ($pageHero->image)
+    @php
+        $mediaExtension = strtolower(
+            pathinfo(
+                $pageHero->image,
+                PATHINFO_EXTENSION
+            )
+        );
+
+        $isVideo = in_array(
+            $mediaExtension,
+            ['mp4', 'webm', 'mov']
+        );
+
+        $mediaUrl = asset(
+            'storage/' . $pageHero->image
+        );
+    @endphp
+
+    <div class="relative overflow-hidden rounded-[1.35rem] bg-slate-950">
+
+        @if ($isVideo)
+            <video
+                class="h-[250px] w-full object-cover sm:h-[310px] lg:h-[350px]"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="{{ $pageHero->image_alt ?: $pageHero->title_line_1 }}"
+            >
+                <source
+                    src="{{ $mediaUrl }}"
+                    type="{{ $mediaExtension === 'mov'
+                        ? 'video/quicktime'
+                        : 'video/' . $mediaExtension }}"
+                >
+
+                Your browser does not support this video.
+            </video>
+        @else
+            <img
+                src="{{ $mediaUrl }}"
+                alt="{{ $pageHero->image_alt ?: $pageHero->title_line_1 }}"
+                class="h-[250px] w-full object-cover sm:h-[310px] lg:h-[350px]"
+                loading="lazy"
+            >
+        @endif
+
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/10 via-transparent to-transparent"></div>
+
+    </div>
+@endif
                                         </div>
 
                                         <div class="min-w-0">
