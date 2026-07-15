@@ -38,7 +38,10 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\CareerController;
 
 
-Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('comming_soon');
+});
+Route::get('/home', [FrontController::class, 'index'])->name('home');
 Route::get('/about', [FrontController::class, 'about'])->name('about');
 Route::get('/brands', [FrontController::class, 'brands'])->name('brands');
 Route::get('/brands/{brand:slug}', [FrontController::class, 'brandCategories'])->name('brands.show');
