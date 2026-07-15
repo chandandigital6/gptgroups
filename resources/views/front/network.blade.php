@@ -583,7 +583,7 @@
 
 
 {{-- CTA --}}
-<section class="network-section-soft py-10 sm:py-12 lg:py-14">
+{{-- <section class="network-section-soft py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-5 text-white shadow-2xl sm:p-8 lg:p-10">
             <div class="grid gap-5 lg:grid-cols-2 lg:items-center">
@@ -610,6 +610,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 @endsection
