@@ -499,7 +499,7 @@
             'year' => '2003',
             'title' => 'Oman Market Experience',
             'desc' => 'Regional market experience strengthened the understanding of Omani customers, GCC retailers, dealers and technology distribution networks.',
-            'image' => 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=600&q=80',
+            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQodLlcnJ1DX1PlG65zJyAGUZTbvv5k4X6zPVnr6ahRAw&s=10',
             'gradient' => 'from-cyan-500 to-blue-500',
             'soft_bg' => 'from-cyan-50 to-blue-50',
             'text_color' => 'text-cyan-700',
