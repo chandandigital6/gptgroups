@@ -173,66 +173,134 @@ class CreateBusinessLead implements Tool
         ], JSON_UNESCAPED_UNICODE);
     }
 
+    // public function schema(JsonSchema $schema): array
+    // {
+    //     return [
+    //         'name' => $schema
+    //             ->string()
+    //             ->description('Visitor full name.')
+    //             ->required(),
+
+    //         'email' => $schema
+    //             ->string()
+    //             ->description(
+    //                 'Visitor email address. Empty string when unavailable.'
+    //             ),
+
+    //         'phone' => $schema
+    //             ->string()
+    //             ->description(
+    //                 'Visitor phone number. Empty string when unavailable.'
+    //             ),
+
+    //         'company_name' => $schema
+    //             ->string()
+    //             ->description(
+    //                 'Visitor company name. Empty string when unavailable.'
+    //             ),
+
+    //         'business_type' => $schema
+    //             ->string()
+    //             ->description(
+    //                 'Visitor business type. Empty string when unavailable.'
+    //             ),
+
+    //         'location' => $schema
+    //             ->string()
+    //             ->description(
+    //                 'Visitor city, region or country. Empty string when unavailable.'
+    //             ),
+
+    //         'lead_type' => $schema
+    //             ->string()
+    //             ->enum([
+    //                 'partnership',
+    //                 'vendor',
+    //                 'b2b',
+    //                 'product',
+    //                 'support',
+    //                 'career',
+    //                 'general',
+    //             ])
+    //             ->required(),
+
+    //         'requirement' => $schema
+    //             ->string()
+    //             ->description(
+    //                 'Complete visitor requirement.'
+    //             )
+    //             ->required(),
+    //     ];
+    // }
+
+  
+
+
     public function schema(JsonSchema $schema): array
-    {
-        return [
-            'name' => $schema
-                ->string()
-                ->description('Visitor full name.')
-                ->required(),
+{
+    return [
+        'name' => $schema
+            ->string()
+            ->description('Visitor full name.')
+            ->required(),
 
-            'email' => $schema
-                ->string()
-                ->description(
-                    'Visitor email address. Empty string when unavailable.'
-                ),
+        'email' => $schema
+            ->string()
+            ->description(
+                'Visitor email address. Use an empty string when unavailable.'
+            )
+            ->required(),
 
-            'phone' => $schema
-                ->string()
-                ->description(
-                    'Visitor phone number. Empty string when unavailable.'
-                ),
+        'phone' => $schema
+            ->string()
+            ->description(
+                'Visitor phone number. Use an empty string when unavailable.'
+            )
+            ->required(),
 
-            'company_name' => $schema
-                ->string()
-                ->description(
-                    'Visitor company name. Empty string when unavailable.'
-                ),
+        'company_name' => $schema
+            ->string()
+            ->description(
+                'Visitor company name. Use an empty string when unavailable.'
+            )
+            ->required(),
 
-            'business_type' => $schema
-                ->string()
-                ->description(
-                    'Visitor business type. Empty string when unavailable.'
-                ),
+        'business_type' => $schema
+            ->string()
+            ->description(
+                'Visitor business type. Use an empty string when unavailable.'
+            )
+            ->required(),
 
-            'location' => $schema
-                ->string()
-                ->description(
-                    'Visitor city, region or country. Empty string when unavailable.'
-                ),
+        'location' => $schema
+            ->string()
+            ->description(
+                'Visitor city, region or country. Use an empty string when unavailable.'
+            )
+            ->required(),
 
-            'lead_type' => $schema
-                ->string()
-                ->enum([
-                    'partnership',
-                    'vendor',
-                    'b2b',
-                    'product',
-                    'support',
-                    'career',
-                    'general',
-                ])
-                ->required(),
+        'lead_type' => $schema
+            ->string()
+            ->enum([
+                'partnership',
+                'vendor',
+                'b2b',
+                'product',
+                'support',
+                'career',
+                'general',
+            ])
+            ->required(),
 
-            'requirement' => $schema
-                ->string()
-                ->description(
-                    'Complete visitor requirement.'
-                )
-                ->required(),
-        ];
-    }
-
+        'requirement' => $schema
+            ->string()
+            ->description(
+                'Complete visitor requirement.'
+            )
+            ->required(),
+    ];
+}
+  
     private function resolvePriority(string $requirement): string
     {
         $requirement = mb_strtolower($requirement);

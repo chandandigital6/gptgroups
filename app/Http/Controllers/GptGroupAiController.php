@@ -20,6 +20,50 @@ use Throwable;
 
 class GptGroupAiController extends Controller
 {
+
+
+
+private function sendAgentPrompt(
+    GptGroupAssistant $agent,
+    string $message,
+    string $provider,
+    string $model
+) {
+    return retry(
+        times: 3,
+
+        callback: function () use (
+            $agent,
+            $message,
+            $provider,
+            $model
+        ) {
+            return $agent->prompt(
+                $message,
+                provider: $provider,
+                model: $model,
+                timeout: 120
+            );
+        },
+
+        sleepMilliseconds: function (
+            int $attempt
+        ): int {
+            return $attempt * 2000;
+        },
+
+        when: function (
+            Throwable $exception
+        ): bool {
+            return $exception
+                instanceof ProviderOverloadedException
+                || $exception
+                instanceof RateLimitedException;
+        }
+    );
+}
+
+
     /**
      * Send a message to GPT Group AI Assistant.
      */
@@ -133,39 +177,68 @@ class GptGroupAiController extends Controller
             |--------------------------------------------------------------------------
             */
 
-            $response = retry(
-                times: 3,
+           try {
+    $response = $this->sendAgentPrompt(
+        agent: $agent,
+        message: $validated['message'],
+        provider: $provider,
+        model: $model
+    );
+} catch (Throwable $exception) {
+    $errorMessage = $exception->getMessage();
 
-                callback: function () use (
-                    $agent,
-                    $validated,
-                    $provider,
-                    $model
-                ) {
-                    return $agent->prompt(
-                        $validated['message'],
-                        provider: $provider,
-                        model: $model,
-                        timeout: 120
-                    );
-                },
+    $hasBrokenToolHistory =
+        str_contains(
+            $errorMessage,
+            'No tool output found for function call'
+        )
+        || str_contains(
+            $errorMessage,
+            'function_call_output'
+        );
 
-                sleepMilliseconds: function (
-                    int $attempt
-                ): int {
-                    return $attempt * 2000;
-                },
+    if (
+        !$hasBrokenToolHistory ||
+        empty($conversationId)
+    ) {
+        throw $exception;
+    }
 
-                when: function (
-                    Throwable $exception
-                ): bool {
-                    return $exception
-                        instanceof ProviderOverloadedException
-                        || $exception
-                        instanceof RateLimitedException;
-                }
-            );
+    Log::warning(
+        'Broken AI tool conversation detected. Retrying with a fresh conversation.',
+        [
+            'conversation_id' => $conversationId,
+            'visitor_id' => $visitor->id,
+            'error' => $errorMessage,
+        ]
+    );
 
+    /*
+    |--------------------------------------------------------------------------
+    | Start a completely fresh agent without continuing old history
+    |--------------------------------------------------------------------------
+    */
+
+    $requestToken = (string) Str::uuid();
+
+    $agent = GptGroupAssistant::make(
+        visitor: $visitor,
+        language: $language,
+        requestToken: $requestToken,
+        pageUrl: $validated['page_url'] ?? null
+    );
+
+    $agent->forUser($visitor);
+
+    $conversationId = null;
+
+    $response = $this->sendAgentPrompt(
+        agent: $agent,
+        message: $validated['message'],
+        provider: $provider,
+        model: $model
+    );
+}
             /*
             |--------------------------------------------------------------------------
             | Extract conversation ID and answer
