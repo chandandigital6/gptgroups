@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\B2bProgramSection;
 use Illuminate\Database\Seeder;
 
-class B2bProgramSectionSeeder extends Seeder
+class B2bBenefitSectionSeeder extends Seeder
 {
 
 
