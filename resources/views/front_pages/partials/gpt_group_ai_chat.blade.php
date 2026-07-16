@@ -445,12 +445,27 @@
                 });
             },
 
+            createApiError(
+                message,
+                status = null,
+                code = null
+            ) {
+                const error = new Error(message);
+
+                error.status = status;
+                error.code = code;
+
+                return error;
+            },
+
             async parseJsonResponse(response) {
                 const rawResponse = await response.text();
 
                 if (!rawResponse.trim()) {
-                    throw new Error(
-                        'Server returned an empty response.'
+                    throw this.createApiError(
+                        'Server returned an empty response.',
+                        response.status || 500,
+                        'EMPTY_SERVER_RESPONSE'
                     );
                 }
 
@@ -466,29 +481,65 @@
                         response.status === 419 ||
                         rawResponse.includes('Page Expired')
                     ) {
-                        throw new Error(
-                            'Your session has expired. Please refresh the page and try again.'
+                        throw this.createApiError(
+                            'Your session has expired. Please refresh the page and try again.',
+                            419,
+                            'SESSION_EXPIRED'
                         );
                     }
 
-                    if (
-                        response.status === 404
-                    ) {
-                        throw new Error(
-                            'AI chat route was not found. Please check the Laravel route.'
+                    if (response.status === 403) {
+                        throw this.createApiError(
+                            'You are not allowed to access this conversation.',
+                            403,
+                            'CONVERSATION_FORBIDDEN'
                         );
                     }
 
-                    if (
-                        response.status === 500
-                    ) {
-                        throw new Error(
-                            'A server error occurred. Please check storage/logs/laravel.log.'
+                    if (response.status === 404) {
+                        throw this.createApiError(
+                            'AI chat route was not found. Please check the Laravel route.',
+                            404,
+                            'AI_ROUTE_NOT_FOUND'
                         );
                     }
 
-                    throw new Error(
-                        'Server returned an invalid response. Please try again.'
+                    if (response.status === 422) {
+                        throw this.createApiError(
+                            'Please check your message and try again.',
+                            422,
+                            'VALIDATION_ERROR'
+                        );
+                    }
+
+                    if (response.status === 429) {
+                        throw this.createApiError(
+                            'Too many requests. Please wait and try again.',
+                            429,
+                            'AI_RATE_LIMITED'
+                        );
+                    }
+
+                    if (response.status === 500) {
+                        throw this.createApiError(
+                            'A server error occurred. Please check storage/logs/laravel.log.',
+                            500,
+                            'SERVER_ERROR'
+                        );
+                    }
+
+                    if (response.status === 503) {
+                        throw this.createApiError(
+                            'The AI service is temporarily unavailable.',
+                            503,
+                            'AI_PROVIDER_OVERLOADED'
+                        );
+                    }
+
+                    throw this.createApiError(
+                        'Server returned an invalid response. Please try again.',
+                        response.status || 500,
+                        'INVALID_JSON_RESPONSE'
                     );
                 }
             },
@@ -524,9 +575,11 @@
                         !response.ok ||
                         !result.success
                     ) {
-                        throw new Error(
+                        throw this.createApiError(
                             result.message ||
-                            'Unable to load conversation history.'
+                            'Unable to load conversation history.',
+                            response.status,
+                            result.error_code || null
                         );
                     }
 
@@ -534,7 +587,7 @@
                         Array.isArray(result.data) &&
                         result.data.length
                     ) {
-                        this.messages = result.data
+                        const historyMessages = result.data
                             .filter(message =>
                                 ['user', 'assistant'].includes(
                                     message.role
@@ -547,11 +600,19 @@
 
                                 role: message.role,
                                 type: 'normal',
+
                                 content:
                                     this.extractMessageContent(
                                         message.content
                                     )
-                            }));
+                            }))
+                            .filter(message =>
+                                message.content.trim() !== ''
+                            );
+
+                        if (historyMessages.length) {
+                            this.messages = historyMessages;
+                        }
                     }
                 } catch (error) {
                     console.error(
@@ -572,7 +633,7 @@
 
             extractMessageContent(content) {
                 if (typeof content === 'string') {
-                    return content;
+                    return content.trim();
                 }
 
                 if (
@@ -582,12 +643,10 @@
                     if (
                         typeof content.text === 'string'
                     ) {
-                        return content.text;
+                        return content.text.trim();
                     }
 
-                    if (
-                        Array.isArray(content)
-                    ) {
+                    if (Array.isArray(content)) {
                         return content
                             .map(item => {
                                 if (
@@ -596,10 +655,31 @@
                                     return item;
                                 }
 
-                                return item?.text || '';
+                                if (
+                                    item &&
+                                    typeof item.text === 'string'
+                                ) {
+                                    return item.text;
+                                }
+
+                                if (
+                                    item &&
+                                    typeof item.content === 'string'
+                                ) {
+                                    return item.content;
+                                }
+
+                                return '';
                             })
                             .filter(Boolean)
-                            .join('\n');
+                            .join('\n')
+                            .trim();
+                    }
+
+                    if (
+                        typeof content.content === 'string'
+                    ) {
+                        return content.content.trim();
                     }
 
                     try {
@@ -609,7 +689,7 @@
                     }
                 }
 
-                return String(content ?? '');
+                return String(content ?? '').trim();
             },
 
             async useSuggestion(suggestion) {
@@ -618,6 +698,7 @@
                 }
 
                 this.input = suggestion;
+
                 await this.sendMessage();
             },
 
@@ -670,6 +751,7 @@
                 this.input = '';
                 this.error = '';
                 this.canRetry = false;
+
                 this.resetTextarea();
 
                 if (addUserMessage) {
@@ -697,6 +779,7 @@
                         {
                             method: 'POST',
                             credentials: 'same-origin',
+
                             signal:
                                 this.requestController.signal,
 
@@ -742,29 +825,37 @@
                         !response.ok ||
                         !result.success
                     ) {
-                        const apiError =
-                            new Error(
-                                result.message ||
-                                this.getStatusMessage(
-                                    response.status
-                                )
-                            );
-
-                        apiError.status =
-                            response.status;
-
-                        apiError.code =
-                            result.error_code || null;
-
-                        throw apiError;
+                        throw this.createApiError(
+                            result.message ||
+                            this.getStatusMessage(
+                                response.status
+                            ),
+                            response.status,
+                            result.error_code || null
+                        );
                     }
 
                     if (
                         !result.data ||
-                        !result.data.message
+                        typeof result.data !== 'object'
                     ) {
-                        throw new Error(
-                            'AI response message is missing.'
+                        throw this.createApiError(
+                            'The AI response data is missing.',
+                            503,
+                            'AI_RESPONSE_DATA_MISSING'
+                        );
+                    }
+
+                    const aiMessage =
+                        this.extractMessageContent(
+                            result.data.message
+                        );
+
+                    if (!aiMessage) {
+                        throw this.createApiError(
+                            'The AI did not return an answer. Please try again.',
+                            503,
+                            'AI_EMPTY_RESPONSE'
                         );
                     }
 
@@ -783,12 +874,12 @@
                         id: crypto.randomUUID(),
                         role: 'assistant',
                         type: 'normal',
-                        content:
-                            result.data.message
+                        content: aiMessage
                     });
 
                     this.lastMessage = '';
                     this.canRetry = false;
+                    this.error = '';
                 } catch (error) {
                     console.error(
                         'GPT Group AI error:',
@@ -810,9 +901,33 @@
 
                         this.canRetry = true;
                     } else if (
+                        error.code ===
+                        'AI_EMPTY_RESPONSE'
+                    ) {
+                        this.error =
+                            'The AI did not return an answer. Please try again.';
+
+                        this.canRetry = true;
+                    } else if (
+                        error.code ===
+                        'AI_RESPONSE_DATA_MISSING'
+                    ) {
+                        this.error =
+                            'The AI response could not be read. Please try again.';
+
+                        this.canRetry = true;
+                    } else if (
+                        error.code ===
+                        'AI_DAILY_LIMIT_REACHED'
+                    ) {
+                        this.error =
+                            'Your daily AI chat limit has been reached. Please try again tomorrow.';
+
+                        this.canRetry = false;
+                    } else if (
                         error.status === 503 ||
                         error.code ===
-                            'AI_PROVIDER_OVERLOADED'
+                        'AI_PROVIDER_OVERLOADED'
                     ) {
                         this.error =
                             'The AI service is temporarily busy. Please wait a few seconds and try again.';
@@ -821,14 +936,17 @@
                     } else if (
                         error.status === 429 ||
                         error.code ===
-                            'AI_RATE_LIMITED'
+                        'AI_RATE_LIMITED'
                     ) {
                         this.error =
-                            'The free AI usage limit has been reached. Please wait and try again later.';
+                            error.message ||
+                            'Too many AI requests. Please wait and try again later.';
 
                         this.canRetry = true;
                     } else if (
-                        error.status === 419
+                        error.status === 419 ||
+                        error.code ===
+                        'SESSION_EXPIRED'
                     ) {
                         this.error =
                             'Your session has expired. Please refresh the page and try again.';
@@ -846,6 +964,21 @@
 
                         this.conversationId = null;
                         this.canRetry = true;
+                    } else if (
+                        error.status === 422
+                    ) {
+                        this.error =
+                            error.message ||
+                            'Please check your message and try again.';
+
+                        this.canRetry = false;
+                    } else if (
+                        error.status === 404
+                    ) {
+                        this.error =
+                            'AI chat route was not found. Please check the Laravel route.';
+
+                        this.canRetry = false;
                     } else {
                         this.error =
                             error.message ||
@@ -867,12 +1000,14 @@
             getStatusMessage(status) {
                 const messages = {
                     400: 'The request is invalid.',
+                    401: 'The AI provider authentication failed.',
                     403: 'You are not allowed to access this conversation.',
                     404: 'The AI endpoint was not found.',
                     419: 'Your session has expired. Please refresh the page.',
                     422: 'Please check your message and try again.',
                     429: 'Too many requests. Please wait and try again.',
                     500: 'The server could not complete the AI request.',
+                    502: 'The AI provider returned an invalid response.',
                     503: 'The AI provider is temporarily busy.'
                 };
 

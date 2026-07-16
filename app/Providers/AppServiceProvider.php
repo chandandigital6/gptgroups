@@ -11,6 +11,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,30 +25,66 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        $this->configureDefaults();
+  public function boot(): void
+{
+    $this->configureDefaults();
 
-         RateLimiter::for(
+    RateLimiter::for(
         'gpt-group-ai',
-        function (Request $request) {
-            $visitor = $request->cookie(
+        function (Request $request): array {
+            $visitorUuid = $request->cookie(
                 'gpt_group_ai_visitor'
             );
 
-            $key = $visitor
+            $identifier = $visitorUuid
                 ?: $request->ip();
 
             return [
                 Limit::perMinute(12)
-                    ->by('ai-minute-' . $key),
+                    ->by(
+                        'gpt-group-ai-minute-'
+                        . $identifier
+                    )
+                    ->response(
+                        function (
+                            Request $request,
+                            array $headers
+                        ) {
+                            return response()->json([
+                                'success' => false,
+                                'error_code' =>
+                                    'AI_RATE_LIMITED',
+
+                                'message' =>
+                                    'Too many AI requests. Please wait a minute and try again.',
+                            ], 429, $headers);
+                        }
+                    ),
 
                 Limit::perDay(150)
-                    ->by('ai-day-' . $key),
+                    ->by(
+                        'gpt-group-ai-day-'
+                        . $identifier
+                    )
+                    ->response(
+                        function (
+                            Request $request,
+                            array $headers
+                        ) {
+                            return response()->json([
+                                'success' => false,
+                                'error_code' =>
+                                    'AI_DAILY_LIMIT_REACHED',
+
+                                'message' =>
+                                    'Your daily AI chat limit has been reached. Please try again tomorrow.',
+                            ], 429, $headers);
+                        }
+                    ),
             ];
         }
     );
-    }
+}
 
     /**
      * Configure default behaviors for production-ready applications.
