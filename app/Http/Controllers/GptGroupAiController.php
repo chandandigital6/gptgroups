@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
+use Laravel\Ai\Exceptions\ProviderOverloadedException;
+use Laravel\Ai\Exceptions\RateLimitedException;
+use Symfony\Component\HttpFoundation\Cookie;
+
 
 class GptGroupAiController extends Controller
 {
@@ -25,8 +29,7 @@ class GptGroupAiController extends Controller
                 'gpt_group_ai_visitor'
             ) ?: (string) Str::uuid();
 
-            $language = $validated['language']
-                ?? 'en';
+            $language = $validated['language'] ?? 'en';
 
             $visitor = AiVisitor::updateOrCreate(
                 [
@@ -68,9 +71,27 @@ class GptGroupAiController extends Controller
                 $agent->forUser($visitor);
             }
 
-            $response = $agent->prompt(
-                $validated['message'],
-                timeout: 120
+            $response = retry(
+                times: 3,
+
+                callback: function () use (
+                    $agent,
+                    $validated
+                ) {
+                    return $agent->prompt(
+                        $validated['message'],
+                        timeout: 120
+                    );
+                },
+
+                sleepMilliseconds: function (int $attempt) {
+                    return $attempt * 2000;
+                },
+
+                when: function (Throwable $exception) {
+                    return $exception
+                        instanceof ProviderOverloadedException;
+                }
             );
 
             $newConversationId =
@@ -92,6 +113,18 @@ class GptGroupAiController extends Controller
                 answer: $answer
             );
 
+            $cookie = Cookie::create(
+                name: 'gpt_group_ai_visitor',
+                value: $visitorUuid,
+                expires: now()->addYear(),
+                path: '/',
+                domain: null,
+                secure: $request->isSecure(),
+                httpOnly: true,
+                raw: false,
+                sameSite: Cookie::SAMESITE_LAX
+            );
+
             return response()
                 ->json([
                     'success' => true,
@@ -102,28 +135,40 @@ class GptGroupAiController extends Controller
                         'message' => $answer,
                     ],
                 ])
-                ->cookie(
-                    name: 'gpt_group_ai_visitor',
-                    value: $visitorUuid,
-                    minutes: 60 * 24 * 365,
-                    path: '/',
-                    secure: $request->isSecure(),
-                    httpOnly: true,
-                    raw: false,
-                    sameSite: 'lax'
-                );
+                ->withCookie($cookie);
+
+        } catch (ProviderOverloadedException $exception) {
+            report($exception);
+
+            return response()->json([
+                'success' => false,
+                'error_code' => 'AI_PROVIDER_OVERLOADED',
+                'message' =>
+                    'The AI service is temporarily busy. Please wait a few seconds and try again.',
+            ], 503);
+
+        } catch (RateLimitedException $exception) {
+            report($exception);
+
+            return response()->json([
+                'success' => false,
+                'error_code' => 'AI_RATE_LIMITED',
+                'message' =>
+                    'The free AI usage limit has been reached. Please try again later.',
+            ], 429);
+
         } catch (Throwable $exception) {
             report($exception);
 
             return response()->json([
                 'success' => false,
+                'error_code' => 'AI_REQUEST_FAILED',
                 'message' => app()->isProduction()
                     ? 'The GPT Group AI assistant is temporarily unavailable.'
                     : $exception->getMessage(),
             ], 500);
         }
     }
-
     public function messages(
         Request $request,
         string $conversationId
