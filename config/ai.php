@@ -12,8 +12,8 @@ return [
     | for the operation. This should be any provider defined below.
     |
     */
-
-    'default' => 'openai',
+ 'default' => env('AI_DEFAULT_PROVIDER', 'openrouter'),
+    // 'default' => 'openai',
     // 'default' => env('AI_DEFAULT_PROVIDER', 'gemini'),
     'default_for_images' => 'gemini',
     'default_for_audio' => 'openai',
@@ -39,6 +39,19 @@ return [
         ],
     ],
 
+
+
+
+     'models' => [
+
+        'text' => [
+            'default' => env(
+                'AI_DEFAULT_MODEL',
+                'openrouter/free'
+            ),
+        ],
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | AI Providers
@@ -139,6 +152,17 @@ return [
             'driver' => 'xai',
             'key' => env('XAI_API_KEY'),
         ],
+    ],
+
+
+
+       'conversations' => [
+
+        'tables' => [
+            'conversations' => 'agent_conversations',
+            'messages' => 'agent_conversation_messages',
+        ],
+
     ],
 
 ];

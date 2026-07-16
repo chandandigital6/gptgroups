@@ -20,155 +20,177 @@ use Symfony\Component\HttpFoundation\Cookie;
 class GptGroupAiController extends Controller
 {
     public function chat(
-        GptGroupAiChatRequest $request
-    ): JsonResponse {
-        $validated = $request->validated();
+    GptGroupAiChatRequest $request
+): JsonResponse {
+    $validated = $request->validated();
 
-        try {
-            $visitorUuid = $request->cookie(
-                'gpt_group_ai_visitor'
-            ) ?: (string) Str::uuid();
+    try {
+        $visitorUuid = $request->cookie(
+            'gpt_group_ai_visitor'
+        ) ?: (string) Str::uuid();
 
-            $language = $validated['language'] ?? 'en';
+        $language = $validated['language'] ?? 'en';
 
-            $visitor = AiVisitor::updateOrCreate(
-                [
-                    'uuid' => $visitorUuid,
-                ],
-                [
-                    'language' => $language,
-                    'ip_address' => $request->ip(),
-                    'user_agent' => $request->userAgent(),
-                    'last_seen_at' => now(),
-                ]
+        $visitor = AiVisitor::updateOrCreate(
+            [
+                'uuid' => $visitorUuid,
+            ],
+            [
+                'language' => $language,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'last_seen_at' => now(),
+            ]
+        );
+
+        $conversationId =
+            $validated['conversation_id'] ?? null;
+
+        if ($conversationId) {
+            $this->ensureConversationBelongsToVisitor(
+                conversationId: $conversationId,
+                visitor: $visitor
             );
-
-            $conversationId =
-                $validated['conversation_id'] ?? null;
-
-            if ($conversationId) {
-                $this->ensureConversationBelongsToVisitor(
-                    conversationId: $conversationId,
-                    visitor: $visitor
-                );
-            }
-
-            $requestToken = (string) Str::uuid();
-
-            $agent = GptGroupAssistant::make(
-                visitor: $visitor,
-                language: $language,
-                requestToken: $requestToken,
-                pageUrl: $validated['page_url'] ?? null
-            );
-
-            if ($conversationId) {
-                $agent->continue(
-                    $conversationId,
-                    as: $visitor
-                );
-            } else {
-                $agent->forUser($visitor);
-            }
-
-            $response = retry(
-                times: 3,
-
-                callback: function () use (
-                    $agent,
-                    $validated
-                ) {
-                    return $agent->prompt(
-                        $validated['message'],
-                        timeout: 120
-                    );
-                },
-
-                sleepMilliseconds: function (int $attempt) {
-                    return $attempt * 2000;
-                },
-
-                when: function (Throwable $exception) {
-                    return $exception
-                        instanceof ProviderOverloadedException;
-                }
-            );
-
-            $newConversationId =
-                $response->conversationId;
-
-            AiLead::query()
-                ->where('request_token', $requestToken)
-                ->update([
-                    'agent_conversation_id' =>
-                        $newConversationId,
-                ]);
-
-            $answer = trim((string) $response);
-
-            $this->captureUnansweredQuestion(
-                visitor: $visitor,
-                conversationId: $newConversationId,
-                question: $validated['message'],
-                answer: $answer
-            );
-
-            $cookie = Cookie::create(
-                name: 'gpt_group_ai_visitor',
-                value: $visitorUuid,
-                expires: now()->addYear(),
-                path: '/',
-                domain: null,
-                secure: $request->isSecure(),
-                httpOnly: true,
-                raw: false,
-                sameSite: Cookie::SAMESITE_LAX
-            );
-
-            return response()
-                ->json([
-                    'success' => true,
-                    'data' => [
-                        'conversation_id' =>
-                            $newConversationId,
-
-                        'message' => $answer,
-                    ],
-                ])
-                ->withCookie($cookie);
-
-        } catch (ProviderOverloadedException $exception) {
-            report($exception);
-
-            return response()->json([
-                'success' => false,
-                'error_code' => 'AI_PROVIDER_OVERLOADED',
-                'message' =>
-                    'The AI service is temporarily busy. Please wait a few seconds and try again.',
-            ], 503);
-
-        } catch (RateLimitedException $exception) {
-            report($exception);
-
-            return response()->json([
-                'success' => false,
-                'error_code' => 'AI_RATE_LIMITED',
-                'message' =>
-                    'The free AI usage limit has been reached. Please try again later.',
-            ], 429);
-
-        } catch (Throwable $exception) {
-            report($exception);
-
-            return response()->json([
-                'success' => false,
-                'error_code' => 'AI_REQUEST_FAILED',
-                'message' => app()->isProduction()
-                    ? 'The GPT Group AI assistant is temporarily unavailable.'
-                    : $exception->getMessage(),
-            ], 500);
         }
+
+        $requestToken = (string) Str::uuid();
+
+        $agent = GptGroupAssistant::make(
+            visitor: $visitor,
+            language: $language,
+            requestToken: $requestToken,
+            pageUrl: $validated['page_url'] ?? null
+        );
+
+        if ($conversationId) {
+            $agent->continue(
+                $conversationId,
+                as: $visitor
+            );
+        } else {
+            $agent->forUser($visitor);
+        }
+
+        $response = retry(
+            times: 3,
+
+            callback: function () use (
+                $agent,
+                $validated
+            ) {
+                return $agent->prompt(
+                    $validated['message'],
+                    provider: 'openrouter',
+                    model: 'openrouter/free',
+                    timeout: 120
+                );
+            },
+
+            sleepMilliseconds: function (int $attempt) {
+                return $attempt * 2000;
+            },
+
+            when: function (Throwable $exception) {
+                return $exception
+                    instanceof ProviderOverloadedException
+                    || $exception
+                        instanceof RateLimitedException;
+            }
+        );
+
+        $newConversationId =
+            $response->conversationId;
+
+        AiLead::query()
+            ->where(
+                'request_token',
+                $requestToken
+            )
+            ->update([
+                'agent_conversation_id' =>
+                    $newConversationId,
+            ]);
+
+        $answer = trim((string) $response);
+
+        $this->captureUnansweredQuestion(
+            visitor: $visitor,
+            conversationId: $newConversationId,
+            question: $validated['message'],
+            answer: $answer
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Positional parameters are used for Symfony version compatibility.
+        |--------------------------------------------------------------------------
+        */
+
+        $cookie = Cookie::create(
+            'gpt_group_ai_visitor',
+            $visitorUuid,
+            now()->addYear(),
+            '/',
+            null,
+            $request->isSecure(),
+            true,
+            false,
+            Cookie::SAMESITE_LAX
+        );
+
+        return response()
+            ->json([
+                'success' => true,
+
+                'data' => [
+                    'conversation_id' =>
+                        $newConversationId,
+
+                    'message' => $answer,
+                ],
+            ])
+            ->withCookie($cookie);
+
+    } catch (ProviderOverloadedException $exception) {
+        report($exception);
+
+        return response()->json([
+            'success' => false,
+            'error_code' =>
+                'AI_PROVIDER_OVERLOADED',
+
+            'message' =>
+                'The AI service is temporarily busy. Please wait a few seconds and try again.',
+        ], 503);
+
+    } catch (RateLimitedException $exception) {
+        report($exception);
+
+        return response()->json([
+            'success' => false,
+            'error_code' =>
+                'AI_RATE_LIMITED',
+
+            'message' =>
+                'The free AI usage limit has been reached. Please try again later.',
+        ], 429);
+
+    } catch (Throwable $exception) {
+        report($exception);
+
+        return response()->json([
+            'success' => false,
+            'error_code' =>
+                'AI_REQUEST_FAILED',
+
+            'message' => app()->isProduction()
+                ? 'The GPT Group AI assistant is temporarily unavailable.'
+                : $exception->getMessage(),
+        ], 500);
     }
+}
+
+
     public function messages(
         Request $request,
         string $conversationId
@@ -258,11 +280,11 @@ class GptGroupAiController extends Controller
 
         $unanswered = collect($patterns)
             ->contains(
-                fn ($pattern) =>
-                    str_contains(
-                        $normalizedAnswer,
-                        mb_strtolower($pattern)
-                    )
+                fn($pattern) =>
+                str_contains(
+                    $normalizedAnswer,
+                    mb_strtolower($pattern)
+                )
             );
 
         if (!$unanswered) {
@@ -280,7 +302,7 @@ class GptGroupAiController extends Controller
             $existing->update([
                 'ai_visitor_id' => $visitor->id,
                 'agent_conversation_id' =>
-                    $conversationId,
+                $conversationId,
                 'agent_response' => $answer,
             ]);
 
@@ -290,7 +312,7 @@ class GptGroupAiController extends Controller
         AiUnansweredQuestion::create([
             'ai_visitor_id' => $visitor->id,
             'agent_conversation_id' =>
-                $conversationId,
+            $conversationId,
             'question' => $question,
             'agent_response' => $answer,
             'asked_count' => 1,
