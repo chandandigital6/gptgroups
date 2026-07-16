@@ -36,6 +36,26 @@ use App\Http\Controllers\JobPositionController;
 use App\Http\Controllers\HiringProcessStepController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\GptGroupAiController;
+
+Route::prefix('gpt-group-ai')
+    ->name('gpt-group-ai.')
+    ->middleware('throttle:gpt-group-ai')
+    ->group(function () {
+        Route::post('/chat', [
+            GptGroupAiController::class,
+            'chat',
+        ])->name('chat');
+
+        Route::get(
+            '/conversations/{conversationId}/messages',
+            [
+                GptGroupAiController::class,
+                'messages',
+            ]
+        )->whereUuid('conversationId')
+            ->name('messages');
+    });
 
 
 Route::get('/', function () {

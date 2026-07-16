@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     {{-- Basic Meta --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- SEO Title --}}
     <title>@yield('title', 'GPT Group | Telecom Distribution, B2B Supply & Retail Network in Oman')</title>
 
@@ -55,10 +56,8 @@
     {{-- Main CSS --}}
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
 
-    <link
-    rel="stylesheet"
-    href="{{ asset('assets/css/style.css') }}?v={{ file_exists(public_path('assets/css/style.css')) ? filemtime(public_path('assets/css/style.css')) : time() }}"
->
+    <link rel="stylesheet"
+        href="{{ asset('assets/css/style.css') }}?v={{ file_exists(public_path('assets/css/style.css')) ? filemtime(public_path('assets/css/style.css')) : time() }}">
 
 
     @stack('styles')
@@ -70,16 +69,24 @@
 
     @yield('content')
 
+
+    @include('front_pages.partials.gpt_group_ai_chat')
+
     @include('front_pages.front_components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    {{-- <script src="{{ asset('assets/js/main.js') }}"></script> --}}
 
-  <script
-    src="{{ asset('assets/js/main.js') }}?v={{ file_exists(public_path('assets/js/main.js')) ? filemtime(public_path('assets/js/main.js')) : time() }}"
+    <script
+        src="{{ asset('assets/js/main.js') }}?v={{ file_exists(public_path('assets/js/main.js')) ? filemtime(public_path('assets/js/main.js')) : time() }}"
+        defer></script>
+
+<script
     defer
+    src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 ></script>
+
     @stack('scripts')
 </body>
+
 </html>
