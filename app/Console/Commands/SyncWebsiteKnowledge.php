@@ -194,7 +194,7 @@ class SyncWebsiteKnowledge extends Command
                         $skipped++;
 
                         $this->warn(
-                            'Skipped: useful content not found.'
+                            'Skipped: page response contained no usable HTML.'
                         );
                     }
                 } catch (Throwable $exception) {
@@ -471,13 +471,57 @@ class SyncWebsiteKnowledge extends Command
             url: $url
         );
 
-        if (
-            mb_strlen(
-                $pageData['content']
-            ) < 100
-        ) {
-            return false;
+        /*
+        |--------------------------------------------------------------------------
+        | Save whatever useful information is available
+        |--------------------------------------------------------------------------
+        |
+        | A page may contain only a title, meta description, headings or a small
+        | amount of visible text. We still store it instead of skipping the page.
+        |
+        */
+
+        $pageData['content'] = trim(
+            (string) $pageData['content']
+        );
+
+        if ($pageData['content'] === '') {
+            $pageData['content'] = trim(
+                implode(
+                    PHP_EOL . PHP_EOL,
+                    array_filter([
+                        $pageData['title'] ?? null,
+                        $pageData['meta_description'] ?? null,
+                        $pageData['summary'] ?? null,
+                        !empty($pageData['headings'])
+                            ? implode(PHP_EOL, $pageData['headings'])
+                            : null,
+                        'Source URL: ' . $url,
+                    ])
+                )
+            );
         }
+
+        if ($pageData['content'] === '') {
+            $pageData['content'] = 'Source URL: ' . $url;
+        }
+
+        if (trim((string) $pageData['summary']) === '') {
+            $pageData['summary'] = Str::limit(
+                $pageData['content'],
+                700,
+                ''
+            );
+        }
+
+        $this->line(
+            'Title: ' . ($pageData['title'] ?: 'Untitled page')
+        );
+
+        $this->line(
+            'Extracted characters: ' .
+            mb_strlen($pageData['content'])
+        );
 
         $slug = $this->makeDocumentSlug(
             $url
@@ -715,6 +759,10 @@ class SyncWebsiteKnowledge extends Command
             );
         }
 
+        if ($title === '') {
+            $title = 'Website Page';
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Meta details
@@ -776,42 +824,82 @@ class SyncWebsiteKnowledge extends Command
         |--------------------------------------------------------------------------
         | Main page content
         |--------------------------------------------------------------------------
+        |
+        | First collect content from common main-content containers. If those are
+        | missing or too small, use the complete body as a fallback.
+        |
         */
 
-        $contentNode = $xpath->query(
-            '//main'
-        )?->item(0);
+        $contentParts = [];
 
-        if (!$contentNode) {
-            $contentNode = $xpath->query(
-                '//article'
-            )?->item(0);
+        $contentQueries = [
+            '//main',
+            '//*[@role="main"]',
+            '//article',
+            '//*[contains(concat(" ", normalize-space(@class), " "), " content ")]',
+            '//*[contains(concat(" ", normalize-space(@class), " "), " page-content ")]',
+            '//*[contains(concat(" ", normalize-space(@class), " "), " section ")]',
+        ];
+
+        foreach ($contentQueries as $contentQuery) {
+            $nodes = $xpath->query($contentQuery);
+
+            if (!$nodes) {
+                continue;
+            }
+
+            foreach ($nodes as $node) {
+                $nodeText = $this->cleanText(
+                    $node->textContent
+                );
+
+                if ($nodeText !== '') {
+                    $contentParts[] = $nodeText;
+                }
+            }
         }
 
-        if (!$contentNode) {
-            $contentNode = $xpath->query(
-                '//*[@role="main"]'
-            )?->item(0);
-        }
+        $contentParts = array_values(
+            array_unique($contentParts)
+        );
 
-        if (!$contentNode) {
-            $contentNode = $xpath->query(
+        $content = $this->normalizeContent(
+            implode(PHP_EOL . PHP_EOL, $contentParts)
+        );
+
+        if (mb_strlen($content) < 30) {
+            $bodyNode = $xpath->query(
                 '//body'
             )?->item(0);
+
+            if ($bodyNode) {
+                $bodyContent = $this->normalizeContent(
+                    $this->cleanText(
+                        $bodyNode->textContent
+                    )
+                );
+
+                if (mb_strlen($bodyContent) > mb_strlen($content)) {
+                    $content = $bodyContent;
+                }
+            }
         }
 
-        $content = '';
-
-        if ($contentNode) {
-            $content = $this->cleanText(
-                $contentNode->textContent
+        if ($content === '') {
+            $content = trim(
+                implode(
+                    PHP_EOL . PHP_EOL,
+                    array_filter([
+                        $title,
+                        $metaDescription,
+                        !empty($headings)
+                            ? implode(PHP_EOL, $headings)
+                            : null,
+                        'Source URL: ' . $url,
+                    ])
+                )
             );
         }
-
-        $content =
-            $this->normalizeContent(
-                $content
-            );
 
         /*
         |--------------------------------------------------------------------------
@@ -899,8 +987,6 @@ class SyncWebsiteKnowledge extends Command
                 '//button',
                 '//nav',
                 '//footer',
-                '//header',
-                '//aside',
                 '//*[@aria-hidden="true"]',
                 '//*[contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "cookie")]',
                 '//*[contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "modal")]',

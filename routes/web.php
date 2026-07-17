@@ -91,8 +91,8 @@ Route::get('/brands/{brand:slug}', [FrontController::class, 'brandCategories'])-
 Route::get('/brands/{brand:slug}/categories/{category:slug}', [FrontController::class, 'categoryProducts'])
     ->name('brands.categories.show');
 Route::get('/carriers', [FrontController::class, 'carriers'])->name('carriers');
-Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
-Route::get('/groups_company', [FrontController::class, 'groups_company'])->name('groups_company');
+Route::get('/contact-us', [FrontController::class, 'contact'])->name('contact');
+Route::get('/groups-company', [FrontController::class, 'groups_company'])->name('groups_company');
 Route::get('/network', [FrontController::class, 'network'])->name('network');
 
 Route::get('/news', [FrontController::class, 'news'])
@@ -107,7 +107,7 @@ Route::get('/news/{slug}', [FrontController::class, 'show'])
     Route::get('/oman-vision-2040', [FrontController::class, 'omanVision'])
     ->name('oman-vision');
 
-Route::get('/retail_outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
+Route::get('/retail-outlet', [FrontController::class, 'retail_outlet'])->name('retail_outlet');
 Route::get('/products', [FrontController::class, 'products'])->name('products');
 Route::get('/services', [FrontController::class, 'services'])->name('services');
 Route::get('/product/{slug}', [FrontController::class, 'productDetail'])->name('product.detail');

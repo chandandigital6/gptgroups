@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AiKnowledgeDocument extends Model
 {
+     use SoftDeletes;
     protected $guarded = ['id'];
 
     protected $casts = [
