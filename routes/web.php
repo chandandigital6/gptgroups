@@ -37,6 +37,34 @@ use App\Http\Controllers\HiringProcessStepController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\GptGroupAiController;
+use App\Http\Controllers\Admin\AiChatController;
+
+
+Route::get('sitemap.xml', [FrontController::class, 'sitemap'])->name('sitemap');
+
+
+Route::middleware([
+    'auth',
+])->prefix('admin/ai-chats')
+    ->name('admin.ai-chats.')
+    ->group(function () {
+        Route::get('/', [
+            AiChatController::class,
+            'index',
+        ])->name('index');
+
+        Route::get('/{conversationId}', [
+            AiChatController::class,
+            'show',
+        ])->name('show');
+
+        Route::delete('/{conversationId}', [
+            AiChatController::class,
+            'destroy',
+        ])->name('destroy');
+    });
+
+
 
 Route::post(
     '/gpt-group-ai/chat',
@@ -53,10 +81,10 @@ Route::get(
     ->name('gpt-group-ai.messages');
 
 
-Route::get('/', function () {
-    return view('comming_soon');
-});
-Route::get('/home', [FrontController::class, 'index'])->name('home');
+// Route::get('/', function () {
+//     return view('comming_soon');
+// });
+Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/about', [FrontController::class, 'about'])->name('about');
 Route::get('/brands', [FrontController::class, 'brands'])->name('brands');
 Route::get('/brands/{brand:slug}', [FrontController::class, 'brandCategories'])->name('brands.show');

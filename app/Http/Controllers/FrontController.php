@@ -697,4 +697,12 @@ public function tradingDistribution()
 }
 
 
+
+public function sitemap()
+{
+    return view('front.sitemap');
+
+}
+
+
 }

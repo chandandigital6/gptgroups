@@ -42,4 +42,11 @@ return [
 ],
 
 
+'gpt_website' => [
+    'url' => env(
+        'GPT_WEBSITE_URL',
+        'https://gptgroups.com'
+    ),
+],
+
 ];
