@@ -80,7 +80,7 @@ Route::get(
     ->middleware('throttle:60,1')
     ->name('gpt-group-ai.messages');
 
-
+// ye temporary route for comming soon page
 Route::get('/', function () {
     return view('comming_soon');
 });
@@ -140,6 +140,17 @@ Route::prefix('business-verticals')
             '/trading-distribution',
             [FrontController::class, 'tradingDistribution']
         )->name('trading');
+    });
+
+
+    Route::prefix('solutions')
+    ->name('solutions.')
+    ->group(function () {
+        Route::get('/', [FrontController::class, 'solutions'])->name('index');
+        Route::get('/mobility-solutions', [FrontController::class, 'mobilitySolutions'])->name('mobility');
+        Route::get('/integrated-security-elv-solutions', [FrontController::class, 'integratedSecurityElvSolutions'])->name('security-elv');
+        Route::get('/smart-home-iot-solutions', [FrontController::class, 'smartHomeIotSolutions'])->name('smart-home-iot');
+        Route::get('/network-infrastructure-structured-cabling-solutions', [FrontController::class, 'networkInfrastructureStructuredCablingSolutions'])->name('network');
     });
 
 

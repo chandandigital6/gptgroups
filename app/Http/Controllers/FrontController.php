@@ -705,4 +705,32 @@ public function sitemap()
 }
 
 
+
+
+
+public function solutions()
+{
+    return view('front_pages.solutions.index');
+}
+
+public function mobilitySolutions()
+{
+    return view('front_pages.solutions.mobility');
+}
+
+public function integratedSecurityElvSolutions()
+{
+    return view('front_pages.solutions.security_elv');
+}
+
+public function smartHomeIotSolutions()
+{
+    return view('front_pages.solutions.smart_home_iot');
+}
+
+public function networkInfrastructureStructuredCablingSolutions()
+{
+    return view('front_pages.solutions.network_infrastructure');
+}
+
 }

@@ -2,55 +2,221 @@
 
 @section('content')
 
+@php
+    /*
+    |--------------------------------------------------------------------------
+    | Static Contact Information
+    |--------------------------------------------------------------------------
+    | Replace only the values below after confirming exact office addresses,
+    | phone numbers and map links. The complete page design will remain unchanged.
+    */
+    $contactEmail = 'info@gptgroups.com';
+    $primaryPhone = '+968 2450 1533';
+
+    $offices = [
+        [
+            'number' => '01',
+            'country' => 'Oman',
+            'title' => 'Oman Head Office',
+            'city' => 'Muscat, Sultanate of Oman',
+            'address' => 'Muscat, Sultanate of Oman',
+            'phone' => '+968 2450 1533',
+            'phone_link' => '+96824501533',
+            'email' => 'info@gptgroups.com',
+            'map_link' => 'https://www.google.com/maps/search/?api=1&query=Muscat+Oman',
+            'map_embed' => 'https://www.google.com/maps?q=Muscat%20Oman&output=embed',
+            'image' => 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1200&q=85',
+            'description' => 'The central office for GPT Group’s Oman operations, business partnerships, distribution activities and customer support.',
+        ],
+        [
+            'number' => '02',
+            'country' => 'UAE',
+            'title' => 'Dubai Office',
+            'city' => 'Dubai, United Arab Emirates',
+            'address' => 'Dubai, United Arab Emirates',
+            'phone' => 'Contact our central office',
+            'phone_link' => '+96824501533',
+            'email' => 'info@gptgroups.com',
+            'map_link' => 'https://www.google.com/maps/search/?api=1&query=Dubai+UAE',
+            'map_embed' => 'https://www.google.com/maps?q=Dubai%20UAE&output=embed',
+            'image' => 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85',
+            'description' => 'Supporting regional relationships, international trade, market development and business coordination across the UAE and GCC.',
+        ],
+        [
+            'number' => '03',
+            'country' => 'India',
+            'title' => 'India Office',
+            'city' => 'India',
+            'address' => 'India Office',
+            'phone' => 'Contact our central office',
+            'phone_link' => '+96824501533',
+            'email' => 'info@gptgroups.com',
+            'map_link' => 'https://www.google.com/maps/search/?api=1&query=India',
+            'map_embed' => 'https://www.google.com/maps?q=India&output=embed',
+            'image' => 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=85',
+            'description' => 'Supporting sourcing, technology services, business coordination and operational requirements for the Group’s wider network.',
+        ],
+    ];
+@endphp
+
 <style>
     html {
         scroll-behavior: smooth;
     }
 
-    .contact-soft-bg {
+    :root {
+        --contact-blue: #1d4ed8;
+        --contact-cyan: #06b6d4;
+        --contact-ink: #071a35;
+        --contact-muted: #64748b;
+    }
+
+    .contact-hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
         background:
-            radial-gradient(circle at 88% 10%, rgba(103, 232, 249, .24), transparent 28%),
-            radial-gradient(circle at 8% 45%, rgba(147, 197, 253, .24), transparent 28%),
-            linear-gradient(135deg, #ffffff 0%, #f8fafc 42%, #eff6ff 100%);
+            radial-gradient(circle at 88% 12%, rgba(6, 182, 212, .20), transparent 29%),
+            radial-gradient(circle at 7% 74%, rgba(37, 99, 235, .14), transparent 32%),
+            linear-gradient(135deg, #f7fbff 0%, #ffffff 48%, #edf7ff 100%);
     }
 
-    .contact-section-light {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    .contact-hero::before {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        opacity: .50;
+        background-image:
+            linear-gradient(rgba(37, 99, 235, .045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(37, 99, 235, .045) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: linear-gradient(to bottom, #000, transparent 96%);
     }
 
-    .contact-section-soft {
-        background:
-            radial-gradient(circle at 85% 15%, rgba(34, 211, 238, .08), transparent 30%),
-            linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%);
+    .contact-label {
+        display: inline-flex;
+        align-items: center;
+        gap: .65rem;
+        color: var(--contact-blue);
+        font-size: .72rem;
+        font-weight: 900;
+        letter-spacing: .20em;
+        text-transform: uppercase;
     }
 
-    .contact-gradient-text {
-        background: linear-gradient(90deg, #2563eb, #06b6d4);
+    .contact-label::before {
+        width: 2rem;
+        height: 2px;
+        content: "";
+        background: linear-gradient(90deg, var(--contact-blue), var(--contact-cyan));
+    }
+
+    .contact-gradient {
+        background: linear-gradient(90deg, var(--contact-blue), var(--contact-cyan));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
     }
 
-    .contact-card-hover {
-        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    .contact-image-shell {
+        position: relative;
+        border: 1px solid rgba(203, 213, 225, .85);
+        border-radius: 1.8rem;
+        background: rgba(255, 255, 255, .88);
+        padding: .7rem;
+        box-shadow: 0 30px 80px rgba(15, 46, 82, .16);
     }
 
-    .contact-card-hover:hover {
-        transform: translateY(-4px);
-        border-color: rgba(37, 99, 235, .18);
-        box-shadow: 0 16px 42px rgba(15, 23, 42, .10);
+    .quick-contact-card,
+    .office-card,
+    .info-card {
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        box-shadow: 0 12px 38px rgba(15, 23, 42, .06);
+        transition:
+            transform .32s ease,
+            box-shadow .32s ease,
+            border-color .32s ease;
+    }
+
+    .quick-contact-card:hover,
+    .office-card:hover,
+    .info-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(37, 99, 235, .25);
+        box-shadow: 0 24px 60px rgba(37, 99, 235, .13);
+    }
+
+    .office-card {
+        display: flex;
+        min-height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        border-radius: 1.5rem;
+    }
+
+    .office-image {
+        position: relative;
+        height: 14rem;
+        overflow: hidden;
+    }
+
+    .office-image::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(to top, rgba(7, 26, 53, .82), transparent 62%);
+    }
+
+    .office-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .65s ease;
+    }
+
+    .office-card:hover .office-image img {
+        transform: scale(1.06);
+    }
+
+    .office-number,
+    .contact-icon {
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--contact-blue), var(--contact-cyan));
+        color: #ffffff;
+        font-weight: 900;
+        box-shadow: 0 12px 25px rgba(37, 99, 235, .22);
+    }
+
+    .office-number {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+        font-size: .8rem;
+    }
+
+    .contact-icon {
+        width: 3.1rem;
+        height: 3.1rem;
+        border-radius: 1rem;
+        font-size: 1.05rem;
     }
 
     .contact-input {
         width: 100%;
-        border: 1px solid #e2e8f0;
-        border-radius: .8rem;
+        border: 1px solid #dce5ef;
+        border-radius: .9rem;
         background: #ffffff;
-        padding: .72rem 1rem;
+        padding: .85rem 1rem;
         color: #0f172a;
-        font-size: .875rem;
+        font-size: .9rem;
         outline: none;
-        transition: border-color .2s ease, box-shadow .2s ease;
+        transition:
+            border-color .2s ease,
+            box-shadow .2s ease,
+            background .2s ease;
     }
 
     .contact-input::placeholder {
@@ -59,386 +225,672 @@
 
     .contact-input:focus {
         border-color: #38bdf8;
-        box-shadow: 0 0 0 3px rgba(56, 189, 248, .14);
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, .13);
+    }
+
+    .contact-soft-section {
+        background:
+            radial-gradient(circle at 90% 10%, rgba(6, 182, 212, .07), transparent 28%),
+            linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%);
+    }
+
+    .office-detail-row {
+        display: flex;
+        align-items: flex-start;
+        gap: .75rem;
+        border-radius: .9rem;
+        background: #f8fafc;
+        padding: .8rem;
+    }
+
+    .office-detail-dot {
+        margin-top: .2rem;
+        width: .55rem;
+        height: .55rem;
+        flex: 0 0 .55rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--contact-blue), var(--contact-cyan));
     }
 </style>
 
-{{-- 01. CONTACT HERO --}}
-<section class="relative overflow-hidden contact-soft-bg py-10 sm:py-12 lg:py-14">
+{{-- 01. Hero --}}
+<section class="contact-hero py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
-
+        <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
             <div>
-                <div class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-700 shadow-sm">
-                    <span class="h-2 w-2 rounded-full bg-cyan-400"></span>
-                    Contact GPT Group
-                </div>
+                <p class="contact-label">Contact GPT Group</p>
 
-                <h1 class="mt-4 text-4xl font-black leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                    Let’s build
-                    <span class="block contact-gradient-text">business together.</span>
+                <h1 class="mt-5 max-w-4xl text-4xl font-black leading-[1.08] text-slate-950 sm:text-5xl lg:text-6xl">
+                    Let’s create new
+                    <span class="contact-gradient">business opportunities together.</span>
                 </h1>
 
-                <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600 lg:text-[17px]">
-                    Connect with GPT Group for distribution, retail outlet support, B2B enquiries,
-                    careers and customer service.
+                <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+                    Connect with GPT Group for product distribution, brand partnerships,
+                    project solutions, B2B supply, retail support, careers or customer service
+                    across Oman, Dubai and India.
                 </p>
 
-                <div class="mt-5 flex flex-wrap gap-3">
+                <div class="mt-8 flex flex-wrap gap-3">
                     <a
                         href="#contact-form"
-                        class="inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-blue-500"
+                        class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-7 py-3.5 text-sm font-black text-white shadow-lg transition hover:-translate-y-1"
                     >
-                        Send Enquiry
+                        Send an Enquiry
                     </a>
 
                     <a
-                        href="tel:+96824501533"
-                        class="inline-flex rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-md transition hover:-translate-y-1 hover:bg-slate-50"
+                        href="tel:{{ preg_replace('/\s+/', '', $primaryPhone) }}"
+                        class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-sm transition hover:-translate-y-1 hover:border-blue-300"
                     >
-                        Call Now
+                        Call {{ $primaryPhone }}
                     </a>
                 </div>
 
-                <div class="mt-6 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
-                    @foreach ([
-                        ['value' => 'Phone', 'label' => 'Support'],
-                        ['value' => 'Email', 'label' => 'Enquiry'],
-                        ['value' => 'Oman', 'label' => 'Office'],
-                        ['value' => 'B2B', 'label' => 'Business'],
-                    ] as $stat)
-                        <div class="rounded-xl border border-slate-100 bg-white/85 p-3 shadow-sm backdrop-blur">
-                            <p class="contact-gradient-text text-lg font-black">
-                                {{ $stat['value'] }}
-                            </p>
+                <div class="mt-9 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-3">
+                    <div class="info-card rounded-2xl p-4">
+                        <p class="text-2xl font-black text-blue-700">03</p>
+                        <p class="mt-1 text-xs font-bold text-slate-600">Office Locations</p>
+                    </div>
 
-                            <p class="mt-1 text-[11px] font-bold text-slate-500">
-                                {{ $stat['label'] }}
-                            </p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+                    <div class="info-card rounded-2xl p-4">
+                        <p class="text-2xl font-black text-blue-700">B2B</p>
+                        <p class="mt-1 text-xs font-bold text-slate-600">Business Support</p>
+                    </div>
 
-            <div class="relative">
-                <div class="relative overflow-hidden rounded-[1.6rem] border border-white bg-white/90 p-3 shadow-xl ring-1 ring-cyan-100">
-                    <img
-                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85"
-                        alt="Contact GPT Group"
-                        class="h-[260px] w-full rounded-[1.2rem] object-cover sm:h-[320px] lg:h-[360px]"
-                        loading="lazy"
-                    >
-
-                    <div class="mt-3 rounded-xl border border-slate-100 bg-white p-4 shadow-md">
-                        <p class="text-lg font-black text-slate-950">
-                            Business & Customer Support
-                        </p>
-
-                        <p class="mt-1.5 text-sm leading-6 text-slate-600">
-                            Distribution, retail setup, B2B enquiries, customer service and careers.
-                        </p>
+                    <div class="info-card col-span-2 rounded-2xl p-4 sm:col-span-1">
+                        <p class="text-2xl font-black text-blue-700">GCC</p>
+                        <p class="mt-1 text-xs font-bold text-slate-600">Regional Reach</p>
                     </div>
                 </div>
             </div>
 
+            <div class="contact-image-shell">
+                <img
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=88"
+                    alt="Contact GPT Group offices"
+                    class="h-[350px] w-full rounded-[1.35rem] object-cover sm:h-[440px] lg:h-[500px]"
+                >
+
+                <div class="absolute -bottom-5 left-6 right-6 rounded-2xl border border-white/60 bg-white/95 p-4 shadow-xl backdrop-blur sm:left-10 sm:right-auto sm:max-w-sm">
+                    <p class="text-xs font-black uppercase tracking-[.18em] text-blue-700">
+                        Business & Customer Support
+                    </p>
+
+                    <p class="mt-2 text-sm font-bold leading-6 text-slate-700">
+                        Distribution, solutions, partnerships, product supply,
+                        customer support and career enquiries.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-{{-- 02. CONTACT CARDS --}}
-<section class="relative z-10 -mt-5 bg-transparent">
+{{-- 02. Quick Contact --}}
+<section class="relative z-10 -mt-2 bg-white py-12 sm:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-
-            <div class="contact-card-hover rounded-2xl border border-slate-100 bg-white p-4 shadow-lg">
-                <div class="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-base font-black text-white">
-                    ☎
-                </div>
-
-                <h3 class="mt-3 text-lg font-black text-slate-950">Phone</h3>
-                <p class="mt-1.5 text-sm leading-6 text-slate-500">Speak with our team.</p>
-
-                <a href="tel:+96824501533" class="mt-2 block text-sm font-black text-blue-700">
-                    +968 2450-1533
-                </a>
-            </div>
-
-            <div class="contact-card-hover rounded-2xl border border-slate-100 bg-white p-4 shadow-lg">
-                <div class="grid h-10 w-10 place-items-center rounded-xl bg-cyan-500 text-base font-black text-white">
-                    ✉
-                </div>
-
-                <h3 class="mt-3 text-lg font-black text-slate-950">Email</h3>
-                <p class="mt-1.5 text-sm leading-6 text-slate-500">Send a business enquiry.</p>
-
-                <a href="mailto:info@gptgroups.com" class="mt-2 block break-words text-sm font-black text-blue-700">
-                    info@gptgroups.com
-                </a>
-            </div>
-
-            <div class="contact-card-hover rounded-2xl border border-slate-100 bg-white p-4 shadow-lg">
-                <div class="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-base font-black text-white">
-                    ⌖
-                </div>
-
-                <h3 class="mt-3 text-lg font-black text-slate-950">Office</h3>
-                <p class="mt-1.5 text-sm leading-6 text-slate-500">Main business operations.</p>
-
-                <p class="mt-2 text-sm font-black text-slate-950">
-                    Muscat, Sultanate of Oman
+        <div class="grid gap-4 md:grid-cols-3">
+            <a
+                href="tel:{{ preg_replace('/\s+/', '', $primaryPhone) }}"
+                class="quick-contact-card rounded-[1.35rem] p-5"
+            >
+                <span class="contact-icon">☎</span>
+                <p class="mt-4 text-xs font-black uppercase tracking-[.16em] text-blue-700">
+                    Phone
                 </p>
-            </div>
-
-            <div class="contact-card-hover rounded-2xl border border-slate-100 bg-white p-4 shadow-lg">
-                <div class="grid h-10 w-10 place-items-center rounded-xl bg-cyan-500 text-base font-black text-white">
-                    ↗
-                </div>
-
-                <h3 class="mt-3 text-lg font-black text-slate-950">Business Enquiry</h3>
-                <p class="mt-1.5 text-sm leading-6 text-slate-500">
-                    Distribution, retail and B2B.
+                <h2 class="mt-2 text-xl font-black text-slate-950">
+                    {{ $primaryPhone }}
+                </h2>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Speak directly with our central business support team.
                 </p>
+            </a>
 
-                <a href="#contact-form" class="mt-2 inline-flex text-sm font-black text-blue-700">
-                    Start Now →
-                </a>
-            </div>
+            <a
+                href="mailto:{{ $contactEmail }}"
+                class="quick-contact-card rounded-[1.35rem] p-5"
+            >
+                <span class="contact-icon">✉</span>
+                <p class="mt-4 text-xs font-black uppercase tracking-[.16em] text-blue-700">
+                    Email
+                </p>
+                <h2 class="mt-2 break-words text-xl font-black text-slate-950">
+                    {{ $contactEmail }}
+                </h2>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Send your business, product, service or partnership enquiry.
+                </p>
+            </a>
 
+            <a
+                href="#office-locations"
+                class="quick-contact-card rounded-[1.35rem] p-5"
+            >
+                <span class="contact-icon">⌖</span>
+                <p class="mt-4 text-xs font-black uppercase tracking-[.16em] text-blue-700">
+                    Offices
+                </p>
+                <h2 class="mt-2 text-xl font-black text-slate-950">
+                    Oman · Dubai · India
+                </h2>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Explore our office locations and regional business presence.
+                </p>
+            </a>
         </div>
     </div>
 </section>
 
-{{-- 03. MAIN CONTACT --}}
-<section id="contact-form" class="contact-section-light py-10 sm:py-12 lg:py-14">
+{{-- 03. Office Locations --}}
+<section id="office-locations" class="contact-soft-section py-14 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-stretch gap-5 lg:grid-cols-[1.1fr_.9fr] lg:gap-7">
+        <div class="mx-auto max-w-3xl text-center">
+            <p class="contact-label justify-center">Our Offices</p>
 
-            <div class="rounded-[1.6rem] border border-slate-100 bg-white p-6 shadow-xl sm:p-7">
-                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
-                    Send Enquiry
-                </p>
+            <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                Connect with our teams across
+                <span class="contact-gradient">three strategic markets.</span>
+            </h2>
 
-                <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
-                    Tell us how we can help.
+            <p class="mt-5 text-base leading-8 text-slate-600">
+                Our regional presence supports customers, brands, business partners
+                and project requirements across Oman, the UAE and India.
+            </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            @foreach ($offices as $office)
+                <article class="office-card group">
+                    <div class="office-image">
+                        <img
+                            src="{{ $office['image'] }}"
+                            alt="{{ $office['title'] }}"
+                            loading="lazy"
+                        >
+
+                        <span class="absolute left-5 top-5 z-10 rounded-full border border-white/30 bg-slate-950/55 px-3 py-1.5 text-[10px] font-black uppercase tracking-[.16em] text-white backdrop-blur">
+                            {{ $office['country'] }}
+                        </span>
+
+                        <div class="absolute bottom-5 left-5 z-10">
+                            <p class="text-xs font-black uppercase tracking-[.15em] text-cyan-300">
+                                GPT Group Office
+                            </p>
+                            <p class="mt-1 text-xl font-black text-white">
+                                {{ $office['city'] }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-1 flex-col p-6">
+                        <span class="office-number">
+                            {{ $office['number'] }}
+                        </span>
+
+                        <h3 class="mt-5 text-2xl font-black text-slate-950">
+                            {{ $office['title'] }}
+                        </h3>
+
+                        <p class="mt-3 text-sm leading-7 text-slate-600">
+                            {{ $office['description'] }}
+                        </p>
+
+                        <div class="mt-5 grid gap-3">
+                            <div class="office-detail-row">
+                                <span class="office-detail-dot"></span>
+                                <div>
+                                    <p class="text-xs font-black uppercase tracking-[.12em] text-slate-500">
+                                        Address
+                                    </p>
+                                    <p class="mt-1 text-sm font-bold leading-6 text-slate-800">
+                                        {{ $office['address'] }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="office-detail-row">
+                                <span class="office-detail-dot"></span>
+                                <div>
+                                    <p class="text-xs font-black uppercase tracking-[.12em] text-slate-500">
+                                        Phone
+                                    </p>
+                                    <a
+                                        href="tel:{{ $office['phone_link'] }}"
+                                        class="mt-1 block text-sm font-bold text-blue-700"
+                                    >
+                                        {{ $office['phone'] }}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="office-detail-row">
+                                <span class="office-detail-dot"></span>
+                                <div>
+                                    <p class="text-xs font-black uppercase tracking-[.12em] text-slate-500">
+                                        Email
+                                    </p>
+                                    <a
+                                        href="mailto:{{ $office['email'] }}"
+                                        class="mt-1 block break-words text-sm font-bold text-blue-700"
+                                    >
+                                        {{ $office['email'] }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a
+                            href="{{ $office['map_link'] }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="mt-6 inline-flex items-center gap-2 text-sm font-black text-blue-700"
+                        >
+                            Open in Google Maps
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 04. Contact Form --}}
+<section id="contact-form" class="bg-white py-14 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-stretch gap-7 lg:grid-cols-[1.08fr_.92fr]">
+            <div class="rounded-[1.7rem] border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
+                <p class="contact-label">Send an Enquiry</p>
+
+                <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                    Tell us how
+                    <span class="contact-gradient">we can help.</span>
                 </h2>
 
-                <p class="mt-3 text-sm leading-6 text-slate-600">
-                    Submit your requirement for distribution, retail setup, B2B supply,
-                    customer service or career enquiry.
+                <p class="mt-4 text-sm leading-7 text-slate-600">
+                    Complete the form and select the office or enquiry category
+                    most relevant to your requirement.
                 </p>
 
-                <form action="#" method="POST" class="mt-5 grid gap-3">
+                @if (session('success'))
+                    <div class="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-bold text-emerald-700">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                        <p class="font-black">Please correct the following:</p>
+                        <ul class="mt-2 list-inside list-disc space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form
+                    action="{{ url('/contact') }}"
+                    method="POST"
+                    class="mt-7 grid gap-4"
+                >
                     @csrf
 
-                    <div class="grid gap-3 sm:grid-cols-2">
+                    <div class="grid gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="mb-1 block text-sm font-black text-slate-700">Full Name</label>
-                            <input type="text" name="name" class="contact-input" placeholder="Enter full name">
+                            <label for="name" class="mb-2 block text-sm font-black text-slate-700">
+                                Full Name <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                class="contact-input"
+                                placeholder="Enter your full name"
+                                required
+                            >
                         </div>
 
                         <div>
-                            <label class="mb-1 block text-sm font-black text-slate-700">Phone</label>
-                            <input type="text" name="phone" class="contact-input" placeholder="Enter phone number">
+                            <label for="phone" class="mb-2 block text-sm font-black text-slate-700">
+                                Phone Number <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="phone"
+                                type="text"
+                                name="phone"
+                                value="{{ old('phone') }}"
+                                class="contact-input"
+                                placeholder="Enter phone number"
+                                required
+                            >
                         </div>
                     </div>
 
-                    <div class="grid gap-3 sm:grid-cols-2">
+                    <div class="grid gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="mb-1 block text-sm font-black text-slate-700">Email</label>
-                            <input type="email" name="email" class="contact-input" placeholder="Enter email">
+                            <label for="email" class="mb-2 block text-sm font-black text-slate-700">
+                                Email Address <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                class="contact-input"
+                                placeholder="Enter email address"
+                                required
+                            >
                         </div>
 
                         <div>
-                            <label class="mb-1 block text-sm font-black text-slate-700">Company / Brand</label>
-                            <input type="text" name="company" class="contact-input" placeholder="Company name">
+                            <label for="company" class="mb-2 block text-sm font-black text-slate-700">
+                                Company / Organisation
+                            </label>
+                            <input
+                                id="company"
+                                type="text"
+                                name="company"
+                                value="{{ old('company') }}"
+                                class="contact-input"
+                                placeholder="Enter company name"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div>
+                            <label for="office" class="mb-2 block text-sm font-black text-slate-700">
+                                Preferred Office
+                            </label>
+                            <select id="office" name="office" class="contact-input">
+                                <option value="">Select office</option>
+                                <option value="Oman Office" @selected(old('office') === 'Oman Office')>
+                                    Oman Office
+                                </option>
+                                <option value="Dubai Office" @selected(old('office') === 'Dubai Office')>
+                                    Dubai Office
+                                </option>
+                                <option value="India Office" @selected(old('office') === 'India Office')>
+                                    India Office
+                                </option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="enquiry_type" class="mb-2 block text-sm font-black text-slate-700">
+                                Enquiry Type <span class="text-red-500">*</span>
+                            </label>
+                            <select id="enquiry_type" name="enquiry_type" class="contact-input" required>
+                                <option value="">Select enquiry type</option>
+                                @foreach ([
+                                    'Distribution Partnership',
+                                    'Brand Partnership',
+                                    'B2B / Wholesale Supply',
+                                    'Security & ELV Solutions',
+                                    'Smart Home & IoT Solutions',
+                                    'Network Infrastructure',
+                                    'Retail Partnership',
+                                    'Customer Support',
+                                    'Career Enquiry',
+                                    'Other',
+                                ] as $type)
+                                    <option value="{{ $type }}" @selected(old('enquiry_type') === $type)>
+                                        {{ $type }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
                     <div>
-                        <label class="mb-1 block text-sm font-black text-slate-700">Enquiry Type</label>
-
-                        <select name="enquiry_type" class="contact-input">
-                            <option>Distribution Partnership</option>
-                            <option>Retail Outlet Setup</option>
-                            <option>B2B / Wholesale Supply</option>
-                            <option>Brand Partnership</option>
-                            <option>Customer Service</option>
-                            <option>Career Enquiry</option>
-                            <option>Other</option>
-                        </select>
+                        <label for="subject" class="mb-2 block text-sm font-black text-slate-700">
+                            Subject
+                        </label>
+                        <input
+                            id="subject"
+                            type="text"
+                            name="subject"
+                            value="{{ old('subject') }}"
+                            class="contact-input"
+                            placeholder="Enter enquiry subject"
+                        >
                     </div>
 
                     <div>
-                        <label class="mb-1 block text-sm font-black text-slate-700">Message</label>
-
+                        <label for="message" class="mb-2 block text-sm font-black text-slate-700">
+                            Message <span class="text-red-500">*</span>
+                        </label>
                         <textarea
+                            id="message"
                             name="message"
-                            rows="3"
+                            rows="5"
                             class="contact-input resize-none"
-                            placeholder="Write your message"
-                        ></textarea>
+                            placeholder="Tell us about your requirement"
+                            required
+                        >{{ old('message') }}</textarea>
                     </div>
+
+                    <label class="flex items-start gap-3 rounded-xl bg-slate-50 p-4">
+                        <input
+                            type="checkbox"
+                            name="consent"
+                            value="1"
+                            class="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600"
+                            required
+                        >
+                        <span class="text-xs font-semibold leading-5 text-slate-600">
+                            I agree that GPT Group may use the information provided
+                            to respond to this enquiry.
+                        </span>
+                    </label>
 
                     <button
                         type="submit"
-                        class="mt-1 inline-flex justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-blue-500"
+                        class="mt-1 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-7 py-3.5 text-sm font-black text-white shadow-lg transition hover:-translate-y-1"
                     >
                         Submit Enquiry
                     </button>
                 </form>
             </div>
 
-            <div class="rounded-[1.6rem] bg-gradient-to-br from-blue-700 to-cyan-500 p-6 text-white shadow-xl sm:p-7">
-                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-100 sm:text-sm">
-                    Contact Details
+            <div class="overflow-hidden rounded-[1.7rem] bg-slate-950 p-6 text-white shadow-2xl sm:p-8">
+                <p class="text-xs font-black uppercase tracking-[.2em] text-cyan-300">
+                    Direct Contact
                 </p>
 
-                <h2 class="mt-3 text-3xl font-black leading-tight sm:text-4xl">
-                    GPT Group Head Office
+                <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+                    Need a faster response?
                 </h2>
 
-                <p class="mt-3 text-sm leading-6 text-blue-50">
-                    Reach us for business partnerships, distribution, retail support and customer enquiries.
+                <p class="mt-4 text-sm leading-7 text-slate-300">
+                    Reach our central team directly for urgent business,
+                    project or customer-support requirements.
                 </p>
 
-                <div class="mt-5 grid gap-3">
-                    <div class="rounded-xl bg-white/15 p-4">
-                        <p class="text-[11px] font-black uppercase tracking-[.18em] text-blue-100">
-                            Office Address
+                <div class="mt-7 grid gap-4">
+                    <a
+                        href="tel:{{ preg_replace('/\s+/', '', $primaryPhone) }}"
+                        class="rounded-2xl border border-white/10 bg-white/10 p-5 transition hover:bg-white/15"
+                    >
+                        <p class="text-xs font-black uppercase tracking-[.15em] text-cyan-300">
+                            Call Us
                         </p>
-                        <p class="mt-2 text-base font-black">Muscat, Sultanate of Oman</p>
-                    </div>
+                        <p class="mt-2 text-xl font-black text-white">
+                            {{ $primaryPhone }}
+                        </p>
+                    </a>
 
-                    <div class="rounded-xl bg-white/15 p-4">
-                        <p class="text-[11px] font-black uppercase tracking-[.18em] text-blue-100">
-                            Phone
+                    <a
+                        href="mailto:{{ $contactEmail }}"
+                        class="rounded-2xl border border-white/10 bg-white/10 p-5 transition hover:bg-white/15"
+                    >
+                        <p class="text-xs font-black uppercase tracking-[.15em] text-cyan-300">
+                            Email Us
                         </p>
-                        <a href="tel:+96824501533" class="mt-2 block text-base font-black text-white">
-                            +968 2450-1533
-                        </a>
-                    </div>
+                        <p class="mt-2 break-words text-xl font-black text-white">
+                            {{ $contactEmail }}
+                        </p>
+                    </a>
 
-                    <div class="rounded-xl bg-white/15 p-4">
-                        <p class="text-[11px] font-black uppercase tracking-[.18em] text-blue-100">
-                            Email
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-5">
+                        <p class="text-xs font-black uppercase tracking-[.15em] text-cyan-300">
+                            Office Network
                         </p>
-                        <a href="mailto:info@gptgroups.com" class="mt-2 block break-words text-base font-black text-white">
-                            info@gptgroups.com
-                        </a>
+                        <p class="mt-2 text-xl font-black text-white">
+                            Oman · Dubai · India
+                        </p>
                     </div>
                 </div>
 
-                <a
-                    href="mailto:info@gptgroups.com"
-                    class="mt-5 inline-flex rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1"
-                >
-                    Email Now
-                </a>
-            </div>
+                <div class="mt-7 rounded-2xl bg-gradient-to-br from-blue-700 to-cyan-500 p-5">
+                    <p class="text-xs font-black uppercase tracking-[.15em] text-blue-100">
+                        Business Enquiries
+                    </p>
 
+                    <p class="mt-3 text-sm font-semibold leading-7 text-white">
+                        Distribution, brand representation, project supply,
+                        smart technology, security, structured cabling,
+                        retail partnerships and regional expansion.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-{{-- 04. MAP --}}
-<section class="contact-section-soft py-10 sm:py-12 lg:py-14">
+{{-- 05. Office Maps --}}
+<section class="contact-soft-section py-14 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-start gap-5 lg:grid-cols-[.75fr_1.25fr] lg:gap-7">
+        <div class="mx-auto max-w-3xl text-center">
+            <p class="contact-label justify-center">Office Locations</p>
 
-            <div>
-                <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
-                    Find Us
-                </p>
+            <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
+                Find our
+                <span class="contact-gradient">regional presence.</span>
+            </h2>
+        </div>
 
-                <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
-                    Visit or connect with GPT Group.
-                </h2>
+        <div class="mt-10 grid gap-6 lg:grid-cols-3">
+            @foreach ($offices as $office)
+                <div class="overflow-hidden rounded-[1.4rem] border border-slate-200 bg-white p-3 shadow-xl">
+                    <iframe
+                        src="{{ $office['map_embed'] }}"
+                        title="{{ $office['title'] }} map"
+                        class="h-[260px] w-full rounded-[1.05rem]"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen
+                    ></iframe>
 
-                <p class="mt-3 text-sm leading-6 text-slate-600">
-                    Our main office is located in Muscat, Sultanate of Oman.
-                </p>
-
-                <div class="mt-4 grid gap-3">
-                    <div class="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                        <h3 class="text-base font-black text-slate-950">Business Hours</h3>
-                        <p class="mt-1.5 text-sm leading-6 text-slate-600">
-                            Sunday to Thursday, Oman local business hours.
+                    <div class="p-3 pt-5">
+                        <p class="text-xs font-black uppercase tracking-[.15em] text-blue-700">
+                            {{ $office['country'] }}
                         </p>
-                    </div>
 
-                    <div class="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                        <h3 class="text-base font-black text-slate-950">Location</h3>
-                        <p class="mt-1.5 text-sm leading-6 text-slate-600">
-                            Muscat, Sultanate of Oman
+                        <h3 class="mt-2 text-xl font-black text-slate-950">
+                            {{ $office['title'] }}
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-6 text-slate-600">
+                            {{ $office['address'] }}
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <div class="overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white p-3 shadow-xl">
-                <iframe
-                    class="h-[300px] w-full rounded-[1.1rem] sm:h-[360px]"
-                    src="https://www.google.com/maps?q=Muscat%20Oman&output=embed"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    allowfullscreen
-                ></iframe>
-            </div>
-
+            @endforeach
         </div>
     </div>
 </section>
 
-{{-- 05. FAQ --}}
-<section class="bg-white py-10 sm:py-12 lg:py-14">
-    <div class="mx-auto grid max-w-7xl gap-7 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
-
+{{-- 06. FAQ --}}
+<section class="bg-white py-14 sm:py-16 lg:py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[.8fr_1.2fr] lg:gap-12 lg:px-8">
         <div>
-            <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
-                FAQs
-            </p>
+            <p class="contact-label">Contact FAQs</p>
 
-            <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
-                Contact questions.
+            <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Common contact
+                <span class="contact-gradient">questions.</span>
             </h2>
 
-            <p class="mt-3 text-sm leading-6 text-slate-600">
-                Quick answers for brands, retailers, B2B buyers and career applicants.
+            <p class="mt-4 text-base leading-8 text-slate-600">
+                Quick information for brands, dealers, business buyers,
+                project partners and career applicants.
             </p>
         </div>
 
         <div class="grid gap-3">
             @foreach ([
                 [
-                    'question' => 'What can I contact GPT Group for?',
-                    'answer' => 'Distribution partnerships, retail outlet setup, B2B supply, customer service, brand partnerships and career enquiries.',
+                    'question' => 'Which office should I contact?',
+                    'answer' => 'Choose the office closest to your business requirement. You may also contact the Oman central office for routing to the appropriate regional team.',
                 ],
                 [
-                    'question' => 'What is GPT Group’s contact email?',
-                    'answer' => 'You can email GPT Group at info@gptgroups.com.',
+                    'question' => 'Can I contact GPT Group for distribution partnerships?',
+                    'answer' => 'Yes. Use the enquiry form and select Distribution Partnership or Brand Partnership.',
                 ],
                 [
-                    'question' => 'Does GPT Group support retail store partnerships?',
-                    'answer' => 'Yes. GPT Group supports authorized retail store setup, distribution and market execution.',
+                    'question' => 'Does GPT Group handle project and B2B enquiries?',
+                    'answer' => 'Yes. GPT Group supports B2B supply, security and ELV, smart home, network infrastructure and structured cabling requirements.',
                 ],
                 [
-                    'question' => 'Where is GPT Group located?',
-                    'answer' => 'GPT Group is based in Muscat, Sultanate of Oman.',
+                    'question' => 'What is the main contact email?',
+                    'answer' => 'The central contact email is info@gptgroups.com.',
+                ],
+                [
+                    'question' => 'Can I submit a career enquiry?',
+                    'answer' => 'Yes. Select Career Enquiry in the contact form and include the relevant role or department in your message.',
                 ],
             ] as $faq)
-                <details class="rounded-xl border border-slate-100 bg-slate-50 p-4 shadow-sm" {{ $loop->first ? 'open' : '' }}>
+                <details
+                    class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm"
+                    {{ $loop->first ? 'open' : '' }}
+                >
                     <summary class="cursor-pointer text-sm font-black text-slate-950 sm:text-base">
                         {{ $faq['question'] }}
                     </summary>
 
-                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                    <p class="mt-3 text-sm leading-7 text-slate-600">
                         {{ $faq['answer'] }}
                     </p>
                 </details>
             @endforeach
         </div>
-
     </div>
 </section>
 
-@endsection
+{{-- 07. Final CTA --}}
+<section class="contact-soft-section py-14 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-2xl sm:p-10 lg:p-12">
+            <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+                <div>
+                    <p class="text-xs font-black uppercase tracking-[.2em] text-cyan-200">
+                        Start a Conversation
+                    </p>
+
+                    <h2 class="mt-4 max-w-3xl text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
+                        Let’s discuss your next business or technology opportunity.
+                    </h2>
+
+                    <p class="mt-4 max-w-2xl text-base leading-8 text-blue-50">
+                        Our team is ready to support your distribution,
+                        partnership, project and product requirements.
+                    </p>
+                </div>
+
+                <a
+                    href="#contact-form"
+                    class="inline-flex min-w-44 items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1"
+                >
+                    Send Enquiry
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@endsection 

@@ -313,6 +313,11 @@
                     'route' => 'oman-vision',
                     'active' => ['oman-vision'],
                 ],
+                 [
+                    'label' => 'Group Companies',
+                    'route' => 'groups_company',
+                    'active' => ['groups_company'],
+                ],
                 [
                     'label' => 'Careers',
                     'route' => 'carriers',
@@ -321,43 +326,38 @@
             ],
         ],
 
-        /*
-        |--------------------------------------------------------------------------
-        | Business Verticals
-        |--------------------------------------------------------------------------
-        */
+        
+
+
+
         [
-            'label' => 'Business Verticals',
-            'route' => 'business.index',
-            'active' => ['business.*'],
-            'children' => [
-                [
-                    'label' => 'All Business Verticals',
-                    'route' => 'business.index',
-                    'active' => ['business.index'],
-                ],
-                [
-                    'label' => 'Mobile & Consumer Electronics',
-                    'route' => 'business.mobile',
-                    'active' => ['business.mobile'],
-                ],
-                [
-                    'label' => 'Security Solutions',
-                    'route' => 'business.security',
-                    'active' => ['business.security'],
-                ],
-                [
-                    'label' => 'IT Infrastructure Solutions',
-                    'route' => 'business.infrastructure',
-                    'active' => ['business.infrastructure'],
-                ],
-                [
-                    'label' => 'Trading & Distribution',
-                    'route' => 'business.trading',
-                    'active' => ['business.trading'],
-                ],
-            ],
+    'label' => 'Solutions',
+    'route' => 'solutions.index',
+    'active' => ['solutions.*'],
+    'children' => [
+        [
+            'label' => 'Mobility Solutions',
+            'route' => 'solutions.mobility',
+            'active' => ['solutions.mobility'],
         ],
+        [
+            'label' => 'Integrated Security & ELV Solutions',
+            'route' => 'solutions.security-elv',
+            'active' => ['solutions.security-elv'],
+        ],
+        [
+            'label' => 'Smart Home & IoT Solutions',
+            'route' => 'solutions.smart-home-iot',
+            'active' => ['solutions.smart-home-iot'],
+        ],
+        [
+            'label' => 'Network Infrastructure & Structured Cabling Solutions',
+            'route' => 'solutions.network',
+            'active' => ['solutions.network'],
+        ],
+    ],
+],
+
 
         /*
         |--------------------------------------------------------------------------
@@ -369,7 +369,7 @@
         |
         */
         [
-            'label' => 'Brands',
+            'label' => 'Our Partners',
             'route' => 'brands',
             'active' => [
                 'brands',
@@ -431,11 +431,7 @@
                         'front.news.*',
                     ],
                 ],
-                [
-                    'label' => 'Group Companies',
-                    'route' => 'groups_company',
-                    'active' => ['groups_company'],
-                ],
+               
             ],
         ],
 
@@ -444,11 +440,11 @@
         | Vendor
         |--------------------------------------------------------------------------
         */
-        [
-            'label' => 'Vendor',
-            'route' => 'vendor',
-            'active' => ['vendor'],
-        ],
+        // [
+        //     'label' => 'Vendor',
+        //     'route' => 'vendor',
+        //     'active' => ['vendor'],
+        // ],
 
         /*
         |--------------------------------------------------------------------------
