@@ -1,210 +1,175 @@
 @extends('front_pages.front_components.main')
+
 @section('content')
-    <style>
-        :root {
-            --brand: #135fc9;
-            --cyan: #00a9d6;
-            --ink: #071a35;
-            --muted: #5d6d82
-        }
+    @php
+        $solutions = [
+            [
+                'number' => '01',
+                'title' => 'Mobility Solutions',
+                'description' => 'Smartphones, connected devices and mobility products for retail, wholesale and enterprise markets.',
+                'route' => 'solutions.mobility',
+                'image' => 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=76',
+            ],
+            [
+                'number' => '02',
+                'title' => 'Integrated Security & ELV Solutions',
+                'description' => 'Surveillance, access control, video door phones, parking management and professional display systems.',
+                'route' => 'solutions.security-elv',
+                'image' => 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=76',
+            ],
+            [
+                'number' => '03',
+                'title' => 'Smart Home & IoT Solutions',
+                'description' => 'Automation, smart lighting, locks, sensors, curtains, climate and energy management.',
+                'route' => 'solutions.smart-home-iot',
+                'image' => 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=76',
+            ],
+            [
+                'number' => '04',
+                'title' => 'Network Infrastructure & Structured Cabling Solutions',
+                'description' => 'Fiber, FTTH, data center connectivity, cabinets, ODF and structured cabling systems.',
+                'route' => 'solutions.network',
+                'image' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=76',
+            ],
+        ];
+    @endphp
 
-        .sol-hero {
-            position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 87% 12%, rgba(0, 169, 214, .18), transparent 28%),
-                radial-gradient(circle at 7% 78%, rgba(19, 95, 201, .12), transparent 30%),
-                linear-gradient(135deg, #f7fbff 0%, #fff 48%, #eef8ff 100%)
-        }
+    <main class="overflow-hidden bg-white text-slate-900">
 
-        .sol-grid {
-            background-image: linear-gradient(rgba(19, 95, 201, .04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(19, 95, 201, .04) 1px, transparent 1px);
-            background-size: 40px 40px
-        }
+        {{-- HERO --}}
+        <section
+            class="relative flex min-h-[350px] items-center overflow-hidden bg-slate-950 bg-cover bg-center sm:min-h-[380px] lg:min-h-[410px]"
+            style="background-image:
+                linear-gradient(90deg, rgba(2,6,23,.96) 0%, rgba(2,6,23,.82) 55%, rgba(2,6,23,.38) 100%),
+                url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=76');"
+        >
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-700/20 via-transparent to-cyan-500/15"></div>
 
-        .sol-label {
-            display: inline-flex;
-            align-items: center;
-            gap: .65rem;
-            color: var(--brand);
-            font-size: .72rem;
-            font-weight: 900;
-            letter-spacing: .19em;
-            text-transform: uppercase
-        }
+            <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl py-14 sm:py-16 lg:py-20">
+                    <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-cyan-300">
+                        <span class="h-0.5 w-7 bg-gradient-to-r from-blue-400 to-cyan-300"></span>
+                        GPT Group Solutions
+                    </p>
 
-        .sol-label:before {
-            content: "";
-            width: 1.9rem;
-            height: 2px;
-            background: linear-gradient(90deg, var(--brand), var(--cyan))
-        }
+                    <h1 class="mt-4 max-w-3xl text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                        Technology solutions that connect
+                        <span class="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                            people, places and businesses.
+                        </span>
+                    </h1>
 
-        .sol-gradient {
-            background: linear-gradient(90deg, var(--brand), var(--cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent
-        }
+                    <p class="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
+                        GPT Group brings mobility, integrated security, smart home automation and
+                        network infrastructure solutions to customers, channel partners and projects across Oman.
+                    </p>
 
-        .sol-image {
-            position: relative;
-            border: 1px solid #dce7f2;
-            border-radius: 1.75rem;
-            background: #fff;
-            padding: .65rem;
-            box-shadow: 0 28px 75px rgba(9, 39, 77, .16)
-        }
+                    <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+                        <a
+                            href="#solutions"
+                            class="inline-flex min-h-11 items-center justify-center rounded-full bg-blue-600 px-6 text-sm font-bold text-white transition hover:bg-blue-700"
+                        >
+                            Explore Solutions
+                        </a>
 
-        .sol-card {
-            height: 100%;
-            border: 1px solid #e2eaf3;
-            border-radius: 1.35rem;
-            background: #fff;
-            padding: 1.45rem;
-            box-shadow: 0 10px 34px rgba(13, 43, 78, .06);
-            transition: .3s
-        }
-
-        .sol-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(19, 95, 201, .3);
-            box-shadow: 0 22px 56px rgba(19, 95, 201, .13)
-        }
-
-        .sol-number {
-            display: grid;
-            width: 3rem;
-            height: 3rem;
-            place-items: center;
-            border-radius: 1rem;
-            background: linear-gradient(135deg, var(--brand), var(--cyan));
-            color: #fff;
-            font-size: .78rem;
-            font-weight: 900
-        }
-
-        .brand-card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #e2eaf3;
-            border-radius: 1.35rem;
-            background: #fff;
-            padding: 1rem;
-            box-shadow: 0 10px 34px rgba(13, 43, 78, .06);
-            transition: .3s
-        }
-
-        .brand-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 22px 56px rgba(19, 95, 201, .12)
-        }
-
-        .brand-logo {
-            display: grid;
-            height: 8rem;
-            place-items: center;
-            border: 1px solid #edf2f7;
-            border-radius: 1rem;
-            background: linear-gradient(145deg, #fff, #f4f9ff);
-            padding: 1.2rem
-        }
-
-        .brand-logo img {
-            max-height: 4.5rem;
-            width: 100%;
-            object-fit: contain
-        }
-
-        .pill {
-            border-radius: 999px;
-            background: #edf6ff;
-            padding: .45rem .8rem;
-            font-size: .69rem;
-            font-weight: 800;
-            color: #135fc9
-        }
-    </style>
-
-    <section class="sol-hero sol-grid py-12 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
-                <div>
-                    <p class="sol-label">GPT Group Solutions</p>
-                    <h1 class="mt-5 text-4xl font-black leading-[1.08] text-slate-950 sm:text-5xl lg:text-6xl">Technology
-                        solutions that connect <span class="sol-gradient">people, places and businesses.</span></h1>
-                    <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">GPT Group brings mobility,
-                        integrated security, smart home automation and network infrastructure solutions to customers,
-                        channel partners and projects across Oman.</p>
-                    <div class="mt-8 flex flex-wrap gap-3"><a href="#solutions"
-                            class="rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-7 py-3.5 text-sm font-black text-white shadow-lg">Explore
-                            Solutions</a><a href="{{ route('contact') }}"
-                            class="rounded-full border border-slate-200 bg-white px-7 py-3.5 text-sm font-black text-slate-950">Partner
-                            With Us</a></div>
+                        <a
+                            href="{{ route('contact') }}"
+                            class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 bg-white px-6 text-sm font-bold text-slate-950 transition hover:bg-slate-100"
+                        >
+                            Partner With Us
+                        </a>
+                    </div>
                 </div>
-                <div class="sol-image"><img
-                        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=88"
-                        alt="GPT Group technology solutions"
-                        class="h-[340px] w-full rounded-[1.35rem] object-cover sm:h-[430px] lg:h-[480px]"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="solutions" class="bg-white py-14 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="sol-label justify-center">Our Solution Portfolio</p>
-                <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">Four focused solution areas.
-                    <span class="sol-gradient">One integrated technology partner.</span></h2>
+        {{-- SOLUTIONS --}}
+        <section id="solutions" class="py-14 sm:py-16 lg:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-3xl text-center">
+                    <p class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                        <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                        Our Solution Portfolio
+                    </p>
+
+                    <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        Four focused solution areas.
+                        <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
+                            One integrated technology partner.
+                        </span>
+                    </h2>
+
+                    <p class="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+                        Explore our core technology capabilities designed for retail, enterprise,
+                        residential and infrastructure requirements.
+                    </p>
+                </div>
+
+                <div class="mt-10 grid gap-5 md:grid-cols-2">
+                    @foreach ($solutions as $solution)
+                        <a
+                            href="{{ route($solution['route']) }}"
+                            class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+                        >
+                            <div class="relative h-52 overflow-hidden sm:h-56">
+                                <img
+                                    src="{{ $solution['image'] }}"
+                                    alt="{{ $solution['title'] }}"
+                                    class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                >
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+
+                                <span class="absolute left-4 top-4 grid h-11 w-11 place-items-center rounded-xl bg-white/95 text-xs font-black text-blue-700 shadow-sm">
+                                    {{ $solution['number'] }}
+                                </span>
+                            </div>
+
+                            <div class="p-5 sm:p-6">
+                                <h3 class="text-xl font-black leading-snug text-slate-950 sm:text-2xl">
+                                    {{ $solution['title'] }}
+                                </h3>
+
+                                <p class="mt-3 text-sm leading-7 text-slate-600">
+                                    {{ $solution['description'] }}
+                                </p>
+
+                                <span class="mt-5 inline-flex items-center gap-2 text-sm font-black text-blue-700">
+                                    Explore Solution
+                                    <span class="transition-transform group-hover:translate-x-1">→</span>
+                                </span>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
-            <div class="mt-10 grid gap-6 md:grid-cols-2">
-                @php
-                    $solutions = [
-                        [
-                            '01',
-                            'Mobility Solutions',
-                            'Smartphones, connected devices and mobility products for retail, wholesale and enterprise markets.',
-                            'solutions.mobility',
-                            'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=85',
-                        ],
-                        [
-                            '02',
-                            'Integrated Security & ELV Solutions',
-                            'Surveillance, access control, video door phones, parking management and professional display systems.',
-                            'solutions.security-elv',
-                            'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=85',
-                        ],
-                        [
-                            '03',
-                            'Smart Home & IoT Solutions',
-                            'Automation, smart lighting, locks, sensors, curtains, climate and energy management.',
-                            'solutions.smart-home-iot',
-                            'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=85',
-                        ],
-                        [
-                            '04',
-                            'Network Infrastructure & Structured Cabling Solutions',
-                            'Fiber, FTTH, data center connectivity, cabinets, ODF and structured cabling systems.',
-                            'solutions.network',
-                            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=85',
-                        ],
-                    ];
-                @endphp
-                @foreach ($solutions as $item)
-                    <a href="{{ route($item[3]) }}"
-                        class="group overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-2 hover:shadow-2xl">
-                        <div class="h-60 overflow-hidden"><img src="{{ $item[4] }}" alt="{{ $item[1] }}"
-                                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"></div>
-                        <div class="p-6"><span class="sol-number">{{ $item[0] }}</span>
-                            <h3 class="mt-5 text-2xl font-black text-slate-950">{{ $item[1] }}</h3>
-                            <p class="mt-3 text-sm leading-7 text-slate-600">{{ $item[2] }}</p><span
-                                class="mt-5 inline-flex text-sm font-black text-blue-700">Explore Solution →</span>
+        </section>
+
+        {{-- CTA --}}
+        <section class="bg-slate-50 py-14 sm:py-16 lg:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-xl sm:p-9 lg:p-10">
+                    <div class="grid items-center gap-7 lg:grid-cols-[1fr_auto]">
+                        <div>
+                            <p class="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                                Start a Conversation
+                            </p>
+
+                            <h2 class="mt-3 max-w-3xl text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+                                Looking for the right technology solution for your business or project?
+                            </h2>
                         </div>
-                    </a>
-                @endforeach
+
+                        <a
+                            href="{{ route('contact') }}"
+                            class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-7 text-sm font-black text-slate-950 transition hover:bg-slate-100"
+                        >
+                            Contact GPT Group
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 @endsection

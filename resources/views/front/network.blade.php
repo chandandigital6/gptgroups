@@ -2,212 +2,74 @@
 
 @section('content')
 
-<style>
-    :root {
-        --eco-blue: #1d4ed8;
-        --eco-cyan: #06b6d4;
-        --eco-dark: #071a35;
-        --eco-muted: #64748b;
-    }
-
-    .ecosystem-hero {
-        position: relative;
-        isolation: isolate;
-        overflow: hidden;
-        background:
-            radial-gradient(circle at 88% 12%, rgba(6, 182, 212, .20), transparent 29%),
-            radial-gradient(circle at 7% 74%, rgba(37, 99, 235, .14), transparent 32%),
-            linear-gradient(135deg, #f7fbff 0%, #ffffff 48%, #edf7ff 100%);
-    }
-
-    .ecosystem-hero::before {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        content: "";
-        opacity: .5;
-        background-image:
-            linear-gradient(rgba(37, 99, 235, .045) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(37, 99, 235, .045) 1px, transparent 1px);
-        background-size: 42px 42px;
-        mask-image: linear-gradient(to bottom, #000, transparent 96%);
-    }
-
-    .eco-label {
-        display: inline-flex;
-        align-items: center;
-        gap: .65rem;
-        color: var(--eco-blue);
-        font-size: .72rem;
-        font-weight: 900;
-        letter-spacing: .2em;
-        text-transform: uppercase;
-    }
-
-    .eco-label::before {
-        width: 2rem;
-        height: 2px;
-        content: "";
-        background: linear-gradient(90deg, var(--eco-blue), var(--eco-cyan));
-    }
-
-    .eco-gradient {
-        background: linear-gradient(90deg, var(--eco-blue), var(--eco-cyan));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    .eco-image-shell {
-        position: relative;
-        border: 1px solid rgba(203, 213, 225, .85);
-        border-radius: 1.8rem;
-        background: rgba(255, 255, 255, .88);
-        padding: .7rem;
-        box-shadow: 0 30px 80px rgba(15, 46, 82, .16);
-    }
-
-    .model-card,
-    .flow-card,
-    .support-card {
-        border: 1px solid #e2e8f0;
-        background: #ffffff;
-        box-shadow: 0 12px 38px rgba(15, 23, 42, .06);
-        transition:
-            transform .32s ease,
-            box-shadow .32s ease,
-            border-color .32s ease;
-    }
-
-    .model-card:hover,
-    .flow-card:hover,
-    .support-card:hover {
-        transform: translateY(-7px);
-        border-color: rgba(37, 99, 235, .25);
-        box-shadow: 0 24px 60px rgba(37, 99, 235, .13);
-    }
-
-    .model-number {
-        display: grid;
-        width: 3rem;
-        height: 3rem;
-        place-items: center;
-        border-radius: 1rem;
-        background: linear-gradient(135deg, var(--eco-blue), var(--eco-cyan));
-        color: #ffffff;
-        font-size: .8rem;
-        font-weight: 900;
-        box-shadow: 0 12px 25px rgba(37, 99, 235, .22);
-    }
-
-    .model-icon {
-        display: grid;
-        width: 3.4rem;
-        height: 3.4rem;
-        place-items: center;
-        border-radius: 1.1rem;
-        background: #eff6ff;
-        color: #1d4ed8;
-        font-size: 1.45rem;
-        font-weight: 900;
-    }
-
-    .eco-pill {
-        border-radius: 999px;
-        background: #eff6ff;
-        padding: .45rem .8rem;
-        color: #1d4ed8;
-        font-size: .69rem;
-        font-weight: 900;
-    }
-
-    .soft-section {
-        background:
-            radial-gradient(circle at 90% 10%, rgba(6, 182, 212, .07), transparent 28%),
-            linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%);
-    }
-
-    .flow-line {
-        position: relative;
-    }
-
-    .flow-line::after {
-        position: absolute;
-        top: 50%;
-        right: -1rem;
-        width: 2rem;
-        height: 2px;
-        content: "";
-        background: linear-gradient(90deg, #93c5fd, #22d3ee);
-    }
-
-    @media (max-width: 1023px) {
-        .flow-line::after {
-            display: none;
-        }
-    }
-</style>
 
 {{-- 01. HERO --}}
-<section class="ecosystem-hero py-12 sm:py-16 lg:py-20">
+<section
+    class="relative flex min-h-[340px] items-center overflow-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50 py-8 sm:min-h-[360px] sm:py-9 lg:min-h-[390px] lg:py-10"
+>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
+        <div class="grid items-center gap-7 lg:grid-cols-[1.08fr_.92fr]">
             <div>
-                <p class="eco-label">GPT Group Business Ecosystem</p>
+                <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                GPT Group Business Ecosystem
+            </p>
 
-                <h1 class="mt-5 max-w-4xl text-4xl font-black leading-[1.08] text-slate-950 sm:text-5xl lg:text-6xl">
+                <h1 class="mt-4 max-w-4xl text-3xl font-black leading-[1.08] text-slate-950 sm:text-4xl lg:text-5xl">
                     One technology group.
-                    <span class="eco-gradient">Three powerful business models.</span>
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">Three powerful business models.</span>
                 </h1>
 
-                <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+                <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
                     GPT Group connects global manufacturer partners with businesses,
                     projects and direct customers through an integrated model covering
                     distribution, technology solutions, retail and after-sales support.
                 </p>
 
-                <div class="mt-8 flex flex-wrap gap-3">
+                <div class="mt-6 flex flex-wrap gap-3">
                     <a
                         href="#business-models"
-                        class="rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-7 py-3.5 text-sm font-black text-white shadow-lg transition hover:-translate-y-1"
+                        class="rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-7 py-3.5 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5"
                     >
                         Explore Our Business Models
                     </a>
 
                     <a
                         href="{{ route('contact') }}"
-                        class="rounded-full border border-slate-200 bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-sm transition hover:-translate-y-1"
+                        class="rounded-full border border-slate-200 bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-sm transition hover:-translate-y-0.5"
                     >
                         Partner With GPT Group
                     </a>
                 </div>
 
-                <div class="mt-9 grid max-w-xl grid-cols-3 gap-3">
-                    <div class="support-card rounded-2xl p-4">
+                <div class="mt-6 grid max-w-xl grid-cols-3 gap-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
                         <p class="text-2xl font-black text-blue-700">B2B</p>
                         <p class="mt-1 text-xs font-bold text-slate-600">Project & Channel Sales</p>
                     </div>
 
-                    <div class="support-card rounded-2xl p-4">
+                    <div class="rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
                         <p class="text-2xl font-black text-blue-700">Tech</p>
                         <p class="mt-1 text-xs font-bold text-slate-600">Integrated Solutions</p>
                     </div>
 
-                    <div class="support-card rounded-2xl p-4">
+                    <div class="rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
                         <p class="text-2xl font-black text-blue-700">Retail</p>
                         <p class="mt-1 text-xs font-bold text-slate-600">Direct Customer Reach</p>
                     </div>
                 </div>
             </div>
 
-            <div class="eco-image-shell">
+            <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
                 <img
-                    src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=88"
+                    src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=76"
                     alt="GPT Group complete technology ecosystem"
-                    class="h-[350px] w-full rounded-[1.35rem] object-cover sm:h-[440px] lg:h-[500px]"
+                    class="h-[240px] w-full rounded-xl object-cover sm:h-[270px] lg:h-[300px]"
+                    loading="eager"
+                    fetchpriority="high"
                 >
 
-                <div class="absolute -bottom-5 left-6 right-6 rounded-2xl border border-white/60 bg-white/95 p-4 shadow-xl backdrop-blur sm:left-10 sm:right-auto sm:max-w-sm">
+                <div class="absolute bottom-3 left-3 right-3 rounded-xl border border-white/60 bg-white/95 p-3 shadow-lg sm:left-5 sm:right-auto sm:max-w-xs">
                     <p class="text-xs font-black uppercase tracking-[.18em] text-blue-700">
                         Complete Technology Ecosystem
                     </p>
@@ -223,14 +85,17 @@
 </section>
 
 {{-- 02. BUSINESS MODELS --}}
-<section id="business-models" class="bg-white py-14 sm:py-16 lg:py-20">
+<section id="business-models" class="bg-white py-12 sm:py-14 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
-            <p class="eco-label justify-center">Our Business Models</p>
+            <p class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                Our Business Models
+            </p>
 
             <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                 Three connected pillars.
-                <span class="eco-gradient">One unified market strategy.</span>
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">One unified market strategy.</span>
             </h2>
 
             <p class="mt-5 text-base leading-8 text-slate-600">
@@ -241,10 +106,10 @@
 
         <div class="mt-10 grid gap-6 lg:grid-cols-3">
             {{-- Model 01 --}}
-            <article class="model-card rounded-[1.5rem] p-6 sm:p-7">
+            <article class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-6 sm:p-7">
                 <div class="flex items-start justify-between gap-4">
-                    <span class="model-number">01</span>
-                    <span class="model-icon">↔</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white shadow-sm">01</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-blue-50 text-xl font-black text-blue-700">↔</span>
                 </div>
 
                 <p class="mt-5 text-xs font-black uppercase tracking-[.16em] text-blue-700">
@@ -281,18 +146,18 @@
                 </div>
 
                 <div class="mt-5 flex flex-wrap gap-2">
-                    <span class="eco-pill">Projects</span>
-                    <span class="eco-pill">Dealers</span>
-                    <span class="eco-pill">Resellers</span>
-                    <span class="eco-pill">Enterprise</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Projects</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Dealers</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Resellers</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Enterprise</span>
                 </div>
             </article>
 
             {{-- Model 02 --}}
-            <article class="model-card rounded-[1.5rem] p-6 sm:p-7">
+            <article class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-6 sm:p-7">
                 <div class="flex items-start justify-between gap-4">
-                    <span class="model-number">02</span>
-                    <span class="model-icon">⚙</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white shadow-sm">02</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-blue-50 text-xl font-black text-blue-700">⚙</span>
                 </div>
 
                 <p class="mt-5 text-xs font-black uppercase tracking-[.16em] text-blue-700">
@@ -329,18 +194,18 @@
                 </div>
 
                 <div class="mt-5 flex flex-wrap gap-2">
-                    <span class="eco-pill">Hikvision</span>
-                    <span class="eco-pill">Samsung</span>
-                    <span class="eco-pill">Fibrain</span>
-                    <span class="eco-pill">LifeSmart</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Hikvision</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Samsung</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Fibrain</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">LifeSmart</span>
                 </div>
             </article>
 
             {{-- Model 03 --}}
-            <article class="model-card rounded-[1.5rem] p-6 sm:p-7">
+            <article class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-6 sm:p-7">
                 <div class="flex items-start justify-between gap-4">
-                    <span class="model-number">03</span>
-                    <span class="model-icon">◆</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white shadow-sm">03</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-blue-50 text-xl font-black text-blue-700">◆</span>
                 </div>
 
                 <p class="mt-5 text-xs font-black uppercase tracking-[.16em] text-blue-700">
@@ -377,10 +242,10 @@
                 </div>
 
                 <div class="mt-5 flex flex-wrap gap-2">
-                    <span class="eco-pill">Outlets</span>
-                    <span class="eco-pill">Customers</span>
-                    <span class="eco-pill">Product Experience</span>
-                    <span class="eco-pill">Support</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Outlets</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Customers</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Product Experience</span>
+                    <span class="rounded-full bg-blue-50 px-3 py-1.5 text-[11px] font-black text-blue-700">Support</span>
                 </div>
             </article>
         </div>
@@ -388,14 +253,17 @@
 </section>
 
 {{-- 03. ECOSYSTEM FLOW --}}
-<section class="soft-section py-14 sm:py-16 lg:py-20">
+<section class="bg-slate-50 py-12 sm:py-14 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
-            <p class="eco-label justify-center">How The Ecosystem Works</p>
+            <p class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                How The Ecosystem Works
+            </p>
 
             <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                 From global brands to
-                <span class="eco-gradient">customer satisfaction.</span>
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">customer satisfaction.</span>
             </h2>
 
             <p class="mt-5 text-base leading-8 text-slate-600">
@@ -441,7 +309,7 @@
 
         <div class="mt-10 grid gap-5 lg:grid-cols-5">
             @foreach ($ecosystemFlow as $step)
-                <article class="flow-card flow-line rounded-[1.35rem] p-5 text-center">
+                <article class="relative rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
                     <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xl font-black text-white shadow-lg">
                         {{ $step['icon'] }}
                     </div>
@@ -458,30 +326,37 @@
                         {{ $step['description'] }}
                     </p>
                 </article>
+
+                @if (!$loop->last)
+                    <div class="hidden lg:absolute lg:right-[-18px] lg:top-1/2 lg:block lg:h-0.5 lg:w-9 lg:-translate-y-1/2 lg:bg-gradient-to-r lg:from-blue-300 lg:to-cyan-300"></div>
+                @endif
             @endforeach
         </div>
     </div>
 </section>
 
 {{-- 04. RETAIL NETWORK FOCUS --}}
-<section class="bg-white py-14 sm:py-16 lg:py-20">
+<section class="bg-white py-12 sm:py-14 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid items-center gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
-            <div class="eco-image-shell">
+            <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
                 <img
-                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1500&q=88"
+                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=76"
                     alt="GPT Group Retail Network"
-                    class="h-[340px] w-full rounded-[1.35rem] object-cover sm:h-[420px]"
+                    class="h-[340px] w-full rounded-xl object-cover sm:h-[420px]"
                     loading="lazy"
                 >
             </div>
 
             <div>
-                <p class="eco-label">Why Retail Network</p>
+                <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                Why Retail Network
+            </p>
 
                 <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     A stronger name for
-                    <span class="eco-gradient">direct customer engagement.</span>
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">direct customer engagement.</span>
                 </h2>
 
                 <p class="mt-5 text-base leading-8 text-slate-600">
@@ -496,7 +371,7 @@
                 </p>
 
                 <div class="mt-7 grid gap-4 sm:grid-cols-2">
-                    <div class="support-card rounded-[1.25rem] p-5">
+                    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-5">
                         <h3 class="text-lg font-black text-slate-950">
                             Corporate Alignment
                         </h3>
@@ -505,7 +380,7 @@
                         </p>
                     </div>
 
-                    <div class="support-card rounded-[1.25rem] p-5">
+                    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-5">
                         <h3 class="text-lg font-black text-slate-950">
                             Customer Visibility
                         </h3>
@@ -514,7 +389,7 @@
                         </p>
                     </div>
 
-                    <div class="support-card rounded-[1.25rem] p-5">
+                    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-5">
                         <h3 class="text-lg font-black text-slate-950">
                             Brand Experience
                         </h3>
@@ -523,7 +398,7 @@
                         </p>
                     </div>
 
-                    <div class="support-card rounded-[1.25rem] p-5">
+                    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-5">
                         <h3 class="text-lg font-black text-slate-950">
                             After-Sales Connection
                         </h3>
@@ -538,15 +413,18 @@
 </section>
 
 {{-- 05. AFTER SALES SUPPORT --}}
-<section class="soft-section py-14 sm:py-16 lg:py-20">
+<section class="bg-slate-50 py-12 sm:py-14 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-7 lg:grid-cols-[.75fr_1.25fr] lg:items-center">
             <div>
-                <p class="eco-label">GPT Care</p>
+                <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                GPT Care
+            </p>
 
                 <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     The ecosystem continues
-                    <span class="eco-gradient">after the sale.</span>
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">after the sale.</span>
                 </h2>
 
                 <p class="mt-5 text-base leading-8 text-slate-600">
@@ -565,8 +443,8 @@
                     ['Partner Support', 'Technical and service coordination for dealers and resellers.'],
                     ['Long-Term Relationships', 'Customer satisfaction and continued business engagement.'],
                 ] as $support)
-                    <article class="support-card rounded-[1.25rem] p-5">
-                        <span class="model-number">
+                    <article class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg rounded-2xl p-5">
+                        <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white shadow-sm">
                             {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                         </span>
 
@@ -585,9 +463,9 @@
 </section>
 
 {{-- 06. SUMMARY --}}
-<section class="bg-white py-14 sm:py-16 lg:py-20">
+<section class="bg-white py-12 sm:py-14 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="overflow-hidden rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl sm:p-10 lg:p-12">
+        <div class="overflow-hidden rounded-3xl bg-slate-950 p-7 text-white shadow-xl sm:p-10 lg:p-12">
             <div class="grid items-center gap-10 lg:grid-cols-[1fr_.85fr]">
                 <div>
                     <p class="text-xs font-black uppercase tracking-[.2em] text-cyan-300">
@@ -630,9 +508,9 @@
 </section>
 
 {{-- 07. CTA --}}
-<section class="soft-section py-14 sm:py-16 lg:py-20">
+<section class="bg-slate-50 py-12 sm:py-14 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-2xl sm:p-10 lg:p-12">
+        <div class="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-xl sm:p-10 lg:p-12">
             <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
                 <div>
                     <p class="text-xs font-black uppercase tracking-[.2em] text-cyan-200">
@@ -647,7 +525,7 @@
 
                 <a
                     href="{{ route('contact') }}"
-                    class="inline-flex min-w-44 items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-1"
+                    class="inline-flex min-w-44 items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5"
                 >
                     Contact GPT Group
                 </a>

@@ -1,4 +1,3 @@
-
 {{-- @php
     $navItems = [
         [
@@ -300,6 +299,8 @@
             'active' => [
                 'about',
                 'oman-vision',
+                'groups_company',
+                'network',
                 'carriers',
             ],
             'children' => [
@@ -313,10 +314,15 @@
                     'route' => 'oman-vision',
                     'active' => ['oman-vision'],
                 ],
-                 [
+                [
                     'label' => 'Group Companies',
                     'route' => 'groups_company',
                     'active' => ['groups_company'],
+                ],
+                [
+                    'label' => 'Our Network',
+                    'route' => 'network',
+                    'active' => ['network'],
                 ],
                 [
                     'label' => 'Careers',
@@ -326,47 +332,43 @@
             ],
         ],
 
-        
-
-
-
+        /*
+        |--------------------------------------------------------------------------
+        | Solutions
+        |--------------------------------------------------------------------------
+        */
         [
-    'label' => 'Solutions',
-    'route' => 'solutions.index',
-    'active' => ['solutions.*'],
-    'children' => [
-        [
-            'label' => 'Mobility Solutions',
-            'route' => 'solutions.mobility',
-            'active' => ['solutions.mobility'],
+            'label' => 'Solutions',
+            'route' => 'solutions.index',
+            'active' => ['solutions.*'],
+            'children' => [
+                [
+                    'label' => 'Mobility Solutions',
+                    'route' => 'solutions.mobility',
+                    'active' => ['solutions.mobility'],
+                ],
+                [
+                    'label' => 'Integrated Security & ELV Solutions',
+                    'route' => 'solutions.security-elv',
+                    'active' => ['solutions.security-elv'],
+                ],
+                [
+                    'label' => 'Smart Home & IoT Solutions',
+                    'route' => 'solutions.smart-home-iot',
+                    'active' => ['solutions.smart-home-iot'],
+                ],
+                [
+                    'label' => 'Network Infrastructure & Structured Cabling Solutions',
+                    'route' => 'solutions.network',
+                    'active' => ['solutions.network'],
+                ],
+            ],
         ],
-        [
-            'label' => 'Integrated Security & ELV Solutions',
-            'route' => 'solutions.security-elv',
-            'active' => ['solutions.security-elv'],
-        ],
-        [
-            'label' => 'Smart Home & IoT Solutions',
-            'route' => 'solutions.smart-home-iot',
-            'active' => ['solutions.smart-home-iot'],
-        ],
-        [
-            'label' => 'Network Infrastructure & Structured Cabling Solutions',
-            'route' => 'solutions.network',
-            'active' => ['solutions.network'],
-        ],
-    ],
-],
-
 
         /*
         |--------------------------------------------------------------------------
-        | Brands
+        | Our Partners
         |--------------------------------------------------------------------------
-        |
-        | Brands के अंदर का dropdown हटा दिया गया है।
-        | अब यह सीधे Brands page पर जाएगा।
-        |
         */
         [
             'label' => 'Our Partners',
@@ -391,7 +393,7 @@
             ],
             'children' => [
                 [
-                    'label' => 'Services',
+                    'label' => 'All Services',
                     'route' => 'services',
                     'active' => ['services'],
                 ],
@@ -405,46 +407,17 @@
 
         /*
         |--------------------------------------------------------------------------
-        | Company
+        | News — Main Menu
         |--------------------------------------------------------------------------
         */
         [
-            'label' => 'Company',
-            'route' => 'network',
+            'label' => 'News',
+            'route' => 'news',
             'active' => [
-                'network',
                 'news',
                 'front.news.*',
-                'groups_company',
-            ],
-            'children' => [
-                [
-                    'label' => 'Network',
-                    'route' => 'network',
-                    'active' => ['network'],
-                ],
-                [
-                    'label' => 'News',
-                    'route' => 'news',
-                    'active' => [
-                        'news',
-                        'front.news.*',
-                    ],
-                ],
-               
             ],
         ],
-
-        /*
-        |--------------------------------------------------------------------------
-        | Vendor
-        |--------------------------------------------------------------------------
-        */
-        // [
-        //     'label' => 'Vendor',
-        //     'route' => 'vendor',
-        //     'active' => ['vendor'],
-        // ],
 
         /*
         |--------------------------------------------------------------------------
@@ -473,24 +446,20 @@
             'route' => 'oman-vision',
         ],
         [
-            'label' => 'Business Verticals',
-            'route' => 'business.index',
+            'label' => 'Group Companies',
+            'route' => 'groups_company',
         ],
         [
             'label' => 'Our Network',
             'route' => 'network',
         ],
         [
-            'label' => 'Group Companies',
-            'route' => 'groups_company',
-        ],
-        [
             'label' => 'Careers',
             'route' => 'carriers',
         ],
         [
-            'label' => 'Vendor',
-            'route' => 'vendor',
+            'label' => 'News',
+            'route' => 'news',
         ],
         [
             'label' => 'Contact Us',
@@ -505,20 +474,20 @@
     */
     $footerServiceLinks = [
         [
-            'label' => 'Mobile & Consumer Electronics',
-            'route' => 'business.mobile',
+            'label' => 'Mobility Solutions',
+            'route' => 'solutions.mobility',
         ],
         [
-            'label' => 'Security Solutions',
-            'route' => 'business.security',
+            'label' => 'Integrated Security & ELV Solutions',
+            'route' => 'solutions.security-elv',
         ],
         [
-            'label' => 'IT Infrastructure Solutions',
-            'route' => 'business.infrastructure',
+            'label' => 'Smart Home & IoT Solutions',
+            'route' => 'solutions.smart-home-iot',
         ],
         [
-            'label' => 'Trading & Distribution',
-            'route' => 'business.trading',
+            'label' => 'Network Infrastructure & Structured Cabling',
+            'route' => 'solutions.network',
         ],
         [
             'label' => 'Retail Outlets',
@@ -533,7 +502,7 @@
     */
     $footerProductLinks = [
         [
-            'label' => 'Our Brands',
+            'label' => 'Our Partners',
             'route' => 'brands',
         ],
         [
@@ -738,4 +707,3 @@
         </div>
     </div>
 </header>
-

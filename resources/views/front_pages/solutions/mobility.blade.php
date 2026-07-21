@@ -1,306 +1,251 @@
 @extends('front_pages.front_components.main')
 
 @section('content')
-    <style>
-        :root {
-            --brand: #135fc9;
-            --cyan: #00a9d6;
-            --ink: #071a35;
-            --muted: #5d6d82
-        }
+    @php
+        $capabilities = [
+            ['01', 'Smartphone Distribution', 'Reliable supply of smartphones and mobility products across retail and wholesale channels.'],
+            ['02', 'Retail Channel Support', 'Product availability, retail activation and market execution support.'],
+            ['03', 'Wholesale Supply', 'Bulk supply and inventory coordination for dealers and resellers.'],
+            ['04', 'Corporate Mobility', 'Device supply solutions for businesses, institutions and project requirements.'],
+            ['05', 'Product Launch Support', 'Channel planning and execution support for new product introductions.'],
+            ['06', 'Brand Development', 'Market expansion, visibility and partner coordination for mobility brands.'],
+        ];
 
-        .sol-hero {
-            position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 87% 12%, rgba(0, 169, 214, .18), transparent 28%),
-                radial-gradient(circle at 7% 78%, rgba(19, 95, 201, .12), transparent 30%),
-                linear-gradient(135deg, #f7fbff 0%, #fff 48%, #eef8ff 100%)
-        }
+        $brands = [
+            [
+                'name' => 'Lava',
+                'logo' => asset('assets/logo brands/lava.png'),
+                'description' => 'Smartphones, feature phones and dependable mobility products for retail and channel markets.',
+            ],
+            [
+                'name' => 'Nothing',
+                'logo' => asset('assets/logo brands/nothing.png'),
+                'description' => 'Design-led smartphones, audio products and connected lifestyle devices.',
+            ],
+            [
+                'name' => 'EZVIZ',
+                'logo' => asset('assets/logo brands/ezviz.png'),
+                'description' => 'Smart security cameras, video doorbells and connected home monitoring solutions.',
+            ],
+            [
+                'name' => 'LifeSmart',
+                'logo' => asset('assets/logo brands/life smart.png'),
+                'description' => 'Smart home automation, intelligent controls, sensors and connected living solutions.',
+            ],
+            [
+                'name' => 'Hikvision',
+                'logo' => asset('assets/logo brands/hikvision.png'),
+                'description' => 'Video security, access control, intercom and intelligent surveillance technologies.',
+            ],
+            [
+                'name' => 'Samsung',
+                'logo' => asset('assets/logo brands/sumsung.png'),
+                'description' => 'Smartphones, tablets, wearables and connected consumer technology.',
+            ],
+            [
+                'name' => 'Mobile Accessories',
+                'logo' => null,
+                'description' => 'Chargers, cables, power banks, cases, screen protection, audio and essential mobile accessories.',
+            ],
+        ];
 
-        .sol-grid {
-            background-image: linear-gradient(rgba(19, 95, 201, .04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(19, 95, 201, .04) 1px, transparent 1px);
-            background-size: 40px 40px
-        }
+        $strengths = [
+            ['01', 'Oman Market Experience', 'Strong understanding of local retail, dealer and corporate requirements.'],
+            ['02', 'Multi-Channel Reach', 'Support across wholesale, retail, reseller and B2B channels.'],
+            ['03', 'Reliable Supply Support', 'Focused product availability and inventory coordination.'],
+        ];
+    @endphp
 
-        .sol-label {
-            display: inline-flex;
-            align-items: center;
-            gap: .65rem;
-            color: var(--brand);
-            font-size: .72rem;
-            font-weight: 900;
-            letter-spacing: .19em;
-            text-transform: uppercase
-        }
+    <main class="overflow-hidden bg-white text-slate-900">
+        {{-- HERO --}}
+        <section class="relative isolate overflow-hidden bg-slate-950">
+            <img
+                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1800&q=78"
+                alt="Mobility Solutions"
+                class="absolute inset-0 -z-20 h-full w-full object-cover"
+                fetchpriority="high"
+            >
 
-        .sol-label:before {
-            content: "";
-            width: 1.9rem;
-            height: 2px;
-            background: linear-gradient(90deg, var(--brand), var(--cyan))
-        }
+            <div class="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/35"></div>
+            <div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-700/20 via-transparent to-cyan-500/10"></div>
 
-        .sol-gradient {
-            background: linear-gradient(90deg, var(--brand), var(--cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent
-        }
+            <div class="mx-auto flex min-h-[360px] max-w-7xl items-center px-4 py-14 sm:min-h-[390px] sm:px-6 sm:py-16 lg:min-h-[420px] lg:px-8 lg:py-20">
+                <div class="max-w-3xl">
+                    <a
+                        href="{{ route('solutions.index') }}"
+                        class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white hover:text-slate-950"
+                    >
+                        <span aria-hidden="true">←</span>
+                        All Solutions
+                    </a>
 
-        .sol-image {
-            position: relative;
-            border: 1px solid #dce7f2;
-            border-radius: 1.75rem;
-            background: #fff;
-            padding: .65rem;
-            box-shadow: 0 28px 75px rgba(9, 39, 77, .16)
-        }
+                    <p class="mt-5 text-xs font-black uppercase tracking-[0.2em] text-cyan-300">
+                        Mobility Solutions
+                    </p>
 
-        .sol-card {
-            height: 100%;
-            border: 1px solid #e2eaf3;
-            border-radius: 1.35rem;
-            background: #fff;
-            padding: 1.45rem;
-            box-shadow: 0 10px 34px rgba(13, 43, 78, .06);
-            transition: .3s
-        }
-
-        .sol-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(19, 95, 201, .3);
-            box-shadow: 0 22px 56px rgba(19, 95, 201, .13)
-        }
-
-        .sol-number {
-            display: grid;
-            width: 3rem;
-            height: 3rem;
-            place-items: center;
-            border-radius: 1rem;
-            background: linear-gradient(135deg, var(--brand), var(--cyan));
-            color: #fff;
-            font-size: .78rem;
-            font-weight: 900
-        }
-
-        .brand-card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #e2eaf3;
-            border-radius: 1.35rem;
-            background: #fff;
-            padding: 1rem;
-            box-shadow: 0 10px 34px rgba(13, 43, 78, .06);
-            transition: .3s
-        }
-
-        .brand-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 22px 56px rgba(19, 95, 201, .12)
-        }
-
-        .brand-logo {
-            display: grid;
-            height: 8rem;
-            place-items: center;
-            border: 1px solid #edf2f7;
-            border-radius: 1rem;
-            background: linear-gradient(145deg, #fff, #f4f9ff);
-            padding: 1.2rem
-        }
-
-        .brand-logo img {
-            max-height: 4.5rem;
-            width: 100%;
-            object-fit: contain
-        }
-
-        .pill {
-            border-radius: 999px;
-            background: #edf6ff;
-            padding: .45rem .8rem;
-            font-size: .69rem;
-            font-weight: 800;
-            color: #135fc9
-        }
-    </style>
-
-    <section class="sol-hero sol-grid py-12 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid items-center gap-10 lg:grid-cols-[1.04fr_.96fr]">
-                <div>
-                    <a href="{{ route('solutions.index') }}"
-                        class="inline-flex rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-black text-blue-700 shadow-sm">←
-                        All Solutions</a>
-                    <p class="sol-label mt-6">Mobility Solutions</p>
-                    <h1 class="mt-5 text-4xl font-black leading-[1.08] text-slate-950 sm:text-5xl lg:text-6xl">Smart mobility
-                        products delivered with
-                        <span class="sol-gradient">strong market reach.</span>
+                    <h1 class="mt-4 max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                        Smart mobility products with
+                        <span class="text-cyan-300">strong market reach.</span>
                     </h1>
-                    <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">GPT Group supports Oman’s
-                        mobility market with smartphones, connected devices and channel-focused distribution services for
-                        retailers, resellers, corporate buyers and technology partners.</p>
-                    <div class="mt-8 flex flex-wrap gap-3">
-                        <a href="{{ route('contact') }}"
-                            class="rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-7 py-3.5 text-sm font-black text-white shadow-lg">Request
-                            a Consultation</a>
-                        <a href="#capabilities"
-                            class="rounded-full border border-slate-200 bg-white px-7 py-3.5 text-sm font-black text-slate-950">Explore
-                            Capabilities</a>
+
+                    <p class="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
+                        GPT Group supports Oman’s mobility market with smartphones, connected devices and
+                        channel-focused distribution services for retailers, resellers, corporate buyers
+                        and technology partners.
+                    </p>
+
+                    <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <a
+                            href="{{ route('contact') }}"
+                            class="inline-flex min-h-11 items-center justify-center rounded-full bg-blue-600 px-6 text-sm font-black text-white transition hover:bg-blue-700"
+                        >
+                            Request a Consultation
+                        </a>
+
+                        <a
+                            href="#capabilities"
+                            class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/30 bg-white px-6 text-sm font-black text-slate-950 transition hover:bg-slate-100"
+                        >
+                            Explore Capabilities
+                        </a>
                     </div>
                 </div>
-                <div class="sol-image"><img
-                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1600&q=88"
-                        alt="Mobility Solutions"
-                        class="h-[340px] w-full rounded-[1.35rem] object-cover sm:h-[430px] lg:h-[480px]"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="capabilities" class="bg-white py-14 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="sol-label justify-center">Solutions & Capabilities</p>
-                <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">Complete technology capabilities
-                    for <span class="sol-gradient">modern requirements.</span></h2>
-            </div>
-            <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                <article class="sol-card"><span class="sol-number">01</span>
-                    <h3 class="mt-5 text-xl font-black text-slate-950">Smartphone Distribution</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Reliable supply of smartphones and mobility products
-                        across retail and wholesale channels.</p>
-                </article>
-                <article class="sol-card"><span class="sol-number">02</span>
-                    <h3 class="mt-5 text-xl font-black text-slate-950">Retail Channel Support</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Product availability, retail activation and market
-                        execution support.</p>
-                </article>
-                <article class="sol-card"><span class="sol-number">03</span>
-                    <h3 class="mt-5 text-xl font-black text-slate-950">Wholesale Supply</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Bulk supply and inventory coordination for dealers and
-                        resellers.</p>
-                </article>
-                <article class="sol-card"><span class="sol-number">04</span>
-                    <h3 class="mt-5 text-xl font-black text-slate-950">Corporate Mobility</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Device supply solutions for businesses, institutions
-                        and project requirements.</p>
-                </article>
-                <article class="sol-card"><span class="sol-number">05</span>
-                    <h3 class="mt-5 text-xl font-black text-slate-950">Product Launch Support</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Channel planning and execution support for new product
-                        introductions.</p>
-                </article>
-                <article class="sol-card"><span class="sol-number">06</span>
-                    <h3 class="mt-5 text-xl font-black text-slate-950">Brand Development</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Market expansion, visibility and partner coordination
-                        for mobility brands.</p>
-                </article>
-            </div>
-        </div>
-    </section>
+        {{-- CAPABILITIES --}}
+        <section id="capabilities" class="py-14 sm:py-16 lg:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-3xl text-center">
+                    <p class="text-xs font-black uppercase tracking-[0.2em] text-blue-700">
+                        Solutions & Capabilities
+                    </p>
 
-    <section class="bg-slate-50 py-14 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <p class="sol-label justify-center">Technology Brands</p>
-                <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">Brands supporting this solution
-                    portfolio.</h2>
-                <p class="mt-4 text-base leading-8 text-slate-600"></p>
-            </div>
-            <div class="mx-auto mt-10 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <article class="brand-card">
-                    <div class="brand-logo"><img src="{{ asset('assets/logo brands/sumsung.png') }}"
-                            alt="Samsung logo" loading="lazy"></div>
-                    <div class="flex flex-1 flex-col p-2 pt-5">
-                        <h3 class="text-xl font-black text-slate-950">Samsung</h3>
-                        <p class="mt-3 flex-1 text-sm leading-7 text-slate-600">Smartphones, tablets, wearables and
-                            connected consumer technology.</p>
-                    </div>
-                </article>
-                <article class="brand-card">
-                    <div class="brand-logo"><img
-                            src="{{ asset('assets/logo brands/vivo.png') }}" alt="Vivo logo"
-                            loading="lazy"></div>
-                    <div class="flex flex-1 flex-col p-2 pt-5">
-                        <h3 class="text-xl font-black text-slate-950">Vivo</h3>
-                        <p class="mt-3 flex-1 text-sm leading-7 text-slate-600">Smartphones focused on camera technology,
-                            design and performance.</p>
-                    </div>
-                </article>
-                <article class="brand-card">
-                    <div class="brand-logo"><img
-                            src="{{ asset('assets/logo brands/honor_huawei_together.jpg') }}" alt="Honor logo" loading="lazy"></div>
-                    <div class="flex flex-1 flex-col p-2 pt-5">
-                        <h3 class="text-xl font-black text-slate-950">Honor</h3>
-                        <p class="mt-3 flex-1 text-sm leading-7 text-slate-600">Smartphones, tablets, laptops, wearables and
-                            intelligent devices.</p>
-                    </div>
-                </article>
-                <article class="brand-card">
-                    <div class="brand-logo"><img
-                            src="{{ asset('assets/logo brands/lava.png') }}"
-                            alt="Lava logo" loading="lazy"></div>
-                    <div class="flex flex-1 flex-col p-2 pt-5">
-                        <h3 class="text-xl font-black text-slate-950">Lava</h3>
-                        <p class="mt-3 flex-1 text-sm leading-7 text-slate-600">Smartphones, feature phones and mobility
-                            products.</p>
-                    </div>
-                </article>
-                <article class="brand-card">
-                    <div class="brand-logo"><img src="{{ asset('assets/logo brands/nothing.png') }}"
-                            alt="Nothing logo" loading="lazy"></div>
-                    <div class="flex flex-1 flex-col p-2 pt-5">
-                        <h3 class="text-xl font-black text-slate-950">Nothing</h3>
-                        <p class="mt-3 flex-1 text-sm leading-7 text-slate-600">Design-led smartphones, audio products and
-                            connected devices.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
+                    <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        Complete mobility capabilities for
+                        <span class="text-blue-700">modern requirements.</span>
+                    </h2>
+                </div>
 
-    <section class="bg-white py-14 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid gap-5 md:grid-cols-3">
-                <article class="sol-card">
-                    <p class="sol-gradient text-4xl font-black">01</p>
-                    <h3 class="mt-4 text-xl font-black text-slate-950">Oman Market Experience</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Strong understanding of local retail, dealer and
-                        corporate requirements.</p>
-                </article>
-                <article class="sol-card">
-                    <p class="sol-gradient text-4xl font-black">02</p>
-                    <h3 class="mt-4 text-xl font-black text-slate-950">Multi-Channel Reach</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Support across wholesale, retail, reseller and B2B
-                        channels.</p>
-                </article>
-                <article class="sol-card">
-                    <p class="sol-gradient text-4xl font-black">03</p>
-                    <h3 class="mt-4 text-xl font-black text-slate-950">Reliable Supply Support</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">Focused product availability and inventory
-                        coordination.</p>
-                </article>
-            </div>
-        </div>
-    </section>
+                <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($capabilities as [$number, $title, $description])
+                        <article class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                            <span class="grid h-11 w-11 place-items-center rounded-xl bg-blue-600 text-xs font-black text-white">
+                                {{ $number }}
+                            </span>
 
-    <section class="bg-slate-50 py-14 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div
-                class="rounded-[2rem] bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-2xl sm:p-10 lg:p-12">
-                <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-                    <div>
-                        <p class="text-xs font-black uppercase tracking-[.2em] text-cyan-200">Start a Conversation</p>
-                        <h2 class="mt-4 max-w-3xl text-3xl font-black sm:text-4xl lg:text-5xl">Discuss mobility
-                            distribution, product supply or channel partnership opportunities with GPT Group.</h2>
-                    </div><a href="{{ route('contact') }}"
-                        class="rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950">Send Enquiry</a>
+                            <h3 class="mt-5 text-xl font-black text-slate-950">
+                                {{ $title }}
+                            </h3>
+
+                            <p class="mt-3 text-sm leading-7 text-slate-600">
+                                {{ $description }}
+                            </p>
+                        </article>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        {{-- BRANDS --}}
+        <section class="bg-slate-50 py-14 sm:py-16 lg:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-3xl text-center">
+                    <p class="text-xs font-black uppercase tracking-[0.2em] text-blue-700">
+                        Technology Brands
+                    </p>
+
+                    <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        Brands supporting this solution portfolio.
+                    </h2>
+                </div>
+
+                <div class="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+                    @foreach ($brands as $brand)
+                        <article class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:shadow-lg">
+                            <div class="grid h-28 place-items-center rounded-xl border border-slate-100 bg-slate-50 p-4">
+                                @if ($brand['logo'])
+                                    <img
+                                        src="{{ $brand['logo'] }}"
+                                        alt="{{ $brand['name'] }} logo"
+                                        class="max-h-16 w-full object-contain"
+                                        loading="lazy"
+                                        onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                                    >
+                                    <div class="hidden h-16 w-16 place-items-center rounded-2xl bg-blue-600 text-xl font-black text-white">
+                                        {{ strtoupper(substr($brand['name'], 0, 2)) }}
+                                    </div>
+                                @else
+                                    <div class="grid h-16 w-16 place-items-center rounded-2xl bg-blue-600 text-2xl text-white">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-8 w-8" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm3 17h4" />
+                                        </svg>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="flex flex-1 flex-col px-1 pb-1 pt-5">
+                                <h3 class="text-lg font-black text-slate-950">
+                                    {{ $brand['name'] }}
+                                </h3>
+
+                                <p class="mt-3 flex-1 text-sm leading-6 text-slate-600">
+                                    {{ $brand['description'] }}
+                                </p>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        {{-- STRENGTHS --}}
+        <section class="py-14 sm:py-16 lg:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="grid gap-5 md:grid-cols-3">
+                    @foreach ($strengths as [$number, $title, $description])
+                        <article class="rounded-2xl border border-slate-200 bg-white p-6">
+                            <p class="text-4xl font-black text-blue-700">
+                                {{ $number }}
+                            </p>
+
+                            <h3 class="mt-4 text-xl font-black text-slate-950">
+                                {{ $title }}
+                            </h3>
+
+                            <p class="mt-3 text-sm leading-7 text-slate-600">
+                                {{ $description }}
+                            </p>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        {{-- CTA --}}
+        <section class="bg-slate-50 py-14 sm:py-16 lg:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white sm:p-10 lg:p-12">
+                    <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+                        <div>
+                            <p class="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                                Start a Conversation
+                            </p>
+
+                            <h2 class="mt-4 max-w-4xl text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+                                Discuss mobility distribution, product supply or channel partnership opportunities with GPT Group.
+                            </h2>
+                        </div>
+
+                        <a
+                            href="{{ route('contact') }}"
+                            class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-7 text-sm font-black text-slate-950 transition hover:bg-slate-100"
+                        >
+                            Send Enquiry
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 @endsection

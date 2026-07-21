@@ -2,168 +2,18 @@
 
 @section('content')
 
-<style>
-    :root {
-        --vision-blue: #1d4ed8;
-        --vision-cyan: #06b6d4;
-        --vision-dark: #0f172a;
-        --vision-green: #059669;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    .vision-hero {
-        background:
-            linear-gradient(
-                110deg,
-                rgba(15, 23, 42, .96),
-                rgba(30, 64, 175, .88),
-                rgba(8, 145, 178, .72)
-            ),
-            url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=2000&q=85')
-            center / cover no-repeat;
-    }
-
-    .vision-soft-section {
-        background:
-            radial-gradient(
-                circle at 88% 10%,
-                rgba(34, 211, 238, .10),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 8% 40%,
-                rgba(59, 130, 246, .08),
-                transparent 30%
-            ),
-            linear-gradient(
-                180deg,
-                #f8fafc 0%,
-                #eef6ff 100%
-            );
-    }
-
-    .vision-gradient-text {
-        background: linear-gradient(
-            90deg,
-            var(--vision-blue),
-            var(--vision-cyan)
-        );
-
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    .vision-section-label {
-        color: var(--vision-blue);
-        font-size: .75rem;
-        font-weight: 900;
-        letter-spacing: .22em;
-        text-transform: uppercase;
-    }
-
-    .vision-card {
-        border: 1px solid rgba(226, 232, 240, .96);
-        border-radius: 1.25rem;
-        background: rgba(255, 255, 255, .97);
-        box-shadow: 0 12px 38px rgba(15, 23, 42, .06);
-        transition:
-            transform .3s ease,
-            box-shadow .3s ease,
-            border-color .3s ease;
-    }
-
-    .vision-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(37, 99, 235, .20);
-        box-shadow: 0 20px 50px rgba(37, 99, 235, .12);
-    }
-
-    .vision-image-card {
-        overflow: hidden;
-        border: 1px solid #e2e8f0;
-        border-radius: 1.5rem;
-        background: #ffffff;
-        box-shadow: 0 18px 50px rgba(15, 23, 42, .10);
-    }
-
-    .vision-check {
-        display: flex;
-        align-items: flex-start;
-        gap: .75rem;
-        border: 1px solid #e2e8f0;
-        border-radius: 1rem;
-        background: #ffffff;
-        padding: .9rem 1rem;
-    }
-
-    .vision-check-icon {
-        display: grid;
-        width: 1.5rem;
-        height: 1.5rem;
-        flex: 0 0 1.5rem;
-        place-items: center;
-        margin-top: .1rem;
-        border-radius: 999px;
-        background: linear-gradient(
-            135deg,
-            var(--vision-blue),
-            var(--vision-cyan)
-        );
-        color: #ffffff;
-        font-size: .68rem;
-        font-weight: 900;
-    }
-
-    .vision-step-line {
-        position: relative;
-    }
-
-    .vision-step-line::before {
-        position: absolute;
-        top: 2.5rem;
-        bottom: 2.5rem;
-        left: 1.2rem;
-        width: 2px;
-        content: "";
-        background: linear-gradient(
-            to bottom,
-            #2563eb,
-            #06b6d4,
-            #10b981
-        );
-    }
-
-    .vision-step-number {
-        position: relative;
-        z-index: 2;
-        display: grid;
-        width: 2.5rem;
-        height: 2.5rem;
-        flex: 0 0 2.5rem;
-        place-items: center;
-        border-radius: 999px;
-        background: linear-gradient(
-            135deg,
-            #2563eb,
-            #06b6d4
-        );
-        color: #ffffff;
-        font-size: .7rem;
-        font-weight: 900;
-        box-shadow: 0 8px 22px rgba(37, 99, 235, .24);
-    }
-</style>
 
 
 {{-- =========================================================
     01. COMPACT HERO
 ========================================================= --}}
 
-<section class="vision-hero relative overflow-hidden py-10 text-white sm:py-12 lg:py-14">
+<section
+    class="relative overflow-hidden bg-slate-950 bg-cover bg-center py-10 text-white sm:py-12 lg:py-14"
+    style="background-image:
+        linear-gradient(110deg, rgba(15,23,42,.96), rgba(30,64,175,.88), rgba(8,145,178,.72)),
+        url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1600&q=76');"
+>
 
     <div class="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/45 to-transparent"></div>
 
@@ -174,7 +24,7 @@
             {{-- Left Content --}}
             <div class="max-w-3xl">
 
-                <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[.16em] text-white backdrop-blur sm:text-xs">
+                <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[.16em] text-white sm:text-xs">
                     <span class="h-2 w-2 rounded-full bg-cyan-300"></span>
                     GPT Group & Oman Vision 2040
                 </div>
@@ -202,14 +52,14 @@
 
                     <a
                         href="#gpt-contribution"
-                        class="inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-black text-slate-950 shadow-lg transition hover:-translate-y-1 sm:text-sm"
+                        class="inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5 sm:text-sm"
                     >
                         Explore Our Contribution
                     </a>
 
                     <a
                         href="#hikvision-role"
-                        class="inline-flex rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-xs font-black text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20 sm:text-sm"
+                        class="inline-flex rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-white/20 sm:text-sm"
                     >
                         Hikvision Technology Role
                     </a>
@@ -237,7 +87,7 @@
                         ],
                     ] as $fact)
 
-                        <div class="rounded-xl border border-white/15 bg-white/10 p-3 backdrop-blur">
+                        <div class="rounded-xl border border-white/15 bg-white/10 p-3">
 
                             <p class="text-lg font-black text-cyan-300 sm:text-xl">
                                 {{ $fact['value'] }}
@@ -257,13 +107,14 @@
             {{-- Right Image Area --}}
             <div class="relative">
 
-                <div class="overflow-hidden rounded-[1.5rem] border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur">
+                <div class="overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-3 shadow-xl">
 
                     <img
                         src="https://www.constructionweekonline.com/cloud/2025/03/06/salalah-oman-sasaki-associates-masterplan-designboom-1200.jpg"
                         alt="Oman modern city and development"
-                        class="h-[280px] w-full rounded-[1.1rem] object-cover sm:h-[340px] lg:h-[380px]"
+                        class="h-[280px] w-full rounded-xl object-cover sm:h-[340px] lg:h-[380px]"
                         loading="eager"
+                        fetchpriority="high"
                     >
 
                 </div>
@@ -297,7 +148,7 @@
 
 
                 {{-- Small GPT Badge --}}
-                <div class="absolute right-4 top-4 rounded-xl border border-white/20 bg-slate-950/70 px-4 py-3 text-white shadow-lg backdrop-blur">
+                <div class="absolute right-4 top-4 rounded-xl border border-white/20 bg-slate-950/70 px-4 py-3 text-white shadow-lg">
 
                     <p class="text-[10px] font-black uppercase tracking-[.15em] text-cyan-300">
                         GPT Group
@@ -329,13 +180,13 @@
 
             <div>
 
-                <p class="vision-section-label">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                     National Direction
                 </p>
 
                 <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     Technology, knowledge and innovation for
-                    <span class="vision-gradient-text">
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                         sustainable national growth.
                     </span>
                 </h2>
@@ -357,32 +208,32 @@
 
                 <div class="mt-6 grid gap-3 sm:grid-cols-2">
 
-                    <div class="vision-check">
-                        <span class="vision-check-icon">✓</span>
+                    <div class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3">
+                        <span class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3-icon">✓</span>
 
                         <p class="text-sm font-semibold leading-6 text-slate-700">
                             Secure digital and physical infrastructure
                         </p>
                     </div>
 
-                    <div class="vision-check">
-                        <span class="vision-check-icon">✓</span>
+                    <div class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3">
+                        <span class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3-icon">✓</span>
 
                         <p class="text-sm font-semibold leading-6 text-slate-700">
                             Knowledge transfer and technical training
                         </p>
                     </div>
 
-                    <div class="vision-check">
-                        <span class="vision-check-icon">✓</span>
+                    <div class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3">
+                        <span class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3-icon">✓</span>
 
                         <p class="text-sm font-semibold leading-6 text-slate-700">
                             Private-sector and SME enablement
                         </p>
                     </div>
 
-                    <div class="vision-check">
-                        <span class="vision-check-icon">✓</span>
+                    <div class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3">
+                        <span class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3-icon">✓</span>
 
                         <p class="text-sm font-semibold leading-6 text-slate-700">
                             Responsible and sustainable business growth
@@ -393,10 +244,10 @@
             </div>
 
 
-            <div class="vision-image-card p-3">
+            <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1400&q=85"
+                    src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=76"
                     alt="Modern infrastructure supporting Oman Vision 2040"
                     class="h-[330px] w-full rounded-[1.15rem] object-cover sm:h-[400px] lg:h-[460px]"
                     loading="lazy"
@@ -469,19 +320,19 @@
     ];
 @endphp
 
-<section class="vision-soft-section py-10 sm:py-12 lg:py-16">
+<section class="bg-slate-50 py-10 sm:py-12 lg:py-16">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="mx-auto max-w-4xl text-center">
 
-            <p class="vision-section-label">
+            <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                 Strategic Alignment
             </p>
 
             <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                 Areas where GPT Group can support
-                <span class="vision-gradient-text">
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                     Oman Vision 2040.
                 </span>
             </h2>
@@ -499,7 +350,7 @@
 
             @foreach ($visionPillars as $pillar)
 
-                <article class="vision-card p-5 sm:p-6">
+                <article class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg p-5 sm:p-6">
 
                     <div class="flex items-start justify-between gap-4">
 
@@ -572,10 +423,10 @@
 
         <div class="grid items-center gap-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-12">
 
-            <div class="vision-image-card p-3">
+            <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=85"
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=76"
                     alt="GPT Group business and technology collaboration"
                     class="h-[340px] w-full rounded-[1.15rem] object-cover sm:h-[410px] lg:h-[520px]"
                     loading="lazy"
@@ -586,13 +437,13 @@
 
             <div>
 
-                <p class="vision-section-label">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                     GPT Group Contribution
                 </p>
 
                 <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     Turning technology partnerships into
-                    <span class="vision-gradient-text">
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                         practical national value.
                     </span>
                 </h2>
@@ -608,7 +459,7 @@
 
                     @foreach ($gptContributions as $item)
 
-                        <div class="vision-card p-4">
+                        <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg p-4">
 
                             <h3 class="text-base font-black text-slate-950">
                                 {{ $item['title'] }}
@@ -708,7 +559,7 @@
                     href="https://www.hikvision.com/en/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1"
+                    class="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-0.5"
                 >
                     Visit Hikvision Official Website
                     <span>↗</span>
@@ -717,10 +568,10 @@
             </div>
 
 
-            <div class="vision-image-card border-white/10 bg-white/5 p-3">
+            <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg border-white/10 bg-white/5 p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1400&q=85"
+                    src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=76"
                     alt="Smart video security and surveillance solutions"
                     class="h-[330px] w-full rounded-[1.15rem] object-cover sm:h-[400px] lg:h-[450px]"
                     loading="lazy"
@@ -761,7 +612,7 @@
 
             @foreach ($hikvisionSolutions as $solution)
 
-                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition hover:-translate-y-1 hover:bg-white/10">
+                <article class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-0.5 hover:bg-white/10">
 
                     <div class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-black text-white">
                         {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
@@ -791,56 +642,56 @@
     $sectorBenefits = [
         [
             'name' => 'Government & Public Services',
-            'image' => 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=85',
+            'image' => 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=76',
             'description' =>
                 'Secure facilities, controlled entry, centralized monitoring and improved situational awareness.',
         ],
         [
             'name' => 'Logistics & Warehousing',
-            'image' => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85',
+            'image' => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=76',
             'description' =>
                 'Asset visibility, perimeter monitoring, controlled zones and more efficient site supervision.',
         ],
         [
             'name' => 'Retail & Commercial',
-            'image' => 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=85',
+            'image' => 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=76',
             'description' =>
                 'Safer stores, operational visibility, loss prevention support and better customer-area management.',
         ],
         [
             'name' => 'Education & Training',
-            'image' => 'https://img.magnific.com/free-photo/learning-education-ideas-insight-intelligence-study-concept_53876-120116.jpg?semt=ais_hybrid&w=740&q=80',
+            'image' => 'https://img.magnific.com/free-photo/learning-education-ideas-insight-intelligence-study-concept_53876-120116.jpg?semt=ais_hybrid&w=740&q=76',
             'description' =>
                 'Improved campus awareness, managed access and safer learning environments.',
         ],
         [
             'name' => 'Hospitality & Tourism',
-            'image' => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85',
+            'image' => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=76',
             'description' =>
                 'Guest-area security, restricted-zone management and reliable site monitoring.',
         ],
         [
             'name' => 'Residential Communities',
-            'image' => 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=85',
+            'image' => 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=76',
             'description' =>
                 'Video intercom, managed entry, smart alerts and connected security for modern living.',
         ],
     ];
 @endphp
 
-<section class="vision-soft-section py-10 sm:py-12 lg:py-16">
+<section class="bg-slate-50 py-10 sm:py-12 lg:py-16">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="mx-auto max-w-4xl text-center">
 
-            <p class="vision-section-label">
+            <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                 Sector-Level Impact
             </p>
 
             <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                 Practical technology benefits across
-                <span class="vision-gradient-text">
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                     Oman’s growing sectors.
                 </span>
             </h2>
@@ -858,7 +709,7 @@
 
             @foreach ($sectorBenefits as $sector)
 
-                <article class="vision-card group overflow-hidden">
+                <article class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg group overflow-hidden">
 
                     <div class="h-48 overflow-hidden">
 
@@ -902,13 +753,13 @@
 
             <div>
 
-                <p class="vision-section-label">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                     Human Capital Development
                 </p>
 
                 <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     Developing local skills for a
-                    <span class="vision-gradient-text">
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                         technology-driven economy.
                     </span>
                 </h2>
@@ -936,9 +787,9 @@
                         'Internship and career pathways',
                     ] as $skill)
 
-                        <div class="vision-check">
+                        <div class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3">
 
-                            <span class="vision-check-icon">✓</span>
+                            <span class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3-icon">✓</span>
 
                             <p class="text-sm font-semibold leading-6 text-slate-700">
                                 {{ $skill }}
@@ -952,10 +803,10 @@
             </div>
 
 
-            <div class="vision-image-card p-3">
+            <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=85"
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=76"
                     alt="Technical training and local talent development"
                     class="h-[340px] w-full rounded-[1.15rem] object-cover sm:h-[410px] lg:h-[480px]"
                     loading="lazy"
@@ -988,16 +839,16 @@
     08. SUSTAINABILITY
 ========================================================= --}}
 
-<section class="vision-soft-section py-10 sm:py-12 lg:py-16">
+<section class="bg-slate-50 py-10 sm:py-12 lg:py-16">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="grid items-center gap-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-12">
 
-            <div class="vision-image-card p-3">
+            <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1400&q=85"
+                    src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=76"
                     alt="Sustainable technology and infrastructure"
                     class="h-[330px] w-full rounded-[1.15rem] object-cover sm:h-[400px] lg:h-[460px]"
                     loading="lazy"
@@ -1008,13 +859,13 @@
 
             <div>
 
-                <p class="vision-section-label">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                     Responsible Growth
                 </p>
 
                 <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     Sustainable technology built around
-                    <span class="vision-gradient-text">
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                         efficiency and long-term value.
                     </span>
                 </h2>
@@ -1050,7 +901,7 @@
                         ],
                     ] as $item)
 
-                        <div class="vision-card p-5">
+                        <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg p-5">
 
                             <h3 class="text-lg font-black text-slate-950">
                                 {{ $item['title'] }}
@@ -1116,13 +967,13 @@
 
         <div class="mx-auto max-w-4xl text-center">
 
-            <p class="vision-section-label">
+            <p class="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
                 Contribution Roadmap
             </p>
 
             <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
                 A practical path from technology supply to
-                <span class="vision-gradient-text">
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                     long-term impact.
                 </span>
             </h2>
@@ -1136,17 +987,18 @@
         </div>
 
 
-        <div class="vision-step-line mx-auto mt-10 max-w-4xl space-y-5">
+        <div class="relative mx-auto mt-10 max-w-4xl space-y-5">
+            <div class="absolute bottom-5 left-5 top-5 w-0.5 bg-gradient-to-b from-blue-600 via-cyan-500 to-emerald-500"></div>
 
             @foreach ($roadmap as $item)
 
                 <div class="flex items-start gap-4">
 
-                    <div class="vision-step-number">
+                    <div class="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-blue-700 to-cyan-500 text-[11px] font-black text-white shadow-sm">
                         {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                     </div>
 
-                    <div class="vision-card flex-1 p-5 sm:p-6">
+                    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg flex-1 p-5 sm:p-6">
 
                         <p class="text-[11px] font-black uppercase tracking-[.18em] text-blue-700">
                             {{ $item['phase'] }}
@@ -1173,11 +1025,11 @@
     10. SHARED VISION
 ========================================================= --}}
 
-<section class="vision-soft-section py-10 sm:py-12 lg:py-16">
+<section class="bg-slate-50 py-10 sm:py-12 lg:py-16">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-6 text-white shadow-2xl sm:p-8 lg:p-10">
+        <div class="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-6 text-white shadow-xl sm:p-8 lg:p-10">
 
             <div class="grid items-center gap-8 lg:grid-cols-[1.2fr_.8fr]">
 
@@ -1215,7 +1067,7 @@
 
                     <a
                         href="{{ route('contact') }}"
-                        class="inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-1"
+                        class="inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-xl transition hover:-translate-y-0.5"
                     >
                         Partner With GPT Group
                     </a>
@@ -1224,7 +1076,7 @@
                         href="https://www.oman2040.om/?lang=en"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex rounded-full bg-slate-950 px-7 py-3.5 text-sm font-black text-white shadow-xl transition hover:-translate-y-1"
+                        class="inline-flex rounded-full bg-slate-950 px-7 py-3.5 text-sm font-black text-white shadow-xl transition hover:-translate-y-0.5"
                     >
                         Visit Oman Vision 2040
                     </a>
