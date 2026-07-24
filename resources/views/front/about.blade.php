@@ -136,89 +136,114 @@
     {{-- =========================================================
     09. FOUNDER & LEADERSHIP - COMPACT DESIGN
 ========================================================= --}}
+{{-- 09. FOUNDER & LEADERSHIP --}}
 @if (isset($founderSection) && $founderSection)
-    <section class="relative overflow-hidden bg-white py-8 sm:py-10 lg:py-12">
+    <section class="relative overflow-hidden bg-white py-12 sm:py-16 lg:py-20">
 
-        {{-- Soft Background --}}
+        {{-- Background Decoration --}}
         <div
-            class="pointer-events-none absolute -left-20 top-0 h-56 w-56 rounded-full bg-blue-100/60 blur-3xl">
+            class="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-blue-100/70 blur-3xl">
         </div>
 
         <div
-            class="pointer-events-none absolute -right-20 bottom-0 h-56 w-56 rounded-full bg-cyan-100/50 blur-3xl">
+            class="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-cyan-100/60 blur-3xl">
+        </div>
+
+        <div
+            class="pointer-events-none absolute inset-0 opacity-[0.035]"
+            style="background-image: radial-gradient(#0f172a 1px, transparent 1px);
+                   background-size: 28px 28px;">
         </div>
 
         <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
+            {{-- Main Leadership Card --}}
             <div
-                class="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-white via-white to-blue-50/60 shadow-[0_18px_50px_rgba(15,23,42,0.09)]">
+                class="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-gradient-to-br from-white via-white to-blue-50/70 shadow-[0_30px_80px_rgba(15,23,42,0.10)]">
 
-                <div class="grid items-center lg:grid-cols-[0.9fr_1.1fr]">
+                <div class="grid items-stretch lg:grid-cols-[0.95fr_1.05fr]">
 
                     {{-- Founder Image --}}
-                    <div class="p-3 sm:p-4 lg:p-5">
+                    <div class="relative p-4 sm:p-6 lg:p-7">
+
                         <div
-                            class="group relative h-[290px] overflow-hidden rounded-[1.35rem] bg-slate-200 shadow-lg sm:h-[330px] lg:h-[350px]">
+                            class="group relative h-full min-h-[340px] overflow-hidden rounded-[1.6rem] bg-slate-200 shadow-[0_20px_45px_rgba(15,23,42,0.18)] sm:min-h-[420px] lg:min-h-[500px]">
 
                             @if ($founderSection->image)
                                 <img
                                     src="{{ asset('storage/' . $founderSection->image) }}"
                                     alt="{{ $founderSection->title }}"
-                                    class="h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
+                                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
                                     loading="lazy">
                             @else
                                 <img
                                     src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
                                     alt="{{ $founderSection->title }}"
-                                    class="h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
+                                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
                                     loading="lazy">
                             @endif
 
                             {{-- Image Overlay --}}
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent">
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent">
                             </div>
 
                             {{-- Top Badge --}}
-                            <div class="absolute left-4 top-4">
+                            <div class="absolute left-5 top-5 sm:left-6 sm:top-6">
                                 <div
-                                    class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/90 px-3 py-1.5 shadow-md backdrop-blur">
+                                    class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/90 px-4 py-2 shadow-lg backdrop-blur-md">
 
-                                    <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+                                    <span class="relative flex h-2.5 w-2.5">
+                                        <span
+                                            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-60">
+                                        </span>
+
+                                        <span
+                                            class="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-600">
+                                        </span>
+                                    </span>
 
                                     <span
-                                        class="text-[10px] font-black uppercase tracking-[0.15em] text-slate-900">
+                                        class="text-[11px] font-black uppercase tracking-[0.18em] text-slate-900">
                                         Founder & Chairman
                                     </span>
                                 </div>
                             </div>
 
-                            {{-- Image Bottom Content --}}
-                            <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                                <p class="text-xl font-black text-white sm:text-2xl">
+                            {{-- Image Bottom Details --}}
+                            <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+
+                                <p class="text-2xl font-black text-white sm:text-3xl">
                                     {{ $founderSection->title }}
                                 </p>
 
-                                <p class="mt-1 text-xs font-bold text-blue-100 sm:text-sm">
-                                    Founder & CEO, GPT Group
-                                </p>
+                                <div class="mt-3 flex items-center gap-3">
+                                    <span
+                                        class="h-[2px] w-10 rounded-full bg-blue-400">
+                                    </span>
+
+                                    <p class="text-sm font-bold text-blue-100">
+                                        Founder & CEO, GPT Group
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {{-- Founder Content --}}
-                    <div class="px-5 pb-7 pt-2 sm:px-7 lg:px-9 lg:py-7 xl:px-10">
+                    <div
+                        class="relative flex flex-col justify-center px-6 pb-9 pt-3 sm:px-8 lg:px-10 lg:py-12 xl:px-14">
 
-                        {{-- Label --}}
+                        {{-- Section Label --}}
                         <div
-                            class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5">
+                            class="inline-flex w-fit items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-4 py-2">
 
                             <span
-                                class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">
+                                class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-white shadow-md shadow-blue-600/20">
 
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3.5 w-3.5"
+                                    class="h-4 w-4"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -227,53 +252,61 @@
                                     <path
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5A4.5 4.5 0 003 9.5c0 2.486 2.014 4.5 4.5 4.5 1.746 0 3.332-.477 4.5-1.253m0-6.494C13.168 5.477 14.754 5 16.5 5A4.5 4.5 0 0121 9.5c0 2.486-2.014 4.5-4.5 4.5-1.746 0-3.332-.477-4.5-1.253" />
                                 </svg>
                             </span>
 
                             <span
-                                class="text-[10px] font-black uppercase tracking-[0.18em] text-blue-700">
+                                class="text-xs font-black uppercase tracking-[0.2em] text-blue-700">
                                 {{ $founderSection->label ?: 'Founder & Leadership' }}
                             </span>
                         </div>
 
                         {{-- Heading --}}
                         <h2
-                            class="mt-4 text-2xl font-black leading-tight tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
+                            class="mt-5 text-3xl font-black leading-[1.08] tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
 
                             {{ $founderSection->title }}
                         </h2>
 
-                        <p class="mt-1.5 text-base font-bold text-blue-600">
+                        {{-- Position --}}
+                        <p class="mt-3 text-lg font-extrabold text-blue-600 sm:text-xl">
                             Founder & CEO, GPT Group
                         </p>
 
-                        {{-- Divider --}}
-                        <div class="mt-4 flex items-center gap-2">
+                        {{-- Decorative Divider --}}
+                        <div class="mt-5 flex items-center gap-2">
                             <span
-                                class="h-1 w-12 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400">
+                                class="h-1 w-14 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400">
                             </span>
 
-                            <span class="h-1 w-2 rounded-full bg-blue-200"></span>
+                            <span
+                                class="h-1 w-3 rounded-full bg-blue-200">
+                            </span>
+
+                            <span
+                                class="h-1 w-3 rounded-full bg-cyan-200">
+                            </span>
                         </div>
 
                         {{-- Description --}}
                         @if ($founderSection->description)
                             <div
-                                class="relative mt-4 rounded-xl border border-slate-200 bg-white/80 px-4 py-3.5 shadow-sm">
+                                class="relative mt-6 rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur-sm sm:p-6">
 
                                 <span
-                                    class="absolute left-0 top-4 h-10 w-1 rounded-r-full bg-gradient-to-b from-blue-600 to-cyan-400">
+                                    class="absolute left-0 top-6 h-12 w-1 rounded-r-full bg-gradient-to-b from-blue-600 to-cyan-400">
                                 </span>
 
-                                <p class="text-sm leading-6 text-slate-600 sm:text-[15px]">
+                                <p class="text-base leading-8 text-slate-600">
                                     {{ $founderSection->description }}
                                 </p>
                             </div>
                         @endif
 
                         {{-- Statistics --}}
-                        <div class="mt-4 grid grid-cols-3 gap-2.5">
+                        <div class="mt-6 grid gap-3 sm:grid-cols-3">
+
                             @foreach ([1, 2, 3] as $i)
                                 @php
                                     $value = $founderSection->{'stat_' . $i . '_value'} ?? null;
@@ -282,50 +315,150 @@
 
                                 @if ($value || $label)
                                     <div
-                                        class="group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+                                        class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl">
 
                                         <div
-                                            class="absolute -right-5 -top-5 h-14 w-14 rounded-full bg-blue-50">
+                                            class="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-blue-50 transition duration-300 group-hover:scale-125">
                                         </div>
 
                                         <div class="relative">
                                             <p
-                                                class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-xl font-black text-transparent sm:text-2xl">
+                                                class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-2xl font-black text-transparent sm:text-3xl">
                                                 {{ $value }}
                                             </p>
 
                                             <p
-                                                class="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-slate-500 sm:text-[11px]">
+                                                class="mt-1 text-xs font-bold uppercase tracking-wide text-slate-500">
                                                 {{ $label }}
                                             </p>
                                         </div>
                                     </div>
                                 @endif
                             @endforeach
+
+                        </div>
+
+                        {{-- Leadership Highlights --}}
+                        <div
+                            class="mt-6 grid gap-3 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50/80 to-cyan-50/70 p-4 sm:grid-cols-3">
+
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blue-600 shadow-sm">
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2">
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs font-black text-slate-900">
+                                        Vision
+                                    </p>
+
+                                    <p class="text-[11px] text-slate-500">
+                                        Future-focused leadership
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-cyan-600 shadow-sm">
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2">
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m6-4a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs font-black text-slate-900">
+                                        People
+                                    </p>
+
+                                    <p class="text-[11px] text-slate-500">
+                                        Strong team culture
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-indigo-600 shadow-sm">
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2">
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M3 17l6-6 4 4 8-8M14 7h7v7" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs font-black text-slate-900">
+                                        Growth
+                                    </p>
+
+                                    <p class="text-[11px] text-slate-500">
+                                        Scalable business strategy
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
                         {{-- Optional Button --}}
                         @if ($founderSection->button_text)
-                            <a
-                                href="{{ $founderSection->button_link ?: '#' }}"
-                                class="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-5 py-2.5 text-xs font-black text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg">
+                            <div class="mt-7">
+                                <a
+                                    href="{{ $founderSection->button_link ?: '#' }}"
+                                    class="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
 
-                                {{ $founderSection->button_text }}
+                                    <span>
+                                        {{ $founderSection->button_text }}
+                                    </span>
 
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3.5 w-3.5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2.5">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4 transition duration-300 group-hover:translate-x-1"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2.5">
 
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
                         @endif
 
                     </div>
