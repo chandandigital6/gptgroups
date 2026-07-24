@@ -190,12 +190,14 @@
 
             <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl py-14 sm:py-16 lg:py-20">
-                    <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-cyan-300">
+                    <p
+                        class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-cyan-300">
                         <span class="h-0.5 w-7 bg-gradient-to-r from-blue-400 to-cyan-300"></span>
                         Our Partners
                     </p>
 
-                    <h1 class="mt-4 max-w-3xl text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                    <h1
+                        class="mt-4 max-w-3xl text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
                         Trusted technology partnerships powering
                         <span class="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
                             stronger market solutions.
@@ -226,7 +228,8 @@
         <section id="partners" class="bg-slate-50 py-14 sm:py-16 lg:py-20">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-3xl text-center">
-                    <p class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                    <p
+                        class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
                         <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
                         Complete Brand Portfolio
                     </p>
@@ -250,16 +253,15 @@
                         <article
                             class="brand-card flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
 
-                            <div class="relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-5">
-                                <span class="absolute grid h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700">
+                            <div
+                                class="relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-5">
+                                <span
+                                    class="absolute grid h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700">
                                     {{ $partner['initials'] }}
                                 </span>
 
-                                <img
-                                    src="{{ $partner['logo'] }}"
-                                    alt="{{ $partner['name'] }} logo"
-                                    class="relative z-10 max-h-20 w-full object-contain"
-                                    loading="lazy"
+                                <img src="{{ $partner['logo'] }}" alt="{{ $partner['name'] }} logo"
+                                    class="relative z-10 max-h-20 w-full object-contain" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
 
@@ -281,16 +283,15 @@
                             class="brand-card flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
                             aria-hidden="true">
 
-                            <div class="relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-5">
-                                <span class="absolute grid h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700">
+                            <div
+                                class="relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-5">
+                                <span
+                                    class="absolute grid h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700">
                                     {{ $partner['initials'] }}
                                 </span>
 
-                                <img
-                                    src="{{ $partner['logo'] }}"
-                                    alt=""
-                                    class="relative z-10 max-h-20 w-full object-contain"
-                                    loading="lazy"
+                                <img src="{{ $partner['logo'] }}" alt=""
+                                    class="relative z-10 max-h-20 w-full object-contain" loading="lazy"
                                     onerror="this.style.display='none'">
                             </div>
 
@@ -316,7 +317,8 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
                     <div>
-                        <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                        <p
+                            class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
                             <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
                             About GPT Group
                         </p>
@@ -403,27 +405,27 @@
 
                 <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach ([
-                        [
-                            'number' => '01',
-                            'title' => 'Local Market Knowledge',
-                            'text' => 'Understanding of customer demand, channel structure and business opportunities in Oman.',
-                        ],
-                        [
-                            'number' => '02',
-                            'title' => 'Strong Channel Reach',
-                            'text' => 'Dealer, reseller, retail and enterprise relationships supporting wider product availability.',
-                        ],
-                        [
-                            'number' => '03',
-                            'title' => 'Technical Capability',
-                            'text' => 'Pre-sales, solution design, product guidance and project coordination for complex requirements.',
-                        ],
-                        [
-                            'number' => '04',
-                            'title' => 'Long-Term Partnership',
-                            'text' => 'A partnership model focused on sustainable brand growth and reliable customer support.',
-                        ],
-                    ] as $benefit)
+            [
+                'number' => '01',
+                'title' => 'Local Market Knowledge',
+                'text' => 'Understanding of customer demand, channel structure and business opportunities in Oman.',
+            ],
+            [
+                'number' => '02',
+                'title' => 'Strong Channel Reach',
+                'text' => 'Dealer, reseller, retail and enterprise relationships supporting wider product availability.',
+            ],
+            [
+                'number' => '03',
+                'title' => 'Technical Capability',
+                'text' => 'Pre-sales, solution design, product guidance and project coordination for complex requirements.',
+            ],
+            [
+                'number' => '04',
+                'title' => 'Long-Term Partnership',
+                'text' => 'A partnership model focused on sustainable brand growth and reliable customer support.',
+            ],
+        ] as $benefit)
                         <article class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
                             <span class="text-sm font-black text-cyan-300">
                                 {{ $benefit['number'] }}
@@ -447,7 +449,8 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
                     <div>
-                        <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                        <p
+                            class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
                             <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
                             Business Coverage
                         </p>
@@ -464,24 +467,25 @@
 
                     <div class="grid gap-4 sm:grid-cols-2">
                         @foreach ([
-                            [
-                                'title' => 'Mobility Solutions',
-                                'text' => 'Smartphones, tablets, wearables and mobile devices for consumer and business markets.',
-                            ],
-                            [
-                                'title' => 'Security & ELV',
-                                'text' => 'Video surveillance, access control, intercom and intelligent security systems.',
-                            ],
-                            [
-                                'title' => 'Smart Home & IoT',
-                                'text' => 'Automation, sensors, smart lighting and connected lifestyle technologies.',
-                            ],
-                            [
-                                'title' => 'Network Infrastructure',
-                                'text' => 'Fiber, structured cabling, connectivity and supporting network accessories.',
-                            ],
-                        ] as $segment)
-                            <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            [
+                'title' => 'Mobility Solutions',
+                'text' => 'Smartphones, tablets, wearables and mobile devices for consumer and business markets.',
+            ],
+            [
+                'title' => 'Security & ELV',
+                'text' => 'Video surveillance, access control, intercom and intelligent security systems.',
+            ],
+            [
+                'title' => 'Smart Home & IoT',
+                'text' => 'Automation, sensors, smart lighting and connected lifestyle technologies.',
+            ],
+            [
+                'title' => 'Network Infrastructure',
+                'text' => 'Fiber, structured cabling, connectivity and supporting network accessories.',
+            ],
+        ] as $segment)
+                            <article
+                                class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                                 <div class="h-1.5 w-12 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500"></div>
 
                                 <h3 class="mt-5 text-xl font-black text-slate-950">
@@ -503,7 +507,8 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid items-center gap-10 lg:grid-cols-[.9fr_1.1fr]">
                     <div>
-                        <p class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                        <p
+                            class="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
                             <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
                             Partner Support
                         </p>
@@ -521,7 +526,8 @@
                     <div class="grid gap-4 sm:grid-cols-2">
                         @foreach ($supportAreas as $index => $area)
                             <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                                <span class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white">
+                                <span
+                                    class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white">
                                     {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                                 </span>
 
@@ -542,7 +548,8 @@
         {{-- CTA --}}
         <section class="bg-slate-50 py-14 sm:py-16 lg:py-20">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-xl sm:p-9 lg:p-10">
+                <div
+                    class="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-800 via-blue-700 to-cyan-500 p-7 text-white shadow-xl sm:p-9 lg:p-10">
                     <div class="grid items-center gap-7 lg:grid-cols-[1fr_auto]">
                         <div>
                             <p class="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">

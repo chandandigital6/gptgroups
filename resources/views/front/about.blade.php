@@ -133,38 +133,147 @@
 
 
 
-     {{-- 09. FOUNDER & LEADERSHIP --}}
+    {{-- =========================================================
+    09. FOUNDER & LEADERSHIP - COMPACT DESIGN
+========================================================= --}}
+@if (isset($founderSection) && $founderSection)
+    <section class="relative overflow-hidden bg-white py-8 sm:py-10 lg:py-12">
 
-    @if (isset($founderSection) && $founderSection)
-        <section class="about-section-soft py-10 sm:py-12 lg:py-14">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid items-center gap-7 lg:grid-cols-2 lg:gap-10">
-                    <div class="soft-image-card p-3">
-                        @if ($founderSection->image)
-                            <img class="h-[300px] w-full rounded-[1.2rem] object-cover sm:h-[370px] lg:h-[420px]"
-                                src="{{ asset('storage/' . $founderSection->image) }}" alt="{{ $founderSection->title }}"
-                                loading="lazy">
-                        @else
-                            <img class="h-[300px] w-full rounded-[1.2rem] object-cover sm:h-[370px] lg:h-[420px]"
-                                src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}" alt="{{ $founderSection->title }}"
-                                loading="lazy">
-                        @endif
+        {{-- Soft Background --}}
+        <div
+            class="pointer-events-none absolute -left-20 top-0 h-56 w-56 rounded-full bg-blue-100/60 blur-3xl">
+        </div>
+
+        <div
+            class="pointer-events-none absolute -right-20 bottom-0 h-56 w-56 rounded-full bg-cyan-100/50 blur-3xl">
+        </div>
+
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div
+                class="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-white via-white to-blue-50/60 shadow-[0_18px_50px_rgba(15,23,42,0.09)]">
+
+                <div class="grid items-center lg:grid-cols-[0.9fr_1.1fr]">
+
+                    {{-- Founder Image --}}
+                    <div class="p-3 sm:p-4 lg:p-5">
+                        <div
+                            class="group relative h-[290px] overflow-hidden rounded-[1.35rem] bg-slate-200 shadow-lg sm:h-[330px] lg:h-[350px]">
+
+                            @if ($founderSection->image)
+                                <img
+                                    src="{{ asset('storage/' . $founderSection->image) }}"
+                                    alt="{{ $founderSection->title }}"
+                                    class="h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
+                                    loading="lazy">
+                            @else
+                                <img
+                                    src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
+                                    alt="{{ $founderSection->title }}"
+                                    class="h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
+                                    loading="lazy">
+                            @endif
+
+                            {{-- Image Overlay --}}
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent">
+                            </div>
+
+                            {{-- Top Badge --}}
+                            <div class="absolute left-4 top-4">
+                                <div
+                                    class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/90 px-3 py-1.5 shadow-md backdrop-blur">
+
+                                    <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+
+                                    <span
+                                        class="text-[10px] font-black uppercase tracking-[0.15em] text-slate-900">
+                                        Founder & Chairman
+                                    </span>
+                                </div>
+                            </div>
+
+                            {{-- Image Bottom Content --}}
+                            <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                                <p class="text-xl font-black text-white sm:text-2xl">
+                                    {{ $founderSection->title }}
+                                </p>
+
+                                <p class="mt-1 text-xs font-bold text-blue-100 sm:text-sm">
+                                    Founder & CEO, GPT Group
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <p class="section-label">{{ $founderSection->label ?: 'Founder & Leadership' }}</p>
+                    {{-- Founder Content --}}
+                    <div class="px-5 pb-7 pt-2 sm:px-7 lg:px-9 lg:py-7 xl:px-10">
 
-                        <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        {{-- Label --}}
+                        <div
+                            class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5">
+
+                            <span
+                                class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3.5 w-3.5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2.2">
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </span>
+
+                            <span
+                                class="text-[10px] font-black uppercase tracking-[0.18em] text-blue-700">
+                                {{ $founderSection->label ?: 'Founder & Leadership' }}
+                            </span>
+                        </div>
+
+                        {{-- Heading --}}
+                        <h2
+                            class="mt-4 text-2xl font-black leading-tight tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
+
                             {{ $founderSection->title }}
                         </h2>
 
+                        <p class="mt-1.5 text-base font-bold text-blue-600">
+                            Founder & CEO, GPT Group
+                        </p>
+
+                        {{-- Divider --}}
+                        <div class="mt-4 flex items-center gap-2">
+                            <span
+                                class="h-1 w-12 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400">
+                            </span>
+
+                            <span class="h-1 w-2 rounded-full bg-blue-200"></span>
+                        </div>
+
+                        {{-- Description --}}
                         @if ($founderSection->description)
-                            <p class="mt-4 text-base leading-7 text-slate-600">
-                                {{ $founderSection->description }}
-                            </p>
+                            <div
+                                class="relative mt-4 rounded-xl border border-slate-200 bg-white/80 px-4 py-3.5 shadow-sm">
+
+                                <span
+                                    class="absolute left-0 top-4 h-10 w-1 rounded-r-full bg-gradient-to-b from-blue-600 to-cyan-400">
+                                </span>
+
+                                <p class="text-sm leading-6 text-slate-600 sm:text-[15px]">
+                                    {{ $founderSection->description }}
+                                </p>
+                            </div>
                         @endif
 
-                        <div class="mt-5 grid gap-3 sm:grid-cols-3">
+                        {{-- Statistics --}}
+                        <div class="mt-4 grid grid-cols-3 gap-2.5">
                             @foreach ([1, 2, 3] as $i)
                                 @php
                                     $value = $founderSection->{'stat_' . $i . '_value'} ?? null;
@@ -172,25 +281,325 @@
                                 @endphp
 
                                 @if ($value || $label)
-                                    <div class="soft-card p-4">
-                                        <p class="text-gradient text-2xl font-black">{{ $value }}</p>
-                                        <p class="mt-1 text-xs font-semibold text-slate-600">{{ $label }}</p>
+                                    <div
+                                        class="group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+
+                                        <div
+                                            class="absolute -right-5 -top-5 h-14 w-14 rounded-full bg-blue-50">
+                                        </div>
+
+                                        <div class="relative">
+                                            <p
+                                                class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-xl font-black text-transparent sm:text-2xl">
+                                                {{ $value }}
+                                            </p>
+
+                                            <p
+                                                class="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-slate-500 sm:text-[11px]">
+                                                {{ $label }}
+                                            </p>
+                                        </div>
                                     </div>
                                 @endif
                             @endforeach
                         </div>
 
-                        {{-- @if ($founderSection->button_text)
-                            <a href="{{ $founderSection->button_link ?: '#' }}"
-                                class="mt-5 inline-flex rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1">
+                        {{-- Optional Button --}}
+                        @if ($founderSection->button_text)
+                            <a
+                                href="{{ $founderSection->button_link ?: '#' }}"
+                                class="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-5 py-2.5 text-xs font-black text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg">
+
                                 {{ $founderSection->button_text }}
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3.5 w-3.5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2.5">
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
                             </a>
-                        @endif --}}
+                        @endif
+
                     </div>
                 </div>
             </div>
-        </section>
-    @endif
+        </div>
+    </section>
+@endif
+
+
+{{-- =========================================================
+    10. GROUP GENERAL MANAGER - COMPACT DESIGN
+    IMAGE ALWAYS ON LEFT SIDE
+========================================================= --}}
+<section class="relative overflow-hidden bg-slate-50 py-8 sm:py-10 lg:py-12">
+
+    {{-- Soft Background --}}
+    <div
+        class="pointer-events-none absolute -right-20 top-0 h-56 w-56 rounded-full bg-blue-100/60 blur-3xl">
+    </div>
+
+    <div
+        class="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-cyan-100/50 blur-3xl">
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div
+            class="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
+
+            <div class="grid items-center lg:grid-cols-[0.8fr_1.2fr]">
+
+                {{-- General Manager Image - Left Side --}}
+                <div class="order-1 p-3 sm:p-4 lg:p-5">
+                    <div
+                        class="group relative h-[290px] overflow-hidden rounded-[1.35rem] bg-slate-200 shadow-lg sm:h-[330px] lg:h-[350px]">
+
+                        <img
+                            src="{{ asset('assets/img/adam-al-bulushi.jpeg') }}"
+                            alt="Adam Al Bulushi - Group General Manager"
+                            class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='{{ asset('assets/img/default-leader.jpg') }}';">
+
+                        {{-- Overlay --}}
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent">
+                        </div>
+
+                        {{-- Top Badge --}}
+                        <div class="absolute left-4 top-4">
+                            <div
+                                class="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/90 px-3 py-1.5 shadow-md backdrop-blur">
+
+                                <span class="h-2 w-2 rounded-full bg-cyan-500"></span>
+
+                                <span
+                                    class="text-[10px] font-black uppercase tracking-[0.15em] text-slate-900">
+                                    Executive Leadership
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Image Caption --}}
+                        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                            <p class="text-xl font-black text-white sm:text-2xl">
+                                Adam Al Bulushi
+                            </p>
+
+                            <p class="mt-1 text-xs font-bold text-blue-100 sm:text-sm">
+                                Group General Manager
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- General Manager Content --}}
+                <div class="order-2 px-5 pb-7 pt-2 sm:px-7 lg:px-9 lg:py-7 xl:px-10">
+
+                    {{-- Label --}}
+                    <div
+                        class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5">
+
+                        <span
+                            class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white">
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-3.5 w-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2">
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m6-4a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </span>
+
+                        <span
+                            class="text-[10px] font-black uppercase tracking-[0.18em] text-blue-700">
+                            Executive Leadership
+                        </span>
+                    </div>
+
+                    {{-- Heading --}}
+                    <h2
+                        class="mt-4 text-2xl font-black leading-tight tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
+
+                        Adam Al Bulushi
+                    </h2>
+
+                    <p class="mt-1.5 text-base font-bold text-blue-600">
+                        Group General Manager
+                    </p>
+
+                    {{-- Divider --}}
+                    <div class="mt-4 flex items-center gap-2">
+                        <span
+                            class="h-1 w-12 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400">
+                        </span>
+
+                        <span class="h-1 w-2 rounded-full bg-blue-200"></span>
+                    </div>
+
+                    {{-- Description --}}
+                    <p class="mt-4 text-sm leading-6 text-slate-600 sm:text-[15px]">
+                        Adam Al Bulushi serves as the Group General Manager of
+                        <strong class="font-bold text-slate-900">
+                            Global Phone Technology LLC
+                        </strong>.
+                        He plays a key role in managing business operations,
+                        strengthening organisational performance and supporting
+                        the group’s continued growth.
+                    </p>
+
+                    <p class="mt-3 text-sm leading-6 text-slate-600 sm:text-[15px]">
+                        With strong leadership and market knowledge, he works closely
+                        with the management team to improve operational efficiency,
+                        develop valuable partnerships and execute the group’s
+                        long-term vision.
+                    </p>
+
+                    {{-- Compact Highlights --}}
+                    <div class="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+
+                        <div
+                            class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+                            <div
+                                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4.5 w-4.5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2">
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m6-4a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+
+                            <div>
+                                <p class="text-xs font-black text-slate-900">
+                                    Leadership
+                                </p>
+
+                                <p class="text-[10px] leading-4 text-slate-500">
+                                    Guiding teams
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+                            <div
+                                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-50 text-cyan-600">
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4.5 w-4.5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2">
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M3 17l6-6 4 4 8-8M14 7h7v7" />
+                                </svg>
+                            </div>
+
+                            <div>
+                                <p class="text-xs font-black text-slate-900">
+                                    Growth
+                                </p>
+
+                                <p class="text-[10px] leading-4 text-slate-500">
+                                    Market expansion
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+
+                            <div
+                                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4.5 w-4.5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2">
+
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+
+                            <div>
+                                <p class="text-xs font-black text-slate-900">
+                                    Operations
+                                </p>
+
+                                <p class="text-[10px] leading-4 text-slate-500">
+                                    Better execution
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Organisation --}}
+                    <div
+                        class="mt-4 flex items-center gap-3 rounded-xl border border-blue-100 bg-blue-50/70 p-3">
+
+                        <div
+                            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-xs font-black text-white shadow-md">
+                            GPT
+                        </div>
+
+                        <div>
+                            <p
+                                class="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-500">
+                                Organisation
+                            </p>
+
+                            <p class="mt-0.5 text-xs font-black text-slate-900 sm:text-sm">
+                                Global Phone Technology LLC
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 
     {{-- 03. COMPANY HISTORY & OVERVIEW --}}
     <section class="about-section-soft py-10 sm:py-12 lg:py-14">
