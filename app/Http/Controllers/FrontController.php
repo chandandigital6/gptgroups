@@ -698,6 +698,11 @@ public function tradingDistribution()
 
 
 
+public function realEstate()
+{
+    return view('front.real_estate');
+}
+
 public function sitemap()
 {
     return view('front.sitemap');

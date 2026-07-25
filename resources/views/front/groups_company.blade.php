@@ -40,8 +40,8 @@
 
                     <div class="mt-6 grid max-w-xl grid-cols-3 gap-3">
                         <div class="rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
-                            <p class="text-2xl font-black text-blue-700">06</p>
-                            <p class="mt-1 text-xs font-bold text-slate-600">Group Companies</p>
+                            <p class="text-2xl font-black text-blue-700">Growing</p>
+                            <p class="mt-1 text-xs font-bold text-slate-600">Business Portfolio</p>
                         </div>
 
                         <div class="rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm">
@@ -154,578 +154,188 @@
 
 
     {{-- =========================================================
-    SWASTIKA TELECOM — PREMIUM VENDOR PARTNER
-    LIGHT BLUE / CYAN WEBSITE THEME
-========================================================= --}}
-<section class="relative overflow-hidden bg-white py-10 sm:py-12 lg:py-14">
-
-    {{-- Background Decorations --}}
-    <div
-        class="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-blue-100/65 blur-3xl">
-    </div>
-
-    <div
-        class="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-cyan-100/60 blur-3xl">
-    </div>
-
-    <div
-        class="pointer-events-none absolute inset-0 opacity-[0.025]"
-        style="
-            background-image: radial-gradient(#0f172a 1px, transparent 1px);
-            background-size: 27px 27px;
-        ">
-    </div>
-
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        {{-- Section Intro --}}
-        <div class="mx-auto max-w-3xl text-center">
-
-            <div
-                class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 shadow-sm">
-
-                <span class="relative flex h-2.5 w-2.5">
-                    <span
-                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-40">
-                    </span>
-
-                    <span
-                        class="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-600">
-                    </span>
-                </span>
-
-                <span
-                    class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700 sm:text-[11px]">
-                    Premium Vendor Partner
-                </span>
+        SWASTIKA TELECOM — STRATEGIC VENDOR PARTNER
+    ========================================================= --}}
+    <section class="relative overflow-hidden bg-white py-12 sm:py-14 lg:py-16">
+        <div class="pointer-events-none absolute inset-0">
+            <div class="absolute -left-24 top-12 h-72 w-72 rounded-full bg-blue-100/70 blur-3xl"></div>
+            <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-cyan-100/70 blur-3xl"></div>
+            <div class="absolute inset-0 opacity-[0.025]"
+                style="background-image:radial-gradient(#0f172a 1px,transparent 1px);background-size:28px 28px;">
             </div>
-
-            <h2
-                class="mt-4 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
-
-                Growing stronger together with
-
-                <span
-                    class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
-                    Swastika Telecom.
-                </span>
-            </h2>
-
-            <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
-                A strategic collaboration that combines GPT Group’s international
-                sourcing and distribution experience with Swastika Telecom’s
-                growing presence across African markets.
-            </p>
         </div>
 
-        {{-- Main Partner Card --}}
-        <div
-            class="mt-8 overflow-hidden rounded-[1.8rem] border border-slate-200 bg-white shadow-[0_22px_65px_rgba(15,23,42,0.10)] sm:mt-10">
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center">
+                <span
+                    class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-700 shadow-sm sm:text-[11px]">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-40"></span>
+                        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-600"></span>
+                    </span>
+                    Strategic Vendor Partnership
+                </span>
 
-            <div class="grid items-stretch lg:grid-cols-[1.08fr_.92fr]">
+                <h2 class="mt-5 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                    Global capability.
+                    <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
+                        Stronger local reach.
+                    </span>
+                </h2>
 
-                {{-- =====================================================
-                    LEFT: LOGO AND CONTENT
-                ====================================================== --}}
-                <div
-                    class="order-1 relative flex flex-col justify-center px-5 py-7 sm:px-7 sm:py-9 lg:px-9 lg:py-10 xl:px-12">
+                <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+                    GPT Group and Swastika Telecom combine global sourcing, distribution expertise
+                    and local market intelligence to build dependable technology channels across Africa.
+                </p>
+            </div>
 
-                    {{-- Decorative Background Shape --}}
-                    <div
-                        class="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-blue-50">
+            <div
+                class="mt-9 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_80px_rgba(15,23,42,0.12)] lg:mt-11">
+                <div class="grid lg:grid-cols-[.9fr_1.1fr]">
+                    {{-- Visual Panel --}}
+                    <div class="relative min-h-[380px] overflow-hidden bg-slate-950 sm:min-h-[440px] lg:min-h-[650px]">
+                        <img
+                            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1500&q=85"
+                            alt="GPT Group and Swastika Telecom technology distribution partnership"
+                            class="absolute inset-0 h-full w-full object-cover"
+                            loading="lazy">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-blue-950/10"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-950/35 to-transparent"></div>
+
+                        <div class="absolute left-5 right-5 top-5 sm:left-7 sm:right-7 sm:top-7">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <span
+                                    class="rounded-full border border-white/20 bg-slate-950/45 px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-white backdrop-blur-md">
+                                    GPT Group × Swastika Telecom
+                                </span>
+
+                                <span
+                                    class="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-400/15 px-3 py-2 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-100 backdrop-blur-md">
+                                    <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                                    Growing Together
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+                            <div class="rounded-2xl border border-white/15 bg-slate-950/65 p-5 text-white shadow-2xl backdrop-blur-md sm:p-6">
+                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-300">
+                                    Shared Regional Vision
+                                </p>
+
+                                <h3 class="mt-3 text-2xl font-black leading-tight sm:text-3xl">
+                                    Building a stronger technology distribution network across Africa.
+                                </h3>
+
+                                <p class="mt-3 text-sm leading-7 text-slate-200">
+                                    Connecting reliable international supply with local dealer relationships,
+                                    market knowledge and scalable operational support.
+                                </p>
+
+                                <div class="mt-5 grid grid-cols-3 gap-2">
+                                    <div class="rounded-xl border border-white/10 bg-white/10 p-3">
+                                        <p class="text-lg font-black">2+</p>
+                                        <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-slate-300">Core Markets</p>
+                                    </div>
+                                    <div class="rounded-xl border border-white/10 bg-white/10 p-3">
+                                        <p class="text-lg font-black">B2B</p>
+                                        <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-slate-300">Channel Focus</p>
+                                    </div>
+                                    <div class="rounded-xl border border-white/10 bg-white/10 p-3">
+                                        <p class="text-lg font-black">360°</p>
+                                        <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-slate-300">Support Model</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div
-                        class="pointer-events-none absolute bottom-0 right-0 h-40 w-40 rounded-tl-[6rem] bg-cyan-50/70">
-                    </div>
+                    {{-- Content Panel --}}
+                    <div class="relative flex flex-col justify-center px-5 py-8 sm:px-8 sm:py-10 lg:px-10 xl:px-12">
+                        <div class="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-bl-[7rem] bg-gradient-to-br from-blue-50 to-cyan-50"></div>
 
-                    <div class="relative">
-
-                        {{-- Logo Area --}}
-                        <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-
+                        <div class="relative">
                             <div
-                                class="flex min-h-[92px] w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm sm:w-auto sm:min-w-[310px]">
-
+                                class="inline-flex min-h-[92px] w-full max-w-[390px] items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm">
                                 <img
                                     src="https://swastikatelecom.com/wp-content/uploads/2026/03/Logo-Final-350x97-1.png"
-                                    alt="Swastika Telecom Logo"
-                                    class="h-auto w-[230px] max-w-full object-contain sm:w-[270px]"
+                                    alt="Swastika Telecom logo"
+                                    class="h-auto w-[280px] max-w-full object-contain"
                                     loading="lazy">
                             </div>
 
-                            <div
-                                class="inline-flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2">
+                            <p class="mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
+                                Premium Vendor Partner
+                            </p>
 
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4 text-amber-600"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2">
+                            <h3 class="mt-2 text-2xl font-black leading-tight text-slate-950 sm:text-3xl">
+                                One partnership designed for reliable supply, wider reach and long-term growth.
+                            </h3>
 
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.036 6.266a1 1 0 00.95.69h6.588c.969 0 1.371 1.24.588 1.81l-5.33 3.872a1 1 0 00-.364 1.118l2.036 6.266c.3.921-.755 1.688-1.539 1.118l-5.33-3.872a1 1 0 00-1.176 0l-5.33 3.872c-.783.57-1.838-.197-1.539-1.118l2.036-6.266a1 1 0 00-.364-1.118l-5.33-3.872c-.783-.57-.38-1.81.588-1.81h6.588a1 1 0 00.95-.69l2.036-6.266z" />
-                                </svg>
+                            <div class="mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500"></div>
 
-                                <span
-                                    class="text-[10px] font-black uppercase tracking-[0.15em] text-amber-700">
-                                    Featured Partner
-                                </span>
-                            </div>
-                        </div>
-
-                        {{-- Name --}}
-                        <p
-                            class="mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
-                            GPT Group × Swastika Telecom
-                        </p>
-
-                        <h3
-                            class="mt-2 text-2xl font-black leading-tight text-slate-950 sm:text-3xl lg:text-[2.15rem]">
-                            Building a stronger technology distribution network
-                            across Africa.
-                        </h3>
-
-                        {{-- Divider --}}
-                        <div class="mt-4 flex items-center gap-2">
-                            <span
-                                class="h-1 w-14 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500">
-                            </span>
-
-                            <span class="h-1 w-3 rounded-full bg-blue-200"></span>
-
-                            <span class="h-1 w-3 rounded-full bg-cyan-200"></span>
-                        </div>
-
-                        {{-- Main Content --}}
-                        <p class="mt-5 text-sm leading-7 text-slate-600 sm:text-[15px]">
-                            Swastika Telecom works closely with
-                            <strong class="font-black text-slate-900">
-                                GPT Group, Oman
-                            </strong>
-                            to develop a dependable and scalable technology
-                            distribution ecosystem for East and Central Africa.
-                            The partnership brings together GPT Group’s extensive
-                            supplier relationships, product sourcing capabilities,
-                            brand experience and operational expertise with
-                            Swastika Telecom’s strong understanding of local
-                            customers, dealers and retail markets.
-                        </p>
-
-                        <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-[15px]">
-                            Through this collaboration, both organisations are able
-                            to plan product availability more effectively, strengthen
-                            dealer relationships, improve last-mile delivery and
-                            create better access to trusted international technology
-                            brands across
-                            <strong class="font-black text-slate-900">
+                            <p class="mt-5 text-sm leading-7 text-slate-600 sm:text-[15px]">
+                                GPT Group supports the partnership through international supplier relationships,
+                                strategic product sourcing, brand experience and operational planning. Swastika
+                                Telecom adds strong local knowledge, dealer connections and retail reach across
                                 Uganda and the Democratic Republic of the Congo.
-                            </strong>
-                        </p>
-
-                        {{-- How We Work Together --}}
-                        <div
-                            class="mt-6 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50/80 to-cyan-50/70 p-4 sm:p-5">
-
-                            <p
-                                class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
-                                How We Work Together
                             </p>
 
-                            <div class="mt-4 grid gap-3 sm:grid-cols-2">
-
-                                {{-- Item 1 --}}
-                                <div class="flex items-start gap-3">
-
-                                    <div
-                                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-blue-700 shadow-sm">
-
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-4.5 w-4.5"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            stroke-width="2">
-
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M3 7h18M5 7l1 13h12l1-13M9 11v5m6-5v5M8 7l1-3h6l1 3" />
-                                        </svg>
+                            <div class="mt-6 grid gap-3 sm:grid-cols-2">
+                                @foreach ([
+                                    ['Global Sourcing', 'Reliable product access and supplier coordination.'],
+                                    ['Channel Development', 'Dealer, reseller and retail network expansion.'],
+                                    ['Operational Support', 'Planning, fulfilment, training and after-sales coordination.'],
+                                    ['Market Expansion', 'New categories, territories and growth opportunities.'],
+                                ] as [$title, $description])
+                                    <div class="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50/60">
+                                        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-xs font-black text-white">
+                                            {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                                        </span>
+                                        <h4 class="mt-3 text-sm font-black text-slate-950">{{ $title }}</h4>
+                                        <p class="mt-1.5 text-xs leading-5 text-slate-600">{{ $description }}</p>
                                     </div>
-
-                                    <div>
-                                        <p class="text-xs font-black text-slate-950">
-                                            Global Product Sourcing
-                                        </p>
-
-                                        <p class="mt-1 text-[11px] leading-5 text-slate-600">
-                                            GPT Group supports brand relationships,
-                                            sourcing strategy and reliable product access.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {{-- Item 2 --}}
-                                <div class="flex items-start gap-3">
-
-                                    <div
-                                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-cyan-700 shadow-sm">
-
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-4.5 w-4.5"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            stroke-width="2">
-
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m6-4a4 4 0 11-8 0 4 4 0 018 0z" />
-                                        </svg>
-                                    </div>
-
-                                    <div>
-                                        <p class="text-xs font-black text-slate-950">
-                                            Local Channel Development
-                                        </p>
-
-                                        <p class="mt-1 text-[11px] leading-5 text-slate-600">
-                                            Swastika Telecom develops dealer,
-                                            reseller and retail relationships locally.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {{-- Item 3 --}}
-                                <div class="flex items-start gap-3">
-
-                                    <div
-                                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-indigo-700 shadow-sm">
-
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-4.5 w-4.5"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            stroke-width="2">
-
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-
-                                    <div>
-                                        <p class="text-xs font-black text-slate-950">
-                                            Operational Support
-                                        </p>
-
-                                        <p class="mt-1 text-[11px] leading-5 text-slate-600">
-                                            Shared planning improves supply,
-                                            fulfilment, training and after-sales coordination.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {{-- Item 4 --}}
-                                <div class="flex items-start gap-3">
-
-                                    <div
-                                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-emerald-700 shadow-sm">
-
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-4.5 w-4.5"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            stroke-width="2">
-
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M3 17l6-6 4 4 8-8M14 7h7v7" />
-                                        </svg>
-                                    </div>
-
-                                    <div>
-                                        <p class="text-xs font-black text-slate-950">
-                                            Market Expansion
-                                        </p>
-
-                                        <p class="mt-1 text-[11px] leading-5 text-slate-600">
-                                            Both teams identify new territories,
-                                            categories and long-term growth opportunities.
-                                        </p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
 
-                        {{-- Future Growth Heading --}}
-                        <h4 class="mt-6 text-lg font-black text-slate-950">
-                            Taking the partnership further
-                        </h4>
+                            <div class="mt-6 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 via-white to-cyan-50 p-5">
+                                <p class="text-[10px] font-black uppercase tracking-[0.18em] text-blue-700">
+                                    Future Growth
+                                </p>
+                                <p class="mt-2 text-sm leading-7 text-slate-700">
+                                    The collaboration can grow through wider product portfolios, stronger retail
+                                    coverage, new brand partnerships, digital ordering systems and dedicated
+                                    regional service networks.
+                                </p>
+                            </div>
 
-                        <p class="mt-2 text-sm leading-7 text-slate-600 sm:text-[15px]">
-                            Going forward, GPT Group and Swastika Telecom can expand
-                            their collaboration through wider product portfolios,
-                            stronger retail coverage, additional brand partnerships,
-                            improved digital ordering systems and dedicated regional
-                            service networks. This shared approach creates a strong
-                            foundation for sustainable growth and long-term leadership
-                            in Africa’s evolving consumer technology market.
-                        </p>
-
-                        {{-- Brand and Region Tags --}}
-                        <div class="mt-5 flex flex-wrap gap-2">
-
-                            @foreach ([
-                                'Samsung Electronics',
-                                'UGREEN',
-                                'Uganda',
-                                'DR Congo',
-                                'Product Distribution',
-                                'Channel Development',
-                            ] as $item)
-                                <span
-                                    class="rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-[10px] font-black text-blue-700 sm:text-[11px]">
-
-                                    {{ $item }}
-                                </span>
-                            @endforeach
-                        </div>
-
-                        {{-- Buttons --}}
-                        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-
-                            <a
-                                href="https://swastikatelecom.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-5 py-3 text-xs font-black text-white shadow-lg shadow-blue-700/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl sm:text-sm">
-
-                                Visit Swastika Telecom
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2.4">
-
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M14 3h7m0 0v7m0-7L10 14M5 5h5M5 5v14h14v-5" />
-                                </svg>
-                            </a>
-
-                            <a
-                                href="{{ route('contact') }}"
-                                class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-xs font-black text-slate-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 hover:shadow-md sm:text-sm">
-
-                                Partnership Enquiry
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2.4">
-
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- =====================================================
-                    RIGHT: ONLINE IMAGE
-                ====================================================== --}}
-                <div
-                    class="order-2 relative min-h-[310px] overflow-hidden bg-slate-200 sm:min-h-[400px] lg:min-h-full">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=85"
-                        alt="Technology distribution and logistics partnership"
-                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-700 hover:scale-[1.03]"
-                        loading="lazy">
-
-                    {{-- Blue Theme Overlay --}}
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent">
-                    </div>
-
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-blue-950/25 via-transparent to-transparent">
-                    </div>
-
-                    {{-- Image Top Badge --}}
-                    <div class="absolute right-4 top-4 sm:right-5 sm:top-5">
-
-                        <div
-                            class="rounded-2xl border border-white/30 bg-white/90 px-4 py-3 text-right shadow-xl backdrop-blur-md">
-
-                            <p
-                                class="text-[9px] font-black uppercase tracking-[0.18em] text-blue-700">
-                                Strategic Support
-                            </p>
-
-                            <p class="mt-1 text-sm font-black text-slate-950">
-                                GPT Group, Oman
-                            </p>
-                        </div>
-                    </div>
-
-                    {{-- Image Bottom Content --}}
-                    <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6 lg:p-7">
-
-                        <div
-                            class="rounded-2xl border border-white/20 bg-slate-950/65 p-5 text-white shadow-xl backdrop-blur-md">
-
-                            <div class="flex items-start gap-3">
-
-                                <div
-                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/20 text-cyan-300 ring-1 ring-white/15">
-
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2">
-
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0c2.5 2.7 3.8 6 3.8 10S14.5 19.3 12 22m0-20C9.5 4.7 8.2 8 8.2 12S9.5 19.3 12 22M2 12h20" />
+                            <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                                <a href="https://swastikatelecom.com/" target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 px-6 py-3 text-xs font-black text-white shadow-lg shadow-blue-700/20 transition hover:-translate-y-0.5 sm:text-sm">
+                                    Visit Swastika Telecom
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M14 3h7m0 0v7m0-7L10 14M5 5h5M5 5v14h14v-5" />
                                     </svg>
-                                </div>
+                                </a>
 
-                                <div>
-                                    <p
-                                        class="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-300">
-                                        Shared Regional Vision
-                                    </p>
-
-                                    <p class="mt-2 text-sm font-semibold leading-6 text-slate-100">
-                                        Connecting reliable global technology supply
-                                        with local market knowledge, strong dealer
-                                        networks and sustainable growth across Africa.
-                                    </p>
-                                </div>
-                            </div>
-
-                            {{-- Mini Stats --}}
-                            <div class="mt-4 grid grid-cols-3 gap-2">
-
-                                <div
-                                    class="rounded-xl border border-white/10 bg-white/10 p-3">
-                                    <p class="text-base font-black text-white">
-                                        2+
-                                    </p>
-
-                                    <p class="mt-1 text-[9px] font-bold uppercase text-slate-300">
-                                        Core Markets
-                                    </p>
-                                </div>
-
-                                <div
-                                    class="rounded-xl border border-white/10 bg-white/10 p-3">
-                                    <p class="text-base font-black text-white">
-                                        B2B
-                                    </p>
-
-                                    <p class="mt-1 text-[9px] font-bold uppercase text-slate-300">
-                                        Channel Focus
-                                    </p>
-                                </div>
-
-                                <div
-                                    class="rounded-xl border border-white/10 bg-white/10 p-3">
-                                    <p class="text-base font-black text-white">
-                                        360°
-                                    </p>
-
-                                    <p class="mt-1 text-[9px] font-bold uppercase text-slate-300">
-                                        Support Model
-                                    </p>
-                                </div>
+                                <a href="{{ route('contact') }}"
+                                    class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-xs font-black text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 sm:text-sm">
+                                    Partnership Enquiry
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        {{-- Bottom Partnership Vision Bar --}}
-        <div
-            class="mt-5 overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 via-white to-cyan-50 p-5 shadow-sm sm:p-6">
-
-            <div class="grid items-center gap-4 sm:grid-cols-[auto_1fr_auto]">
-
-                <div
-                    class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-700 to-cyan-500 text-white shadow-lg shadow-blue-600/20">
-
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2">
-
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M8 11l4-4 4 4m-8 2l4 4 4-4M4 8l4 4-4 4m16-8l-4 4 4 4" />
-                    </svg>
-                </div>
-
-                <div>
-                    <p
-                        class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
-                        One Partnership. Shared Ambition.
-                    </p>
-
-                    <p class="mt-1.5 text-sm font-semibold leading-6 text-slate-700">
-                        GPT Group provides global strength and operational expertise;
-                        Swastika Telecom converts that strength into meaningful
-                        local reach, stronger distribution and new growth opportunities.
-                    </p>
-                </div>
-
-                <div
-                    class="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-black text-emerald-700">
-
-                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-
-                    Growing Together
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
+    </section>
 
 
    {{-- =========================================================
@@ -774,7 +384,7 @@
             <h2
                 class="mt-4 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
 
-                Six companies.
+                A growing portfolio.
                 <span
                     class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
                     One shared vision.
@@ -782,9 +392,9 @@
             </h2>
 
             <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
-                Explore the businesses that form GPT Group and support its presence
-                across technology, international trade, digital commerce, retail
-                and project solutions.
+                Discover the growing network of businesses shaping GPT Group across technology,
+                international trade, digital commerce, retail and project solutions.
+                Our portfolio continues to evolve as new opportunities and companies join the Group.
             </p>
         </div>
 
@@ -794,6 +404,7 @@
                     'number' => '01',
                     'name' => 'Global Phone Technology',
                     'short_name' => 'GPT',
+                    'logo' => asset('assets/logo/GPT-Group-Logo.webp'),
                     'category' => 'Technology Distribution',
                     'image' =>
                         'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1400&q=80',
@@ -806,6 +417,7 @@
                     'number' => '02',
                     'name' => 'Global Phone Technology International',
                     'short_name' => 'GPT International',
+                    'logo' => null,
                     'category' => 'International Business',
                     'image' =>
                         'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80',
@@ -818,6 +430,7 @@
                     'number' => '03',
                     'name' => 'Global Digital Company',
                     'short_name' => 'GDC',
+                    'logo' => null,
                     'category' => 'Digital Commerce',
                     'image' =>
                         'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80',
@@ -830,6 +443,7 @@
                     'number' => '04',
                     'name' => 'Mosaic',
                     'short_name' => 'Mosaic',
+                    'logo' => asset('assets/logo brands/Mosaic_Logo.svg.webp'),
                     'category' => 'Lifestyle & Retail',
                     'image' =>
                         'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
@@ -842,6 +456,7 @@
                     'number' => '05',
                     'name' => 'Smart Concept Solutions',
                     'short_name' => 'SCS',
+                    'logo' => asset('assets/logo brands/life smart.png'),
                     'category' => 'Technology Solutions',
                     'image' =>
                         'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80',
@@ -854,6 +469,7 @@
                     'number' => '06',
                     'name' => 'Global Spec',
                     'short_name' => 'Global Spec',
+                    'logo' => asset('assets/logo brands/gsp.jpeg'),
                     'category' => 'Architectural Hardware',
                     'image' =>
                         'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=80',
@@ -861,6 +477,19 @@
                         'Global Spec Middle East is a specialist division of GPT Group serving architectural and project requirements. Its portfolio includes architectural hardware, decorative hardware, life-safety products, electronic access control, hotel locking systems and door solutions.',
                     'tags' => ['Architectural Hardware', 'Access Control', 'Door Solutions', 'Project Supply'],
                     'website' => 'https://globalspecworld.com/',
+                ],
+                [
+                    'number' => '07',
+                    'name' => 'Merit',
+                    'short_name' => 'Merit',
+                    'logo' => asset('assets/logo brands/merit.jpeg'),
+                    'category' => 'Emerging Group Business',
+                    'image' =>
+                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80',
+                    'description' =>
+                        'Merit is part of GPT Group’s expanding business portfolio, created to pursue new market opportunities with the same commitment to quality, customer value and sustainable growth that guides the wider Group.',
+                    'tags' => ['Business Growth', 'New Opportunities', 'Customer Value', 'GPT Group'],
+                    'website' => null,
                 ],
             ];
         @endphp
@@ -913,6 +542,16 @@
                                     {{ $company['number'] }}
                                 </span>
                             </div>
+
+                            @if (filled($company['logo']))
+                                <div class="absolute left-5 bottom-24 rounded-2xl border border-white/30 bg-white/95 px-5 py-4 shadow-xl backdrop-blur-md sm:left-6">
+                                    <img src="{{ $company['logo'] }}"
+                                        alt="{{ $company['name'] }} logo"
+                                        class="max-h-14 w-auto max-w-[210px] object-contain"
+                                        loading="lazy"
+                                        onerror="this.closest('div').style.display='none'">
+                                </div>
+                            @endif
 
                             {{-- Image Bottom Title --}}
                             <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6">

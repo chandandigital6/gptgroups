@@ -1140,19 +1140,24 @@
 </section>
 
 {{-- 08. OUR BUSINESS VERTICALS --}}
+{{-- 08. OUR BUSINESS VERTICALS --}}
 <section class="section-muted py-10 sm:py-12 lg:py-14">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        {{-- Section Heading --}}
         <div class="mx-auto max-w-3xl text-center">
             <p class="text-xs font-black uppercase tracking-[.22em] text-blue-700 sm:text-sm">
                 Our Business Verticals
             </p>
 
             <h2 class="mt-3 text-3xl font-black text-slate-950 sm:text-4xl lg:text-5xl">
-                Four pillars. One technology ecosystem.
+                Five pillars. One integrated business ecosystem.
             </h2>
 
             <p class="mt-4 text-base leading-7 text-slate-600 lg:text-[17px]">
-                We connect brands, products and business solutions through a complete distribution and execution platform.
+                We connect technology, infrastructure, smart solutions and
+                real estate opportunities through a complete business and
+                execution platform.
             </p>
         </div>
 
@@ -1160,43 +1165,52 @@
             $businessVerticals = [
                 [
                     'number' => '01',
-                    'title' => 'Mobile & Consumer Electronics',
-                    'description' => 'Smartphones, tablets, wearables, accessories and consumer technology from trusted global brands.',
-                    'link' => route('business.mobile'),
+                    'title' => 'Mobility Solutions',
+                    'description' => 'Smartphones, tablets, wearables, accessories and mobility products from trusted global technology brands.',
+                    'route' => 'business.mobility',
                 ],
                 [
                     'number' => '02',
-                    'title' => 'Security & Surveillance Solutions',
-                    'description' => 'CCTV, video surveillance, access control and intelligent security systems.',
-                    'link' => route('business.security'),
+                    'title' => 'Integrated Security & ELV Solutions',
+                    'description' => 'CCTV, access control, video surveillance, fire alarm and integrated low-voltage security systems.',
+                    'route' => 'business.security-elv',
                 ],
                 [
                     'number' => '03',
-                    'title' => 'IT Infrastructure & Enterprise Solutions',
-                    'description' => 'Networking, structured cabling and scalable business infrastructure.',
-                    'link' => route('business.infrastructure'),
+                    'title' => 'Smart Home & IoT Solutions',
+                    'description' => 'Connected automation, intelligent devices and smart technology solutions for homes and businesses.',
+                    'route' => 'business.smart-home-iot',
                 ],
                 [
                     'number' => '04',
-                    'title' => 'Trading & Distribution',
-                    'description' => 'Sourcing, supply chain, channel development and GCC market expansion.',
-                    'link' => route('business.trading'),
+                    'title' => 'Network Infrastructure & Structured Cabling',
+                    'description' => 'Reliable networking, structured cabling and scalable infrastructure solutions for modern organisations.',
+                    'route' => 'business.network',
+                ],
+                [
+                    'number' => '05',
+                    'title' => 'Real Estate',
+                    'description' => 'Strategic real estate development, commercial opportunities, investments and long-term property partnerships.',
+                    'route' => 'business.real-estate',
                 ],
             ];
         @endphp
 
-        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {{-- Business Cards --}}
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             @foreach ($businessVerticals as $vertical)
                 <a
-                    href="{{ $vertical['link'] }}"
-                    class="soft-card soft-card-hover group rounded-2xl p-5"
+                    href="{{ route($vertical['route']) }}"
+                    class="soft-card soft-card-hover group flex h-full flex-col rounded-2xl p-5"
                 >
                     <div class="flex items-center justify-between gap-4">
                         <span class="text-gradient text-3xl font-black">
                             {{ $vertical['number'] }}
                         </span>
 
-                        <span class="grid h-9 w-9 place-items-center rounded-full bg-blue-50 text-lg text-blue-700 transition group-hover:bg-blue-600 group-hover:text-white">
+                        <span
+                            class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue-50 text-lg text-blue-700 transition duration-200 group-hover:bg-blue-600 group-hover:text-white"
+                        >
                             →
                         </span>
                     </div>
@@ -1208,13 +1222,22 @@
                     <p class="mt-3 text-sm leading-6 text-slate-600">
                         {{ $vertical['description'] }}
                     </p>
+
+                    <span class="mt-auto pt-5 text-sm font-black text-blue-700">
+                        Explore Solution
+                    </span>
                 </a>
             @endforeach
         </div>
 
-        <div class="mt-7 text-center">
-            <a href="{{ route('business.index') }}" class="btn-blue px-6 py-3 text-sm">
+        {{-- View All Button --}}
+        <div class="mt-8 text-center">
+            <a
+                href="{{ route('business.index') }}"
+                class="btn-blue inline-flex items-center justify-center gap-2 px-6 py-3 text-sm"
+            >
                 View All Business Verticals
+                <span aria-hidden="true">→</span>
             </a>
         </div>
     </div>
@@ -1365,6 +1388,15 @@
     */
 
     $featuredProductBrands = [
+         [
+            'name' => 'Hikvision',
+            'logo_names' => ['hikvision'],
+            'website' => 'https://www.hikvision.com/en/',
+            'category' => 'Security & Surveillance',
+            'description' => 'Professional CCTV, video surveillance, access control, intercom and security solutions.',
+            'priority' => true,
+            'priority_text' => 'Primary Brand',
+        ],
         [
             'name' => 'Samsung',
             'logo_names' => ['sumsung', 'samsung'],
@@ -1374,15 +1406,7 @@
             'priority' => true,
             'priority_text' => 'Primary Brand',
         ],
-        [
-            'name' => 'Hikvision',
-            'logo_names' => ['hikvision'],
-            'website' => 'https://www.hikvision.com/en/',
-            'category' => 'Security & Surveillance',
-            'description' => 'Professional CCTV, video surveillance, access control, intercom and security solutions.',
-            'priority' => true,
-            'priority_text' => 'Primary Brand',
-        ],
+       
         [
             'name' => 'Vivo',
             'logo_names' => ['vivo'],

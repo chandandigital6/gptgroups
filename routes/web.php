@@ -115,44 +115,32 @@ Route::get('/vendor', [FrontController::class, 'vendor'])->name('vendor');
 
 
 
-Route::prefix('business-verticals')
+
+
+
+    Route::prefix('business')
     ->name('business.')
     ->group(function () {
-        Route::get('/', [FrontController::class, 'businessVerticals'])
+        Route::get('/', [FrontController::class, 'solutions'])
             ->name('index');
 
-        Route::get(
-            '/mobile-consumer-electronics',
-            [FrontController::class, 'mobileConsumerElectronics']
-        )->name('mobile');
+        Route::get('/mobility-solutions', [FrontController::class, 'mobilitySolutions'])
+            ->name('mobility');
+
+        Route::get('/integrated-security-elv-solutions', [FrontController::class, 'integratedSecurityElvSolutions'])
+            ->name('security-elv');
+
+        Route::get('/smart-home-iot-solutions', [FrontController::class, 'smartHomeIotSolutions'])
+            ->name('smart-home-iot');
 
         Route::get(
-            '/security-solutions',
-            [FrontController::class, 'securitySolutions']
-        )->name('security');
+            '/network-infrastructure-structured-cabling-solutions',
+            [FrontController::class, 'networkInfrastructureStructuredCablingSolutions']
+        )->name('network');
 
-        Route::get(
-            '/it-infrastructure-solutions',
-            [FrontController::class, 'itInfrastructureSolutions']
-        )->name('infrastructure');
-
-        Route::get(
-            '/trading-distribution',
-            [FrontController::class, 'tradingDistribution']
-        )->name('trading');
+        Route::get('/real-estate', [FrontController::class, 'realEstate'])
+            ->name('real-estate');
     });
-
-
-    Route::prefix('solutions')
-    ->name('solutions.')
-    ->group(function () {
-        Route::get('/', [FrontController::class, 'solutions'])->name('index');
-        Route::get('/mobility-solutions', [FrontController::class, 'mobilitySolutions'])->name('mobility');
-        Route::get('/integrated-security-elv-solutions', [FrontController::class, 'integratedSecurityElvSolutions'])->name('security-elv');
-        Route::get('/smart-home-iot-solutions', [FrontController::class, 'smartHomeIotSolutions'])->name('smart-home-iot');
-        Route::get('/network-infrastructure-structured-cabling-solutions', [FrontController::class, 'networkInfrastructureStructuredCablingSolutions'])->name('network');
-    });
-
 
 
 

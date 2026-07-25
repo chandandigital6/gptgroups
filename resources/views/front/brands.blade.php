@@ -63,12 +63,12 @@
                 'description' => 'Smartphones focused on design, camera and performance.',
                 'initials' => 'VI',
             ],
-            [
-                'name' => 'Honor',
-                'logo' => asset('assets/logo brands/honor_huawei_together.jpg'),
-                'description' => 'Smartphones, tablets, laptops, wearables and connected devices.',
-                'initials' => 'HO',
-            ],
+            // [
+            //     'name' => 'Honor',
+            //     'logo' => asset('assets/logo brands/honor_huawei_together.jpg'),
+            //     'description' => 'Smartphones, tablets, laptops, wearables and connected devices.',
+            //     'initials' => 'HO',
+            // ],
         ];
 
         $supportAreas = [
