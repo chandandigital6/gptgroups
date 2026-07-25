@@ -80,6 +80,13 @@
                     'route' => 'business.network',
                     'active' => ['business.network'],
                 ],
+
+[
+                    'label' => 'Architectural Solutions',
+                    'route' => 'architecturalSolutions',
+                    'active' => ['architecturalSolutions'],
+                ],
+
                 [
                     'label' => 'Real Estate',
                     'route' => 'business.real-estate',

@@ -113,6 +113,9 @@ Route::get('/services', [FrontController::class, 'services'])->name('services');
 Route::get('/product/{slug}', [FrontController::class, 'productDetail'])->name('product.detail');
 Route::get('/vendor', [FrontController::class, 'vendor'])->name('vendor');
 
+Route::get('/architectural-solutions', [FrontController::class, 'architecturalSolutions'])->name('architecturalSolutions');
+
+
 
 
 

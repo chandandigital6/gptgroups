@@ -703,6 +703,13 @@ public function realEstate()
     return view('front.real_estate');
 }
 
+
+
+public function architecturalSolutions()
+{
+    return view('front.architectural_solutions');
+}
+
 public function sitemap()
 {
     return view('front.sitemap');
