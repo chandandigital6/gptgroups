@@ -478,19 +478,19 @@
                     'tags' => ['Architectural Hardware', 'Access Control', 'Door Solutions', 'Project Supply'],
                     'website' => 'https://globalspecworld.com/',
                 ],
-                [
-                    'number' => '07',
-                    'name' => 'Merit',
-                    'short_name' => 'Merit',
-                    'logo' => asset('assets/logo brands/merit.jpeg'),
-                    'category' => 'Emerging Group Business',
-                    'image' =>
-                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80',
-                    'description' =>
-                        'Merit is part of GPT Group’s expanding business portfolio, created to pursue new market opportunities with the same commitment to quality, customer value and sustainable growth that guides the wider Group.',
-                    'tags' => ['Business Growth', 'New Opportunities', 'Customer Value', 'GPT Group'],
-                    'website' => null,
-                ],
+                // [
+                //     'number' => '07',
+                //     'name' => 'Merit',
+                //     'short_name' => 'Merit',
+                //     'logo' => asset('assets/logo brands/merit.jpeg'),
+                //     'category' => 'Emerging Group Business',
+                //     'image' =>
+                //         'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80',
+                //     'description' =>
+                //         'Merit is part of GPT Group’s expanding business portfolio, created to pursue new market opportunities with the same commitment to quality, customer value and sustainable growth that guides the wider Group.',
+                //     'tags' => ['Business Growth', 'New Opportunities', 'Customer Value', 'GPT Group'],
+                //     'website' => null,
+                // ],
             ];
         @endphp
 
