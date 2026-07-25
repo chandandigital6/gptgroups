@@ -114,11 +114,11 @@
                 'retail_outlet',
             ],
             'children' => [
-                [
-                    'label' => 'GPT Oman Network',
-                    'route' => 'network',
-                    'active' => ['network'],
-                ],
+                // [
+                //     'label' => 'GPT Oman Network',
+                //     'route' => 'network',
+                //     'active' => ['network'],
+                // ],
                 [
                     'label' => 'Our Partners',
                     'route' => 'brands',
