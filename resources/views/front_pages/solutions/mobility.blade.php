@@ -72,11 +72,11 @@
             <div class="mx-auto flex min-h-[360px] max-w-7xl items-center px-4 py-14 sm:min-h-[390px] sm:px-6 sm:py-16 lg:min-h-[420px] lg:px-8 lg:py-20">
                 <div class="max-w-3xl">
                     <a
-                        href="{{ route('solutions.index') }}"
+                        href="{{ route('business.index') }}"
                         class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white hover:text-slate-950"
                     >
                         <span aria-hidden="true">←</span>
-                        All Solutions
+                        All business
                     </a>
 
                     <p class="mt-5 text-xs font-black uppercase tracking-[0.2em] text-cyan-300">

@@ -80,10 +80,10 @@
             <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl py-14 sm:py-16 lg:py-20">
                     <a
-                        href="{{ route('solutions.index') }}"
+                        href="{{ route('business.index') }}"
                         class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white hover:text-slate-950"
                     >
-                        ← All Solutions
+                        ← All business
                     </a>
 
                     <p class="mt-5 inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-cyan-300">
