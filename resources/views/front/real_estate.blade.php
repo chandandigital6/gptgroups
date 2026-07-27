@@ -90,7 +90,7 @@
 
                 <div class="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur-md">
                     <img
-                        src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=86"
+                        src="{{ asset('assets/gpt office.png') }}"
                         alt="Luxury residential interior"
                         class="h-[430px] w-full rounded-[1.4rem] object-cover"
                         loading="eager"

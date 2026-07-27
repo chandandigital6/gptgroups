@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=76"
+                    <img src="{{ asset('assets/under.png') }}"
                         alt="GPT Group business companies"
                         class="h-[240px] w-full rounded-xl object-cover sm:h-[270px] lg:h-[300px]" loading="eager"
                         fetchpriority="high">
@@ -404,10 +404,10 @@
                     'number' => '01',
                     'name' => 'Global Phone Technology',
                     'short_name' => 'GPT',
-                    'logo' => asset('assets/logo/GPT-Group-Logo.webp'),
+                    'logo' => null, //asset('assets/logo/GPT-Group-Logo.webp'),
                     'category' => 'Technology Distribution',
-                    'image' =>
-                        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1400&q=80',
+                    'image' =>asset('assets/frnt.png'),
+                        // 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1400&q=80',
                     'description' =>
                         'Global Phone Technology is the core technology distribution company of GPT Group. It serves Oman’s consumer and business markets with mobile devices, smartphones, accessories, smart security products, professional displays and connected technology solutions.',
                     'tags' => ['Mobility', 'Smart Security', 'Distribution', 'B2B Supply'],
@@ -443,10 +443,10 @@
                     'number' => '04',
                     'name' => 'Mosaic',
                     'short_name' => 'Mosaic',
-                    'logo' => asset('assets/logo brands/Mosaic_Logo.svg.webp'),
+                    'logo' => null,
                     'category' => 'Lifestyle & Retail',
-                    'image' =>
-                        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
+                    'image' => asset('assets/mosa.png'),
+                        // 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
                     'description' =>
                         'Mosaic represents the Group’s lifestyle and consumer-facing retail interests. The business is positioned around curated products, modern presentation and customer-focused retail experiences designed for evolving market preferences.',
                     'tags' => ['Retail', 'Lifestyle', 'Consumer Products', 'Customer Experience'],
@@ -469,10 +469,10 @@
                     'number' => '06',
                     'name' => 'Global Spec',
                     'short_name' => 'Global Spec',
-                    'logo' => asset('assets/logo brands/gsp.jpeg'),
+                    'logo' => null, //asset('assets/logo brands/gsp.jpeg'),
                     'category' => 'Architectural Hardware',
-                    'image' =>
-                        'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=80',
+                    'image' =>asset('assets/globle.png'),
+                        // 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=80',
                     'description' =>
                         'Global Spec Middle East is a specialist division of GPT Group serving architectural and project requirements. Its portfolio includes architectural hardware, decorative hardware, life-safety products, electronic access control, hotel locking systems and door solutions.',
                     'tags' => ['Architectural Hardware', 'Access Control', 'Door Solutions', 'Project Supply'],
