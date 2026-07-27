@@ -456,7 +456,7 @@
                     'number' => '05',
                     'name' => 'Smart Concept Solutions',
                     'short_name' => 'SCS',
-                    'logo' => asset('assets/logo brands/life smart.png'),
+                    'logo' => null,//asset('assets/logo brands/life smart.png'),
                     'category' => 'Technology Solutions',
                     'image' =>
                         'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80',
