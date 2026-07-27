@@ -1,17 +1,23 @@
 @extends('front_pages.front_components.main')
 
 @section('content')
-    @php
+   @php
         $partners = [
             [
                 'name' => 'Samsung',
-                'logo' => asset('assets/logo brands/sumsung.png'),
+                'logo' => asset('assets/logo brands/sum.jpeg'),
                 'description' => 'Smartphones, tablets, wearables and connected consumer technology.',
                 'initials' => 'SA',
             ],
+             [
+                'name' => 'Hikvision',
+                'logo' => asset('assets/logo brands/hikvision.png'),
+                'description' => 'Video surveillance, access control, intercom and security technologies.',
+                'initials' => 'HK',
+            ],
             [
-                'name' => 'Lava',
-                'logo' => asset('assets/logo brands/lava.png'),
+                'name' => 'Lg',
+                'logo' => asset('assets/logo brands/lg.png'),
                 'description' => 'Smartphones, feature phones and mobility products.',
                 'initials' => 'LA',
             ],
@@ -21,12 +27,7 @@
                 'description' => 'Design-led smartphones, audio products and connected devices.',
                 'initials' => 'NO',
             ],
-            [
-                'name' => 'Hikvision',
-                'logo' => asset('assets/logo brands/hikvision.png'),
-                'description' => 'Video surveillance, access control, intercom and security technologies.',
-                'initials' => 'HK',
-            ],
+           
             [
                 'name' => 'EZVIZ',
                 'logo' => asset('assets/logo brands/ezviz.png'),
@@ -40,20 +41,20 @@
                 'initials' => 'LS',
             ],
             [
-                'name' => 'Mobile Accessories',
-                'logo' => asset('assets/logo brands/mobile-accessories.png'),
-                'description' => 'Chargers, cables, audio products, power solutions and mobility accessories.',
+                'name' => 'Merit',
+                'logo' => asset('assets/logo brands/merit.jpeg'),
+                'description' => 'Architectural hardware..',
                 'initials' => 'MA',
             ],
             [
                 'name' => 'Fibrain',
-                'logo' => asset('assets/logo brands/fibrain.png'),
+                'logo' => asset('assets/logo brands/fibr.jpeg'),
                 'description' => 'Fiber-optic, FTTH and structured cabling solutions.',
                 'initials' => 'FB',
             ],
             [
                 'name' => 'Avlon',
-                'logo' => asset('assets/logo brands/Avlon.png'),
+                'logo' => asset('assets/logo brands/aval.jpeg'),
                 'description' => 'Structured cabling and network infrastructure products.',
                 'initials' => 'AV',
             ],
@@ -63,12 +64,12 @@
                 'description' => 'Smartphones focused on design, camera and performance.',
                 'initials' => 'VI',
             ],
-            // [
-            //     'name' => 'Honor',
-            //     'logo' => asset('assets/logo brands/honor_huawei_together.jpg'),
-            //     'description' => 'Smartphones, tablets, laptops, wearables and connected devices.',
-            //     'initials' => 'HO',
-            // ],
+            [
+                'name' => 'mi',
+                'logo' => asset('assets/logo brands/mi.webp'),
+                'description' => 'Smartphones, tablets, laptops, wearables and connected devices.',
+                'initials' => 'HO',
+            ],
         ];
 
         $supportAreas = [
@@ -90,7 +91,6 @@
             ],
         ];
     @endphp
-
     <style>
         .brand-slider {
             width: 100%;
