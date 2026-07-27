@@ -166,6 +166,190 @@
 {{-- OUTLETS LIST --}}
 
 @if($storeOutletSection && $storeOutletSection->activeOutlets->count())
+    <section
+        id="{{ $storeOutletSection->section_id ?: 'outlets' }}"
+        class="relative overflow-hidden bg-slate-50 py-12 sm:py-16 lg:py-20"
+    >
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -left-24 top-10 h-72 w-72 rounded-full bg-blue-100/60 blur-3xl"></div>
+            <div class="absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-cyan-100/60 blur-3xl"></div>
+        </div>
+
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div class="max-w-3xl">
+                    @if($storeOutletSection->label)
+                        <p class="text-sm font-black uppercase tracking-[.22em] text-blue-700">
+                            {{ $storeOutletSection->label }}
+                        </p>
+                    @endif
+
+                    <h2 class="mt-3 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                        {{ $storeOutletSection->title }}
+                    </h2>
+
+                    @if($storeOutletSection->description)
+                        <p class="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+                            {{ $storeOutletSection->description }}
+                        </p>
+                    @endif
+                </div>
+
+                @if($storeOutletSection->button_text)
+                    <a
+                        href="{{ $storeOutletSection->button_link ?: '#' }}"
+                        class="inline-flex w-fit items-center justify-center rounded-full bg-blue-600 px-7 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700"
+                    >
+                        {{ $storeOutletSection->button_text }}
+
+                        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                @endif
+            </div>
+
+            <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                @foreach($storeOutletSection->activeOutlets as $outlet)
+                    @php
+                        $badgeClass = match($outlet->theme) {
+                            'cyan' => 'bg-cyan-500 shadow-cyan-500/30',
+                            'slate' => 'bg-slate-800 shadow-slate-500/30',
+                            'pink' => 'bg-pink-500 shadow-pink-500/30',
+                            default => 'bg-blue-600 shadow-blue-500/30',
+                        };
+                    @endphp
+
+                    <article class="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:border-blue-200 hover:shadow-2xl hover:shadow-slate-300/50">
+
+                        <div class="relative flex h-64 items-center justify-center overflow-hidden bg-white p-4 sm:h-72">
+                            <img
+                                src="{{ !empty($outlet->image) ? asset('storage/' . ltrim($outlet->image, '/')) : $retailFallbackImage }}"
+                                alt="{{ $outlet->image_alt ?: $outlet->title }}"
+                                class="h-full w-full object-contain transition duration-500 group-hover:scale-[1.03]"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='{{ $retailFallbackImage }}';"
+                            >
+
+                            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/10 to-transparent"></div>
+
+                            @if($outlet->badge)
+                                <span class="absolute left-4 top-4 rounded-full {{ $badgeClass }} px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow-lg">
+                                    {{ $outlet->badge }}
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="flex flex-1 flex-col p-6">
+                            <div>
+                                <h3 class="text-2xl font-black leading-tight text-slate-950">
+                                    {{ $outlet->title }}
+                                </h3>
+
+                                @if($outlet->subtitle)
+                                    <p class="mt-2 font-bold text-blue-700">
+                                        {{ $outlet->subtitle }}
+                                    </p>
+                                @endif
+                            </div>
+
+                            @if($outlet->activeDetails->count())
+                                <div class="mt-5 space-y-3 border-t border-slate-100 pt-5">
+                                    @foreach($outlet->activeDetails as $detail)
+                                        <div class="flex items-start gap-3 text-sm leading-6 text-slate-600">
+                                            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600"></span>
+
+                                            <p>
+                                                <span class="font-bold text-slate-800">
+                                                    {{ $detail->label }}:
+                                                </span>
+
+                                                {{ $detail->value }}
+                                            </p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if($outlet->button_text)
+                                <div class="mt-auto pt-6">
+                                    <a
+                                        href="{{ $outlet->button_link ?: '#' }}"
+                                        class="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-black text-white transition duration-300 hover:bg-blue-600"
+                                    >
+                                        {{ $outlet->button_text }}
+
+                                        <svg class="ml-2 h-4 w-4 transition group-hover:translate-x-1"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                  stroke-linejoin="round"
+                                                  stroke-width="2"
+                                                  d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
+
+                @if($storeOutletSection->cta_title)
+                    <div class="relative flex min-h-[440px] flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 via-blue-600 to-cyan-500 p-7 text-white shadow-2xl shadow-blue-500/25 sm:p-8">
+                        <div class="absolute -right-16 -top-16 h-52 w-52 rounded-full border-[35px] border-white/10"></div>
+                        <div class="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-white/10 blur-2xl"></div>
+
+                        <div class="relative">
+                            @if($storeOutletSection->cta_label)
+                                <p class="text-sm font-black uppercase tracking-[.25em] text-blue-100">
+                                    {{ $storeOutletSection->cta_label }}
+                                </p>
+                            @endif
+
+                            <h3 class="mt-5 text-3xl font-black leading-tight sm:text-4xl">
+                                {{ $storeOutletSection->cta_title }}
+                            </h3>
+
+                            @if($storeOutletSection->cta_description)
+                                <p class="mt-5 max-w-md text-base leading-7 text-blue-50">
+                                    {{ $storeOutletSection->cta_description }}
+                                </p>
+                            @endif
+                        </div>
+
+                        @if($storeOutletSection->cta_button_text)
+                            <div class="relative mt-8">
+                                <a
+                                    href="{{ $storeOutletSection->cta_button_link ?: '#' }}"
+                                    class="inline-flex items-center rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-blue-50"
+                                >
+                                    {{ $storeOutletSection->cta_button_text }}
+
+                                    <svg class="ml-2 h-4 w-4"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>
+@endif
+
+{{-- OUTLETS LIST --}}
+
+{{-- @if($storeOutletSection && $storeOutletSection->activeOutlets->count())
     <section id="{{ $storeOutletSection->section_id ?: 'outlets' }}" class="outlet-section-soft py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -285,7 +469,7 @@
 
         </div>
     </section>
-@endif
+@endif --}}
 
 
 {{-- STORE SETUP SUPPORT --}}
