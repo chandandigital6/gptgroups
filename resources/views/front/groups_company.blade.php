@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
-                    <img src="{{ asset('assets/under.png') }}" alt="GPT Group business companies"
+                    <img src="{{ asset('assets/com/off.png') }}" alt="GPT Group business companies"
                         class="h-[240px] w-full rounded-xl object-cover sm:h-[270px] lg:h-[300px]" loading="eager"
                         fetchpriority="high">
 
@@ -408,14 +408,14 @@
                     ],
                     [
                         'number' => '01',
-                        'name' => 'Mosaic',
-                        'short_name' => 'Mosaic',
+                        'name' => 'Naqsh',
+                        'short_name' => 'Naqsh',
                         'logo' => null,
                         'category' => 'Lifestyle & Retail',
                         'image' => asset('assets/mosa.png'),
                         // 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
                         'description' =>
-                            'Mosaic represents the Group’s lifestyle and consumer-facing retail interests. The business is positioned around curated products, modern presentation and customer-focused retail experiences designed for evolving market preferences.',
+                            'Naqsh represents the Group’s lifestyle and consumer-facing retail interests. The business is positioned around curated products, modern presentation and customer-focused retail experiences designed for evolving market preferences.',
                         'tags' => ['Retail', 'Lifestyle', 'Consumer Products', 'Customer Experience'],
                         'website' => null,
                     ],
@@ -935,7 +935,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid items-center gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
                 <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
-                    <img src="{{ asset('assets/office img.png') }}" alt="GPT Group shared business model"
+                    <img src="{{ asset('assets/com/gopt.png') }}" alt="GPT Group shared business model"
                         class="h-[300px] w-full rounded-xl object-cover sm:h-[360px]" loading="lazy">
                 </div>
 

@@ -12,9 +12,20 @@
         ];
 
         $brands = [
+                        [
+                'name' => 'Samsung',
+                'logo' => asset('assets/logo brands/sumsung.png'),
+                'description' => 'Smartphones, tablets, wearables and connected consumer technology.',
+            ],
+              [
+                'name' => 'Hikvision',
+                'logo' => asset('assets/logo brands/hikvision.png'),
+                'description' => 'Video security, access control, intercom and intelligent surveillance technologies.',
+            ],
+
             [
-                'name' => 'Lava',
-                'logo' => asset('assets/logo brands/lava.png'),
+                'name' => 'lg',
+                'logo' => asset('assets/logo brands/lg.png'),
                 'description' => 'Smartphones, feature phones and dependable mobility products for retail and channel markets.',
             ],
             [
@@ -32,21 +43,18 @@
                 'logo' => asset('assets/logo brands/life smart.png'),
                 'description' => 'Smart home automation, intelligent controls, sensors and connected living solutions.',
             ],
+          
             [
-                'name' => 'Hikvision',
-                'logo' => asset('assets/logo brands/hikvision.png'),
-                'description' => 'Video security, access control, intercom and intelligent surveillance technologies.',
+                'name' => 'Lava',
+                'logo' => asset('assets/logo brands/lava.png'),
+                'description' => 'Smartphones, feature phones and dependable mobility products for retail and channel markets.',
             ],
-            [
-                'name' => 'Samsung',
-                'logo' => asset('assets/logo brands/sumsung.png'),
-                'description' => 'Smartphones, tablets, wearables and connected consumer technology.',
-            ],
-            [
-                'name' => 'Mobile Accessories',
-                'logo' => null,
-                'description' => 'Chargers, cables, power banks, cases, screen protection, audio and essential mobile accessories.',
-            ],
+            // [
+            //     'name' => 'Mobile Accessories',
+            //     'logo' => null,
+            //     'description' => 'Chargers, cables, power banks, cases, screen protection, audio and essential mobile accessories.',
+            // ],
+
         ];
 
         $strengths = [

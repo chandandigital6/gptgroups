@@ -36,13 +36,13 @@
         $brands = [
             [
                 'name' => 'Fibrain',
-                'logo' => asset('assets/logo brands/fibrain.png'),
+                'logo' => asset('assets/logo brands/fibr.jpeg'),
                 'description' => 'Fiber-optic cables, optical connectivity, FTTH and structured cabling systems.',
                 'initials' => 'FB',
             ],
             [
                 'name' => 'Avlon',
-                'logo' => asset('assets/logo brands/Avlon.png'),
+                'logo' => asset('assets/logo brands/aval.jpeg'),
                 'description' => 'Structured cabling, network connectivity and infrastructure products.',
                 'initials' => 'AV',
             ],
@@ -71,7 +71,7 @@
             class="relative flex min-h-[360px] items-center overflow-hidden bg-slate-950 bg-cover bg-center sm:min-h-[390px] lg:min-h-[420px]"
             style="background-image:
                 linear-gradient(90deg, rgba(2,6,23,.96) 0%, rgba(2,6,23,.82) 55%, rgba(2,6,23,.38) 100%),
-                url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=76');"
+                url({{ asset('assets/com/c1.jpg') }});"
         >
             <div class="absolute inset-0 bg-gradient-to-br from-blue-700/20 via-transparent to-cyan-500/15"></div>
 

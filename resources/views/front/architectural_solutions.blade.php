@@ -46,7 +46,7 @@
 
 <section class="bg-white py-14 sm:py-16">
     <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[.9fr_1.1fr] lg:px-8">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=84"
+        <img src="{{ asset('assets/com/tr.png') }}"
             alt="Architectural planning" class="h-[350px] w-full rounded-[1.8rem] object-cover shadow-xl">
 
         <div>
@@ -99,46 +99,82 @@
     </div>
 </section>
 
-<section class="bg-white py-14 sm:py-16">
+<section class="bg-white py-10 sm:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-blue-800 shadow-2xl">
-            <div class="grid items-center lg:grid-cols-[.85fr_1.15fr]">
-                <div class="relative flex min-h-[290px] items-center justify-center bg-white p-8">
-                    <div class="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-lg">
-                        <img src="{{ asset('assets/logo brands/merit.png') }}"
-                            alt="Merit logo" class="mx-auto max-h-24 w-full object-contain"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div class="hidden">
-                            <p class="text-5xl font-black text-blue-800">MERIT</p>
-                            <p class="mt-2 text-xs font-black uppercase tracking-[.2em] text-slate-500">
-                                Architectural Hardware
-                            </p>
+
+        <div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50">
+            <div class="grid items-center gap-0 md:grid-cols-[320px_1fr]">
+
+                {{-- Logos --}}
+                <div class="flex min-h-[220px] items-center justify-center border-b border-slate-200 bg-white p-7 md:border-b-0 md:border-r">
+                    <div class="w-full max-w-[230px] text-center">
+
+                        <img
+                            src="{{ asset('assets/logo brands/merit.jpeg') }}"
+                            alt="Merit"
+                            class="mx-auto max-h-16 w-full object-contain"
+                        >
+
+                        <div class="my-5 flex items-center gap-3">
+                            <span class="h-px flex-1 bg-slate-200"></span>
+                            <span class="text-[10px] font-bold uppercase tracking-[.18em] text-slate-400">
+                                Part of Merit
+                            </span>
+                            <span class="h-px flex-1 bg-slate-200"></span>
                         </div>
+
+                        <img
+                            src="{{ asset('assets/logo brands/GlobalSpec-gpt-logo-1.png') }}"
+                            alt="Global Spec Middle East"
+                            class="mx-auto max-h-16 w-full object-contain"
+                        >
+
                     </div>
                 </div>
 
-                <div class="p-7 text-white sm:p-10 lg:p-12">
-                    <p class="text-[11px] font-black uppercase tracking-[.2em] text-cyan-300">Featured Brand</p>
-                    <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-                        Merit architectural hardware.
-                    </h2>
-                    <p class="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-                        Merit adds practical, durable and design-focused architectural hardware
-                        to our project portfolio. Its products are suited to residential,
-                        commercial and hospitality applications where reliable operation and
-                        modern finishes are important.
+                {{-- Content --}}
+                <div class="p-7 sm:p-9 lg:p-10">
+                    <p class="text-xs font-bold uppercase tracking-[.18em] text-blue-700">
+                        Architectural Hardware
                     </p>
 
-                    <div class="mt-6 flex flex-wrap gap-2">
-                        @foreach (['Door Hardware', 'Locks & Handles', 'Project Supply', 'Modern Finishes'] as $tag)
-                            <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-black text-cyan-100">
+                    <h2 class="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
+                        Merit & Global Spec Middle East
+                    </h2>
+
+                    <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-600">
+                        Global Spec Middle East is a specialist part of Merit, providing
+                        architectural hardware, access control, hotel locking systems
+                        and complete door solutions for commercial and hospitality projects.
+                    </p>
+
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        @foreach ([
+                            'Architectural Hardware',
+                            'Access Control',
+                            'Hotel Locks',
+                            'Door Solutions'
+                        ] as $tag)
+                            <span class="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700">
                                 {{ $tag }}
                             </span>
                         @endforeach
                     </div>
+
+                    <a
+                        href="https://globalspecworld.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-blue-700 transition hover:text-blue-900"
+                    >
+                        Visit Global Spec
+                        <span aria-hidden="true">→</span>
+                    </a>
                 </div>
+
             </div>
         </div>
+
     </div>
 </section>
 

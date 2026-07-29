@@ -426,7 +426,7 @@
             <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=76"
+                    src="{{ asset('assets/bu hnd 2.jpg') }}"
                     alt="GPT Group business and technology collaboration"
                     class="h-[340px] w-full rounded-[1.15rem] object-cover sm:h-[410px] lg:h-[520px]"
                     loading="lazy"
@@ -654,7 +654,7 @@
         ],
         [
             'name' => 'Retail & Commercial',
-            'image' => 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=76',
+            'image' => asset('assets/com/c1.jpg'),
             'description' =>
                 'Safer stores, operational visibility, loss prevention support and better customer-area management.',
         ],
@@ -806,7 +806,7 @@
             <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=76"
+                    src="{{ asset('assets/com/tr.png') }}"
                     alt="Technical training and local talent development"
                     class="h-[340px] w-full rounded-[1.15rem] object-cover sm:h-[410px] lg:h-[480px]"
                     loading="lazy"
