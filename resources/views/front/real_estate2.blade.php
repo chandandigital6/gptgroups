@@ -646,3 +646,284 @@
     </section>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+@php
+    $journey = [
+        [
+            'year' => '2000',
+            'title' => 'Telecom Industry Foundation',
+            'desc' => 'Leadership experience began in the telecom sector, creating strong knowledge of products, customers, sales channels and market operations.',
+            'image' => 'https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?auto=format&fit=crop&w=600&q=80',
+            'gradient' => 'from-blue-600 to-indigo-500',
+            'soft_bg' => 'from-blue-50 to-indigo-50',
+            'text_color' => 'text-blue-700',
+            'ring_color' => 'ring-blue-100',
+        ],
+        [
+            'year' => '2003',
+            'title' => 'Oman Market Experience',
+            'desc' => 'Regional market experience strengthened the understanding of Omani customers, IMEA retailers, dealers and technology distribution networks.',
+            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQodLlcnJ1DX1PlG65zJyAGUZTbvv5k4X6zPVnr6ahRAw&s=10',
+            'gradient' => 'from-cyan-500 to-blue-500',
+            'soft_bg' => 'from-cyan-50 to-blue-50',
+            'text_color' => 'text-cyan-700',
+            'ring_color' => 'ring-cyan-100',
+        ],
+        [
+            'year' => '2016',
+            'title' => 'GPT Group Established',
+            'desc' => 'Global Phone Technology LLC was established in Oman to connect international technology brands with local customers and business partners.',
+            'image' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=600&q=80',
+            'gradient' => 'from-violet-600 to-purple-500',
+            'soft_bg' => 'from-violet-50 to-purple-50',
+            'text_color' => 'text-violet-700',
+            'ring_color' => 'ring-violet-100',
+        ],
+        [
+            'year' => '2018',
+            'title' => 'Global Brand Partnerships',
+            'desc' => 'GPT Group expanded its relationships with international mobile, electronics, accessories and technology brands.',
+            'image' => 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80',
+            'gradient' => 'from-orange-500 to-amber-400',
+            'soft_bg' => 'from-orange-50 to-amber-50',
+            'text_color' => 'text-orange-700',
+            'ring_color' => 'ring-orange-100',
+        ],
+        [
+            'year' => '2021',
+            'title' => 'IT Infrastructure Expansion',
+            'desc' => 'Enterprise infrastructure, networking, structured cabling and project-based technology solutions became part of the growing portfolio.',
+            'image' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80',
+            'gradient' => 'from-emerald-500 to-teal-500',
+            'soft_bg' => 'from-emerald-50 to-teal-50',
+            'text_color' => 'text-emerald-700',
+            'ring_color' => 'ring-emerald-100',
+        ],
+        [
+            'year' => '2023',
+            'title' => 'Security Solutions Expansion',
+            'desc' => 'Video surveillance, access control, intercom, smart monitoring and integrated security solutions became a major business focus.',
+            'image' => 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
+            'gradient' => 'from-rose-500 to-red-500',
+            'soft_bg' => 'from-rose-50 to-red-50',
+            'text_color' => 'text-rose-700',
+            'ring_color' => 'ring-rose-100',
+        ],
+        [
+            'year' => 'Today',
+            'title' => 'Integrated Technology Group',
+            'desc' => 'Today, GPT Group operates across technology distribution, retail, security solutions, IT infrastructure and regional trading.',
+            'image' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
+            'gradient' => 'from-blue-700 to-cyan-500',
+            'soft_bg' => 'from-blue-50 to-cyan-50',
+            'text_color' => 'text-blue-700',
+            'ring_color' => 'ring-blue-100',
+        ],
+    ];
+@endphp
+
+<section class="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-blue-50 py-10 sm:py-12 lg:py-16">
+
+  
+    <div class="pointer-events-none absolute -left-32 top-32 h-80 w-80 rounded-full bg-blue-200/30 blur-3xl"></div>
+    <div class="pointer-events-none absolute -right-32 bottom-20 h-80 w-80 rounded-full bg-cyan-200/30 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        
+        <div class="mx-auto max-w-4xl text-center">
+
+            <div class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[.2em] text-blue-700 shadow-sm">
+                <span class="h-2 w-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400"></span>
+                GPT Group Growth Journey
+            </div>
+
+            <h2 class="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Milestones that shaped
+                <span class="bg-gradient-to-r from-blue-700 via-violet-600 to-cyan-500 bg-clip-text text-transparent">
+                    GPT Group.
+                </span>
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600">
+                From telecom experience and local market knowledge to an integrated
+                technology, security, infrastructure and distribution group serving Oman.
+            </p>
+        </div>
+
+
+      
+        <div class="relative mt-10 sm:mt-12">
+
+           
+            <div class="absolute bottom-10 left-1/2 top-10 hidden w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-blue-300 via-violet-300 to-cyan-300 lg:block"></div>
+
+          
+            <div class="absolute bottom-6 left-[22px] top-6 w-[3px] rounded-full bg-gradient-to-b from-blue-300 via-violet-300 to-cyan-300 lg:hidden"></div>
+
+            <div class="space-y-6 lg:space-y-8">
+
+                @foreach ($journey as $item)
+
+                    <article class="relative grid items-center gap-5 lg:grid-cols-[1fr_80px_1fr] lg:gap-7">
+
+                        {{-- Timeline card --}}
+                        <div class="pl-14 lg:pl-0 {{ $loop->iteration % 2 === 0 ? 'lg:col-start-3' : 'lg:col-start-1' }}">
+
+                            <div class="group overflow-hidden rounded-[1.4rem] bg-gradient-to-br {{ $item['soft_bg'] }} p-[1px] shadow-lg transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl">
+
+                                <div class="overflow-hidden rounded-[1.35rem] bg-white">
+
+                                    <div class="grid sm:grid-cols-[145px_1fr]">
+
+                                        {{-- Small image --}}
+                                        <div class="relative h-44 overflow-hidden sm:h-full sm:min-h-[190px]">
+
+                                            <img
+                                                src="{{ $item['image'] }}"
+                                                alt="{{ $item['title'] }}"
+                                                class="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                                                loading="lazy"
+                                            >
+
+                                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent"></div>
+
+                                            <span class="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[.14em] {{ $item['text_color'] }} shadow-lg backdrop-blur">
+                                                {{ $item['year'] }}
+                                            </span>
+                                        </div>
+
+
+                                        {{-- Content --}}
+                                        <div class="flex flex-col justify-center p-5 sm:p-6">
+
+                                            <div class="flex items-center gap-3">
+
+                                                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br {{ $item['gradient'] }} text-xs font-black text-white shadow-lg">
+                                                    {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                                                </span>
+
+                                                <p class="text-[10px] font-black uppercase tracking-[.18em] {{ $item['text_color'] }}">
+                                                    GPT Group Milestone
+                                                </p>
+
+                                            </div>
+
+                                            <h3 class="mt-4 text-xl font-black leading-tight text-slate-950 sm:text-2xl">
+                                                {{ $item['title'] }}
+                                            </h3>
+
+                                            <p class="mt-2 text-sm leading-6 text-slate-600">
+                                                {{ $item['desc'] }}
+                                            </p>
+
+                                            <div class="mt-4 flex items-center gap-2">
+                                                <span class="h-1.5 w-10 rounded-full bg-gradient-to-r {{ $item['gradient'] }}"></span>
+                                                <span class="h-1.5 w-3 rounded-full bg-slate-200"></span>
+                                                <span class="h-1.5 w-2 rounded-full bg-slate-100"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {{-- Desktop center year --}}
+                        <div class="relative z-10 hidden lg:col-start-2 lg:row-start-1 lg:grid lg:place-items-center">
+
+                            <div class="grid h-[72px] w-[72px] place-items-center rounded-full border-[5px] border-white bg-gradient-to-br {{ $item['gradient'] }} text-center text-[11px] font-black text-white shadow-xl ring-4 {{ $item['ring_color'] }}">
+                                {{ $item['year'] }}
+                            </div>
+
+                        </div>
+
+
+                        {{-- Mobile timeline dot --}}
+                        <div class="absolute left-0 top-5 z-10 grid h-11 w-11 place-items-center rounded-full border-4 border-white bg-gradient-to-br {{ $item['gradient'] }} text-[9px] font-black text-white shadow-lg lg:hidden">
+                            {{ $item['year'] }}
+                        </div>
+
+
+                        {{-- Empty alternating desktop column --}}
+                        @if ($loop->iteration % 2 === 0)
+                            <div class="hidden lg:col-start-1 lg:row-start-1 lg:block"></div>
+                        @else
+                            <div class="hidden lg:col-start-3 lg:row-start-1 lg:block"></div>
+                        @endif
+
+                    </article>
+
+                @endforeach
+
+            </div>
+        </div>
+
+
+       
+        <div class="relative mt-10 overflow-hidden rounded-[1.6rem] bg-gradient-to-r from-blue-800 via-violet-700 to-cyan-500 p-6 text-white shadow-2xl sm:p-8">
+
+            <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl"></div>
+            <div class="absolute -bottom-20 left-1/3 h-48 w-48 rounded-full bg-cyan-300/20 blur-3xl"></div>
+
+            <div class="relative grid items-center gap-6 lg:grid-cols-[1.2fr_.8fr]">
+
+                <div>
+
+                    <p class="text-[11px] font-black uppercase tracking-[.2em] text-blue-100">
+                        Continuing Our Journey
+                    </p>
+
+                    <h3 class="mt-3 text-2xl font-black leading-tight sm:text-3xl">
+                        Innovation, partnerships and sustainable growth for Oman.
+                    </h3>
+
+                    <p class="mt-3 max-w-3xl text-sm leading-6 text-blue-50 sm:text-base">
+                        GPT Group remains focused on creating long-term value for
+                        international brands, customers, dealers and business partners
+                        through dependable technology and strong local execution.
+                    </p>
+
+                </div>
+
+
+                <div class="grid grid-cols-3 gap-3 lg:justify-self-end">
+
+                    <div class="rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur">
+                        <p class="text-xl font-black text-cyan-200">20+</p>
+                        <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-blue-100">
+                            Years Experience
+                        </p>
+                    </div>
+
+                    <div class="rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur">
+                        <p class="text-xl font-black text-cyan-200"></p>
+                        <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-blue-100">
+                            Core Market
+                        </p>
+                    </div>
+
+                    <div class="rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur">
+                        <p class="text-xl font-black text-cyan-200">IMEA+</p>
+                        <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-blue-100">
+                            Growth Vision
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
