@@ -2,75 +2,7 @@
 
 @section('content')
    @php
-        $partners = [
-            [
-                'name' => 'Samsung',
-                'logo' => asset('assets/logo brands/sum.jpeg'),
-                'description' => 'Smartphones, tablets, wearables and connected consumer technology.',
-                'initials' => 'SA',
-            ],
-             [
-                'name' => 'Hikvision',
-                'logo' => asset('assets/logo brands/hikvision.png'),
-                'description' => 'Video surveillance, access control, intercom and security technologies.',
-                'initials' => 'HK',
-            ],
-            [
-                'name' => 'Lg',
-                'logo' => asset('assets/logo brands/lg.png'),
-                'description' => 'Smartphones, feature phones and mobility products.',
-                'initials' => 'LA',
-            ],
-            [
-                'name' => 'Nothing',
-                'logo' => asset('assets/logo brands/nothing.png'),
-                'description' => 'Design-led smartphones, audio products and connected devices.',
-                'initials' => 'NO',
-            ],
-           
-            [
-                'name' => 'EZVIZ',
-                'logo' => asset('assets/logo brands/ezviz.png'),
-                'description' => 'Smart cameras, doorbells and connected home security products.',
-                'initials' => 'EZ',
-            ],
-            [
-                'name' => 'LifeSmart',
-                'logo' => asset('assets/logo brands/life smart.png'),
-                'description' => 'Smart-home automation, sensors, lighting and intelligent controls.',
-                'initials' => 'LS',
-            ],
-            [
-                'name' => 'Merit',
-                'logo' => asset('assets/logo brands/merit.jpeg'),
-                'description' => 'Architectural hardware..',
-                'initials' => 'MA',
-            ],
-            [
-                'name' => 'Fibrain',
-                'logo' => asset('assets/logo brands/fibr.jpeg'),
-                'description' => 'Fiber-optic, FTTH and structured cabling solutions.',
-                'initials' => 'FB',
-            ],
-            [
-                'name' => 'Avlon',
-                'logo' => asset('assets/logo brands/aval.jpeg'),
-                'description' => 'Structured cabling and network infrastructure products.',
-                'initials' => 'AV',
-            ],
-            [
-                'name' => 'Vivo',
-                'logo' => asset('assets/logo brands/vivo.png'),
-                'description' => 'Smartphones focused on design, camera and performance.',
-                'initials' => 'VI',
-            ],
-            [
-                'name' => 'mi',
-                'logo' => asset('assets/logo brands/mi.webp'),
-                'description' => 'Smartphones, tablets, laptops, wearables and connected devices.',
-                'initials' => 'HO',
-            ],
-        ];
+    
 
         $supportAreas = [
             [
@@ -91,91 +23,168 @@
             ],
         ];
     @endphp
-    <style>
-        .brand-slider {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            padding: 8px 0 16px;
+  @php
+    $partners = [
+        [
+            'name' => 'Samsung',
+            'logo' => asset('assets/logo brands/sum.jpeg'),
+            'description' => 'Smartphones, tablets, wearables and connected consumer technology.',
+            'initials' => 'SA',
+        ],
+        [
+            'name' => 'Hikvision',
+            'logo' => asset('assets/logo brands/hikvision.png'),
+            'description' => 'Video surveillance, access control, intercom and security technologies.',
+            'initials' => 'HK',
+        ],
+        [
+            'name' => 'LG',
+            'logo' => asset('assets/logo brands/lg.png'),
+            'description' => 'Smartphones, feature phones and mobility products.',
+            'initials' => 'LG',
+        ],
+        [
+            'name' => 'Nothing',
+            'logo' => asset('assets/logo brands/nothing.png'),
+            'description' => 'Design-led smartphones, audio products and connected devices.',
+            'initials' => 'NO',
+        ],
+        [
+            'name' => 'EZVIZ',
+            'logo' => asset('assets/logo brands/ezviz.png'),
+            'description' => 'Smart cameras, doorbells and connected home security products.',
+            'initials' => 'EZ',
+        ],
+        [
+            'name' => 'LifeSmart',
+            'logo' => asset('assets/logo brands/life smart.png'),
+            'description' => 'Smart-home automation, sensors, lighting and intelligent controls.',
+            'initials' => 'LS',
+        ],
+        [
+            'name' => 'Merit',
+            'logo' => asset('assets/logo brands/merit.jpeg'),
+            'description' => 'Premium architectural hardware and modern building solutions.',
+            'initials' => 'ME',
+        ],
+        [
+            'name' => 'Fibrain',
+            'logo' => asset('assets/logo brands/fibr.jpeg'),
+            'description' => 'Fiber-optic, FTTH and structured cabling solutions.',
+            'initials' => 'FB',
+        ],
+        [
+            'name' => 'Avlon',
+            'logo' => asset('assets/logo brands/aval.jpeg'),
+            'description' => 'Structured cabling and network infrastructure products.',
+            'initials' => 'AV',
+        ],
+        [
+            'name' => 'Vivo',
+            'logo' => asset('assets/logo brands/vivo.png'),
+            'description' => 'Smartphones focused on design, camera and performance.',
+            'initials' => 'VI',
+        ],
+        [
+            'name' => 'Mi',
+            'logo' => asset('assets/logo brands/mi.webp'),
+            'description' => 'Smartphones, tablets, wearables and connected devices.',
+            'initials' => 'MI',
+        ],
+    ];
+
+    /*
+     * Slider को seamless बनाने के लिए partners को दो बार render किया गया है।
+     */
+    $sliderPartners = array_merge($partners, $partners);
+    $originalPartnerCount = count($partners);
+@endphp
+
+<style>
+    .brand-slider {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding: 8px 0 16px;
+    }
+
+    .brand-slider::before,
+    .brand-slider::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 5;
+        width: 70px;
+        pointer-events: none;
+    }
+
+    .brand-slider::before {
+        left: 0;
+        background: linear-gradient(to right, rgb(248 250 252), transparent);
+    }
+
+    .brand-slider::after {
+        right: 0;
+        background: linear-gradient(to left, rgb(248 250 252), transparent);
+    }
+
+    .brand-slider-track {
+        display: flex;
+        width: max-content;
+        gap: 18px;
+        animation: brandMarquee 68s linear infinite;
+        will-change: transform;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+    }
+
+    .brand-slider:hover .brand-slider-track {
+        animation-play-state: paused;
+    }
+
+    .brand-card {
+        width: 300px;
+        min-width: 300px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .brand-logo-box {
+        background: #ffffff;
+    }
+
+    @keyframes brandMarquee {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(calc(-50% - 9px));
+        }
+    }
+
+    @media (max-width: 767px) {
+        .brand-card {
+            width: 260px;
+            min-width: 260px;
+        }
+
+        .brand-slider-track {
+            animation-duration: 52s;
         }
 
         .brand-slider::before,
         .brand-slider::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 70px;
-            z-index: 5;
-            pointer-events: none;
+            width: 28px;
         }
+    }
 
-        .brand-slider::before {
-            left: 0;
-            background: linear-gradient(to right, rgb(248 250 252), transparent);
-        }
-
-        .brand-slider::after {
-            right: 0;
-            background: linear-gradient(to left, rgb(248 250 252), transparent);
-        }
-
+    @media (prefers-reduced-motion: reduce) {
         .brand-slider-track {
-            display: flex;
-            width: max-content;
-            gap: 18px;
-            animation: brandMarquee 68s linear infinite;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
+            animation-duration: 90s;
         }
-
-        .brand-slider-track,
-        .brand-card {
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .brand-slider:hover .brand-slider-track {
-            animation-play-state: paused;
-        }
-
-        .brand-card {
-            width: 300px;
-            min-width: 300px;
-        }
-
-        @keyframes brandMarquee {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(calc(-50% - 9px));
-            }
-        }
-
-        @media (max-width: 767px) {
-            .brand-card {
-                width: 260px;
-                min-width: 260px;
-            }
-
-            .brand-slider-track {
-                animation-duration: 52s;
-            }
-
-            .brand-slider::before,
-            .brand-slider::after {
-                width: 28px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .brand-slider-track {
-                animation: brandMarquee 68s linear infinite !important;
-            }
-        }
-    </style>
+    }
+</style>
 
     <main class="overflow-hidden bg-white text-slate-900">
 
@@ -226,90 +235,87 @@
 
         {{-- CONTINUOUS BRAND SLIDER --}}
         <section id="partners" class="bg-slate-50 py-14 sm:py-16 lg:py-20">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-3xl text-center">
-                    <p
-                        class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
-                        <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
-                        Complete Brand Portfolio
-                    </p>
 
-                    <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
-                        Explore all technology brands.
-                    </h2>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                    <p class="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
-                        Browse the wider GPT Group brand ecosystem across mobile, security,
-                        smart technology, networking and accessories.
-                    </p>
-                </div>
-            </div>
+        <div class="mx-auto max-w-3xl text-center">
 
-            <div class="brand-slider mt-10">
-                <div class="brand-slider-track">
+            <p class="inline-flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span class="h-0.5 w-7 bg-gradient-to-r from-blue-700 to-cyan-500"></span>
+                Complete Brand Portfolio
+            </p>
 
-                    {{-- First set --}}
-                    @foreach ($partners as $partner)
-                        <article
-                            class="brand-card flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+            <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Explore all technology brands.
+            </h2>
 
-                            <div
-                                class="relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-5">
-                                <span
-                                    class="absolute grid h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700">
-                                    {{ $partner['initials'] }}
-                                </span>
+            <p class="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+                Browse the wider GPT Group brand ecosystem across mobile, security,
+                smart technology, networking and accessories.
+            </p>
 
-                                <img src="{{ $partner['logo'] }}" alt="{{ $partner['name'] }} logo"
-                                    class="relative z-10 max-h-20 w-full object-contain" loading="lazy"
-                                    onerror="this.style.display='none'">
-                            </div>
+        </div>
 
-                            <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
-                                <h3 class="text-xl font-black text-slate-950">
-                                    {{ $partner['name'] }}
-                                </h3>
+    </div>
 
-                                <p class="mt-2 flex-1 text-sm leading-7 text-slate-600">
-                                    {{ $partner['description'] }}
-                                </p>
-                            </div>
-                        </article>
-                    @endforeach
+    <div class="brand-slider mt-10">
 
-                    {{-- Duplicate set required for seamless infinite movement --}}
-                    @foreach ($partners as $partner)
-                        <article
-                            class="brand-card flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
-                            aria-hidden="true">
+        <div class="brand-slider-track">
 
-                            <div
-                                class="relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 bg-slate-50 p-5">
-                                <span
-                                    class="absolute grid h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700">
-                                    {{ $partner['initials'] }}
-                                </span>
+            @foreach ($sliderPartners as $index => $partner)
 
-                                <img src="{{ $partner['logo'] }}" alt=""
-                                    class="relative z-10 max-h-20 w-full object-contain" loading="lazy"
-                                    onerror="this.style.display='none'">
-                            </div>
+                <article
+                    class="brand-card flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
+                    @if ($index >= $originalPartnerCount) aria-hidden="true" @endif
+                >
 
-                            <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
-                                <h3 class="text-xl font-black text-slate-950">
-                                    {{ $partner['name'] }}
-                                </h3>
+                    {{-- White Logo Background --}}
+                    <div
+                        class="brand-logo-box relative grid h-32 place-items-center overflow-hidden rounded-xl border border-slate-100 p-5"
+                    >
 
-                                <p class="mt-2 flex-1 text-sm leading-7 text-slate-600">
-                                    {{ $partner['description'] }}
-                                </p>
-                            </div>
-                        </article>
-                    @endforeach
+                        {{-- Fallback initials: image fail होने पर ही दिखेंगे --}}
+                        <span
+                            class="brand-logo-fallback hidden h-14 w-14 place-items-center rounded-xl bg-blue-50 text-sm font-black text-blue-700"
+                        >
+                            {{ $partner['initials'] }}
+                        </span>
 
-                </div>
-            </div>
-        </section>
+                        <img
+                            src="{{ $partner['logo'] }}"
+                            alt="{{ $index < $originalPartnerCount ? $partner['name'].' logo' : '' }}"
+                            class="brand-logo-image max-h-20 w-full object-contain"
+                            loading="lazy"
+                            onerror="
+                                this.style.display='none';
+                                this.previousElementSibling.classList.remove('hidden');
+                                this.previousElementSibling.classList.add('grid');
+                            "
+                        >
+
+                    </div>
+
+                    <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+
+                        <h3 class="text-xl font-black text-slate-950">
+                            {{ $partner['name'] }}
+                        </h3>
+
+                        <p class="mt-2 flex-1 text-sm leading-7 text-slate-600">
+                            {{ $partner['description'] }}
+                        </p>
+
+                    </div>
+
+                </article>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</section>
 
 
         {{-- GPT GROUP OVERVIEW --}}
