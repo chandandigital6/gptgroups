@@ -748,7 +748,7 @@
 
                     <p class="mt-4 text-base leading-7 text-slate-600">
                         Founded with a vision for innovation and growth, GPT Group has emerged as a technology
-                        distribution and solutions business serving Oman, the wider GCC and selected international markets.
+                        distribution and solutions business serving Oman, the wider IMEA and selected international markets.
                     </p>
 
                     <p class="mt-3 text-base leading-7 text-slate-600">
@@ -766,10 +766,10 @@
                         </div>
 
                         <div class="soft-card p-5">
-                            <p class="text-gradient text-2xl font-black">GCC+</p>
+                            <p class="text-gradient text-2xl font-black">IMEA+</p>
                             <h3 class="mt-2 text-lg font-black text-slate-950">Regional Ambition</h3>
                             <p class="mt-1.5 text-sm leading-6 text-slate-500">
-                                Partner-led growth across GCC and selected global markets.
+                                Partner-led growth across IMEA and selected global markets.
                             </p>
                         </div>
                     </div>
@@ -897,7 +897,7 @@
     </section>
 
     {{-- 06. CUSTOMER SATISFACTION & MARKET PRESENCE --}}
-    
+
     {{-- <section class="bg-white py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid items-end gap-5 lg:grid-cols-[.9fr_1.1fr]">
@@ -962,7 +962,7 @@
                     <h3 class="mt-4 text-2xl font-black text-slate-950">Our Vision</h3>
                     <p class="mt-2 text-sm leading-6 text-slate-600">
                         To become a respected and professional technology distribution and solutions group
-                        serving Oman and the GCC with consistent quality and innovation.
+                        serving IMEA with consistent quality and innovation.
                     </p>
                 </div>
 
@@ -1041,7 +1041,7 @@
         [
             'year' => '2003',
             'title' => 'Oman Market Experience',
-            'desc' => 'Regional market experience strengthened the understanding of Omani customers, GCC retailers, dealers and technology distribution networks.',
+            'desc' => 'Regional market experience strengthened the understanding of Omani customers, IMEA retailers, dealers and technology distribution networks.',
             'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQodLlcnJ1DX1PlG65zJyAGUZTbvv5k4X6zPVnr6ahRAw&s=10',
             'gradient' => 'from-cyan-500 to-blue-500',
             'soft_bg' => 'from-cyan-50 to-blue-50',
@@ -1277,14 +1277,14 @@
                     </div>
 
                     <div class="rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur">
-                        <p class="text-xl font-black text-cyan-200">Oman</p>
+                        <p class="text-xl font-black text-cyan-200"></p>
                         <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-blue-100">
                             Core Market
                         </p>
                     </div>
 
                     <div class="rounded-xl border border-white/15 bg-white/10 p-3 text-center backdrop-blur">
-                        <p class="text-xl font-black text-cyan-200">GCC+</p>
+                        <p class="text-xl font-black text-cyan-200">IMEA+</p>
                         <p class="mt-1 text-[9px] font-bold uppercase tracking-wide text-blue-100">
                             Growth Vision
                         </p>
