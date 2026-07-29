@@ -17,15 +17,15 @@
         [
             'number' => '01',
             'country' => 'Oman',
-            'title' => 'Oman Head Office',
+            'title' => ' GPT Head Office',
             'city' => 'Muscat, Sultanate of Oman',
-            'address' => 'Muscat, Sultanate of Oman',
+            'address' => 'Way 5007, Ghala Heights, Muscat',
             'phone' => '+968 2450 1533',
             'phone_link' => '+96824501533',
             'email' => 'info@gptgroups.com',
             'map_link' => 'https://www.google.com/maps/search/?api=1&query=Muscat+Oman',
-            'map_embed' => 'https://www.google.com/maps?q=Muscat%20Oman&output=embed',
-            'image' => 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1200&q=85',
+            'map_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.445100136705!2d58.3718835!3d23.588364899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e91ffb723022c77%3A0xbe6052a930c928c6!2sGPT%20LLC%20-%20National%20Distributor-%20Hikvision%2C%20Samsung%2C%20Vivo%2C%20Ezviz!5e0!3m2!1sen!2sin!4v1785353882171!5m2!1sen!2sin',
+            'image' => asset('assets/gpt office.png'),
             'description' => 'The central office for GPT Group’s Oman operations, business partnerships, distribution activities and customer support.',
         ],
         // [
@@ -308,7 +308,7 @@
 
             <div class="contact-image-shell">
                 <img
-                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=88"
+                    src="{{ asset('assets/office img.png') }}"
                     alt="Contact GPT Group offices"
                     class="h-[350px] w-full rounded-[1.35rem] object-cover sm:h-[440px] lg:h-[500px]"
                 >
