@@ -897,7 +897,8 @@
     </section>
 
     {{-- 06. CUSTOMER SATISFACTION & MARKET PRESENCE --}}
-    <section class="bg-white py-10 sm:py-12 lg:py-14">
+    
+    {{-- <section class="bg-white py-10 sm:py-12 lg:py-14">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid items-end gap-5 lg:grid-cols-[.9fr_1.1fr]">
                 <div>
@@ -918,7 +919,7 @@
                     ['title' => 'GPT Samsung Lounge', 'location' => 'Boshar, Muscat'],
                     ['title' => 'GPT Hikvision Stall', 'location' => 'Boshar, Muscat'],
                     ['title' => 'GPT Service Centre', 'location' => 'Service & Support'],
-                    ['title' => 'Honor Phones Outlet', 'location' => 'Retail Network'],
+                    // ['title' => 'Honor Phones Outlet', 'location' => 'Retail Network'],
                     ['title' => 'GPT Samsung Lounge', 'location' => 'Additional Retail Presence'],
                 ];
             @endphp
@@ -942,7 +943,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- 07. VISION, MISSION & AIM --}}
     <section class="about-section-soft py-10 sm:py-12 lg:py-14">
