@@ -171,10 +171,10 @@
 
                             @if ($founderSection->image)
                                 <img
-                                    src="{{ asset('storage/' . $founderSection->image) }}"
-                                    alt="{{ $founderSection->title }}"
-                                    class="absolute inset-0 h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]"
-                                    loading="lazy">
+        src="{{ asset('storage/' . $founderSection->image) }}"
+        alt="{{ $founderSection->title }}"
+        class="absolute inset-0 h-full w-full object-contain object-center transition duration-700 group-hover:scale-[1.03]"
+        loading="lazy">
                             @else
                                 <img
                                     src="{{ asset('assets/img/Mr.-Tripathi.jpg') }}"
