@@ -12,7 +12,7 @@
     class="relative overflow-hidden bg-slate-950 bg-cover bg-center py-10 text-white sm:py-12 lg:py-14"
     style="background-image:
         linear-gradient(110deg, rgba(15,23,42,.96), rgba(30,64,175,.88), rgba(8,145,178,.72)),
-        url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1600&q=76');"
+        url({{ asset('assets/mus.jpg') }});"
 >
 
     <div class="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/45 to-transparent"></div>
@@ -110,7 +110,7 @@
                 <div class="overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-3 shadow-xl">
 
                     <img
-                        src="https://www.constructionweekonline.com/cloud/2025/03/06/salalah-oman-sasaki-associates-masterplan-designboom-1200.jpg"
+                        src="{{ asset('assets/mus.jpg') }}"
                         alt="Oman modern city and development"
                         class="h-[280px] w-full rounded-xl object-cover sm:h-[340px] lg:h-[380px]"
                         loading="eager"
@@ -247,7 +247,7 @@
             <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg p-3">
 
                 <img
-                    src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=76"
+                    src="{{ asset('assets/oman2040.jpg') }}"
                     alt="Modern infrastructure supporting Oman Vision 2040"
                     class="h-[330px] w-full rounded-[1.15rem] object-cover sm:h-[400px] lg:h-[460px]"
                     loading="lazy"

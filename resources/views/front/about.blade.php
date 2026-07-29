@@ -781,11 +781,11 @@
                         alt="GPT Group distribution" loading="lazy">
 
                     <img class="mt-5 h-44 w-full rounded-2xl object-cover shadow-lg sm:mt-7 sm:h-52 lg:h-56"
-                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+                        src="{{ asset('assets/hand.jpg') }}"
                         alt="GPT Group technology" loading="lazy">
 
                     <img class="h-44 w-full rounded-2xl object-cover shadow-lg sm:h-52 lg:h-56"
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80"
+                        src="{{ asset('assets/b1.jpg') }}"
                         alt="GPT Group team" loading="lazy">
 
                     <div
@@ -807,7 +807,7 @@
             <div class="grid items-center gap-7 lg:grid-cols-[.9fr_1.1fr] lg:gap-10">
                 <div class="soft-image-card p-3">
                     <img class="h-[270px] w-full rounded-[1.2rem] object-cover sm:h-[330px] lg:h-[360px]"
-                        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=82"
+                        src="{{ asset('assets/b2.jpg') }}"
                         alt="GPT Group conception" loading="lazy">
                 </div>
 
