@@ -194,7 +194,7 @@
                 <div class="grid lg:grid-cols-[.9fr_1.1fr]">
                     {{-- Visual Panel --}}
                     <div class="relative min-h-[380px] overflow-hidden bg-slate-950 sm:min-h-[440px] lg:min-h-[650px]">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1500&q=85"
+                        <img src="{{ asset('assets/bu hnd 2.jpg') }}"
                             alt="GPT Group and Swastika Telecom technology distribution partnership"
                             class="absolute inset-0 h-full w-full object-cover" loading="lazy">
 
