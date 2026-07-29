@@ -341,7 +341,7 @@
         <div class="grid items-center gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
             <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
                 <img
-                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=76"
+                    src="{{ asset('assets/com/re.png') }}"
                     alt="GPT Group Retail Network"
                     class="h-[340px] w-full rounded-xl object-cover sm:h-[420px]"
                     loading="lazy"
