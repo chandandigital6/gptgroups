@@ -118,7 +118,7 @@
 
         <div class="overflow-hidden rounded-[2rem] bg-slate-100 p-3 shadow-xl">
             <img
-                src="{{ asset('assets/gpt o.jpeg') }}"
+                src="{{ asset('assets/ggggg.png') }}"
                 alt="GPT Group office building in Ghala Heights"
                 class="h-[350px] w-full rounded-[1.4rem] object-cover sm:h-[420px]"
                 loading="lazy"
@@ -167,7 +167,7 @@
 {{-- =========================================================
     PROPERTY SOLUTIONS
 ========================================================= --}}
-<section id="property-solutions" class="bg-slate-50 py-14 sm:py-16">
+{{-- <section id="property-solutions" class="bg-slate-50 py-14 sm:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="mx-auto max-w-3xl text-center">
@@ -231,7 +231,7 @@
             @endforeach
         </div>
     </div>
-</section>
+</section> --}}
 
 
 {{-- =========================================================
@@ -244,7 +244,7 @@
 
                 <div class="relative min-h-[350px] lg:min-h-[430px]">
                     <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFigjMVelOaBoEJnS017PI824IMERoJh0c-zAyvcSSjCVBwsbC26-y4qQS&s=10"
+                        src="{{ asset('assets/gptofficennn.jpeg') }}"
                         alt="GPT Tower Building 752 Ghala Heights"
                         class="absolute inset-0 h-full w-full object-cover"
                         loading="lazy"

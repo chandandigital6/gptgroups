@@ -148,7 +148,7 @@
 
                     <div class="relative">
                         <img class="h-[360px] w-full rounded-3xl object-cover shadow-lg sm:h-[430px]"
-                            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=78"
+                            src="{{ asset('assets/b3.jpg') }}"
                             alt="GPT Group business technology consultation" loading="lazy">
                         <div class="absolute bottom-5 left-5 rounded-2xl bg-white/95 p-4 shadow-lg">
                             <strong class="block text-2xl font-black text-blue-600">360°</strong>
@@ -170,8 +170,8 @@
                         'Complete project-based technology solutions for commercial, enterprise, industrial and government sectors.',
                     'description' =>
                         'GPT Group works closely with consultants, contractors, system integrators, corporate IT teams and procurement departments to support technology projects from planning through final product supply.',
-                    'image' =>
-                        'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1300&q=78',
+                    'image' => asset('assets/com/t2.png')
+                        ,
                     'alt' => 'B2B project sales and enterprise consultation',
                     'items' => [
                         'Project Consultation',
@@ -193,8 +193,8 @@
                         'Reliable distribution and dedicated support for dealers, resellers and solution partners.',
                     'description' =>
                         'Our channel sales model helps partners compete effectively through dependable products, responsive commercial support, product knowledge and partner enablement.',
-                    'image' =>
-                        'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1300&q=78',
+                    'image' =>asset('assets/b hnd.jpg')
+                        ,
                     'alt' => 'GPT Group channel partner and reseller support',
                     'items' => [
                         'Authorized Distribution',
@@ -369,7 +369,7 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                     <img class="h-[360px] w-full rounded-3xl object-cover shadow-lg sm:h-[460px]"
-                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=78"
+                        src="{{ asset('assets/com/gopt.png') }}"
                         alt="GPT Group technology service team" loading="lazy">
 
                     <div>
