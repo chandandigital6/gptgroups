@@ -70,7 +70,7 @@
     @yield('content')
 
 
-    @include('front_pages.partials.gpt_group_ai_chat')
+    {{-- @include('front_pages.partials.gpt_group_ai_chat') --}}
 
     @include('front_pages.front_components.footer')
 
