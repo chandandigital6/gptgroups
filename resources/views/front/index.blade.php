@@ -1023,7 +1023,7 @@
         'subtitle' => 'Galaxy AI',
         'description' => 'Discover powerful performance, an immersive foldable display and next-generation mobile innovation.',
 
-        'launch_text' => 'Just Launched',
+        'launch_text' => 'Comming Soon',
         'launch_note' => 'Now available through GPT Group Oman',
     ];
 @endphp
