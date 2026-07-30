@@ -23,6 +23,12 @@
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
 
+
+                <flux:navlist.item :href="route('home-advertisements.index')"
+                    :current="request()->routeIs('home-advertisements.*')" icon="megaphone" wire:navigate>
+                    Home Advertisements
+                </flux:navlist.item>
+
                 <flux:navlist.item :href="route('admin.ai-chats.index')"
                     :current="request()->routeIs('admin.ai-chats.*')" icon="chat-bubble-left-right" wire:navigate>
                     AI Chats

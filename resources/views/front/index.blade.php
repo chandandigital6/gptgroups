@@ -1010,25 +1010,7 @@
 
 
 
-
-    @php
-    $showHomeAdvertisement = true;
-
-    $homeAdvertisement = [
-        'image' => asset('assets/advertisements/fold.jpg'),
-        'link' => '#',
-
-        'brand' => 'Samsung Galaxy',
-        'title' => 'Galaxy Z Fold8 Ultra',
-        'subtitle' => 'Galaxy AI',
-        'description' => 'Discover powerful performance, an immersive foldable display and next-generation mobile innovation.',
-
-        'launch_text' => 'Coming Soon',
-        'launch_note' => 'Coming soon through GPT Group Oman',
-    ];
-@endphp
-
-@if ($showHomeAdvertisement)
+@if ($homeAdvertisement)
 
     <section
         id="gptCompactAdvertisement"
@@ -1036,7 +1018,6 @@
     >
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            {{-- Advertisement Label --}}
             <div class="mb-3 flex items-center justify-between">
 
                 <div class="flex items-center gap-2">
@@ -1065,14 +1046,12 @@
 
             </div>
 
-            {{-- Compact Card --}}
             <article
                 class="group relative overflow-hidden rounded-2xl
                        border border-slate-200 bg-[#f7f8fa]
                        shadow-[0_14px_40px_-24px_rgba(15,23,42,0.45)]
                        sm:rounded-3xl"
             >
-                {{-- Top Border --}}
                 <div
                     class="absolute inset-x-0 top-0 z-20 h-1
                            bg-gradient-to-r from-blue-700
@@ -1084,15 +1063,13 @@
                            md:grid-cols-[0.82fr_1.18fr]
                            lg:min-h-[340px]"
                 >
-                    {{-- Left Content --}}
+                    {{-- Left content --}}
                     <div
                         class="relative flex flex-col justify-center
                                overflow-hidden bg-slate-950
                                px-6 py-8 text-white
-                               sm:px-8 md:px-9 md:py-8
-                               lg:px-11"
+                               sm:px-8 md:px-9 md:py-8 lg:px-11"
                     >
-                        {{-- Decoration --}}
                         <div
                             class="pointer-events-none absolute
                                    -right-16 -top-16 h-44 w-44
@@ -1107,102 +1084,115 @@
 
                         <div class="relative">
 
-                            {{-- Launch Badge --}}
-                            <div
-                                class="inline-flex items-center gap-2
-                                       rounded-full border border-emerald-400/30
-                                       bg-emerald-400/10 px-3 py-1.5
-                                       text-[10px] font-black uppercase
-                                       tracking-[0.15em] text-emerald-300"
-                            >
-                                <span class="relative flex h-2 w-2">
-                                    <span
-                                        class="absolute inline-flex h-full w-full
-                                               animate-ping rounded-full
-                                               bg-emerald-400 opacity-70"
-                                    ></span>
+                            @if ($homeAdvertisement->launch_text)
+                                <div
+                                    class="inline-flex items-center gap-2
+                                           rounded-full
+                                           border border-amber-400/30
+                                           bg-amber-400/10 px-3 py-1.5
+                                           text-[10px] font-black uppercase
+                                           tracking-[0.15em] text-amber-300"
+                                >
+                                    <span class="relative flex h-2 w-2">
+                                        <span
+                                            class="absolute inline-flex
+                                                   h-full w-full animate-ping
+                                                   rounded-full bg-amber-400
+                                                   opacity-70"
+                                        ></span>
 
-                                    <span
-                                        class="relative inline-flex h-2 w-2
-                                               rounded-full bg-emerald-400"
-                                    ></span>
-                                </span>
+                                        <span
+                                            class="relative inline-flex
+                                                   h-2 w-2 rounded-full
+                                                   bg-amber-400"
+                                        ></span>
+                                    </span>
 
-                                {{ $homeAdvertisement['launch_text'] }}
-                            </div>
+                                    {{ $homeAdvertisement->launch_text }}
+                                </div>
+                            @endif
 
-                            {{-- Brand --}}
-                            <p
-                                class="mt-4 text-[11px] font-bold uppercase
-                                       tracking-[0.18em] text-cyan-300"
-                            >
-                                {{ $homeAdvertisement['brand'] }}
-                            </p>
+                            @if ($homeAdvertisement->brand)
+                                <p
+                                    class="mt-4 text-[11px] font-bold uppercase
+                                           tracking-[0.18em] text-cyan-300"
+                                >
+                                    {{ $homeAdvertisement->brand }}
+                                </p>
+                            @endif
 
-                            {{-- Title --}}
                             <h2
                                 class="mt-2 max-w-md text-2xl font-black
-                                       leading-tight tracking-tight
-                                       text-white sm:text-3xl lg:text-4xl"
+                                       leading-tight tracking-tight text-white
+                                       sm:text-3xl lg:text-4xl"
                             >
-                                {{ $homeAdvertisement['title'] }}
+                                {{ $homeAdvertisement->title }}
                             </h2>
 
-                            {{-- Subtitle --}}
-                            <p
-                                class="mt-2 text-base font-bold
-                                       text-cyan-300 sm:text-lg"
-                            >
-                                {{ $homeAdvertisement['subtitle'] }}
-                            </p>
-
-                            {{-- Description --}}
-                            <p
-                                class="mt-3 max-w-lg text-sm leading-6
-                                       text-slate-300"
-                            >
-                                {{ $homeAdvertisement['description'] }}
-                            </p>
-
-                            {{-- Launch Information --}}
-                            <div
-                                class="mt-5 flex items-center gap-3
-                                       border-t border-white/10 pt-4"
-                            >
-                                <span
-                                    class="inline-flex h-9 w-9 shrink-0
-                                           items-center justify-center
-                                           rounded-full bg-blue-600/20
-                                           text-lg text-blue-300"
+                            @if ($homeAdvertisement->subtitle)
+                                <p
+                                    class="mt-2 text-base font-bold
+                                           text-cyan-300 sm:text-lg"
                                 >
-                                    ✦
-                                </span>
+                                    {{ $homeAdvertisement->subtitle }}
+                                </p>
+                            @endif
 
-                                <div>
-                                    <p
-                                        class="text-xs font-black uppercase
-                                               tracking-[0.12em] text-white"
+                            @if ($homeAdvertisement->description)
+                                <p
+                                    class="mt-3 max-w-lg text-sm
+                                           leading-6 text-slate-300"
+                                >
+                                    {{ $homeAdvertisement->description }}
+                                </p>
+                            @endif
+
+                            @if ($homeAdvertisement->launch_note)
+                                <div
+                                    class="mt-5 flex items-center gap-3
+                                           border-t border-white/10 pt-4"
+                                >
+                                    <span
+                                        class="inline-flex h-9 w-9 shrink-0
+                                               items-center justify-center
+                                               rounded-full bg-blue-600/20
+                                               text-lg text-blue-300"
                                     >
-                                        Newly Introduced
-                                    </p>
+                                        ✦
+                                    </span>
 
-                                    <p class="mt-1 text-xs text-slate-400">
-                                        {{ $homeAdvertisement['launch_note'] }}
-                                    </p>
+                                    <div>
+                                        <p
+                                            class="text-xs font-black uppercase
+                                                   tracking-[0.12em] text-white"
+                                        >
+                                            Coming Soon
+                                        </p>
+
+                                        <p
+                                            class="mt-1 text-xs text-slate-400"
+                                        >
+                                            {{ $homeAdvertisement->launch_note }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
                         </div>
                     </div>
 
-                    {{-- Right Product Image --}}
+                    {{-- Right image --}}
+                    @php
+                        $advertisementLink =
+                            $homeAdvertisement->link ?: 'javascript:void(0)';
+                    @endphp
+
                     <a
-                        href="{{ $homeAdvertisement['link'] }}"
+                        href="{{ $advertisementLink }}"
                         class="relative flex min-h-[300px]
                                items-center justify-center
-                               overflow-hidden bg-white
-                               md:min-h-0"
-                        aria-label="{{ $homeAdvertisement['title'] }}"
+                               overflow-hidden bg-white md:min-h-0"
+                        aria-label="{{ $homeAdvertisement->title }}"
                     >
                         <div
                             class="pointer-events-none absolute inset-0
@@ -1210,8 +1200,8 @@
                         ></div>
 
                         <img
-                            src="{{ $homeAdvertisement['image'] }}"
-                            alt="{{ $homeAdvertisement['title'] }}"
+                            src="{{ $homeAdvertisement->image_url }}"
+                            alt="{{ $homeAdvertisement->title }}"
                             class="relative z-10 h-full max-h-[330px]
                                    w-full object-contain p-3
                                    transition duration-500
@@ -1220,21 +1210,24 @@
                             loading="lazy"
                         >
 
-                        {{-- Image Launch Badge --}}
-                        <span
-                            class="absolute right-3 top-3 z-20
-                                   inline-flex items-center gap-2
-                                   rounded-full border border-emerald-200
-                                   bg-emerald-50/95 px-3 py-1.5
-                                   text-[9px] font-black uppercase
-                                   tracking-[0.14em] text-emerald-700
-                                   shadow-sm backdrop-blur"
-                        >
-                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        @if ($homeAdvertisement->launch_text)
+                            <span
+                                class="absolute right-3 top-3 z-20
+                                       inline-flex items-center gap-2
+                                       rounded-full border border-amber-200
+                                       bg-amber-50/95 px-3 py-1.5
+                                       text-[9px] font-black uppercase
+                                       tracking-[0.14em] text-amber-700
+                                       shadow-sm backdrop-blur"
+                            >
+                                <span
+                                    class="h-1.5 w-1.5 rounded-full
+                                           bg-amber-500"
+                                ></span>
 
-                            Just Launched
-                        </span>
-
+                                {{ $homeAdvertisement->launch_text }}
+                            </span>
+                        @endif
                     </a>
 
                 </div>
@@ -1272,7 +1265,6 @@
         });
     });
 </script>
-
     
    
 

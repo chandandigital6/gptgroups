@@ -38,7 +38,7 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\GptGroupAiController;
 use App\Http\Controllers\Admin\AiChatController;
-
+use App\Http\Controllers\Admin\HomeAdvertisementController;
 
 Route::get('sitemap.xml', [FrontController::class, 'sitemap'])->name('sitemap');
 
@@ -377,6 +377,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('career-sections', CareerSectionController::class);
     Route::resource('job-positions', JobPositionController::class);
     Route::resource('hiring-process-steps', HiringProcessStepController::class);
+
+    Route::patch(
+    'home-advertisements/{homeAdvertisement}/toggle-status',
+    [HomeAdvertisementController::class, 'toggleStatus']
+)->name('home-advertisements.toggle-status');
+
+Route::resource(
+    'home-advertisements',
+    HomeAdvertisementController::class
+);
 
     Route::resource('job-applications', JobApplicationController::class)
         ->only(['index', 'show', 'update', 'destroy']);

@@ -20,6 +20,7 @@ use App\Models\HiringProcessStep;
 use App\Models\JobApplication;
 use App\Models\JobPosition;
 use Illuminate\Validation\Rule;
+use App\Models\HomeAdvertisement;
 
 class FrontController extends Controller
 {
@@ -124,7 +125,13 @@ class FrontController extends Controller
             ->first();
 
 
-        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection', 'productBrands', 'productCategories', 'upcomingProducts', 'latestProducts', 'companyOverview', 'networkSection', 'retailOutletSection', 'strategySection', 'faqSection', 'partnerLogoSection', 'testimonialSection', 'serviceSection'));
+             $homeAdvertisement = HomeAdvertisement::query()
+        ->currentlyActive()
+        ->orderBy('sort_order')
+        ->latest('id')
+        ->first();
+
+        return view('front.index', compact('banners', 'founderSection', 'whatWeDoSection', 'productBrands', 'productCategories', 'upcomingProducts', 'latestProducts', 'companyOverview', 'networkSection', 'retailOutletSection', 'strategySection', 'faqSection', 'partnerLogoSection', 'testimonialSection', 'serviceSection','homeAdvertisement'));
     }
 
 
