@@ -118,7 +118,7 @@
 
         <div class="overflow-hidden rounded-[2rem] bg-slate-100 p-3 shadow-xl">
             <img
-                src="{{ asset('assets/ggggg.png') }}"
+                src="{{ asset('assets/gpt o.jpeg') }}"
                 alt="GPT Group office building in Ghala Heights"
                 class="h-[350px] w-full rounded-[1.4rem] object-cover sm:h-[420px]"
                 loading="lazy"
