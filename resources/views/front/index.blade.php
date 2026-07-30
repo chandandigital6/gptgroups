@@ -1008,6 +1008,268 @@
     </section>
 
 
+
+
+
+    {{-- =========================================================
+    COMPACT PRODUCT ADVERTISEMENT CARD
+    Place below Hero Banner and above Quick Facts
+========================================================= --}}
+
+@php
+    /*
+    |--------------------------------------------------------------------------
+    | Advertisement Settings
+    |--------------------------------------------------------------------------
+    | Advertisement बंद करने के लिए false कर दें।
+    */
+
+    $showHomeAdvertisement = true;
+
+    $homeAdvertisement = [
+        'image' => asset('assets/advertisements/fold.jpg'),
+
+        // Product page URL
+        'link' => '#',
+
+        'brand' => 'Samsung Galaxy',
+        'title' => 'Galaxy Z Fold8 Ultra',
+        'subtitle' => 'Galaxy AI',
+        'description' => 'Discover powerful performance, an immersive foldable display and next-generation mobile innovation.',
+
+        'button_text' => 'View Product',
+    ];
+@endphp
+
+@if ($showHomeAdvertisement)
+
+    <section
+        id="gptCompactAdvertisement"
+        class="bg-white py-6 sm:py-8 lg:py-9"
+    >
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            {{-- Advertisement Label --}}
+            <div class="mb-3 flex items-center justify-between">
+
+                <div class="flex items-center gap-2">
+
+                    <span
+                        class="h-2 w-2 rounded-full bg-blue-600"
+                    ></span>
+
+                    <p
+                        class="text-[10px] font-black uppercase
+                               tracking-[0.18em] text-slate-500 sm:text-xs"
+                    >
+                        Featured Advertisement
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="closeGptCompactAdvertisement"
+                    class="inline-flex h-8 w-8 items-center justify-center
+                           rounded-lg border border-slate-200 bg-white
+                           text-lg leading-none text-slate-400
+                           transition hover:border-red-200
+                           hover:bg-red-50 hover:text-red-500"
+                    aria-label="Close advertisement"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            {{-- Compact Card --}}
+            <article
+                class="group relative overflow-hidden rounded-2xl
+                       border border-slate-200 bg-[#f7f8fa]
+                       shadow-[0_14px_40px_-24px_rgba(15,23,42,0.45)]
+                       sm:rounded-3xl"
+            >
+                {{-- Top Blue Border --}}
+                <div
+                    class="absolute inset-x-0 top-0 z-20 h-1
+                           bg-gradient-to-r from-blue-700
+                           via-cyan-500 to-blue-700"
+                ></div>
+
+                <div
+                    class="grid min-h-[300px]
+                           md:grid-cols-[0.82fr_1.18fr]
+                           lg:min-h-[340px]"
+                >
+                    {{-- Left Content --}}
+                    <div
+                        class="relative flex flex-col justify-center
+                               overflow-hidden bg-slate-950
+                               px-6 py-8 text-white
+                               sm:px-8 md:px-9 md:py-8
+                               lg:px-11"
+                    >
+                        {{-- Decoration --}}
+                        <div
+                            class="pointer-events-none absolute
+                                   -right-16 -top-16 h-44 w-44
+                                   rounded-full bg-blue-500/20 blur-3xl"
+                        ></div>
+
+                        <div
+                            class="pointer-events-none absolute
+                                   -bottom-16 -left-16 h-44 w-44
+                                   rounded-full bg-cyan-500/10 blur-3xl"
+                        ></div>
+
+                        <div class="relative">
+
+                            {{-- Brand --}}
+                            <div
+                                class="inline-flex items-center gap-2
+                                       rounded-full border border-white/15
+                                       bg-white/10 px-3 py-1.5
+                                       text-[10px] font-bold uppercase
+                                       tracking-[0.14em] text-cyan-200"
+                            >
+                                <span
+                                    class="h-1.5 w-1.5 rounded-full
+                                           bg-cyan-400"
+                                ></span>
+
+                                {{ $homeAdvertisement['brand'] }}
+                            </div>
+
+                            {{-- Title --}}
+                            <h2
+                                class="mt-4 max-w-md text-2xl font-black
+                                       leading-tight tracking-tight
+                                       text-white sm:text-3xl lg:text-4xl"
+                            >
+                                {{ $homeAdvertisement['title'] }}
+                            </h2>
+
+                            {{-- Subtitle --}}
+                            <p
+                                class="mt-2 text-base font-bold
+                                       text-cyan-300 sm:text-lg"
+                            >
+                                {{ $homeAdvertisement['subtitle'] }}
+                            </p>
+
+                            {{-- Description --}}
+                            <p
+                                class="mt-3 max-w-lg text-sm leading-6
+                                       text-slate-300"
+                            >
+                                {{ $homeAdvertisement['description'] }}
+                            </p>
+
+                            {{-- Button --}}
+                            <div class="mt-5">
+
+                                <a
+                                    href="{{ $homeAdvertisement['link'] }}"
+                                    class="inline-flex items-center
+                                           justify-center gap-3 rounded-xl
+                                           bg-blue-600 px-5 py-3
+                                           text-sm font-black text-white
+                                           transition duration-300
+                                           hover:-translate-y-0.5
+                                           hover:bg-blue-500"
+                                >
+                                    {{ $homeAdvertisement['button_text'] }}
+
+                                    <span
+                                        class="inline-flex h-5 w-5
+                                               items-center justify-center
+                                               rounded-full bg-white/15"
+                                    >
+                                        →
+                                    </span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{-- Right Product Image --}}
+                    <a
+                        href="{{ $homeAdvertisement['link'] }}"
+                        class="relative flex min-h-[300px]
+                               items-center justify-center
+                               overflow-hidden bg-white
+                               md:min-h-0"
+                        aria-label="{{ $homeAdvertisement['title'] }}"
+                    >
+                        {{-- Background Pattern --}}
+                        <div
+                            class="pointer-events-none absolute inset-0
+                                   bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.07),transparent_60%)]"
+                        ></div>
+
+                        <img
+                            src="{{ $homeAdvertisement['image'] }}"
+                            alt="{{ $homeAdvertisement['title'] }}"
+                            class="relative z-10 h-full max-h-[330px]
+                                   w-full object-contain p-3
+                                   transition duration-500
+                                   group-hover:scale-[1.015]
+                                   sm:p-4 lg:max-h-[350px]"
+                            loading="lazy"
+                        >
+
+                        <span
+                            class="absolute right-3 top-3 z-20
+                                   rounded-md border border-slate-200
+                                   bg-white/90 px-2.5 py-1
+                                   text-[9px] font-black uppercase
+                                   tracking-[0.14em] text-slate-400
+                                   shadow-sm backdrop-blur"
+                        >
+                            Advertisement
+                        </span>
+
+                    </a>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+@endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const advertisement = document.getElementById(
+            'gptCompactAdvertisement'
+        );
+
+        const closeButton = document.getElementById(
+            'closeGptCompactAdvertisement'
+        );
+
+        if (!advertisement || !closeButton) {
+            return;
+        }
+
+        closeButton.addEventListener('click', function () {
+            advertisement.style.transition =
+                'opacity 250ms ease, transform 250ms ease';
+
+            advertisement.style.opacity = '0';
+            advertisement.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function () {
+                advertisement.remove();
+            }, 260);
+        });
+    });
+</script>
+
+    
    
 
 {{-- 06. COMPANY OVERVIEW --}}
