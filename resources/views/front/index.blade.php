@@ -1011,25 +1011,11 @@
 
 
 
-    {{-- =========================================================
-    COMPACT PRODUCT ADVERTISEMENT CARD
-    Place below Hero Banner and above Quick Facts
-========================================================= --}}
-
-@php
-    /*
-    |--------------------------------------------------------------------------
-    | Advertisement Settings
-    |--------------------------------------------------------------------------
-    | Advertisement बंद करने के लिए false कर दें।
-    */
-
+    @php
     $showHomeAdvertisement = true;
 
     $homeAdvertisement = [
         'image' => asset('assets/advertisements/fold.jpg'),
-
-        // Product page URL
         'link' => '#',
 
         'brand' => 'Samsung Galaxy',
@@ -1037,7 +1023,8 @@
         'subtitle' => 'Galaxy AI',
         'description' => 'Discover powerful performance, an immersive foldable display and next-generation mobile innovation.',
 
-        'button_text' => 'View Product',
+        'launch_text' => 'Just Launched',
+        'launch_note' => 'Now available through GPT Group Oman',
     ];
 @endphp
 
@@ -1053,10 +1040,7 @@
             <div class="mb-3 flex items-center justify-between">
 
                 <div class="flex items-center gap-2">
-
-                    <span
-                        class="h-2 w-2 rounded-full bg-blue-600"
-                    ></span>
+                    <span class="h-2 w-2 rounded-full bg-blue-600"></span>
 
                     <p
                         class="text-[10px] font-black uppercase
@@ -1064,7 +1048,6 @@
                     >
                         Featured Advertisement
                     </p>
-
                 </div>
 
                 <button
@@ -1089,7 +1072,7 @@
                        shadow-[0_14px_40px_-24px_rgba(15,23,42,0.45)]
                        sm:rounded-3xl"
             >
-                {{-- Top Blue Border --}}
+                {{-- Top Border --}}
                 <div
                     class="absolute inset-x-0 top-0 z-20 h-1
                            bg-gradient-to-r from-blue-700
@@ -1124,25 +1107,41 @@
 
                         <div class="relative">
 
-                            {{-- Brand --}}
+                            {{-- Launch Badge --}}
                             <div
                                 class="inline-flex items-center gap-2
-                                       rounded-full border border-white/15
-                                       bg-white/10 px-3 py-1.5
-                                       text-[10px] font-bold uppercase
-                                       tracking-[0.14em] text-cyan-200"
+                                       rounded-full border border-emerald-400/30
+                                       bg-emerald-400/10 px-3 py-1.5
+                                       text-[10px] font-black uppercase
+                                       tracking-[0.15em] text-emerald-300"
                             >
-                                <span
-                                    class="h-1.5 w-1.5 rounded-full
-                                           bg-cyan-400"
-                                ></span>
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="absolute inline-flex h-full w-full
+                                               animate-ping rounded-full
+                                               bg-emerald-400 opacity-70"
+                                    ></span>
 
-                                {{ $homeAdvertisement['brand'] }}
+                                    <span
+                                        class="relative inline-flex h-2 w-2
+                                               rounded-full bg-emerald-400"
+                                    ></span>
+                                </span>
+
+                                {{ $homeAdvertisement['launch_text'] }}
                             </div>
+
+                            {{-- Brand --}}
+                            <p
+                                class="mt-4 text-[11px] font-bold uppercase
+                                       tracking-[0.18em] text-cyan-300"
+                            >
+                                {{ $homeAdvertisement['brand'] }}
+                            </p>
 
                             {{-- Title --}}
                             <h2
-                                class="mt-4 max-w-md text-2xl font-black
+                                class="mt-2 max-w-md text-2xl font-black
                                        leading-tight tracking-tight
                                        text-white sm:text-3xl lg:text-4xl"
                             >
@@ -1165,30 +1164,32 @@
                                 {{ $homeAdvertisement['description'] }}
                             </p>
 
-                            {{-- Button --}}
-                            <div class="mt-5">
-
-                                <a
-                                    href="{{ $homeAdvertisement['link'] }}"
-                                    class="inline-flex items-center
-                                           justify-center gap-3 rounded-xl
-                                           bg-blue-600 px-5 py-3
-                                           text-sm font-black text-white
-                                           transition duration-300
-                                           hover:-translate-y-0.5
-                                           hover:bg-blue-500"
+                            {{-- Launch Information --}}
+                            <div
+                                class="mt-5 flex items-center gap-3
+                                       border-t border-white/10 pt-4"
+                            >
+                                <span
+                                    class="inline-flex h-9 w-9 shrink-0
+                                           items-center justify-center
+                                           rounded-full bg-blue-600/20
+                                           text-lg text-blue-300"
                                 >
-                                    {{ $homeAdvertisement['button_text'] }}
+                                    ✦
+                                </span>
 
-                                    <span
-                                        class="inline-flex h-5 w-5
-                                               items-center justify-center
-                                               rounded-full bg-white/15"
+                                <div>
+                                    <p
+                                        class="text-xs font-black uppercase
+                                               tracking-[0.12em] text-white"
                                     >
-                                        →
-                                    </span>
-                                </a>
+                                        Newly Introduced
+                                    </p>
 
+                                    <p class="mt-1 text-xs text-slate-400">
+                                        {{ $homeAdvertisement['launch_note'] }}
+                                    </p>
+                                </div>
                             </div>
 
                         </div>
@@ -1203,7 +1204,6 @@
                                md:min-h-0"
                         aria-label="{{ $homeAdvertisement['title'] }}"
                     >
-                        {{-- Background Pattern --}}
                         <div
                             class="pointer-events-none absolute inset-0
                                    bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.07),transparent_60%)]"
@@ -1220,15 +1220,19 @@
                             loading="lazy"
                         >
 
+                        {{-- Image Launch Badge --}}
                         <span
                             class="absolute right-3 top-3 z-20
-                                   rounded-md border border-slate-200
-                                   bg-white/90 px-2.5 py-1
+                                   inline-flex items-center gap-2
+                                   rounded-full border border-emerald-200
+                                   bg-emerald-50/95 px-3 py-1.5
                                    text-[9px] font-black uppercase
-                                   tracking-[0.14em] text-slate-400
+                                   tracking-[0.14em] text-emerald-700
                                    shadow-sm backdrop-blur"
                         >
-                            Advertisement
+                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+
+                            Just Launched
                         </span>
 
                     </a>
