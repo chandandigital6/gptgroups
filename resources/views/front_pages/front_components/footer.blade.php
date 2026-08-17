@@ -459,9 +459,9 @@
                         News
                     </a>
 
-                    <span>
+                    {{-- <span>
                         Designed with Chandan
-                    </span>
+                    </span> --}}
                 </div>
             </div>
         </div>

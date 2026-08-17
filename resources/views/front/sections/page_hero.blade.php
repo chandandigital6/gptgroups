@@ -133,12 +133,12 @@
                                         </span>
                                     </div>
                                 @else
-                                    <img
-                                        src="{{ asset('storage/' . $pageHero->image) }}"
-                                        alt="{{ $pageHero->image_alt ?: $pageHero->title_line_1 }}"
-                                        class="h-full w-full object-cover"
-                                        loading="eager"
-                                        fetchpriority="high"
+                                     <img
+                src="{{ asset('storage/' . $pageHero->image) }}"
+                alt="{{ $pageHero->image_alt ?: $pageHero->title_line_1 }}"
+                class="h-full w-full object-contain object-center"
+                loading="eager"
+                fetchpriority="high"
                                     >
                                 @endif
                             </div>
