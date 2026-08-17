@@ -1162,12 +1162,12 @@
                                     </span>
 
                                     <div>
-                                        <p
+                                        {{-- <p
                                             class="text-xs font-black uppercase
                                                    tracking-[0.12em] text-white"
                                         >
                                             Coming Soon
-                                        </p>
+                                        </p> --}}
 
                                         <p
                                             class="mt-1 text-xs text-slate-400"
