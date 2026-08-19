@@ -18,7 +18,7 @@
             'route' => 'groups_company',
         ],
         [
-            'label' => 'Careers',
+            'label' => 'career',
             'route' => 'carriers',
         ],
         [

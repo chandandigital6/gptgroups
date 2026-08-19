@@ -41,7 +41,7 @@
                     'active' => ['oman-vision'],
                 ],
                 [
-                    'label' => 'Careers',
+                    'label' => 'career',
                     'route' => 'carriers',
                     'active' => ['carriers'],
                 ],
