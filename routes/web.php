@@ -90,7 +90,7 @@ Route::get('/brands', [FrontController::class, 'brands'])->name('brands');
 Route::get('/brands/{brand:slug}', [FrontController::class, 'brandCategories'])->name('brands.show');
 Route::get('/brands/{brand:slug}/categories/{category:slug}', [FrontController::class, 'categoryProducts'])
     ->name('brands.categories.show');
-Route::get('/carriers', [FrontController::class, 'carriers'])->name('carriers');
+Route::get('/career', [FrontController::class, 'carriers'])->name('carriers');
 Route::get('/contact-us', [FrontController::class, 'contact'])->name('contact');
 Route::get('/groups-company', [FrontController::class, 'groups_company'])->name('groups_company');
 Route::get('/network', [FrontController::class, 'network'])->name('network');
