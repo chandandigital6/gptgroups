@@ -26,6 +26,12 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/favicon_io/favicon-32x32.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/favicon_io/favicon-16x16.png') }}">
 
+
+    <link rel="icon" href="{{ asset('assets/favicon_io/favicon.ico') }}" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon_io/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon_io/favicon-16x16.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon_io/apple-touch-icon.png') }}">
+
     {{-- Open Graph / Facebook / WhatsApp --}}
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="GPT Group">
